@@ -19,22 +19,23 @@ global:
     margin horizontal
     padding vertical
     padding horizontal
-    background-image
-    background-repeat
-    background-position
+	
+	
+	background-image
     
 topbar:
-
+    
+  position
+    relative/sticky/onscroll
+	header above/below(relative)
+	
   size
     min-height
     outermarginmargin/fullwidth
     
   style
     ..
-    
-  behavior
-    relative/sticky/onscroll
-    
+
   logo
     image
     min size
@@ -68,4 +69,14 @@ topbar:
     width
     text-alignment left/right
     responsive position before/after/collapse/hide
-    
+
+
+header
+
+subheader
+
+maincontent
+
+subcontent
+
+footer
