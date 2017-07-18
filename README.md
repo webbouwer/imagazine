@@ -5,20 +5,20 @@ A multi purpose Wordpress theme (in development)
 * global:
 
   * Identity
-  	* Title
-  	* Tagline
-	* Icon
-	* Logo(default)
+   * Title
+   * Tagline
+   * Icon
+   * Logo(default)
 	
   * Screen modes
-	* small screen width
-    	* small screen outermargin 
-    	* medium screen min switch
-	* medium screen width
-    	* medium screen outermargin 
-    	* large screen min switch
-	* large screen width
-    	* large screen outermargin
+   * small screen width
+   * small screen outermargin 
+   * medium screen min switch
+   * medium screen width
+   * medium screen outermargin 
+   * large screen min switch
+   * large screen width
+   * large screen outermargin
     
   * Style
     background-color
