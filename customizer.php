@@ -586,6 +586,12 @@ function imagazine_customize_adaptive(){
 	max-width:<?php echo get_theme_mod('imagazine_global_screenmode_mediummargin', 960).'px'; ?> !important;
 	}
 
+	#topbarcontainer
+	{
+	min-height:<?php echo get_theme_mod('imagazine_topbar_behavior_minheight', 60).'px'; ?> !important;
+	}
+
+
 	}
 
 
