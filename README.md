@@ -2,25 +2,62 @@
 A multi purpose Wordpress theme (in development)
 
 
-global:
+* global:
 
-  Identity
-  	Title
-  	Tagline
-	Icon
-	Logo(default)
-	
-  Screen modes
-	small screen width
-    small screen outermargin 
-    medium screen min switch
-	medium screen width
-    medium screen outermargin 
-    large screen min switch
-	large screen width
-    large screen outermargin
+  * Identity
+    * Title
+    * Tagline
+    * Icon
+    * Logo(default)
+  * Header
+  * Background-image
+  * Screen modes
+    * small screen width
+    * small screen outermargin 
+    * medium screen min switch
+    * medium screen width
+    * medium screen outermargin 
+    * large screen min switch
+    * large screen width
+    * large screen outermargin
+* topbar:
+  * behavior
+    * hidden/relative/sticky/onscroll
+    * min-height
+    * outermarginmargin/fullwidth
+  * logo
+    * image
+    * min size
+    * max size
+    * left/right/menucenter/centerabove
+  * menu
+    * smallscreen open/collapsed
+    * largescreen left/right/center/collapsed
+    * text-alignment left/right
+    * submenu horizontal/vertical
+    * submenu compact/fullwidth/fullscreen
     
-  Style
+
+  * topwidgets
+    * position menucolumntop/topbarwidth
+    * max columns
+  
+  * topsidebars
+    * sidebar1 position left/right
+    * sidebar1 width
+    * sidebar1 text-alignment left/right
+    * sidebar1 responsive position 		before/after/collapse/hide
+    * sidebar2 position left/right
+    * sidebar2 width
+    * sidebar2 text-alignment left/right
+    * sidebar2 responsive position before/after/collapse/hide
+
+
+
+> Following is in development
+
+
+  * Style
     background-color
     font color
     link color
@@ -30,46 +67,11 @@ global:
     padding vertical
     padding horizontal
 	
-	
-    
-topbar:
-   
-  behavior
-    hidden/relative/sticky/onscroll
-    min-height
-    outermarginmargin/fullwidth
- 
-  logo
-    image
-    min size
-    max size
-    left/right/menucenter/centerabove
-    
-  menu
-    smallscreen open/collapsed
-    largescreen left/right/center/collapsed
-    text-alignment left/right
-    submenu horizontal/vertical
-    submenu compact/fullwidth/fullscreen
-    
-  topmenustyle
+topmenustyle
     ..
-  submenustyle
+submenustyle
     ..
   
-  topwidgets
-    position menucolumntop/topbarwidth
-    max columns
-  
-  topsidebars
-    sidebar1 position left/right
-    sidebar1 width
-    sidebar1 text-alignment left/right
-    sidebar1 responsive position 		before/after/collapse/hide
-    sidebar2 position left/right
-    sidebar2 width
-    sidebar2 text-alignment left/right
-    sidebar2 responsive position before/after/collapse/hide
 
 
 header
