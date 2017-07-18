@@ -2,25 +2,25 @@
 A multi purpose Wordpress theme (in development)
 
 
-global:
+* global:
 
-  Identity
-  	Title
-  	Tagline
-	Icon
-	Logo(default)
+  * Identity
+  	* Title
+  	* Tagline
+	* Icon
+	* Logo(default)
 	
-  Screen modes
-	small screen width
-    small screen outermargin 
-    medium screen min switch
-	medium screen width
-    medium screen outermargin 
-    large screen min switch
-	large screen width
-    large screen outermargin
+  * Screen modes
+	* small screen width
+    	* small screen outermargin 
+    	* medium screen min switch
+	* medium screen width
+    	* medium screen outermargin 
+    	* large screen min switch
+	* large screen width
+    	* large screen outermargin
     
-  Style
+  * Style
     background-color
     font color
     link color
