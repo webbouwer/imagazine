@@ -1,5 +1,7 @@
 <?php
 // Customizer Imagazine
+// todo ..
+// https://www.gavick.com/blog/using-javascript-theme-customization-screen
 
 function imagazine_theme_customizer( $wp_customize ){
 
@@ -408,14 +410,9 @@ function imagazine_theme_customizer( $wp_customize ){
 
 
 	/* Topbar - Sidebars */
-	/*
-	sidebar1 position left/right
-    sidebar1 width
-    sidebar1 text-alignment left/right
-    sidebar1 responsive position
-	*/
 
-	$wp_customize->add_setting( 'imagazine_topbar_sidebars_sidebar1pos' , array(
+
+		$wp_customize->add_setting( 'imagazine_topbar_sidebars_sidebar1pos' , array(
 		'default' => 'none',
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
@@ -433,16 +430,17 @@ function imagazine_theme_customizer( $wp_customize ){
     	)));
 
 		$wp_customize->add_setting( 'imagazine_topbar_sidebars_sidebar1width' , array(
-		'default' => '30',
+		'default' => 30,
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_sidebars_sidebar1width', array(
             	'label'          => __( 'Sidebar width', 'imagazine' ),
             	'section'        => 'imagazine_topbar_sidebars',
             	'settings'       => 'imagazine_topbar_sidebars_sidebar1width',
-            	'type'           => 'text',
- 	    	'description'    => __( 'Select sidebar width (percentage).', 'imagazine' ),
+            	'type'           => 'number',
+ 	    		'description'    => __( 'Select sidebar width (percentage).', 'imagazine' ),
     	)));
+
 
 		$wp_customize->add_setting( 'imagazine_topbar_sidebars_sidebar1align' , array(
 		'default' => 'left',
@@ -501,14 +499,14 @@ function imagazine_theme_customizer( $wp_customize ){
     	)));
 
 		$wp_customize->add_setting( 'imagazine_topbar_sidebars_sidebar2width' , array(
-		'default' => '30',
+		'default' => 30,
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_sidebars_sidebar2width', array(
             	'label'          => __( 'Second sidebar width', 'imagazine' ),
             	'section'        => 'imagazine_topbar_sidebars',
             	'settings'       => 'imagazine_topbar_sidebars_sidebar2width',
-            	'type'           => 'text',
+            	'type'           => 'number',
  	    	'description'    => __( 'Select second sidebar width (percentage).', 'imagazine' ),
     	)));
 
@@ -573,7 +571,28 @@ function imagazine_customize_adaptive(){
 	max-width:<?php echo get_theme_mod('imagazine_global_screenmode_smallmargin', 320).'px'; ?> !important;
 	}
 
+	.align-left
+	{
+	text-align:left;
+	}
+	.align-right
+	{
+	text-align:right;
+	}
 
+	/* topbar */
+	#topmainbar, #topsidebar-1, #topsidebar-2
+	{
+	position: relative;
+	display: block;
+	}
+
+	#toplogobox .site-logo img
+	{
+	min-width:<?php echo get_theme_mod('imagazine_topbar_logo_minwidth', 60).'px'; ?> !important;
+	max-width:<?php echo get_theme_mod('imagazine_topbar_logo_maxwidth', 120).'px'; ?> !important;
+	height:auto;
+	}
 
 	/*
 	 * MEDIUM SCREEN
@@ -589,6 +608,20 @@ function imagazine_customize_adaptive(){
 	#topbarcontainer
 	{
 	min-height:<?php echo get_theme_mod('imagazine_topbar_behavior_minheight', 60).'px'; ?> !important;
+	}
+	#topbarcontainer .pos-left
+	{
+	float:left;
+	}
+	#topbarcontainer .pos-right
+	{
+	float:right;
+	}
+
+	#topbarcontainer .pos-above
+	{
+	float:none;
+	text-align: center;
 	}
 
 
