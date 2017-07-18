@@ -25,16 +25,6 @@ require get_template_directory() . '/customizer.php'; // customizer functions
 
 
 
-	/*
-	 * Register global variables (options/customizer)
-	 */
-	$wp_global_data = array(); // special var $wp_global_data
-	$wp_global_data['customizer'] = json_encode(get_theme_mods());
-
-
-
-
-
 
 	/*
 	 * Register menu's
@@ -73,11 +63,6 @@ require get_template_directory() . '/customizer.php'; // customizer functions
 	add_action( 'admin_init', 'imagazine_editor_styles' );
 
 
-
-
-
-
-
 	/* JQuery init */
 	function imagazine_frontend_jquery() {
 		wp_enqueue_script('jquery');
@@ -91,10 +76,6 @@ require get_template_directory() . '/customizer.php'; // customizer functions
 		// . '/assets/responsive.js', array(), '1.0.0', true );
 	}
 	add_action( 'wp_enqueue_scripts', 'imagazine_theme_scripts' );
-
-
-
-
 
 
 	/* Widgets */
@@ -255,6 +236,17 @@ require get_template_directory() . '/customizer.php'; // customizer functions
 
 
 
+	/*
+	 * Register global variables (options/customizer)
+	 */
+	$wp_global_data = array(); // special var $wp_global_data
+	$wp_global_data['customizer'] = json_encode(get_theme_mods());
+
+
+
+
+
+
 
 /*
 	 * WP CUSTOM VARS LOCATED
@@ -303,39 +295,23 @@ require get_template_directory() . '/customizer.php'; // customizer functions
 
 
 
+/**
+ * Keep category select list in hiearchy
+ * source http://wordpress.stackexchange.com/questions/61922/add-post-screen-keep-category-structure
+ */
+function imagazine_wp_terms_checklist_args( $args, $post_id ) {
+
+   $args[ 'checked_ontop' ] = false;
+
+   return $args;
+
+}
+add_filter( 'wp_terms_checklist_args', 'imagazine_wp_terms_checklist_args', 1, 2 );
+
+
 
 
 /*
-class imagazine_customized {
-
-	// defaults
-    public $prop1 = "I'm a class property!";
-
-
-
-    function nameOfTheClass() {
-        print "This function is called on class creation";
-    }
-
-
-    function aClassfunc() {
-        print 'second class';
-    }
-
-}
-
-
-$myclass = new nameOfTheClass;  // prints "This function is called on class creation";
-print $myclass->$prop1; // prints "I'm a class property!"
-print $myclass->aClassfunc; // prints "second class"
-
-
-// run function inside class
-function getVarName()
-{
-return 'prop1';
-}
-print $myclass->{getVarName()}; // prints "I'm a class property!"
 */
 
 ?>

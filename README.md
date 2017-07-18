@@ -3,14 +3,24 @@ A multi purpose Wordpress theme (in development)
 
 
 global:
-  size
+
+  Identity
+  	Title
+  	Tagline
+	Icon
+	Logo(default)
+	
+  Screen modes
+	small screen width
     small screen outermargin 
-    medium screen switch
+    medium screen min switch
+	medium screen width
     medium screen outermargin 
-    large screen switch
+    large screen min switch
+	large screen width
     large screen outermargin
     
-  style
+  Style
     background-color
     font color
     link color
@@ -21,21 +31,14 @@ global:
     padding horizontal
 	
 	
-	background-image
     
 topbar:
-    
-  position
-    relative/sticky/onscroll
-	header above/below(relative)
-	
-  size
+   
+  behavior
+    hidden/relative/sticky/onscroll
     min-height
     outermarginmargin/fullwidth
-    
-  style
-    ..
-
+ 
   logo
     image
     min size
@@ -43,8 +46,8 @@ topbar:
     left/right/menucenter/centerabove
     
   menu
-    large left/right/center/collapsed
-    small open/collapsed
+    smallscreen open/collapsed
+    largescreen left/right/center/collapsed
     text-alignment left/right
     submenu horizontal/vertical
     submenu compact/fullwidth/fullscreen
@@ -58,17 +61,15 @@ topbar:
     position menucolumntop/topbarwidth
     max columns
   
-  topsidebar1
-    position left/right
-    width
-    text-alignment left/right
-    responsive position before/after/collapse/hide
-    
-  topsidebar2
-    position left/right
-    width
-    text-alignment left/right
-    responsive position before/after/collapse/hide
+  topsidebars
+    sidebar1 position left/right
+    sidebar1 width
+    sidebar1 text-alignment left/right
+    sidebar1 responsive position 		before/after/collapse/hide
+    sidebar2 position left/right
+    sidebar2 width
+    sidebar2 text-alignment left/right
+    sidebar2 responsive position before/after/collapse/hide
 
 
 header
