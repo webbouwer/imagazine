@@ -32,25 +32,25 @@ A multi purpose Wordpress theme (in development)
 	
 	
     
-topbar:
+* topbar:
    
-  behavior
-    hidden/relative/sticky/onscroll
-    min-height
-    outermarginmargin/fullwidth
+  * behavior
+    * hidden/relative/sticky/onscroll
+    * min-height
+    * outermarginmargin/fullwidth
  
-  logo
-    image
-    min size
-    max size
-    left/right/menucenter/centerabove
+  * logo
+    * image
+    * min size
+    * max size
+    * left/right/menucenter/centerabove
     
-  menu
-    smallscreen open/collapsed
-    largescreen left/right/center/collapsed
-    text-alignment left/right
-    submenu horizontal/vertical
-    submenu compact/fullwidth/fullscreen
+  * menu
+    * smallscreen open/collapsed
+    * largescreen left/right/center/collapsed
+    * text-alignment left/right
+    * submenu horizontal/vertical
+    * submenu compact/fullwidth/fullscreen
     
   topmenustyle
     ..
