@@ -21,6 +21,15 @@ $topbarposition = get_theme_mod('imagazine_topbar_behavior_position', 'center');
 // topbar logo
 $topbarlogopos = get_theme_mod('imagazine_topbar_logo_position', 'center');
 
+// topbar menu
+$topbarmenusmall = get_theme_mod('imagazine_topbar_menu_smallscreen', 'collapsed');
+$topbarmenularge = get_theme_mod('imagazine_topbar_menu_largescreen', 'center');
+$topbarmenutextalign = get_theme_mod('imagazine_topbar_menu_textalign', 'center');
+
+// widgets
+$topbartopwidgetspos = get_theme_mod('imagazine_topbar_widgets_position', 'full');
+$topbartopwidgetsmaxcol = get_theme_mod('imagazine_topbar_widgets_maxcol', 5);
+
 // sidebars
 $topsidebar1pos = get_theme_mod('imagazine_topbar_sidebars_sidebar1pos', 'none' );
 $topsidebar1width = get_theme_mod('imagazine_topbar_sidebars_sidebar1width', 30 );
@@ -39,8 +48,20 @@ if($topbarposition != 'none'){
 
 	echo '<div id="topbarcontainer">';
 
-	// top widgets
+	// uppermenu
+	if ( has_nav_menu( 'uppermenu' ) ) {
+		echo '<div id="uppermenu"><nav><div class="innerpadding">';
+		wp_nav_menu( array( 'theme_location' => 'uppermenu' ) );
+		echo '<div class="clr"></div></div></nav></div>';
+	}
 
+
+	// top widgets
+	if( $topbartopwidgetspos == 'full' && function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('topwidgets')){
+	echo '<div id="topwidgets" class="widgetcontainer">';
+	dynamic_sidebar('topwidgets');
+	echo '<div class="clr"></div></div>';
+	}
 	// top sidebars
 
 	// topsidebar 1
@@ -60,7 +81,7 @@ if($topbarposition != 'none'){
 
 
 	// top main content
-	echo '<div id="topmainbar" class="maincolumn">';
+	echo '<div id="topmainbar" class="maincolumn large-'.$topbarmenularge.' small-'.$topbarmenusmall.'">';
 
 	// toplogo
 	if( $topbarlogo != '' && $topbarlogopos != 'none' ){
@@ -68,7 +89,7 @@ if($topbarposition != 'none'){
 	}
 
 	// topmenu
-	echo '<div id="topmenu"><nav><div class="innerpadding">';
+	echo '<div id="topmenu" class="pos-'.$topbarmenularge.' align-'.$topbarmenutextalign.'"><nav><div class="innerpadding">';
 	if ( has_nav_menu( 'topmenu' ) ) {
 		wp_nav_menu( array( 'theme_location' => 'topmenu' ) );
 	}else{
@@ -83,7 +104,7 @@ if($topbarposition != 'none'){
 
 
 
-	echo '</div>';
+	echo '<div class="clr"></div></div>';
 
 }// end use topbar
 

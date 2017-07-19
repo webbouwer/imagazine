@@ -19,3 +19,45 @@ Use it to make something cool, have fun, and share what you've learned with othe
 padding:0;
 margin:0;
 }
+.clr
+{
+clear:both;
+height:0;
+line-height: 0;
+}
+
+
+/*
+ * Basic topbar
+ */
+#uppermenu,
+#topwidgets
+{
+display: block;
+position: relative;
+width:100%;
+}
+
+#uppermenu nav div div > ul > li
+{
+display: inline-block;
+}
+
+
+#topmenu nav div div > ul > li
+{
+display: inline-block;
+}
+#topmenu nav div div ul > li > a
+{
+display:table-cell;
+vertical-align:middle;
+}
+#topmenu nav div div ul.sub-menu
+{
+display:none;
+}
+#topmenu nav div div ul.sub-menu li
+{
+clear:both;
+}

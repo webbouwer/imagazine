@@ -27,7 +27,7 @@ get_template_part('header');
 /*
  * CONTENT
  */
-get_template_part('main');
+get_template_part('loop');
 
 /*
  * FOOTERBAR

@@ -5,6 +5,8 @@ jQuery(function ($) {
 			var $wp_custom_vars = JSON.parse(site_data['customizer']);//alert( $wp_custom_vars['imagazine_topbar_behavior_minheight'] );
 			var mediumswitch = $wp_custom_vars['imagazine_global_screenmode_mediummin'];
 
+
+			/* Topbar */
 			var menusmall = $wp_custom_vars['imagazine_topbar_menu_smallscreen'];
 			var menularge = $wp_custom_vars['imagazine_topbar_menu_largescreen'];
 
@@ -13,11 +15,8 @@ jQuery(function ($) {
 			var menu_logo_html = '<li class="menu-item logo"></li>';
 
 			var toplogopos = $wp_custom_vars['imagazine_topbar_logo_position'];
-
 			var toplogominw = $wp_custom_vars['imagazine_topbar_logo_minwidth'];
 			var toplogomaxw = $wp_custom_vars['imagazine_topbar_logo_maxwidth'];
-
-
 
 			var topsidebar1pos = $wp_custom_vars['imagazine_topbar_sidebars_sidebar1pos'];
 			var topsidebar1width = $wp_custom_vars['imagazine_topbar_sidebars_sidebar1width'];
@@ -30,44 +29,26 @@ jQuery(function ($) {
 			var topsidebar2respon = $wp_custom_vars['imagazine_topbar_sidebars_sidebar2responsive'];
 
 
+			var sidebar1pos = $wp_custom_vars['imagazine_content_sidebars_sidebar1pos'];
+			var sidebar1width = $wp_custom_vars['imagazine_content_sidebars_sidebar1width'];
+			var sidebar1align = $wp_custom_vars['imagazine_content_sidebars_sidebar1align'];
+			var sidebar1respon = $wp_custom_vars['imagazine_content_sidebars_sidebar1responsive'];
+
+			var sidebar2pos = $wp_custom_vars['imagazine_content_sidebars_sidebar2pos'];
+			var sidebar2width = $wp_custom_vars['imagazine_content_sidebars_sidebar2width'];
+			var sidebar2align = $wp_custom_vars['imagazine_content_sidebars_sidebar2align'];
+			var sidebar2respon = $wp_custom_vars['imagazine_content_sidebars_sidebar2responsive'];
+
 			// set outermargins
 			if( $wp_custom_vars['imagazine_topbar_behavior_position'] != 'none' && $wp_custom_vars['imagazine_topbar_behavior_width'] == 'margin'){
 				$( "#topbarcontainer" ).wrapInner( '<div class="outermargin"></div>');
 			}
 
+			//if( $wp_custom_vars['imagazine_topbar_behavior_position'] != 'none' && $wp_custom_vars['imagazine_topbar_behavior_width'] == 'margin'){
+				$( "#maincontentcontainer" ).wrapInner( '<div class="outermargin"></div>');
+			//}
 
 
-
-
-			/*
-			 * on resize end function
-			 */
-			var rctime;
-			var ctimeout = false;
-			var cdelta = 200;
-			$(window).resize(function() {
-				rctime = new Date();
-				if (ctimeout === false) {
-					ctimeout = true;
-					setTimeout(customizer_resizeend, cdelta);
-				}
-			});
-
-			function customizer_resizeend(){
-
-				if(new Date() - rctime < cdelta){
-					setTimeout(customizer_resizeend, cdelta);
-				}else{
-					ctimeout = false;
-					//alert('Done resizing');
-
-					// check topbar
-					if($wp_custom_vars['imagazine_topbar_behavior_position'] != 'none'){
-						set_topbar_elements();
-					}
-				}
-
-			}
 
 
 			function set_topbar_elements(){
@@ -76,18 +57,16 @@ jQuery(function ($) {
 				// default topmainbar width
 				var mainwidth = 100;
 
+				// before, after, collapsed, hide revert for large screen
+				$('#topmainbar').parent().prepend( $('#topsidebar-2') );
+				$('#topmainbar').parent().prepend( $('#topsidebar-1') );
+				$('#topmainbar').parent().prepend( $('#topwidgets') );
+				$('#topmainbar').parent().prepend( $('#uppermenu') );
+
 				// for medium/large screen
 				if( $(window).width() >= mediumswitch ){ //alert($mediumswitch); alert(topsidebar1width);
-
-
-
-				// set top sidebars
+					// set top sidebars
 					if( $('#topsidebar-1').length > 0 ){
-
-						// before, after, collapsed, hide revert for large screen
-						$('#topmainbar').parent().prepend( $('#topsidebar-2') );
-						$('#topmainbar').parent().prepend( $('#topsidebar-1') );
-
 						// split total width for topmainbar and sidebar 1
 						mainwidth = mainwidth - topsidebar1width;
 						$('#topsidebar-1').css({
@@ -102,7 +81,7 @@ jQuery(function ($) {
 						});
 					}
 
-				// define topmainbar width and float position
+					// define topmainbar width and float position
 					var mainfloat = 'left';
 					if( topsidebar1pos === 'left' && topsidebar2pos === 'left')
 					{
@@ -115,15 +94,23 @@ jQuery(function ($) {
 					});
 
 
+
+
+
+
 				// default hide menu & topmainmenubutton
 					$('#topmenu').hide();
 					$('#topmainmenubutton').remove();
+
+
 
 				// menu placement
 					if( menularge != 'none' && menularge != 'collapsed'){
 
 							// menu available
 							$('#topmenu').show();
+
+
 
 							//  logo positioning inside
 							if( toplogopos == 'middle'){
@@ -137,10 +124,9 @@ jQuery(function ($) {
 								}
 								// move logo inside menu html wrapper
 								$('#topmenu nav div div > ul li.logo').append( $('#toplogobox') );
-
 								// adjust menu height to logo
 								// .. todo: logo min height
-								$('#topmenu nav div div > ul > li > a').css( 'height', $('#toplogobox a').height() );
+								$('#topmenu nav div div > ul > li > a').css( 'height', $('#toplogobox a img').height() );
 
 
 							}else{
@@ -148,9 +134,15 @@ jQuery(function ($) {
 								// logo default (revert menu placement)
 								$('#topmainbar').prepend( $('#toplogobox') );
 								$('#topmenu nav div div > ul > li.logo').remove();
-								$('#topmenu nav div div > ul > li > a').css( 'height', 'auto' );
+
+								if( toplogopos != 'above' && toplogopos != 'none'){
+									$('#topmenu nav div div > ul > li > a').css( 'height', $('#toplogobox a img').height() );
+								}else{
+									$('#topmenu nav div div > ul > li > a').css( 'height', 'auto' );
+								}
 
 							}
+
 
 
 					}else{
@@ -207,6 +199,118 @@ jQuery(function ($) {
 
 				}
 
+
+			}
+
+
+
+
+
+
+			function set_maincontent_elements(){
+
+
+
+
+			// default topmainbar width
+				var maincontentwidth = 100;
+
+				// for medium/large screen
+				if( $(window).width() >= mediumswitch ){ //alert($mediumswitch); alert(sidebar1width);
+
+
+
+				// set top sidebars
+					if( $('#sidebar').length > 0 ){
+
+						// before, after, collapsed, hide revert for large screen
+						$('#mainconent').parent().prepend( $('#sidebar-2') );
+						$('#mainconent').parent().prepend( $('#sidebar') );
+
+						// split total width for topmainbar and sidebar 1
+						maincontentwidth = maincontentwidth - sidebar1width;
+						$('#sidebar').css({
+						'width': sidebar1width+'%'
+						});
+					}
+					if( $('#sidebar-2').length > 0 ){
+						// split total width for topmainbar and sidebar 2
+						maincontentwidth = maincontentwidth - sidebar2width;
+						$('#sidebar-2').css({
+						'width': sidebar2width+'%'
+						});
+					}
+
+					// define topmainbar width and float position
+					var maincontentfloat = 'left';
+					if( sidebar1pos === 'left' && sidebar2pos === 'left')
+					{
+						maincontentfloat = 'right';
+					}
+
+					$('#maincontent').css({
+						'width': maincontentwidth+'%',
+						'float': maincontentfloat
+					});
+
+
+				}else{ // smaller screens..
+
+					// move sidebars before, after, collapsed, hide
+					if( $('#sidebar-2').length > 0 && sidebar2respon === 'after' ){
+						$('#sidebar-2').insertAfter( $('#maincontent') );
+					}
+
+					if( $('#sidebar').length > 0 && sidebar1respon === 'after' ){
+						$('#sidebar').insertAfter( $('#maincontent') );
+					}
+					// revert maincolumn/sidebars full width
+					// .. todo set small width
+					$('#maincontent, #sidebar, #sidebar-2').css({
+						'width': '100%',
+					});
+
+				}
+
+
+
+			}
+
+
+			/*
+			 * on resize end function
+			 */
+			var rctime;
+			var ctimeout = false;
+			var cdelta = 200;
+			$(window).resize(function() {
+				rctime = new Date();
+				if (ctimeout === false) {
+					ctimeout = true;
+					setTimeout(customizer_resizeend, cdelta);
+				}
+			});
+
+			function customizer_resizeend(){
+
+				if(new Date() - rctime < cdelta){
+					setTimeout(customizer_resizeend, cdelta);
+				}else{
+					ctimeout = false;
+					//alert('Done resizing');
+
+					// check topbar
+					if($wp_custom_vars['imagazine_topbar_behavior_position'] != 'none'){
+						set_topbar_elements();
+					}
+					// todo ..header
+
+					// work maincontent
+					set_maincontent_elements();
+
+
+					// todo ..footer
+				}
 
 			}
 

@@ -32,6 +32,7 @@ require get_template_directory() . '/customizer.php'; // customizer functions
 	function imagazine_setup_register_menus() {
 		register_nav_menus(
 			array(
+			'uppermenu' => __( 'Upper menu' , 'imagazine' ),
 			'topmenu' => __( 'Top menu' , 'imagazine' ),
 			'sidemenu' => __( 'Side menu' , 'imagazine' ),
 			'footermenu' => __( 'Footer menu' , 'imagazine' )
@@ -82,16 +83,18 @@ require get_template_directory() . '/customizer.php'; // customizer functions
 	function imagazine_setup_widgets_init() {
 		if (function_exists('register_sidebar')) {
 
+
 			// the default wordpress header widget
 			register_sidebar(array(
-				'name' => 'Header content (Widgets Default)',
-				'id'   => 'widgets-header',
-				'description'   => 'This is a standard wordpress widgetized area.',
+				'name' => 'Top widgets (topbar topbox)',
+				'id'   => 'topwidgets',
+				'description'   => 'This is for top widget(s) above on top of the topbar.',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
 				'after_widget'  => '<div class="clr"></div></div>',
 				'before_title'  => '<h3>',
 				'after_title'   => '</h3>'
 			));
+
 
 			// the topbar sidebar widget column
 			register_sidebar(array(
@@ -113,6 +116,8 @@ require get_template_directory() . '/customizer.php'; // customizer functions
 				'before_title'  => '<h3>',
 				'after_title'   => '</h3>'
 			));
+
+
 
 			// the header sidebar widget
 			register_sidebar(array(
@@ -146,6 +151,21 @@ require get_template_directory() . '/customizer.php'; // customizer functions
 				'before_title'  => '<h3>',
 				'after_title'   => '</h3>'
 			));
+
+
+
+			// the default wordpress header widget
+			register_sidebar(array(
+				'name' => 'Header content (Widgets Default)',
+				'id'   => 'widgets-header',
+				'description'   => 'This is a standard wordpress widgetized area.',
+				'before_widget' => '<div id="%1$s" class="widget %2$s">',
+				'after_widget'  => '<div class="clr"></div></div>',
+				'before_title'  => '<h3>',
+				'after_title'   => '</h3>'
+			));
+
+
 
 			// the columns below content
 			register_sidebar(array(

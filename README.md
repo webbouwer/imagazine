@@ -59,23 +59,30 @@ A multi purpose Wordpress theme (in development)
     * sidebar2 responsive position before/after/collapse/hide
 
 
-> Following is in development
-    
-  * topwidgets
 
-    * position menucolumntop/topbarwidth
-    * max columns
-  
-  * topsidebars
+ * maincontent
+ 
     * sidebar1 position left/right
     * sidebar1 width
     * sidebar1 text-alignment left/right
-    * sidebar1 responsive position before/after/collapse/hide
+    * sidebar1 responsive position 		before/after/collapse/hide
     * sidebar2 position left/right
     * sidebar2 width
     * sidebar2 text-alignment left/right
     * sidebar2 responsive position before/after/collapse/hide
+
+
+
+> Following is in development
     
+  * uppermenu
+  	* position full/topmain
+	* menu alignment left/center/right
+	
+  * topwidgets
+    * position full/topmain
+    * max columns
+  
   * Style
     background-color
     font color
@@ -94,7 +101,7 @@ header
 
 subheader
 
-maincontent
+maincontent 
 
 subcontent
 

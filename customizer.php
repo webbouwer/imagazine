@@ -22,7 +22,13 @@ function imagazine_theme_customizer( $wp_customize ){
 
     $wp_customize->add_panel('imagazine_topbar', array(
         'title'    => __('Topbar', 'imagazine'),
-        'priority' => 10,
+        'priority' => 20,
+    ));
+
+
+    $wp_customize->add_panel('imagazine_content', array(
+        'title'    => __('Maincontent', 'imagazine'),
+        'priority' => 30,
     ));
 
 
@@ -85,6 +91,12 @@ function imagazine_theme_customizer( $wp_customize ){
     ));
 
 
+
+	$wp_customize->add_section('imagazine_content_sidebars', array(
+        'title'    => __('Sidebars', 'imagazine'),
+        'panel'  => 'imagazine_content',
+		'priority' => 120,
+    ));
 
 
 
@@ -550,6 +562,151 @@ function imagazine_theme_customizer( $wp_customize ){
 
 
 
+		/* Main content - Sidebars */
+
+
+		$wp_customize->add_setting( 'imagazine_content_sidebars_sidebar1pos' , array(
+		'default' => 'none',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_sidebars_sidebar1pos', array(
+            	'label'          => __( 'Sidebar position', 'imagazine' ),
+            	'section'        => 'imagazine_content_sidebars',
+            	'settings'       => 'imagazine_content_sidebars_sidebar1pos',
+            	'type'           => 'select',
+ 	    		'description'    => __( 'Select the default content sidebar position.', 'imagazine' ),
+            	'choices'        => array(
+                	'none'   => __( 'none', 'imagazine' ),
+                	'left'   => __( 'left', 'imagazine' ),
+            		'right'   => __( 'right', 'imagazine' ),
+            	)
+    	)));
+
+		$wp_customize->add_setting( 'imagazine_content_sidebars_sidebar1width' , array(
+		'default' => 30,
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_sidebars_sidebar1width', array(
+            	'label'          => __( 'Sidebar width', 'imagazine' ),
+            	'section'        => 'imagazine_content_sidebars',
+            	'settings'       => 'imagazine_content_sidebars_sidebar1width',
+            	'type'           => 'number',
+ 	    		'description'    => __( 'Select sidebar width (percentage).', 'imagazine' ),
+    	)));
+
+
+		$wp_customize->add_setting( 'imagazine_content_sidebars_sidebar1align' , array(
+		'default' => 'left',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+			'priority' => 50,
+    	));
+    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_sidebars_sidebar1align', array(
+            	'label'          => __( 'Sidebar content alignment', 'imagazine' ),
+            	'section'        => 'imagazine_content_sidebars',
+            	'settings'       => 'imagazine_content_sidebars_sidebar1align',
+            	'type'           => 'select',
+ 	    		'description'    => __( 'Select the sidebar content alignment', 'imagazine' ),
+            	'choices'        => array(
+                	'center'   => __( 'Center', 'imagazine' ),
+                	'left'   => __( 'Left', 'imagazine' ),
+            		'right'   => __( 'Right', 'imagazine' ),
+            	)
+    	)));
+
+		$wp_customize->add_setting( 'imagazine_content_sidebars_sidebar1responsive' , array(
+		'default' => 'after',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+			'priority' => 50,
+    	));
+    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_sidebars_sidebar1responsive', array(
+            	'label'          => __( 'Sidebar responsive position', 'imagazine' ),
+            	'section'        => 'imagazine_content_sidebars',
+            	'settings'       => 'imagazine_content_sidebars_sidebar1responsive',
+            	'type'           => 'select',
+ 	    		'description'    => __( 'Select the content sidebar positioning on small screens', 'imagazine' ),
+            	'choices'        => array(
+                	'before'   => __( 'On top', 'imagazine' ),
+                	'after'   => __( 'After logo/navigation', 'imagazine' ),
+            		'collapsed'   => __( 'Collapsed', 'imagazine' ),
+            		'hide'   => __( 'Hide', 'imagazine' ),
+            	)
+    	)));
+
+
+
+		$wp_customize->add_setting( 'imagazine_content_sidebars_sidebar2pos' , array(
+		'default' => 'none',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_sidebars_sidebar2pos', array(
+            	'label'          => __( 'Second content sidebar position', 'imagazine' ),
+            	'section'        => 'imagazine_content_sidebars',
+            	'settings'       => 'imagazine_content_sidebars_sidebar2pos',
+            	'type'           => 'select',
+ 	    		'description'    => __( 'Select the second content sidebar position.', 'imagazine' ),
+            	'choices'        => array(
+                	'none'   => __( 'none', 'imagazine' ),
+                	'left'   => __( 'left', 'imagazine' ),
+            		'right'   => __( 'right', 'imagazine' ),
+            	)
+    	)));
+
+		$wp_customize->add_setting( 'imagazine_content_sidebars_sidebar2width' , array(
+		'default' => 30,
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_sidebars_sidebar2width', array(
+            	'label'          => __( 'Second content sidebar width', 'imagazine' ),
+            	'section'        => 'imagazine_content_sidebars',
+            	'settings'       => 'imagazine_content_sidebars_sidebar2width',
+            	'type'           => 'number',
+ 	    	'description'    => __( 'Select second content sidebar width (percentage).', 'imagazine' ),
+    	)));
+
+		$wp_customize->add_setting( 'imagazine_content_sidebars_sidebar2align' , array(
+		'default' => 'left',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+			'priority' => 50,
+    	));
+    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_sidebars_sidebar2align', array(
+            	'label'          => __( 'Second sidebar content alignment', 'imagazine' ),
+            	'section'        => 'imagazine_content_sidebars',
+            	'settings'       => 'imagazine_content_sidebars_sidebar2align',
+            	'type'           => 'select',
+ 	    		'description'    => __( 'Select the second sidebar content alignment', 'imagazine' ),
+            	'choices'        => array(
+                	'center'   => __( 'Center', 'imagazine' ),
+                	'left'   => __( 'Left', 'imagazine' ),
+            		'right'   => __( 'Right', 'imagazine' ),
+            	)
+    	)));
+
+		$wp_customize->add_setting( 'imagazine_content_sidebars_sidebar2responsive' , array(
+		'default' => 'after',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+			'priority' => 50,
+    	));
+    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_sidebars_sidebar2responsive', array(
+            	'label'          => __( 'Second sidebar responsive position', 'imagazine' ),
+            	'section'        => 'imagazine_content_sidebars',
+            	'settings'       => 'imagazine_content_sidebars_sidebar2responsive',
+            	'type'           => 'select',
+ 	    		'description'    => __( 'Select the second content sidebar positioning on small screens', 'imagazine' ),
+            	'choices'        => array(
+                	'before'   => __( 'On top', 'imagazine' ),
+                	'after'   => __( 'After logo/navigation and sidebar', 'imagazine' ),
+            		'collapsed'   => __( 'Collapsed', 'imagazine' ),
+            		'hide'   => __( 'Hide', 'imagazine' ),
+            	)
+    	)));
+
+
+
+
+
+
+
+
 
 }
 add_action( 'customize_register', 'imagazine_theme_customizer' );
@@ -609,20 +766,34 @@ function imagazine_customize_adaptive(){
 	{
 	min-height:<?php echo get_theme_mod('imagazine_topbar_behavior_minheight', 60).'px'; ?> !important;
 	}
-	#topbarcontainer .pos-left
+
+
+
+	.pos-left
 	{
 	float:left;
 	}
-	#topbarcontainer .pos-right
+	.pos-right
 	{
 	float:right;
 	}
-
-	#topbarcontainer .pos-above
+	.pos-above,
+	.pos-center
 	{
 	float:none;
 	text-align: center;
 	}
+
+
+
+	/* maincontent */
+	#maincontent, #sidebar, #sidebar-2
+	{
+	position: relative;
+	display: block;
+	}
+
+
 
 
 	}
