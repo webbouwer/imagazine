@@ -84,9 +84,20 @@ require get_template_directory() . '/customizer.php'; // customizer functions
 		if (function_exists('register_sidebar')) {
 
 
-			// the default wordpress header widget
+			// the upperbar sidebar
 			register_sidebar(array(
-				'name' => 'Top widgets (topbar topbox)',
+				'name' => 'Uppersidebar',
+				'id'   => 'uppersidebar',
+				'description'   => 'This is for top widget(s) above on top of the topbar.',
+				'before_widget' => '<div id="%1$s" class="widget %2$s">',
+				'after_widget'  => '<div class="clr"></div></div>',
+				'before_title'  => '<h3>',
+				'after_title'   => '</h3>'
+			));
+
+			// the top widgets
+			register_sidebar(array(
+				'name' => 'Top widgets',
 				'id'   => 'topwidgets',
 				'description'   => 'This is for top widget(s) above on top of the topbar.',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',

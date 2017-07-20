@@ -6,6 +6,22 @@ jQuery(function ($) {
 			var mediumswitch = $wp_custom_vars['imagazine_global_screenmode_mediummin'];
 
 
+			/* Upperbar */
+			var upperbardisplaysmall = $wp_custom_vars['imagazine_upperbar_behavior_displaysmall'];
+			var upperbardisplaylarge = $wp_custom_vars['imagazine_upperbar_behavior_displaylarge'];
+			var upperbarwidth = $wp_custom_vars['imagazine_upperbar_behavior_width'];
+
+			var uppermenusmallpos = $wp_custom_vars['imagazine_upperbar_menu_smallscreen'];
+			var uppermenulargepos = $wp_custom_vars['imagazine_upperbar_menu_largescreen'];
+			var uppermenutextalign = $wp_custom_vars['imagazine_upperbar_menu_textalign'];
+
+			var uppersidebarsmallpos = $wp_custom_vars['imagazine_upperbar_sidebar_smallscreen'];
+
+			var uppersidebarpos = $wp_custom_vars['imagazine_upperbar_sidebar_pos'];
+			var uppersidebarwidth = $wp_custom_vars['imagazine_upperbar_sidebar_width'];
+			var uppersidebaralign = $wp_custom_vars['imagazine_upperbar_sidebar_align'];
+			var uppersidebarrespon = $wp_custom_vars['imagazine_upperbar_sidebar_responsive'];
+
 			/* Topbar */
 			var menusmall = $wp_custom_vars['imagazine_topbar_menu_smallscreen'];
 			var menularge = $wp_custom_vars['imagazine_topbar_menu_largescreen'];
@@ -18,6 +34,8 @@ jQuery(function ($) {
 			var toplogominw = $wp_custom_vars['imagazine_topbar_logo_minwidth'];
 			var toplogomaxw = $wp_custom_vars['imagazine_topbar_logo_maxwidth'];
 
+		    var topwidgetspos = $wp_custom_vars['imagazine_topbar_widgets_position'];
+
 			var topsidebar1pos = $wp_custom_vars['imagazine_topbar_sidebars_sidebar1pos'];
 			var topsidebar1width = $wp_custom_vars['imagazine_topbar_sidebars_sidebar1width'];
 			var topsidebar1align = $wp_custom_vars['imagazine_topbar_sidebars_sidebar1align'];
@@ -29,6 +47,9 @@ jQuery(function ($) {
 			var topsidebar2respon = $wp_custom_vars['imagazine_topbar_sidebars_sidebar2responsive'];
 
 
+
+
+			/* main content */
 			var sidebar1pos = $wp_custom_vars['imagazine_content_sidebars_sidebar1pos'];
 			var sidebar1width = $wp_custom_vars['imagazine_content_sidebars_sidebar1width'];
 			var sidebar1align = $wp_custom_vars['imagazine_content_sidebars_sidebar1align'];
@@ -39,7 +60,13 @@ jQuery(function ($) {
 			var sidebar2align = $wp_custom_vars['imagazine_content_sidebars_sidebar2align'];
 			var sidebar2respon = $wp_custom_vars['imagazine_content_sidebars_sidebar2responsive'];
 
+
 			// set outermargins
+			if( $("#upperbarcontainer").length > 0 && upperbarwidth == 'margin' ){
+
+				$( "#upperbarcontainer" ).wrapInner( '<div class="outermargin"></div>');
+			}
+
 			if( $wp_custom_vars['imagazine_topbar_behavior_position'] != 'none' && $wp_custom_vars['imagazine_topbar_behavior_width'] == 'margin'){
 				$( "#topbarcontainer" ).wrapInner( '<div class="outermargin"></div>');
 			}
@@ -51,6 +78,77 @@ jQuery(function ($) {
 
 
 
+			function set_upperbar_elements(){
+
+				$('#upperbarcontainer').hide();
+				$('#uppermenubox').hide();
+
+				// for medium/large screen upperbarcontainer
+				if( $(window).width() >= mediumswitch ){
+
+					if( upperbardisplaylarge != 'none' ){
+
+						$('#upperbarcontainer').show();
+						$('#uppermenubox').parent().prepend( $('#uppersidebar') );
+
+						// default topmainbar width
+						var uppermenuwidth = 100;
+						if( $('#uppersidebar').length > 0 ){
+
+							if( uppermenulargepos != 'none' ){ // check if width shoulb be split
+
+							// split total width for topmainbar and sidebar 1
+							uppermenuwidth = uppermenuwidth - uppersidebarwidth;
+							$('#uppersidebar').css({
+							'width': uppersidebarwidth+'%'
+							});
+
+
+							// define topmainbar width and float position
+							var uppermenufloat = 'left';
+							if( uppersidebarpos === 'left')
+							{
+								uppermenufloat = 'right';
+							}
+
+							$('#uppermenubox').css({
+								'width': uppermenuwidth+'%',
+								'float': uppermenufloat
+							});
+
+
+							}
+						}
+
+
+
+					}
+					if( uppermenulargepos != 'none' && uppermenulargepos != 'collapsed' ){
+
+						$('#uppermenubox').show();
+
+					}
+
+				}else{
+
+					if( upperbardisplaysmall != 'none' ){
+
+						$('#upperbarcontainer').show();
+
+					}
+
+					if( uppermenusmallpos != 'none' && uppermenusmallpos != 'collapsed' ){
+
+						$('#uppermenubox').show();
+
+					}
+
+
+				}
+
+			}
+
+
 			function set_topbar_elements(){
 
 
@@ -60,8 +158,21 @@ jQuery(function ($) {
 				// before, after, collapsed, hide revert for large screen
 				$('#topmainbar').parent().prepend( $('#topsidebar-2') );
 				$('#topmainbar').parent().prepend( $('#topsidebar-1') );
-				$('#topmainbar').parent().prepend( $('#topwidgets') );
-				$('#topmainbar').parent().prepend( $('#uppermenu') );
+
+
+				if( topwidgetspos == 'top'){
+					$('#topmainbar').parent().prepend( $('#topwidgets') ); // top of topbar
+				}else if( topwidgetspos == 'above'){
+					$('#topmainbar').prepend( $('#topwidgets') ); // top of topmainbar
+				}else if( topwidgetspos == 'below'){
+					$('#topmainbar').append( $('#topwidgets') ); // bottom of topmainbar
+				}else{
+					$('#topmainbar').parent().append( $('#topwidgets') ); // bottom of topbar
+				}
+
+
+
+
 
 				// for medium/large screen
 				if( $(window).width() >= mediumswitch ){ //alert($mediumswitch); alert(topsidebar1width);
@@ -298,6 +409,9 @@ jQuery(function ($) {
 				}else{
 					ctimeout = false;
 					//alert('Done resizing');
+
+					// set upperbar
+					set_upperbar_elements();
 
 					// check topbar
 					if($wp_custom_vars['imagazine_topbar_behavior_position'] != 'none'){

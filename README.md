@@ -22,7 +22,11 @@ A multi purpose Wordpress theme (in development)
     * large screen min switch
     * large screen width
     * large screen outermargin
-        
+ 
+* Upperbar
+  * behavior
+  * menu
+ 
 * topbar:
    
   * behavior
@@ -75,13 +79,23 @@ A multi purpose Wordpress theme (in development)
 
 > Following is in development
     
-  * uppermenu
-  	* position full/topmain
-	* menu alignment left/center/right
+ * upperbar
+    * behavior
+	  * small screen show/collapse/none
+	  * large screen scroll/fixed/none
+	  * display fixed/scroll/none
+	  * width full/margin
+      
+  	* menu 
+	  * position small screen show/collapse/none
+	  * position large screen left/center/right/none
+	  * menu alignment left/center/right
 	
-  * topwidgets
-    * position full/topmain
-    * max columns
+    * sidebar
+	  * position left/right/none
+      * width percentage
+	  * content alignment left/center/right
+	  * responsive placement above/after left/center/right
   
   * Style
     background-color
