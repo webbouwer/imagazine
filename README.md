@@ -108,15 +108,15 @@ A multi purpose Wordpress theme (in development)
     padding horizontal
 
 
-  topmenustyle
-  submenustyle
+  	topmenustyle
+  	submenustyle
 
-header
+	header
 
-subheader
+	subheader
 
-maincontent 
+	maincontent 
 
-subcontent
+	subcontent
 
-footer
+	footer 

@@ -176,13 +176,22 @@ require get_template_directory() . '/customizer.php'; // customizer functions
 				'after_title'   => '</h3>'
 			));
 
-
-
 			// the columns below content
 			register_sidebar(array(
-				'name' => 'Maincontent Column Widgets',
-				'id'   => 'maincontentcolumns',
-				'description'   => 'MAin content widgetized columns',
+				'name' => 'Content top widgets',
+				'id'   => 'contenttopwidgets',
+				'description'   => 'Before maincontent widgetized area ',
+				'before_widget' => '<div id="%1$s" class="widget %2$s">',
+				'after_widget'  => '<div class="clr"></div></div>',
+				'before_title'  => '<h3>',
+				'after_title'   => '</h3>'
+			));
+
+			// the columns after the main content
+			register_sidebar(array(
+				'name' => 'Content bottom widgets',
+				'id'   => 'contentbottomwidgets',
+				'description'   => 'After main content widgetized area',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
 				'after_widget'  => '<div class="clr"></div></div>',
 				'before_title'  => '<h3>',
