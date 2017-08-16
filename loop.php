@@ -1,4 +1,11 @@
 <?php
+
+// options
+
+$headerfeaturedimg = get_theme_mod('imagazine_header_featuredimages', 'no');
+$headertitle = get_theme_mod('imagazine_header_pagetitle', 'no');
+
+
 // sidebars
 $sidebar1pos = get_theme_mod('imagazine_content_sidebars_sidebar1pos', 'none' );
 $sidebar1width = get_theme_mod('imagazine_content_sidebars_sidebar1width', 30 );
@@ -117,10 +124,13 @@ echo '</div>'; // end post container
 <?php
 echo '<article>';
 
-if ( has_post_thumbnail() ) {
+if ( has_post_thumbnail() && $headerfeaturedimg != 'yes') {
 the_post_thumbnail('medium');
 }
+
+if($headertitle != 'head'){
 echo '<h1><a href="'.get_the_permalink().'">'.get_the_title().'</a></h1>';
+}
 /*
 if( get_theme_mod('imagazine_settings_content_authordisplay', 'list') == 'single' || get_theme_mod('imagazine_settings_content_authordisplay', 'list') == 'list' || get_theme_mod('imagazine_settings_content_authordisplay', 'list') == 'all' ){
 imagazine_display_author();
@@ -168,10 +178,14 @@ comments_template(); // WP THEME STANDARD: comments_template( $file, $separate_c
 <?php
 
 echo '<article>';
-if ( has_post_thumbnail() ) {
+if ( has_post_thumbnail() && $headerfeaturedimg != 'yes' ) {
 the_post_thumbnail('medium');
 }
+
+
+if($headertitle != 'head'){
 echo '<h1><a href="'.get_the_permalink().'">'.get_the_title().'</a></h1>';
+}
 /*
 if( get_theme_mod('imagazine_settings_content_authordisplay', 'list') == 'page' || get_theme_mod('imagazine_settings_content_authordisplay', 'list') == 'all' ){
 imagazine_display_author();

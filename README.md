@@ -112,7 +112,7 @@ A multi purpose Wordpress theme (in development)
   	submenustyle
 
 	header
-
+  
 	subheader
 
 	maincontent 
