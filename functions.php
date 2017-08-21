@@ -232,6 +232,17 @@ require get_template_directory() . '/customizer.php'; // customizer functions
 				'after_title'   => '</h3>'
 			));
 
+			// the footer content
+			register_sidebar(array(
+				'name' => 'Footer Content Widgets',
+				'id'   => 'footercontent',
+				'description'   => 'Footer widgetized content',
+				'before_widget' => '<div id="%1$s" class="widget %2$s">',
+				'after_widget'  => '<div class="clr"></div></div>',
+				'before_title'  => '<h3>',
+				'after_title'   => '</h3>'
+			));
+
 			// the footer sidebar widget column
 			register_sidebar(array(
 				'name' => 'Footer sidebar 1',

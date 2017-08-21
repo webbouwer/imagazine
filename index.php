@@ -34,6 +34,7 @@ get_template_part('loop');
  */
 get_template_part('footer');
 
+
 wp_footer();
 
 echo '</div></body></html>';

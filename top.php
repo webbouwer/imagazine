@@ -21,6 +21,7 @@ $topbarposition = get_theme_mod('imagazine_topbar_behavior_position', 'center');
 $upperbardisplaysmall = get_theme_mod('imagazine_upperbar_behavior_displaysmall', 'none');
 $upperbardisplaylarge = get_theme_mod('imagazine_upperbar_behavior_displaylarge', 'fixed');
 
+$upperbarwidth = get_theme_mod('imagazine_upperbar_behavior_width', 'margin');
 
 $uppermenusmallpos = get_theme_mod('imagazine_upperbar_menu_smallscreen', 'none');
 $uppermenulargepos = get_theme_mod('imagazine_upperbar_menu_largescreen', 'left');
@@ -35,6 +36,8 @@ $uppersidebarrespon = get_theme_mod('imagazine_upperbar_sidebar_responsive', 'af
 // topbar logo
 $topbarlogopos = get_theme_mod('imagazine_topbar_logo_position', 'center');
 
+$topbarbehavior = get_theme_mod('imagazine_topbar_behavior_position', 'relative');
+$topbarbehaviorwidth =  get_theme_mod('imagazine_topbar_behavior_width', 'margin');
 // topbar menu
 $topbarmenusmall = get_theme_mod('imagazine_topbar_menu_smallscreen', 'collapsed');
 $topbarmenularge = get_theme_mod('imagazine_topbar_menu_largescreen', 'center');
@@ -55,10 +58,16 @@ $topsidebar2width = get_theme_mod('imagazine_topbar_sidebars_sidebar2width', 30 
 $topsidebar2align = get_theme_mod('imagazine_topbar_sidebars_sidebar2align', 'left' );
 $topsidebar2respon = get_theme_mod('imagazine_topbar_sidebars_sidebar2responsive', 'after' );
 
+
+
 // use upperbar?
 	if ( ( $upperbardisplaysmall != 'none' || $upperbardisplaylarge != 'none' ) && ( has_nav_menu( 'uppermenu' ) || (  function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('uppersidebar') ) ) ){
 
-	echo '<div id="upperbarcontainer">';
+		echo '<div id="upperbarcontainer" class="small-'.$upperbardisplaysmall.' large-'.$upperbardisplaylarge.'">';
+
+		if( $upperbarwidth == 'margin'){
+			echo '<div class="outermargin">';
+		}
 
 		// uppersidebar
 		if( $uppersidebarpos != 'none' && function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('uppersidebar')){
@@ -74,7 +83,11 @@ $topsidebar2respon = get_theme_mod('imagazine_topbar_sidebars_sidebar2responsive
 		echo '<div class="clr"></div></div></nav></div></div>';
 		}
 
-	echo '<div class="clr"></div></div>';
+		if( $upperbarwidth == 'margin'){
+			echo '</div>';
+		}
+
+		echo '<div class="clr"></div></div>';
 
 	}
 
@@ -83,8 +96,12 @@ $topsidebar2respon = get_theme_mod('imagazine_topbar_sidebars_sidebar2responsive
 // use topbar?
 if($topbarposition != 'none'){
 
-	echo '<div id="topbarcontainer">';
+	echo '<div id="topbarcontainer" class="pos-'.$topbarbehavior.'">';
 
+
+	if( $topbarbehaviorwidth === 'margin'){
+		echo '<div class="outermargin">';
+	}
 
 	// top widgets
 	if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('topwidgets')){
@@ -111,6 +128,8 @@ if($topbarposition != 'none'){
 
 
 
+
+
 	// top main content
 	echo '<div id="topmainbar" class="maincolumn large-'.$topbarmenularge.' small-'.$topbarmenusmall.'">';
 
@@ -128,11 +147,15 @@ if($topbarposition != 'none'){
 	}
 	echo '<div class="clr"></div></div></nav></div>';
 
-
 	echo '<div class="clr"></div></div>';
 
 
 
+
+
+	if( $topbarbehaviorwidth === 'margin'){
+		echo '</div>';
+	}
 
 
 	echo '<div class="clr"></div></div>';

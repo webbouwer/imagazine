@@ -14,6 +14,9 @@ This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
 
+
+
+/* global init set */
 *
 {
 padding:0;
@@ -27,9 +30,32 @@ line-height: 0;
 }
 
 
+
+
+#pagecontainer
+{
+position: relative;
+}
+
+
+
 /*
- * Basic topbar
+ * upperbar and topbar
  */
+#upperbarcontainer.small-fixed,
+#upperbarcontainer.large-fixed
+{
+	position: absolute;
+	width:100%;
+	z-index:299;
+	background-color: aquamarine;
+}
+#upperbarcontainer.sticky
+{
+	position: fixed;
+}
+
+
 #uppermenu,
 #topwidgets
 {
@@ -38,12 +64,13 @@ position: relative;
 width:100%;
 }
 
+/* upper menu */
 #uppermenu nav div div > ul > li
 {
 display: inline-block;
 }
 
-
+/* top menu */
 #topmenu nav div div > ul > li
 {
 display: inline-block;
@@ -62,4 +89,15 @@ display:none;
 clear:both;
 }
 
-
+/* top fixed */
+#topbarcontainer.pos-fixed
+{
+	position: absolute;
+	width:100%;
+	z-index:299;
+	background-color: blue;
+}
+#topbarcontainer.sticky
+{
+	position: fixed;
+}

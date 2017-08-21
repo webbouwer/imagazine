@@ -22,6 +22,8 @@ $sidebar2respon = get_theme_mod('imagazine_content_sidebars_sidebar2responsive',
 <div id="maincontentcontainer">
 <?php
 
+	echo '<div class="outermargin">';
+
 	/* maincontent sidebar 1 */
 	if( $sidebar1pos != 'none' && function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('sidebar') ){
 	echo '<div id="sidebar" class="sidecolumn width'.$sidebar1width.' pos-'.$sidebar1pos.' align-'.$sidebar1align.'">';
@@ -249,7 +251,7 @@ if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') &
 	echo '<div class="clr"></div></div>';
 }
 
-
+echo '<div class="clr"></div></div>'; // end margin
 ?>
 
 

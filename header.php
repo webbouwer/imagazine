@@ -52,7 +52,7 @@ if( ( is_single() || is_page() ) && ( $headerfeaturedimg == 'yes' || $headertitl
 
 }else if( $headertitle != 'no'  ){
 
-	$headmaintitle = single_cat_title("test", false);
+	$headmaintitle = single_cat_title("Category ", false);
 
 	if(!$headmaintitle){
 	$headmaintitle = get_bloginfo('name');
@@ -121,7 +121,7 @@ echo '<div class="outermargin">';
 
 	echo '<div id="headermainbar" class="maincolumn align-'.$headermainalign.'"'.$columnbgstyle.'>';
 
-
+	echo '<div class="maincolumnbox">';
 
 	// display title
 	if($headertitle != 'no'){
@@ -136,6 +136,8 @@ echo '<div class="outermargin">';
 		dynamic_sidebar('widgets-header');
 
 	}
+
+	echo '<div class="clr"></div></div>';
 
 	echo '<div class="clr"></div></div>';
 
