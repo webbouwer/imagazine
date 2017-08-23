@@ -24,12 +24,12 @@ A multi purpose Wordpress theme (in development)
     * large screen outermargin
  
 * Upperbar
-  * behavior
+  * behavior small & large
   * menu
  
 * topbar:
    
-  * behavior
+  * behavior small & large
     * hidden/relative/sticky/onscroll
     * min-height
     * outermarginmargin/fullwidth
@@ -80,7 +80,7 @@ A multi purpose Wordpress theme (in development)
 > Following is in development
     
  * upperbar
-    * behavior
+    * behavior 
 	  * small screen show/collapse/none
 	  * large screen scroll/fixed/none
 	  * display fixed/scroll/none
@@ -110,8 +110,13 @@ A multi purpose Wordpress theme (in development)
 
   	topmenustyle
   	submenustyle
-
-	header
+  
+  * Header
+	  * width
+      * height percentage
+	  * content alignment left/center/right
+	  * 2 sidebars left/right/none
+	  * responsive placement above/after left/center/right
   
 	subheader
 

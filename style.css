@@ -42,19 +42,6 @@ position: relative;
 /*
  * upperbar and topbar
  */
-#upperbarcontainer.small-fixed,
-#upperbarcontainer.large-fixed
-{
-	position: absolute;
-	width:100%;
-	z-index:299;
-	background-color: aquamarine;
-}
-#upperbarcontainer.sticky
-{
-	position: fixed;
-}
-
 
 #uppermenu,
 #topwidgets
@@ -89,15 +76,26 @@ display:none;
 clear:both;
 }
 
-/* top fixed */
-#topbarcontainer.pos-fixed
-{
-	position: absolute;
+/*
+ * upperbar and topbar
+ */
+#upperbarcontainer{
+	position: relative;
 	width:100%;
+}
+#upperbarcontainer.sticky
+{
+	position: fixed;
 	z-index:299;
-	background-color: blue;
+}
+
+/* top fixed */
+#topbarcontainer{
+	position: relative;
+	width:100%;
 }
 #topbarcontainer.sticky
 {
 	position: fixed;
+	z-index:298;
 }

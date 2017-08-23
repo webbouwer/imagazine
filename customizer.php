@@ -494,17 +494,37 @@ function imagazine_theme_customizer( $wp_customize ){
 
 
 	/* Topbar - Behavior */
-	$wp_customize->add_setting( 'imagazine_topbar_behavior_position' , array(
+	$wp_customize->add_setting( 'imagazine_topbar_behavior_smallposition' , array(
+		'default' => 'fixed',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+		'priority' => 30,
+    ));
+
+    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_behavior_smallposition', array(
+            'label'          => __( 'Topbar small screen positioning', 'imagazine' ),
+            'section'        => 'imagazine_topbar_behavior',
+            'settings'       => 'imagazine_topbar_behavior_smallposition',
+            'type'           => 'select',
+ 	    	'description'    => __( 'Select smallscreen topbar screen behavior', 'imagazine' ),
+            'choices'        => array(
+                'relative'   => __( 'Relative, scroll along', 'imagazine' ),
+                'fixed'   => __( 'Fixed, stick to top', 'imagazine' ),
+                'scroll'   => __( 'Fixed, visible on first scroll', 'imagazine' ),
+                'none'   => __( 'Do not use a topbar', 'imagazine' ),
+            )
+    )));
+
+	$wp_customize->add_setting( 'imagazine_topbar_behavior_largeposition' , array(
 		'default' => 'fixed',
 		'sanitize_callback' => 'imagazine_sanitize_default',
 		'priority' => 20,
     ));
-    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_behavior_position', array(
-            'label'          => __( 'Topbar screen positioning', 'imagazine' ),
+    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_behavior_largeposition', array(
+            'label'          => __( 'Topbar large screen positioning', 'imagazine' ),
             'section'        => 'imagazine_topbar_behavior',
-            'settings'       => 'imagazine_topbar_behavior_position',
+            'settings'       => 'imagazine_topbar_behavior_largeposition',
             'type'           => 'select',
- 	    	'description'    => __( 'Select topbar screen behavior', 'imagazine' ),
+ 	    	'description'    => __( 'Select topbar large screen behavior', 'imagazine' ),
             'choices'        => array(
                 'relative'   => __( 'Relative, scroll along', 'imagazine' ),
                 'fixed'   => __( 'Fixed, stick to top', 'imagazine' ),
@@ -1588,6 +1608,25 @@ function imagazine_customize_adaptive(){
 
 
 	/* Header */
+	#headermedia,
+	#headermedia > .outermargin /* height set in global.js */
+	{
+
+		display: block;
+		-webkit-transform-style: preserve-3d;
+		-moz-transform-style: preserve-3d;
+		transform-style: preserve-3d;
+		overflow: visible;
+	}
+
+	#headermedia .maincolumnbox,
+	#headermedia .sidecolumn
+	{
+	  position: relative;
+	  top: 50%;
+	  transform: translateY(-50%);
+	}
+
 
 
 	/* maincontent */
@@ -1615,25 +1654,6 @@ function imagazine_customize_adaptive(){
 	}
 
 
-	/* Header */
-	#headermedia,
-	#headermedia > .outermargin /* height set in global.js */
-	{
-
-		display: block;
-		-webkit-transform-style: preserve-3d;
-		-moz-transform-style: preserve-3d;
-		transform-style: preserve-3d;
-		overflow: visible;
-	}
-
-	#headermedia .maincolumnbox,
-	#headermedia .sidecolumn
-	{
-	  position: relative;
-	  top: 50%;
-	  transform: translateY(-50%);
-	}
 
 
 	}

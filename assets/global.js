@@ -31,7 +31,8 @@ jQuery(function ($) {
 			var menu_button_html = '<div id="topmainmenubutton">MENU</div>';
 			var menu_logo_html = '<li class="menu-item logo"></li>';
 
-			var topbarbehavior = $wp_custom_vars['imagazine_topbar_behavior_position']; // relative / fixed / scroll / none
+			var topbarlargebehavior = $wp_custom_vars['imagazine_topbar_behavior_largeposition']; // relative / fixed / scroll / none
+			var topbarsmallbehavior = $wp_custom_vars['imagazine_topbar_behavior_smallposition']; // relative / fixed / scroll / none
 			var topbarwidth =  $wp_custom_vars['imagazine_topbar_behavior_width'];
 			var toplogopos = $wp_custom_vars['imagazine_topbar_logo_position'];
 			var toplogominw = $wp_custom_vars['imagazine_topbar_logo_minwidth'];
@@ -92,247 +93,239 @@ jQuery(function ($) {
 
 			function set_top_behavior(){
 
-
-				var upperbarTop = $('#upperbarcontainer').offset().top;
-				var topbarTop = $('#topbarcontainer').offset().top;
-				var uh = 0;
-				var th = 0;
-
-				$('#upperspacer,#topspacer').remove();
-
-				if( $('#upperbarcontainer').length > 0 && ( upperbardisplaysmall == 'fixed' || upperbardisplaylarge == 'fixed' ) ){
-					uh = $('#upperbarcontainer').height();
-					$('<div id="upperspacer" style="height:'+uh+'px;"></div>').insertAfter( $('#upperbarcontainer') );
-
-						$('#upperbarcontainer').addClass('sticky');
-				}
-
-				if( $('#topbarcontainer').length > 0 && topbarbehavior == 'fixed' ){
-					th = $('#topbarcontainer').height();
-					$('<div id="topspacer" style="height:'+th+'px;"></div>').insertAfter( $('#topbarcontainer') );
-				}
-
-				$(window).scroll(function() {
-
-					// topbar
-					var windowTop = $(window).scrollTop(); // top + upperbar
-
-					if (topbarTop < ( windowTop + uh ) && topbarbehavior == 'fixed' && !$('#topbarcontainer').hasClass('sticky') ){
-
-						$('#topbarcontainer').addClass('sticky');
-						$('#topbarcontainer').css('top', uh );
-
-					} else if( topbarTop >= ( windowTop + uh ) && $('#topbarcontainer').hasClass('sticky') ) {
-
-						$('#topbarcontainer').removeClass('sticky');
-						$('#topbarcontainer').css('top', topbarTop );
-
-					}
-
-
-				});
-
-			}
-				/*
-				var upperbarTop = $('#upperbarcontainer').offset().top;
-				var topbarTop = $('#topbarcontainer').offset().top;
-				var uppervoid = 0;
-				var topvoid = 0;
+				var tsp = 0;
 
 				if( $('#wpadminbar').length > 0 ){
-					uppervoid = $('#wpadminbar').outerHeight();
+					$('#wpadminbar').css('top', 0 );
+					$('#wpadminbar').css('position', 'fixed');
+					tsp = $('#wpadminbar').outerHeight();
 				}
 
-			  	$(window).scroll(function() {
+				var ut = tsp;
 
-					var windowTop = $(window).scrollTop() + uppervoid;
+				if( $('#upperbarcontainer').length > 0 ){
 
-					if (upperbarTop < windowTop  && ( upperbardisplaysmall == 'fixed' || upperbardisplaylarge == 'fixed' ) && !$('#upperbarcontainer').hasClass('sticky') ){
+					// fixed positioning
+					if( ( $(window).width() < mediumswitch  && upperbardisplaysmall == 'fixed' ) || ( $(window).width() >= mediumswitch && upperbardisplaylarge == 'fixed' ) ){
 
-						$('#upperbarcontainer').addClass('sticky');
-						topvoid = uppervoid + $('#upperbarcontainer').height();
-						$('#pagecontainer').css('margin-top', $('#upperbarcontainer').height() );
+						if( !$('#upperbarcontainer').hasClass('sticky') ){
 
-					} else if( upperbarTop >= windowTop && $('#upperbarcontainer').hasClass('sticky') ) {
+							// set absolute pos on nst
+							$('#upperbarcontainer').css('top', ut);
 
-						$('#upperbarcontainer').removeClass('sticky');
-						$('#pagecontainer').css('margin-top', 0 );
+							// set next sticky top
+							var uh = $('#upperbarcontainer').outerHeight();
+							tsp += uh;
 
-					}
+							// insert relative spacer div
+							$('<div id="upperspacer" style="height:'+uh+'px;"></div>').insertAfter( $('#upperbarcontainer') );
 
-					windowTop = $(window).scrollTop() + topvoid;
-					if (topbarTop < windowTop + topvoid && topbarbehavior == 'fixed' && !$('#topbarcontainer').hasClass('sticky') ){
-
-						$('#topbarcontainer').addClass('sticky');
-						$('#topbarcontainer').css('top', topvoid );
-
-					} else if( topbarTop >= windowTop + topvoid && $('#topbarcontainer').hasClass('sticky') ) {
-
-						$('#topbarcontainer').removeClass('sticky');
-						$('#topbarcontainer').css('top', 0 );
-
-					}
-
-
-
-
-				});
-
-				*/
-
-
-		 		/*
-				var topvoid = 0;
-				var topbarstickyheight = 0;
-
-				if( $('#wpadminbar').length > 0 ){
-					topvoid = $('#wpadminbar').outerHeight();
-				}
-
-				var upperbarTop = $('#upperbarcontainer').offset().top;
-				var topbarTop = $('#topbarcontainer').offset().top;
-
-
-			  	$(window).scroll(function() {
-
-					var windowTop = $(window).scrollTop() + topvoid;
-					//console.log(windowTop);
-
-					if (upperbarTop < windowTop && ( upperbardisplaysmall == 'fixed' || upperbardisplaylarge == 'fixed' ) && !$('#upperbarcontainer').hasClass('sticky') ){
-
-						$('#upperbarcontainer').addClass('sticky');
-						topbarstickyheight = $('#upperbarcontainer').outerHeight();
-
-					} else if( upperbarTop >= windowTop && $('#upperbarcontainer').hasClass('sticky') ) {
-
-						$('#upperbarcontainer').removeClass('sticky');
-
-					}
-
-
-					if (topbarTop < ( windowTop + topbarstickyheight) && topbarbehavior == 'fixed' && !$('#topbarcontainer').hasClass('sticky')){
-							$('#topbarcontainer').addClass('sticky');
-							$('#topbarcontainer').css({
-								"top": topbarstickyheight;
-							});
-
-						} else if( topbarTop >= windowTop && $('#topbarcontainer').hasClass('sticky') ){
-
-						    $('#topbarcontainer').css({
-								"top": 0
-							});
-							$('#topbarcontainer').removeClass('sticky');
-						}
-					}
-
-
-
-				});
-				*/
-				/*
-				// relative positioned element distances to top
-				var upperbarTop = $('#upperbarcontainer').offset().top;
-				var topbarTop = $('#upperbarcontainer').offset().top;
-
-				// onscroll
-			  	$(window).scroll(function() {
-					// detect page top
-					var windowTop = $(window).scrollTop();
-					var topbartoppos = 0;
-
-					// add adminbar margintop
-					if( $('#wpadminbar').length > 0 ){
-						topbartoppos = $('#wpadminbar').height();
-					}
-
-					// large screen
-					if( $(window).width() >= mediumswitch ){
-
-						// if upper large fixed
-						if (upperbarTop < windowTop && upperbardisplaylarge == 'fixed' && !$('#upperbarcontainer').hasClass('sticky') ){
-
+							// set fixed
 							$('#upperbarcontainer').addClass('sticky');
 
-						} else {
-
-							$('#upperbarcontainer').removeClass('sticky');
-
 						}
 
-
-
-
-						// topbar large screen
-						// if topbar fixed
-						if (topbarTop < windowTop && topbarbehavior == 'fixed' && !$('#topbarcontainer').hasClass('sticky')){
-							$('#topbarcontainer').addClass('sticky');
-							$('#topbarcontainer').css({
-								"top": topbartoppos
-							});
-
-						} else {
-
-						    $('#topbarcontainer').css({
-								"top": 0
-							});
-							$('#topbarcontainer').removeClass('sticky');
-
-						}
-
-
-					// small sreen
 					}else{
 
-						// if upper small fixed
-						if (upperbarTop < windowTop && upperbardisplaysmall == 'fixed' && !$('#upperbarcontainer').hasClass('sticky') ){
-							$('#upperbarcontainer').css({
-								"position": "fixed",
-								"width": "100%",
-							});
-							topbartoppos += $('#upperbarcontainer').height();
-							$('#upperbarcontainer').addClass('sticky');
+						if( $('#upperbarcontainer').hasClass('sticky') ){
+							// set next sticky top
+							var uh = $('#upperbarcontainer').outerHeight();
 
-						} else {
+							// revert absolute pos on tsp
+							tsp -= uh;
 
-						    $('#upperbarcontainer').css('position', 'relative');
+							// relative or none positioning
 							$('#upperbarcontainer').removeClass('sticky');
+
+							// set relative pos
+							$('#upperbarcontainer').css('top', 0);
+
+							// remove spacer
+							$('#upperspacer').remove();
 						}
-
-
-
-
-						// topbar small screen
-						// if topbar fixed
-						if (topbarTop < windowTop && topbarbehavior == 'fixed' && !$('#topbarcontainer').hasClass('sticky')){
-							$('#topbarcontainer').css({
-								"position": "fixed",
-								"width": "100%",
-								"top": 0
-							});
-							$('#topbarcontainer').addClass('sticky');
-
-						} else {
-
-						  $('#topbarcontainer').css({
-								"position": "relative",
-								"width": "100%",
-								"top": 0
-							});
-							$('#topbarcontainer').removeClass('sticky');
-
-						}
-
-
-
-
 					}
 
 
+				}
 
 
-	    		});
-				*/
 
+
+
+
+				if( $('#topbarcontainer').length > 0 ){
+
+					if( ( $(window).width() < mediumswitch && topbarsmallbehavior == 'fixed' ) || ( $(window).width() >= mediumswitch && topbarlargebehavior == 'fixed') ){
+
+
+						// get offsets
+						var topbarTop = $('#topbarcontainer').offset().top;
+
+						// get topbarcontainer height
+						var th = $('#topbarcontainer').outerHeight();
+
+						// fixed on top after scrolling upperbar height
+
+							// onscroll
+							$(window).scroll(function(){
+
+								// get scroll top position
+								var windowTop = $(window).scrollTop() + tsp;
+
+								// check topbar position
+								if ( topbarTop < windowTop && !$('#topbarcontainer').hasClass('sticky') ){
+
+									// set absolute pos on nst
+									$('#topbarcontainer').css('top', tsp);
+
+									// insert relative spacer div
+									$('<div id="topspacer" style="height:'+th+'px;"></div>').insertAfter( $('#topbarcontainer') );
+
+									// set sticky
+									$('#topbarcontainer').addClass('sticky');
+
+								}else if( topbarTop >= windowTop && $('#topbarcontainer').hasClass('sticky') ) {
+
+									// remove sticky
+									$('#topbarcontainer').removeClass('sticky');
+
+									// set absolute pos return
+									$('#topbarcontainer').css('top', 0);
+
+									// remove spacer
+									$('#topspacer').remove();
+
+								}
+
+							});
+
+
+					}else{
+
+									// remove sticky
+									$('#topbarcontainer').removeClass('sticky');
+
+									// remove spacer
+									$('#topspacer').remove();
+
+					}
+
+				}
+			}
+
+
+				/*
+				// adminbar on top
+				var nst = 0; // window top - uppervoid
+				if( $('#wpadminbar').length > 0 ){
+					$('#wpadminbar').css('top', 0 );
+					$('#wpadminbar').css('position', 'fixed');
+					nst = $('#wpadminbar').outerHeight();
+				}
+
+				// remove spacers
+				$('#upperspacer,#topspacer').remove();
+
+				// onresize set variables
+				if( $('#upperbarcontainer').length > 0 ){
+
+					// fixed positioning
+					if( ( $(window).width() < mediumswitch  && upperbardisplaysmall == 'fixed' ) || ( $(window).width() >= mediumswitch && upperbardisplaylarge == 'fixed' ) ){
+
+						// set absolute pos on nst
+						$('#upperbarcontainer').css('top',nst);
+
+						// set next sticky top
+						var uh = $('#upperbarcontainer').outerHeight();
+						nst += uh;
+
+						// insert relative spacer div
+						$('<div id="upperspacer" style="height:'+uh+'px;"></div>').insertAfter( $('#upperbarcontainer') );
+
+						// set fixed
+						$('#upperbarcontainer').addClass('sticky');
+
+					}else{
+
+						// relative or none positioning
+						$('#upperbarcontainer').removeClass('sticky');
+
+						$('#upperspacer').remove();
+					}
+
+
+				}
+
+				if( $('#topbarcontainer').length > 0 ){
+
+					if( ( $(window).width() < mediumswitch && topbarsmallbehavior == 'fixed' ) || ( $(window).width() >= mediumswitch && topbarlargebehavior == 'fixed') ){
+
+
+						// get offsets
+						var upperbarTop = $('#upperbarcontainer').offset().top;
+						var topbarTop = $('#topbarcontainer').offset().top;
+
+						// get topbarcontainer height
+						var th = $('#topbarcontainer').outerHeight();
+
+						// fixed on top after scrolling upperbar height
+						if( $('#upperbarcontainer').length > 0 ){
+
+							// onscroll
+							$(window).scroll(function(){
+
+								// get scroll top position
+								var windowTop = $(window).scrollTop();
+
+								// check topbar position
+								if ( ( topbarTop - nst )  < windowTop && !$('#topbarcontainer').hasClass('sticky') ){
+
+									// set absolute pos on nst
+									$('#topbarcontainer').css('top',nst);
+
+									// insert relative spacer div
+									$('<div id="topspacer" style="height:'+th+'px;"></div>').insertAfter( $('#topbarcontainer') );
+
+									// set sticky
+									$('#topbarcontainer').addClass('sticky');
+
+								}else if( ( topbarTop - nst ) >= windowTop && $('#topbarcontainer').hasClass('sticky') ) {
+
+									// remove sticky
+									$('#topbarcontainer').removeClass('sticky');
+
+									// remove spacer
+									$('#topspacer').remove();
+
+								}
+
+
+							});
+
+
+						}else{ // fixed on top directly
+
+								// insert relative spacer div
+								$('<div id="topspacer" style="height:'+th+'px;"></div>').insertAfter( $('#topbarcontainer') );
+
+								// set sticky
+								$('#topbarcontainer').addClass('sticky');
+
+
+						}
+
+
+
+					}else{
+								// remove sticky
+								$('#topbarcontainer').removeClass('sticky');
+
+								// remove spacer
+								$('#topspacer').remove();
+
+					}
+
+				}*/
 
 
 
@@ -419,6 +412,21 @@ jQuery(function ($) {
 
 				// default topmainbar width
 				var mainwidth = 100;
+				if( $(window).width() >= mediumswitch ){
+					if( topbarlargebehavior == 'none' ){
+						$('#topbarcontainer').hide();
+					}else{
+						$('#topbarcontainer').show();
+					}
+				}else{
+					if( topbarsmallbehavior == 'none' ){
+						$('#topbarcontainer').hide();
+					}else{
+						$('#topbarcontainer').show();
+					}
+				}
+
+				if( ( $(window).width() < mediumswitch && topbarsmallbehavior != 'none') || ( $(window).width() >= mediumswitch && topbarlargebehavior != 'none') ){//$wp_custom_vars['imagazine_topbar_behavior_position'] != 'none'){
 
 				// before, after, collapsed, hide revert for large screen
 				$('#topmainbar').parent().prepend( $('#topsidebar-2').show() );
@@ -603,6 +611,8 @@ jQuery(function ($) {
 
 
 				}
+
+				} //
 
 
 			}
@@ -850,7 +860,7 @@ jQuery(function ($) {
 			}
 
 
-
+		$(window).load(function() {
 			/*
 			 * on resize end function
 			 */
@@ -878,9 +888,11 @@ jQuery(function ($) {
 					set_upperbar_elements();
 
 					// check topbar
-					if($wp_custom_vars['imagazine_topbar_behavior_position'] != 'none'){
-						set_topbar_elements();
-					}
+					set_topbar_elements();
+
+
+					// fixed topbar etc.
+					set_top_behavior();
 
 
 					// header
@@ -894,9 +906,6 @@ jQuery(function ($) {
 					set_footer_elements();
 
 
-
-					// fixed topbar etc.
-					set_top_behavior();
 				}
 
 			}
@@ -904,9 +913,11 @@ jQuery(function ($) {
 			// init resize end on document ready
 			customizer_resizeend();
 
-	});
+		}); //end onload
 
-});
+	}); //end on ready
+
+}); // end jquery
 
 
 

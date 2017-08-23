@@ -17,10 +17,8 @@ $sidebar2width = get_theme_mod('imagazine_content_sidebars_sidebar2width', 30 );
 $sidebar2align = get_theme_mod('imagazine_content_sidebars_sidebar2align', 'left' );
 $sidebar2respon = get_theme_mod('imagazine_content_sidebars_sidebar2responsive', 'after' );
 
-?>
 
-<div id="maincontentcontainer">
-<?php
+echo '<div id="maincontentcontainer">';
 
 	echo '<div class="outermargin">';
 
@@ -109,7 +107,9 @@ echo '<a href="'.get_the_permalink().'">'.__('Lees meer', 'imagazine' ).'</a>';
 
 echo '</div>';
 
-echo '</div>'; // end post container
+
+echo '<div class="clr"></div></div>'; // end page(post) container
+
 
 
 
@@ -158,23 +158,17 @@ the_tags('Tags: ',' ');
 previous_post_link('%link', __('vorige', 'imagazine' ).': %title', TRUE);
 next_post_link('%link', __('volgende', 'imagazine' ).': %title', TRUE);
 
-echo '</div>'; // end post container
-
-
-
 // post comments
 if ( comments_open() || get_comments_number() ) {
 comments_template(); // WP THEME STANDARD: comments_template( $file, $separate_comments );
 }
 
+echo '<div class="clr"></div></div>'; // end page(post) container
+
 
 
 }else if( is_page() ){
-
 ?>
-
-
-
 
 <div id="post-<?php echo get_the_ID(); ?>" <?php post_class(); ?>>
 <?php
@@ -200,6 +194,7 @@ if ( is_super_admin() ) {
 edit_post_link( __( 'Edit' , 'imagazine' ), '<span class="edit-link">', '</span>' );
 }
 
+
 echo '<div class="innerpadding">';
 echo apply_filters('the_content', get_the_content());
 echo '</div>';
@@ -220,9 +215,26 @@ $defaults = array(
 );
 wp_link_pages( $defaults );
 
+
+echo '<div class="clr"></div></div>'; // end page(post) container
+
+
 }
+
+
+
+
+
+
+
+
 endwhile;
 endif;
+
+
+
+
+
 
 // pagination
 if ( !is_single() ) {
@@ -239,9 +251,6 @@ echo paginate_links( array(
 }
 
 
-echo '<div class="clr"></div></div>'; // end page(post) container
-
-
 
 
 // maincontent bottom widgets
@@ -251,9 +260,14 @@ if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') &
 	echo '<div class="clr"></div></div>';
 }
 
+
+echo '<div class="clr"></div></div>'; // end maincontent
+
+
 echo '<div class="clr"></div></div>'; // end margin
+
+
+echo '<div class="clr"></div></div>'; // end maincontent container
 ?>
 
 
-
-<div class="clr"></div></div> <!-- end maincontent container -->

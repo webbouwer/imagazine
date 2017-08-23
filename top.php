@@ -7,8 +7,6 @@ if( get_theme_mod('imagazine_topbar_logo_image', '') != '' ){
 $topbarlogo = get_theme_mod('imagazine_topbar_logo_image', '');
 }
 
-// topbar screen positioning (relative,fixed,scroll,none)
-$topbarposition = get_theme_mod('imagazine_topbar_behavior_position', 'center');
 
 // use minheight?
 // JS: topbar minheight imagazine_topbar_behavior_minheight
@@ -36,7 +34,8 @@ $uppersidebarrespon = get_theme_mod('imagazine_upperbar_sidebar_responsive', 'af
 // topbar logo
 $topbarlogopos = get_theme_mod('imagazine_topbar_logo_position', 'center');
 
-$topbarbehavior = get_theme_mod('imagazine_topbar_behavior_position', 'relative');
+$topbarlargebehavior = get_theme_mod('imagazine_topbar_behavior_largeposition', 'fixed');
+$topbarsmallbehavior = get_theme_mod('imagazine_topbar_behavior_smallposition', 'fixed');
 $topbarbehaviorwidth =  get_theme_mod('imagazine_topbar_behavior_width', 'margin');
 // topbar menu
 $topbarmenusmall = get_theme_mod('imagazine_topbar_menu_smallscreen', 'collapsed');
@@ -84,7 +83,7 @@ $topsidebar2respon = get_theme_mod('imagazine_topbar_sidebars_sidebar2responsive
 		}
 
 		if( $upperbarwidth == 'margin'){
-			echo '</div>';
+			echo '<div class="clr"></div></div>';
 		}
 
 		echo '<div class="clr"></div></div>';
@@ -94,9 +93,9 @@ $topsidebar2respon = get_theme_mod('imagazine_topbar_sidebars_sidebar2responsive
 
 
 // use topbar?
-if($topbarposition != 'none'){
+if($topbarlargebehavior != 'none' || $topbarsmallbehavior != 'none'){
 
-	echo '<div id="topbarcontainer" class="pos-'.$topbarbehavior.'">';
+	echo '<div id="topbarcontainer" class="small-'.$topbarsmallbehavior.' large-'.$topbarlargebehavior.'">';
 
 
 	if( $topbarbehaviorwidth === 'margin'){

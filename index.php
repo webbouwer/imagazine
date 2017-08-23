@@ -35,7 +35,9 @@ get_template_part('loop');
 get_template_part('footer');
 
 
+echo '<div class="clr"></div></div>'; // end pagecontainer
+
 wp_footer();
 
-echo '</div></body></html>';
+echo '</body></html>';
 ?>
