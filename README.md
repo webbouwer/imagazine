@@ -1,6 +1,19 @@
 # Imagazine
 A multi purpose Wordpress theme (in development)
 
+  ###Features:
+    * ready for pagebuilder plugins
+  	* adjustments through customizer
+    * upperbar with menu (option to stick to top)
+    * topbar with menu & logo combined + 2 sidebars (option to stick to top)
+	* header image and/or featured image header incl. 2 sidebars
+	* content with before and after widgets + 2 sidebars
+	* footer with menu + 2 sidebars
+	
+  ###In progress:
+    * Styling options
+	* Responsive behavior
+	
 * global:
 
   * Identity
