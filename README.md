@@ -6,28 +6,27 @@ At the moment only the most basic needed css styling for element positioning wit
 
     * ready for pagebuilder plugins
   	* adjustments through customizer
-    * upperbar with menu (option to stick to top)
-    * topbar with menu & logo combined + 2 sidebars (option to stick to top)
+    * upperbar with a navigation menu (option to stick to top)
+    * topbar with a navigation menu & logo combined + 2 sidebars (option to stick to top)
 	* header image and/or featured image header incl. 2 sidebars
 	* content with before and after widgets + 2 sidebars
-	* footer with menu + 2 sidebars
+	* footer with a widgetcolumns-row, above or below + a navigation menu + 2 sidebars
 	
 ###In progress:
 
     * Page meta options
 	* Responsive behavior
+	* default css markup
 	
 * global:
 
   * Identity
-    * Title
-    * Tagline
-    * Icon
-    * Logo(default)
+    * Title (wp default)
+    * Tagline (wp default)
+    * Logo(wp default)
+    * (Fav)icon (wp default)
 
-  * Header
-  
-  * Background-image
+  * Background-image (default)
 
   * Screen modes
     * small screen width
@@ -40,104 +39,149 @@ At the moment only the most basic needed css styling for element positioning wit
     * large screen outermargin
  
 * Upperbar
-  * behavior small & large
-  * menu
- 
+  	* Behavior 
+		* small screen hidden/relative/sticky (onscroll)
+  		* large screen hidden/relative/sticky (onscroll)
+  		* width outermargin
+  	* Menu
+		* small screen 
+  		* large screen
+  	* Sidebar
+		* position
+		* width percentage
+		* content alignment
+		* responsive position
+		
 * topbar:
    
-  * behavior small & large
-    * hidden/relative/sticky/onscroll
-    * min-height
-    * outermarginmargin/fullwidth
+  	* Behavior 
+		* small screen hidden/relative/sticky (onscroll)
+  		* large screen hidden/relative/sticky (onscroll)
+    	* min-height
+    	* outermarginmargin/fullwidth
 
-  * logo
-    * image
-    * min size
-    * max size
-    * left/right/menucenter/centerabove
+  	* logo
+    	* image
+    	* min size
+		* max size
+    	* left/right/menucenter/centerabove
 
-  * menu
-    * smallscreen open/collapsed
-    * largescreen left/right/center/collapsed
-    * text-alignment left/right
-    * submenu horizontal/vertical
-    * submenu compact/fullwidth/fullscreen
+	* menu
+    	* smallscreen open/collapsed
+    	* largescreen left/right/center/collapsed
+    	* text-alignment left/right
     
 
-  * topwidgets
-    * position menucolumntop/topbarwidth
-    * max columns
+  	* topwidgets
+    	* position menucolumntop/topbarwidth
+    	* max columns
   
-  * topsidebars
-    * sidebar1 position left/right
-    * sidebar1 width
-    * sidebar1 text-alignment left/right
-    * sidebar1 responsive position 		before/after/collapse/hide
-    * sidebar2 position left/right
-    * sidebar2 width
-    * sidebar2 text-alignment left/right
-    * sidebar2 responsive position before/after/collapse/hide
+  	* topsidebars
+		* sidebar1 position left/right
+		* sidebar1 width
+		* sidebar1 text-alignment left/right
+		* sidebar1 responsive position 		before/after/collapse/hide
+		* sidebar2 position left/right
+		* sidebar2 width
+		* sidebar2 text-alignment left/right
+		* sidebar2 responsive position before/after/collapse/hide
+		
+ * Header
+ 	* header image
+		* select or upload (wp default)
+ 	* header settings
+		* type (imageonly/overlaycolumns/inside maincolumn)
+		* title display (post/page)
+		* use featured images yes/no
+	  	* area width
+		* inner content width
+      	* height percentage
+		* min-height in px
+	  	* content alignment left/center/right
+		
+	* header sidebar 1
+	  	* sidebar1 position left/right
+		* sidebar1 width
+		* sidebar1 text-alignment left/right
+		* sidebar1 responsive position 		before/after/collapse/hide
+		
+	* header sidebar 2
+	  	* sidebar2 position left/right
+		* sidebar2 width
+		* sidebar2 text-alignment left/right
+		* sidebar2 responsive position before/after/collapse/hide
+  	
 
 
+	* maincontent
+		* Sidebars
+			* sidebar1 position left/right
+			* sidebar1 width
+			* sidebar1 text-alignment left/right
+			* sidebar1 responsive position 		before/after/collapse/hide
+			* sidebar2 position left/right
+			* sidebar2 width
+			* sidebar2 text-alignment left/right
+			* sidebar2 responsive position before/after/collapse/hide
 
- * maincontent
- 
-    * sidebar1 position left/right
-    * sidebar1 width
-    * sidebar1 text-alignment left/right
-    * sidebar1 responsive position 		before/after/collapse/hide
-    * sidebar2 position left/right
-    * sidebar2 width
-    * sidebar2 text-alignment left/right
-    * sidebar2 responsive position before/after/collapse/hide
+	* Footer
+		* Behavior
+			* width
+		* Columns widgets
+			* placement above/below/none
+		* Sidebars
+			* sidebar1 position left/right
+			* sidebar1 width
+			* sidebar1 text-alignment left/right
+			* sidebar1 responsive position 		before/after/collapse/hide
+			* sidebar2 position left/right
+			* sidebar2 width
+			* sidebar2 text-alignment left/right
+			* sidebar2 responsive position before/after/collapse/hide
 
 
+	* Customizer default option;
+		* Menu's
+		* Widgets
+		* Static frontpage
+		* Extra css
 
-> Following is in development
+
+### Following is in development
     
  * upperbar
     * behavior 
-	  * small screen show/collapse/none
-	  * large screen scroll/fixed/none
-	  * display fixed/scroll/none
-	  * width full/margin
+	  	* display on scroll/none
+	  	* responsive behavior
       
   	* menu 
-	  * position small screen show/collapse/none
-	  * position large screen left/center/right/none
-	  * menu alignment left/center/right
+	  	* menu alignment left/center/right
+      	* submenu horizontal/vertical
+      	* submenu compact/fullwidth/fullscreen
 	
     * sidebar
-	  * position left/right/none
-      * width percentage
-	  * content alignment left/center/right
-	  * responsive placement above/after left/center/right
+	  	* position left/right/none
+      	* width percentage
+	  	* content alignment left/center/right
+	  	* responsive placement above/after left/center/right
   
-  * Style
-    background-color
-    font color
-    link color
-    hover link color
-    margin vertical
-    margin horizontal
-    padding vertical
-    padding horizontal
+  	* CSS markup for basic styling
+	
+		background-color
+		font color
+		link color
+		hover link color
+		margin vertical
+		margin horizontal
+		padding vertical
+		padding horizontal
 
 
-  	topmenustyle
-  	submenustyle
-  
-  * Header
-	  * width
-      * height percentage
-	  * content alignment left/center/right
-	  * 2 sidebars left/right/none
-	  * responsive placement above/after left/center/right
-  
-	subheader
-
-	maincontent 
-
-	subcontent
-
-	footer 
+  	* Widget exensions
+		* recentposts widget with thumbnails etc.
+		* image widget with link and subtitle options.
+		
+	* test with 
+		* sliders/carroussels
+		* agenda, calendarm etc.
+		* video
