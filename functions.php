@@ -4,6 +4,8 @@
 require get_template_directory() . '/options.php'; // options functions
 require get_template_directory() . '/customizer.php'; // customizer functions
 
+require get_template_directory() . '/assets/metaboxes.php'; // meta functions
+
 
 
 
