@@ -18,6 +18,24 @@ $sidebar2align = get_theme_mod('imagazine_content_sidebars_sidebar2align', 'left
 $sidebar2respon = get_theme_mod('imagazine_content_sidebars_sidebar2responsive', 'after' );
 
 
+// overwrite page meta sidebar settings
+if( is_page() ){
+
+	$page_sidebar1_display = get_post_meta( get_the_ID() , "page-meta-sidebar1-display", true);
+	$page_sidebar2_display = get_post_meta( get_the_ID() , "page-meta-sidebar2-display", true);
+	if( $page_sidebar1_display != 0 ){
+		$posarr = array(1 => 'right', 2 => 'left', 3 => 'none');
+		// specify page meta settings
+		$sidebar1pos = $posarr[ $page_sidebar1_display ];
+	}
+	if( $page_sidebar2_display != 0 ){
+		$posarr = array(1 => 'right', 2 => 'left', 3 => 'none');
+		// specify page meta settings
+		$sidebar2pos = $posarr[ $page_sidebar2_display ];
+	}
+}
+
+
 echo '<div id="maincontentcontainer">';
 
 	echo '<div class="outermargin">';
@@ -35,6 +53,12 @@ echo '<div id="maincontentcontainer">';
 	dynamic_sidebar('sidebar-2');
 	echo '<div class="clr"></div></div>';
 	}
+
+
+
+
+
+
 
 
 
@@ -59,6 +83,11 @@ if( is_search() ){ // search results
 echo '<div class="searchheader">'.__('Resultaten voor ', 'imagazine' ).'<strong>'.wp_specialchars($s).'</strong></div>';
 }
 
+
+
+
+
+
 // get post(s)
 if ( have_posts() ) :
 while( have_posts() ) : the_post();
@@ -66,16 +95,15 @@ while( have_posts() ) : the_post();
 
 if ( !is_single() && !is_page() ) {
 
-// post in a list
+// post in a list (category/search/archieve etc.)
 ?>
-
-
-
 <div id="post-<?php echo get_the_ID(); ?>" <?php post_class(); ?>>
+
 <?php
 echo '<h2><a href="'.get_the_permalink().'">';
 if( is_search() ){ echo search_title_highlight(); }else{ echo get_the_title(); }
 echo '</a></h2>';
+
 if ( has_post_thumbnail() ) {
 echo '<a href="'.get_the_permalink().'" title="'.get_the_title().'" >';
 the_post_thumbnail('big-thumb');
@@ -92,23 +120,21 @@ if ( is_super_admin() ) {
 edit_post_link( __( 'Bewerk' , 'imagazine' ), '<span class="edit-link">', '</span>' );
 }
 
-
-
-
-
 echo '<div class="innerpadding">';
-//if( is_search() ) {
-//echo search_excerpt_highlight();
-//}else{
+if( is_search() ) {
+echo search_excerpt_highlight();
+}else{
 echo apply_filters('the_excerpt', get_the_excerpt());
-//}
+}
 
-echo '<a href="'.get_the_permalink().'">'.__('Lees meer', 'imagazine' ).'</a>';
+echo ' <a href="'.get_the_permalink().'">'.__('Lees meer', 'imagazine' ).'</a>';
 
 echo '</div>';
 
-
 echo '<div class="clr"></div></div>'; // end page(post) container
+
+
+
 
 
 
@@ -119,9 +145,6 @@ echo '<div class="clr"></div></div>'; // end page(post) container
 
 // single post
 ?>
-
-
-
 <div id="post-<?php echo get_the_ID(); ?>" <?php post_class(); ?>>
 <?php
 echo '<article>';
@@ -167,7 +190,13 @@ echo '<div class="clr"></div></div>'; // end page(post) container
 
 
 
+
+
+
+
 }else if( is_page() ){
+// page
+$page_title_display = get_post_meta( get_the_ID() , "page-meta-title-display", true);
 ?>
 
 <div id="post-<?php echo get_the_ID(); ?>" <?php post_class(); ?>>
@@ -179,7 +208,7 @@ the_post_thumbnail('medium');
 }
 
 
-if($headertitle != 'head'){
+if( ( $headertitle != 'head' && $page_title_display == 0 ) || ( $headertitle != 'head' && $page_title_display != 3 ) || $page_title_display == 1 ){
 echo '<h1><a href="'.get_the_permalink().'">'.get_the_title().'</a></h1>';
 }
 /*

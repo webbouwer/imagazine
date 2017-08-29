@@ -41,6 +41,11 @@ if( ( is_single() || is_page() ) && ( $headerfeaturedimg == 'yes' || $headertitl
 	$headmaintitle = get_the_title();
     $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' ); //wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
 
+	$page_title_display = '';
+	// check page meta overwrite
+	if( is_page() ){
+		$page_title_display = get_post_meta( get_the_ID() , "page-meta-title-display", true);
+	}
 
     endwhile;
 	endif;
@@ -124,7 +129,7 @@ echo '<div class="outermargin">';
 	echo '<div class="maincolumnbox">';
 
 	// display title
-	if($headertitle != 'no'){
+	if( ( $headertitle != 'no' && $page_title_display == 0 ) || $page_title_display != 1 ){
 
 	echo '<h1>'.$headmaintitle.'</h1>';
 

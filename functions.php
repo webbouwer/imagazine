@@ -55,6 +55,60 @@ require get_template_directory() . '/assets/metaboxes.php'; // meta functions
 
 
 
+	/*
+	 * Adjust excerpt num words max
+	 */
+	function the_excerpt_length( $words = null, $links = true ) {
+		global $_the_excerpt_length_filter;
+
+		if( isset($words) ) {
+			$_the_excerpt_length_filter = $words;
+		}
+
+		add_filter( 'excerpt_length', '_the_excerpt_length_filter' );
+		if( $links == false){
+			echo preg_replace('/(?i)<a([^>]+)>(.+?)<\/a>/','', get_the_excerpt() );
+		}else{
+			the_excerpt();
+		}
+
+		remove_filter( 'excerpt_length', '_the_excerpt_length_filter' );
+
+		// reset the global
+		$_the_excerpt_length_filter = null;
+	}
+
+	function _the_excerpt_length_filter( $default ) {
+		global $_the_excerpt_length_filter;
+
+		if( isset($_the_excerpt_length_filter) ) {
+			return $_the_excerpt_length_filter;
+		}
+
+		return $default;
+	}
+	// the_excerpt_length( 25 );
+
+
+
+
+
+	/* Search highlighting */
+
+	function search_title_highlight() {
+		$title = get_the_title();
+		$keys = implode('|', explode(' ', get_search_query()));
+		$title = preg_replace('/(' . $keys .')/iu', '<strong class="search-highlight">\0</strong>', $title);
+		echo $title;
+	}
+
+	function search_excerpt_highlight($excerpt_length = 20) {
+	$excerpt = the_excerpt_length( $excerpt_length ); //get_the_excerpt();
+	$keys = implode('|', explode(' ', get_search_query()));
+	$excerpt = preg_replace('/(' . $keys .')/iu', '<strong class="search-highlight">\0</strong>', $excerpt);
+	echo $excerpt;
+	}
+
 
 	/*
 	 * Editor style WP THEME STANDARD

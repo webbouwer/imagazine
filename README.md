@@ -1,5 +1,6 @@
 # Imagazine
-A multi purpose Wordpress theme (in development)
+A multi purpose Wordpress theme (in development, beta release not planned yet)
+At the moment only the most basic needed css styling for element positioning with customizer- and meta-options. A perfect 'blank' setup for custom theme development.
 
 ###Features:
 
@@ -13,7 +14,7 @@ A multi purpose Wordpress theme (in development)
 	
 ###In progress:
 
-    * Styling options
+    * Page meta options
 	* Responsive behavior
 	
 * global:
