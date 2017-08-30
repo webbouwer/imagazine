@@ -4,25 +4,28 @@ At the moment only the most basic needed css styling for element positioning wit
 
 ### Features:
 
-    * ready for pagebuilder plugins
-  	* adjustments through customizer
-    * upperbar with a navigation menu (option to stick to top)
-    * topbar with a navigation menu & logo combined + 2 sidebars (option to stick to top)
-	* header image and/or featured image header incl. 2 sidebars
-	* content with before and after widgets + 2 sidebars
-	* footer with a widgetcolumns-row, above or below + a navigation menu + 2 sidebars
+ * ready for pagebuilder plugins
+* adjustments through customizer
+* upperbar with a navigation menu (option to stick to top)
+* topbar with a navigation menu & logo combined + 2 sidebars (option to stick to top)
+* header with image and/or featured image, positioned around or besides max. 2 sidebars, optional page title display	
+* content with top and bottom widget area's + 2 sidebars with sidebar sidemenu
+* posts date time-ago format option
+* footer with a widgetcolumns-row, above or below + a navigation menu + 2 sidebars
 	
-	+ Widget for Post list  incl. 
-		* category select or current post tag/cat related filter
-		* thumbnail 
-		* date/author setting
-		* excerpt length setting
++ Page metabox: page specific element display options for small and large screens on page-edit screen
++ Menu image: Add image/icon image for each menu item
++ Widget for Post list  incl. 
+	* category select or current post tag/cat related filter
+	* thumbnail 
+	* date/author setting
+	* excerpt length setting
 	
-	+ Theme Commit Updates from Github 
++ Admin Dashboard Theme Commit Updates from Github 
 
+(More functions allready available, will be updated soon)
 
 ### Customizer options
-
 * global:
 
   * Identity
