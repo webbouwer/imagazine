@@ -2,7 +2,7 @@
 A multi purpose Wordpress theme (in development, beta release not planned yet)
 At the moment only the most basic needed css styling for element positioning with customizer- and meta-options. A perfect 'blank' setup for custom theme development.
 
-###Features:
+### Features:
 
     * ready for pagebuilder plugins
   	* adjustments through customizer
