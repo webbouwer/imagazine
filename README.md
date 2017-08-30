@@ -113,42 +113,47 @@ At the moment only the most basic needed css styling for element positioning wit
   	
 
 
-	* maincontent
-		* Sidebars
-			* sidebar1 position left/right
-			* sidebar1 width
-			* sidebar1 text-alignment left/right
-			* sidebar1 responsive position 		before/after/collapse/hide
-			* sidebar2 position left/right
-			* sidebar2 width
-			* sidebar2 text-alignment left/right
-			* sidebar2 responsive position before/after/collapse/hide
+* maincontent
+	* Sidebars
+		* sidebar1 position left/right
+		* sidebar1 width
+		* sidebar1 text-alignment left/right
+		* sidebar1 responsive position 		before/after/collapse/hide
+		* sidebar2 position left/right
+		* sidebar2 width
+		* sidebar2 text-alignment left/right
+		* sidebar2 responsive position before/after/collapse/hide
 
-	* Footer
-		* Behavior
-			* width
+* Footer
+	* Behavior
+		* width
 		* Columns widgets
-			* placement above/below/none
-		* Sidebars
-			* sidebar1 position left/right
-			* sidebar1 width
-			* sidebar1 text-alignment left/right
-			* sidebar1 responsive position 		before/after/collapse/hide
-			* sidebar2 position left/right
-			* sidebar2 width
-			* sidebar2 text-alignment left/right
-			* sidebar2 responsive position before/after/collapse/hide
+		* placement above/below/none
+	* Sidebars
+		* sidebar1 position left/right
+		* sidebar1 width
+		* sidebar1 text-alignment left/right
+		* sidebar1 responsive position 		before/after/collapse/hide
+		* sidebar2 position left/right
+		* sidebar2 width
+		* sidebar2 text-alignment left/right
+		* sidebar2 responsive position before/after/collapse/hide
 
 
-	* Customizer default option;
-		* Menu's
-		* Widgets
-		* Static frontpage
-		* Extra css
+* Customizer default option;
+	* Menu's
+	* Widgets
+	* Static frontpage
+	* Extra css
 
 
 ### Following is in development
     
+ * Theme Settings (options) page	
+ 	
+ * Customizer options
+ 	* Add smart controls - http://divjot.co/blog/2015/03/23/smart-controls-wordpress-customizer/
+	
  * upperbar
     * behavior 
 	  	* display on scroll/none
@@ -165,6 +170,11 @@ At the moment only the most basic needed css styling for element positioning wit
 	  	* content alignment left/center/right
 	  	* responsive placement above/after left/center/right
   
+  	* Post Lists
+		* list navigations
+  		* search results
+		* default category filter
+		
   	* CSS markup for basic styling
 	
 		background-color

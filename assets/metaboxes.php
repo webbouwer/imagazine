@@ -15,15 +15,17 @@ function imagazine_page_meta_box($object)
 
 	$option_topbar_largedisplay = array(0=>'Default setting ('.get_theme_mod('imagazine_topbar_behavior_largeposition').')', 1=>'fixed', 2=>'relative', 3=>'none');
 
-	$option_header_type = array(0=>'Default type ('.get_theme_mod('imagazine_header_display_type').')', 1=>'Image only', 2=>'Image with overlay widget column(s)', 3=>'Image in maincolumn besides optional column(s)');
+
+
+	$option_header_type = array(0=>'Default type ('.get_theme_mod('imagazine_header_display_type').')', 1=>'Image only', 2=>'Image with overlay widget column(s)', 3=>'Image in maincolumn besides optional column(s)', 4 => 'No header');
 
 	$option_header_image = array(0=>'Default setting (featured images:'.get_theme_mod('imagazine_header_featuredimages').')', 1=>'Default header image', 2=>'Page featured image');
 
 	$option_title_display = array(0=>'Default setting ('.get_theme_mod('imagazine_header_pagetitle').')', 1=>'Not in header, only on maintext', 2=>'Title in header and on maintext', 3=>'In header only');
 
-	$option_sidebar1_display = array(0=>'Default setting ('.get_theme_mod('imagazine_header_sidebar1pos').')', 1=>'right', 2=>'left', 3=>'none' );
+	$option_sidebar1_display = array(0=>'Default setting ('.get_theme_mod('imagazine_content_sidebars_sidebar1pos').')', 1=>'right', 2=>'left', 3=>'none' );
 
-	$option_sidebar2_display = array(0=>'Default setting ('.get_theme_mod('imagazine_header_sidebar1pos').')', 1=>'right', 2=>'left', 3=>'none');
+	$option_sidebar2_display = array(0=>'Default setting ('.get_theme_mod('imagazine_content_sidebars_sidebar2pos').')', 1=>'right', 2=>'left', 3=>'none');
 
 
 	?>
@@ -307,7 +309,7 @@ function save_page_meta_box($post_id, $post, $update)
     {
         $page_meta_topbar_large = $_POST["page-meta-topbar-large"];
     }
-    update_post_meta($post_id, "page-meta-upperbar-large", $page_meta_topbar_large);
+    update_post_meta($post_id, "page-meta-topbar-large", $page_meta_topbar_large);
 
 
 

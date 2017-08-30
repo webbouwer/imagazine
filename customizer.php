@@ -12,6 +12,8 @@ function imagazine_theme_customizer( $wp_customize ){
 	$wp_customize->remove_panel('colors');
 
 
+	$imagazine_themename = get_option( 'stylesheet' );
+   	$imagazine_themename = preg_replace("/\W/", "_", strtolower( $imagazine_themename ) );
 
 
 	// add panels
@@ -509,7 +511,7 @@ function imagazine_theme_customizer( $wp_customize ){
             'choices'        => array(
                 'relative'   => __( 'Relative, scroll along', 'imagazine' ),
                 'fixed'   => __( 'Fixed, stick to top', 'imagazine' ),
-                'scroll'   => __( 'Fixed, visible on first scroll', 'imagazine' ),
+                //'scroll'   => __( 'Fixed, visible on first scroll', 'imagazine' ),
                 'none'   => __( 'Do not use a topbar', 'imagazine' ),
             )
     )));
@@ -528,7 +530,7 @@ function imagazine_theme_customizer( $wp_customize ){
             'choices'        => array(
                 'relative'   => __( 'Relative, scroll along', 'imagazine' ),
                 'fixed'   => __( 'Fixed, stick to top', 'imagazine' ),
-                'scroll'   => __( 'Fixed, visible on first scroll', 'imagazine' ),
+                //'scroll'   => __( 'Fixed, visible on first scroll', 'imagazine' ),
                 'none'   => __( 'Do not use a topbar', 'imagazine' ),
             )
     )));
@@ -864,6 +866,7 @@ function imagazine_theme_customizer( $wp_customize ){
                 	'image'   => __( 'Image only', 'imagazine' ),
             		'overlay'   => __( 'Image with overlay widget column(s)', 'imagazine' ),
             		'split'   => __( 'Image in maincolumn besides optional column(s)', 'imagazine' ),
+                	'none'   => __( 'No header', 'imagazine' ),
             	)
     	)));
 
@@ -1464,11 +1467,51 @@ function imagazine_theme_customizer( $wp_customize ){
 
 
 
+	/* Extra css (experiment preset css)
+		// Custom CSS setting
+	   class imagazine_Custom_CSS_Control extends WP_Customize_Control {
 
+		  public $type = 'custom_css';
+
+		  public function render_content() {
+		  ?>
+			 <label>
+				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+				<textarea rows="5" style="width:100%;" <?php $this->link(); ?>><?php echo esc_textarea( $this->value() ); ?></textarea>
+			 </label>
+		  <?php
+		  }
+
+	   }
+
+	   $wp_customize->add_section('imagazine_custom_css_setting', array(
+		  'priority' => 190,
+		  'title' => __('Theme CSS', 'imagazine'),
+		  //'panel' => 'imagazine_global'
+	   ));
+
+	   $wp_customize->add_setting($imagazine_themename.'[imagazine_custom_css]', array(
+		  'default' => '',
+		  'type' => 'option',
+		  'capability' => 'edit_theme_options',
+		  'sanitize_callback' => 'imagazine_sanitize_default',
+	   ));
+
+	   $wp_customize->add_control(new imagazine_Custom_CSS_Control($wp_customize, $imagazine_themename.'[imagazine_custom_css]', array(
+		  'label' => __('Theme main css styles. These styles are customized for specific design functions, do not edit unless your webdesigner approves and adding Extra Css does not work.', 'imagazine'),
+		  'section' => 'imagazine_custom_css_setting',
+		  'settings' => $imagazine_themename.'[imagazine_custom_css]'
+	   )));
+
+		*/
 
 
 }
 add_action( 'customize_register', 'imagazine_theme_customizer' );
+
+
+
+
 
 
 

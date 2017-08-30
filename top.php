@@ -59,6 +59,42 @@ $topsidebar2respon = get_theme_mod('imagazine_topbar_sidebars_sidebar2responsive
 
 
 
+
+/// if page - meta option
+if( is_page() ){
+
+	$page_upperbar_small = get_post_meta( get_the_ID() , "page-meta-upperbar-small", true);
+	$page_upperbar_large = get_post_meta( get_the_ID() , "page-meta-upperbar-large", true);
+	$page_topbar_small = get_post_meta( get_the_ID() , "page-meta-topbar-small", true);
+	$page_topbar_large = get_post_meta( get_the_ID() , "page-meta-topbar-large", true);
+
+	$baroptarr = array( 1=>'fixed', 2=>'relative', 3=>'none');
+
+
+	if( $page_upperbar_small != 0 ){
+		// specify page meta settings
+		$upperbardisplaysmall = $baroptarr[ $page_upperbar_small ];
+	}
+	if( $page_upperbar_large != 0 ){
+		// specify page meta settings
+		$upperbardisplaylarge = $baroptarr[ $page_upperbar_large ];
+	}
+	if( $page_topbar_small != 0 ){
+		// specify page meta settings
+		$topbarsmallbehavior = $baroptarr[ $page_topbar_small ];
+	}
+	if( $page_topbar_large != 0 ){
+		// specify page meta settings
+		$topbarlargebehavior = $baroptarr[ $page_topbar_large ];
+	}
+}
+
+
+
+
+
+
+
 // use upperbar?
 	if ( ( $upperbardisplaysmall != 'none' || $upperbardisplaylarge != 'none' ) && ( has_nav_menu( 'uppermenu' ) || (  function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('uppersidebar') ) ) ){
 

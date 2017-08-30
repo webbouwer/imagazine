@@ -23,13 +23,13 @@ if( is_page() ){
 
 	$page_sidebar1_display = get_post_meta( get_the_ID() , "page-meta-sidebar1-display", true);
 	$page_sidebar2_display = get_post_meta( get_the_ID() , "page-meta-sidebar2-display", true);
+
+	$posarr = array(1 => 'right', 2 => 'left', 3 => 'none');
 	if( $page_sidebar1_display != 0 ){
-		$posarr = array(1 => 'right', 2 => 'left', 3 => 'none');
 		// specify page meta settings
 		$sidebar1pos = $posarr[ $page_sidebar1_display ];
 	}
 	if( $page_sidebar2_display != 0 ){
-		$posarr = array(1 => 'right', 2 => 'left', 3 => 'none');
 		// specify page meta settings
 		$sidebar2pos = $posarr[ $page_sidebar2_display ];
 	}
