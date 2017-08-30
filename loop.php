@@ -40,18 +40,39 @@ echo '<div id="maincontentcontainer">';
 
 	echo '<div class="outermargin">';
 
+
+
 	/* maincontent sidebar 1 */
-	if( $sidebar1pos != 'none' && function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('sidebar') ){
+	if( $sidebar1pos != 'none' &&  ( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('sidebar') || has_nav_menu( 'sidemenu' ) ) ){
+
 	echo '<div id="sidebar" class="sidecolumn width'.$sidebar1width.' pos-'.$sidebar1pos.' align-'.$sidebar1align.'">';
+
+	// sidemenu
+	if ( has_nav_menu( 'sidemenu' ) ){
+		echo '<div id="sidemenubox"><div id="sidemenu" class="pos-default"><nav><div class="innerpadding">';
+		wp_nav_menu( array( 'theme_location' => 'sidemenu' ) );
+		echo '<div class="clr"></div></div></nav></div></div>';
+	}
+
+
+
 	dynamic_sidebar('sidebar');
+
+
+
 	echo '<div class="clr"></div></div>';
+
 	}
 
 	// maincontent sidebar 2
 	if( $sidebar2pos != 'none' && function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('sidebar-2') ){
+
 	echo '<div id="sidebar-2" class="sidecolumn width'.$sidebar2width.' pos-'.$sidebar2pos.' align-'.$sidebar2align.'">';
+
 	dynamic_sidebar('sidebar-2');
+
 	echo '<div class="clr"></div></div>';
+
 	}
 
 

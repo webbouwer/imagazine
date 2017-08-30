@@ -3,6 +3,7 @@
 
 require get_template_directory() . '/options.php'; // options functions
 require get_template_directory() . '/customizer.php'; // customizer functions
+require get_template_directory() . '/assets/menu.php'; 	// menu image plugin functions
 require get_template_directory() . '/assets/metaboxes.php'; // post meta functions
 require get_template_directory() . '/assets/widgets.php'; // widget functions
 
