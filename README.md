@@ -20,12 +20,8 @@ At the moment only the most basic needed css styling for element positioning wit
 	
 	+ Theme Commit Updates from Github 
 
-	
-###This theme is in development
 
-
-
-## Customizer options
+### Customizer options
 
 * global:
 
@@ -157,7 +153,51 @@ At the moment only the most basic needed css styling for element positioning wit
 
 
 ### Following is in development
-    
+ 
+Customizer and meta options
+page meta box
+- [x] show/hide page top content widget
+- [x] show/hide page main content
+- [ ] show/hide date
+- [ ] show/hide author
+- [ ] date display type 
+- [x] show/hide page bottom content widget
+
+customizer global lists default settings
+- [ ] show/hide top content widget
+- [ ] show/hide date
+- [ ] show/hide author
+- [ ] date display type 
+- [ ] show/hide bottom content widget
+
+customizer global post default settings
+- [ ] show/hide top content widget
+- [ ] show/hide date
+- [ ] show/hide author
+- [ ] date display type 
+- [ ] show/hide bottom content widget
+- [ ] single post sidebars
+
+Theme Widgets
+- [x] dashboard widget latest theme github commits 
+- [x] post listing widget by category or related to current category/tags
+
+Theme Core Extensions
+- [ ] menu images
+- [ ] default filter selected categories
+ 
+Theme css
+add most basic css styling for all basic elements
+- [ ]  upperbar menu and sidebar widgets
+- [ ]  topbar  menu and sidebar widgets
+- [ ]  header  columns, title and sidebar widgets
+- [ ]  content top & bottom widgets, side menu, sidebar widgets
+- [ ]  footer column widgets, menu and sidebar widgets
+ 
+ 
+ 
+#### And further more
+ 
  * Theme Settings (options) page	
  	
  * Customizer options
