@@ -55,8 +55,8 @@ class imagazine_postlist_widget extends WP_Widget {
 
 		$itemcount = 3;
 		$itemorder = 'DESC';
-		$excerptlength = 10;
-		$dsp_image = 'center';//(none,center,left,right)
+		$excerptlength = 0;
+		$dsp_image = 'center';
 		$dsp_date = 0;
 		$dsp_author = 0;
 		$dsp_tags = 0;
@@ -69,7 +69,7 @@ class imagazine_postlist_widget extends WP_Widget {
 		if(isset($instance['itemorder']) && $instance['itemorder'] !='' )
 			$itemorder = $instance['itemorder'];
 
-		if(isset($instance['excerptlength']) && $instance['excerptlength'] !='' )
+		if(isset($instance['excerptlength']) && $instance['excerptlength'] != 0 )
 			$excerptlength = $instance['excerptlength'];
 
 		if(isset($instance['dsp_image']) && $instance['dsp_image'] !='' )
@@ -94,16 +94,6 @@ class imagazine_postlist_widget extends WP_Widget {
 
 		if ( ! empty( $title ) )
 		echo $args['before_title'] . $title . $args['after_title'];
-
-
-
-		/*
-		 * Query for post category or related
-		 * - widget selected category
-		 * .. related categories / tags (or default / recent posts)
-		 */
-
-
 
 
 			// Category related posts
@@ -163,7 +153,7 @@ class imagazine_postlist_widget extends WP_Widget {
 		}
 
 
-
+		// list posts
 		if (have_posts()) :
 
 		echo '<ul>';
@@ -173,21 +163,8 @@ class imagazine_postlist_widget extends WP_Widget {
 		if($currentid!= get_the_ID()){ // double check if item is current active page/post id
 
 		// define title link
-		$custom_metabox_url = get_post_meta( get_the_ID() , 'meta-box-custom-url', true);
-		$custom_metabox_useurl = get_post_meta( get_the_ID() , 'meta-box-custom-useurl', true);
-		$custom_metabox_urltext = get_post_meta( get_the_ID() , 'meta-box-custom-urltext', true);
-
 		$title_link = '<a class="rel-item" data-id="'.get_the_ID().'" href="'.get_the_permalink().'" target="_self" title="'.get_the_title().'">';
 
-		if( $custom_metabox_url != '' && $custom_metabox_useurl == 'replaceblank'){
-		$title_link = '<a class="rel-item" data-id="'.get_the_ID().'" href="'.$custom_metabox_url.'" target="_blank" title="'.get_the_title().'">';
-		}elseif( $custom_metabox_url != '' && $custom_metabox_useurl == 'replaceself'){
-		$title_link = '<a class="rel-item" data-id="'.get_the_ID().'" href="'.$custom_metabox_url.'" target="_self" title="'.get_the_title().'">';
-		}
-
-
-		// include product options
-		//include('product.php');
 
 		//start output
 		echo '<li>'. $title_link;
@@ -212,18 +189,6 @@ class imagazine_postlist_widget extends WP_Widget {
 		}
 		echo '</div>';
 
-		// post product label
-		/*if( isset($post_meta_label) && $post_meta_label[0] != 'none' &&  $instance[ 'dsp_label' ] != 0 ){
-		echo '<div class="labelbox"><span class="productlabel">'.$post_meta_label[0].'</span></div>';
-		}*/
-		/*
-			// post product label
-			echo $productlabel;
-
-		// product box
-		if( isset( $instance[ 'dsp_price' ] ) && $instance[ 'dsp_price' ] != 0)
-		echo $productbox;
-		*/
 		echo '<div class="item-excerpt">'; //.$title_link;
 
 		if ( has_post_thumbnail() && $dsp_image != 'none' ) {
@@ -232,26 +197,19 @@ class imagazine_postlist_widget extends WP_Widget {
     	}
 
 		// Post intro content
-
-		// preg_replace('/(?i)<a([^>]+)>(.+?)<\/a>/','', get_the_excerpt() );
+			// preg_replace('/(?i)<a([^>]+)>(.+?)<\/a>/','', get_the_excerpt() );
+		if( $excerptlength != 0 ){
 
 		echo '<p>';
 		the_excerpt_length( $excerptlength, false );
 		echo '</p>';
 
+		}
+
 		echo '</div><div class="clr"></div>';
 
 		echo '</a>';
 
-		/*
-		// package box
-		if( $instance[ 'dsp_packweight' ] !=0)
-			echo $packagebox;
-
-		// order box
-		if( isset( $instance[ 'dsp_order' ] )  && $instance[ 'dsp_order' ] != 0)
-			echo $orderbox;
-		*/
 		if( isset( $instance[ 'dsp_tags' ] )  && $dsp_tags != 0 ){
 			echo '<div class="post-tags">';
     		the_tags('Tagged with: ',' '); // the_tags(', ');  //
@@ -350,7 +308,7 @@ class imagazine_postlist_widget extends WP_Widget {
 		?>
 		<p><label for="<?php echo $this->get_field_id( 'excerptlength' ); ?>">Amount of text in words:</label>
 		<input type="text" size="3" <?php echo $value; ?>name="<?php echo $this->get_field_name( 'excerptlength' ); ?>" id="<?php echo $this->get_field_id( 'excerptlength' ); ?>" />
-		</p>
+		<small>0 or empty = no text display</small></p>
 
 
 

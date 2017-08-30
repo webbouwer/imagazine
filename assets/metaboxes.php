@@ -23,6 +23,15 @@ function imagazine_page_meta_box($object)
 
 	$option_title_display = array(0=>'Default setting ('.get_theme_mod('imagazine_header_pagetitle').')', 1=>'Not in header, only on maintext', 2=>'Title in header and on maintext', 3=>'In header only');
 
+
+
+	$option_contenttop_widgets_display = array( 0 =>'show', 1 => 'hide');
+
+	$option_maincontent_display = array( 0 =>'show', 1 => 'hide');
+
+	$option_contentbottom_widgets_display = array( 0 =>'show', 1 => 'hide');
+
+
 	$option_sidebar1_display = array(0=>'Default setting ('.get_theme_mod('imagazine_content_sidebars_sidebar1pos').')', 1=>'right', 2=>'left', 3=>'none' );
 
 	$option_sidebar2_display = array(0=>'Default setting ('.get_theme_mod('imagazine_content_sidebars_sidebar2pos').')', 1=>'right', 2=>'left', 3=>'none');
@@ -176,6 +185,83 @@ function imagazine_page_meta_box($object)
 
 
 <b>Content display</b><br />
+
+
+
+
+		<label for="page-meta-contenttop-display">Content top widgets display</label>
+		<br />
+            <select name="page-meta-contenttop-display">
+                <?php
+                    foreach($option_contenttop_widgets_display as $key => $value)
+                    {
+                        if($key == get_post_meta($object->ID, "page-meta-contenttop-display", true))
+                        {
+                            ?>
+                            <option value='<?php echo $key; ?>' selected><?php echo $value; ?></option>
+                            <?php
+                        }
+                        else
+                        {
+                            ?>
+                            <option value='<?php echo $key; ?>'><?php echo $value; ?></option>
+                            <?php
+                        }
+                    }
+                ?>
+            </select>
+		<br />
+
+		<label for="page-meta-maincontent-display">Maincontent display</label>
+		<br />
+            <select name="page-meta-maincontent-display">
+                <?php
+                    foreach($option_maincontent_display as $key => $value)
+                    {
+                        if($key == get_post_meta($object->ID, "page-meta-maincontent-display", true))
+                        {
+                            ?>
+                            <option value='<?php echo $key; ?>' selected><?php echo $value; ?></option>
+                            <?php
+                        }
+                        else
+                        {
+                            ?>
+                            <option value='<?php echo $key; ?>'><?php echo $value; ?></option>
+                            <?php
+                        }
+                    }
+                ?>
+            </select>
+		<br />
+
+
+		<label for="page-meta-contentbottom-display">Content bottom widgets display</label>
+		<br />
+            <select name="page-meta-contentbottom-display">
+                <?php
+                    foreach($option_contentbottom_widgets_display as $key => $value)
+                    {
+                        if($key == get_post_meta($object->ID, "page-meta-contentbottom-display", true))
+                        {
+                            ?>
+                            <option value='<?php echo $key; ?>' selected><?php echo $value; ?></option>
+                            <?php
+                        }
+                        else
+                        {
+                            ?>
+                            <option value='<?php echo $key; ?>'><?php echo $value; ?></option>
+                            <?php
+                        }
+                    }
+                ?>
+            </select>
+		<br />
+
+
+
+
 		<label for="page-meta-title-display">Page title</label>
 		<br />
             <select name="page-meta-title-display">
@@ -198,6 +284,11 @@ function imagazine_page_meta_box($object)
                 ?>
             </select>
 		<br />
+
+
+
+
+
 
 
 		<label for="page-meta-sidebar1-display">Sidebar 1</label>
@@ -282,7 +373,12 @@ function save_page_meta_box($post_id, $post, $update)
     $page_meta_topbar_large = "";
     $page_meta_header_type = "";
     $page_meta_header_display = "";
+
+	$page_meta_contenttop_display = "";
+	$page_meta_maincontent_display = "";
     $page_meta_title_display = "";
+	$page_meta_contentbottom_display = "";
+
     $page_meta_sidebar1_display = "";
     $page_meta_sidebar2_display = "";
 
@@ -325,11 +421,34 @@ function save_page_meta_box($post_id, $post, $update)
     }
     update_post_meta($post_id, "page-meta-header-display", $page_meta_header_display);
 
+
+	if(isset($_POST["page-meta-contenttop-display"]))
+    {
+        $page_meta_contenttop_display = $_POST["page-meta-contenttop-display"];
+    }
+    update_post_meta($post_id, "page-meta-contenttop-display", $page_meta_contenttop_display);
+
+
+    if(isset($_POST["page-meta-maincontent-display"]))
+    {
+        $page_meta_maincontent_display = $_POST["page-meta-maincontent-display"];
+    }
+    update_post_meta($post_id, "page-meta-maincontent-display", $page_meta_maincontent_display);
+
+
     if(isset($_POST["page-meta-title-display"]))
     {
         $page_meta_title_display = $_POST["page-meta-title-display"];
     }
     update_post_meta($post_id, "page-meta-title-display", $page_meta_title_display);
+
+	if(isset($_POST["page-meta-contentbottom-display"]))
+    {
+        $page_meta_contentbottom_display = $_POST["page-meta-contentbottom-display"];
+    }
+    update_post_meta($post_id, "page-meta-contentbottom-display", $page_meta_contentbottom_display);
+
+
 
 
 	if(isset($_POST["page-meta-sidebar1-display"]))

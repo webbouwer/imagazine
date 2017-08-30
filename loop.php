@@ -66,7 +66,9 @@ echo '<div id="maincontentcontainer">';
 
 echo '<div id="maincontent">';
 
+$page_contenttop_display = get_post_meta( get_the_ID() , "page-meta-contenttop-display", true);
 
+if( !( is_page() && $page_contenttop_display == 1) ){
 
 // maincontent top widgets
 if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('contenttopwidgets') ){
@@ -75,6 +77,7 @@ if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') &
 	echo '<div class="clr"></div></div>';
 }
 
+}
 
 
 
@@ -197,6 +200,10 @@ echo '<div class="clr"></div></div>'; // end page(post) container
 }else if( is_page() ){
 // page
 $page_title_display = get_post_meta( get_the_ID() , "page-meta-title-display", true);
+$page_maincontent_display = get_post_meta( get_the_ID() , "page-meta-maincontent-display", true);
+
+
+if( $page_maincontent_display != 1 ){
 ?>
 
 <div id="post-<?php echo get_the_ID(); ?>" <?php post_class(); ?>>
@@ -247,8 +254,9 @@ wp_link_pages( $defaults );
 
 echo '<div class="clr"></div></div>'; // end page(post) container
 
+} // end if page meta content
 
-}
+} // end page in loop
 
 
 
@@ -281,6 +289,9 @@ echo paginate_links( array(
 
 
 
+$page_contentbottom_display = get_post_meta( get_the_ID() , "page-meta-contentbottom-display", true);
+
+if( !( is_page() && $page_contentbottom_display == 1) ){
 
 // maincontent bottom widgets
 if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('contentbottomwidgets') ){
@@ -289,6 +300,7 @@ if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') &
 	echo '<div class="clr"></div></div>';
 }
 
+}
 
 echo '<div class="clr"></div></div>'; // end maincontent
 

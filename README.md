@@ -12,12 +12,21 @@ At the moment only the most basic needed css styling for element positioning wit
 	* content with before and after widgets + 2 sidebars
 	* footer with a widgetcolumns-row, above or below + a navigation menu + 2 sidebars
 	
-###In progress:
-
-    * Page meta options
-	* Responsive behavior
-	* default css markup
+	+ Widget for Post list  incl. 
+		* category select or current post tag/cat related filter
+		* thumbnail 
+		* date/author setting
+		* excerpt length setting
 	
+	+ Theme Commit Updates from Github 
+
+	
+###This theme is in development
+
+
+
+## Customizer options
+
 * global:
 
   * Identity
@@ -28,10 +37,10 @@ At the moment only the most basic needed css styling for element positioning wit
 
   * Background-image (default)
 
-  * Screen modes
-    * small screen width
-    * small screen outermargin 
-    * medium screen min switch
+ * Screen modes
+ 	* small screen width
+	* small screen outermargin
+	* medium screen min switch
     * medium screen width
     * medium screen outermargin 
     * large screen min switch
@@ -187,7 +196,6 @@ At the moment only the most basic needed css styling for element positioning wit
 		padding horizontal
 
 	* Admin Widgets
-		* Theme Commit Updates from Github 
 
   	* Widget exensions
 		* recentposts widget with thumbnails etc.
