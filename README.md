@@ -178,12 +178,23 @@ customizer global post default settings
 - [ ] show/hide bottom content widget
 - [ ] single post sidebars
 
+customizer upperbar menu 
+- [ ] menu alignment left/center/right
+- [ ] submenu horizontal/vertical
+- [ ] submenu compact .. /fullwidth/fullscreen
+
+customizer topbar menu 
+- [ ] menu alignment left/center/right
+- [ ] submenu horizontal/vertical
+- [ ] submenu compact .. /fullwidth/fullscreen
+
 Theme Widgets
 - [x] dashboard widget latest theme github commits 
 - [x] post listing widget by category or related to current category/tags
+- [ ] image/banner widget with link and subtitle options (extend core image widget?).
 
 Theme Core Extensions
-- [ ] menu images
+- [ ] menu images [in development]
 - [ ] default filter selected categories
  
 Theme css
@@ -208,14 +219,8 @@ add most basic css styling for all basic elements
 	  	* display on scroll/none
 	  	* responsive behavior
       
-  	* menu 
-	  	* menu alignment left/center/right
-      	* submenu horizontal/vertical
-      	* submenu compact/fullwidth/fullscreen
 	
-    * sidebar
-	  	* position left/right/none
-      	* width percentage
+    	* sidebars
 	  	* content alignment left/center/right
 	  	* responsive placement above/after left/center/right
   
@@ -236,10 +241,6 @@ add most basic css styling for all basic elements
 		padding horizontal
 
 	* Admin Widgets
-
-  	* Widget exensions
-		* recentposts widget with thumbnails etc.
-		* image widget with link and subtitle options.
 		
 	* test with 
 		* sliders/carroussels
