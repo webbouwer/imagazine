@@ -186,6 +186,8 @@ At the moment only the most basic needed css styling for element positioning wit
 		padding vertical
 		padding horizontal
 
+	* Admin Widgets
+		* Theme Commit Updates from Github 
 
   	* Widget exensions
 		* recentposts widget with thumbnails etc.

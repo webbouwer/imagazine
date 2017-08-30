@@ -3,9 +3,8 @@
 
 require get_template_directory() . '/options.php'; // options functions
 require get_template_directory() . '/customizer.php'; // customizer functions
-
-require get_template_directory() . '/assets/metaboxes.php'; // meta functions
-
+require get_template_directory() . '/assets/metaboxes.php'; // post meta functions
+require get_template_directory() . '/assets/widgets.php'; // widget functions
 
 
 
@@ -51,6 +50,36 @@ require get_template_directory() . '/assets/metaboxes.php'; // meta functions
 	 * Return of the Links Manager
 	 */
 	add_filter( 'pre_option_link_manager_enabled', '__return_true' );
+
+
+
+
+
+
+
+	/*
+	 * Time
+	 */
+	function wp_time_ago( $t ) {
+		// https://codex.wordpress.org/Function_Reference/human_time_diff
+		//get_the_time( 'U' )
+		printf( _x( '%s '.__('geleden','protago'), '%s = human-readable time difference', 'imagazine' ), human_time_diff( $t, current_time( 'timestamp' ) ) );
+	}
+
+	/* set date display
+	function display_date(){
+
+		if( get_theme_mod('protago_settings_data_dateformat', 'default') == 'default' ){
+			echo '<span class="post-date date-time">'.get_the_date().'</span> ';
+		}else{
+			echo '<span class="post-date time-ago">';
+			wp_time_ago(get_the_time( 'U' ));
+			echo '</span>';
+		}
+
+	}
+	*/
+
 
 
 
@@ -108,6 +137,39 @@ require get_template_directory() . '/assets/metaboxes.php'; // meta functions
 	$excerpt = preg_replace('/(' . $keys .')/iu', '<strong class="search-highlight">\0</strong>', $excerpt);
 	echo $excerpt;
 	}
+
+
+
+
+
+	/* CATEGORY LIST - for metaboxes / customizer functions */
+	function get_categories_select(){
+		$get_cats = get_categories();
+			$results;
+			$count = count($get_cats);
+			for ($i=0; $i < $count; $i++) {
+				if (isset($get_cats[$i]))
+					$results[$get_cats[$i]->slug] = $get_cats[$i]->name;
+				else
+					$count++;
+			}
+		return $results;
+	}
+
+
+	/**
+	 * Keep category select list in hiÎarchy
+	 * source http://wordpress.stackexchange.com/questions/61922/add-post-screen-keep-category-structure
+	 */
+	function imagazine_wp_terms_checklist_args( $args, $post_id ) {
+
+	   $args[ 'checked_ontop' ] = false;
+
+	   return $args;
+
+	}
+	add_filter( 'wp_terms_checklist_args', 'imagazine_wp_terms_checklist_args', 1, 2 );
+
 
 
 	/*
@@ -399,21 +461,6 @@ require get_template_directory() . '/assets/metaboxes.php'; // meta functions
 	*/
 
 
-
-
-
-/**
- * Keep category select list in hiearchy
- * source http://wordpress.stackexchange.com/questions/61922/add-post-screen-keep-category-structure
- */
-function imagazine_wp_terms_checklist_args( $args, $post_id ) {
-
-   $args[ 'checked_ontop' ] = false;
-
-   return $args;
-
-}
-add_filter( 'wp_terms_checklist_args', 'imagazine_wp_terms_checklist_args', 1, 2 );
 
 
 
