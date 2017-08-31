@@ -168,9 +168,9 @@ page meta box
 
 customizer global lists default settings
 - [x] show/hide top content widget
-- [ ] show/hide date
-- [ ] show/hide author
-- [ ] date display type 
+- [x] show/hide date
+- [x] show/hide author
+- [x] date display type 
 - [x] show/hide bottom content widget
 - [x] single post sidebar 1 display
 - [x] single post sidebar 2 display
