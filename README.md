@@ -167,19 +167,19 @@ page meta box
 - [x] show/hide page bottom content widget
 
 customizer global lists default settings
-- [ ] show/hide top content widget
+- [x] show/hide top content widget
 - [ ] show/hide date
 - [ ] show/hide author
 - [ ] date display type 
-- [ ] show/hide bottom content widget
+- [x] show/hide bottom content widget
 
 customizer global post default settings
-- [ ] show/hide top content widget
+- [x] show/hide top content widget
 - [ ] show/hide date
 - [ ] show/hide author
 - [ ] date display type 
-- [ ] show/hide bottom content widget
-- [ ] single post sidebars
+- [x] show/hide bottom content widget
+- [] single post sidebars
 
 customizer upperbar menu 
 - [ ] menu alignment left/center/right
