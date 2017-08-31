@@ -96,6 +96,10 @@ class imagazine_postlist_widget extends WP_Widget {
 		echo $args['before_title'] . $title . $args['after_title'];
 
 
+
+
+
+
 			// Category related posts
 			$catsrel = "";
 			//$posttags = get_the_tags();
@@ -120,6 +124,7 @@ class imagazine_postlist_widget extends WP_Widget {
 
 		// list the post accoording to settings category/related
 		if($instance['post_category'] == '' ||
+
 		   (is_category() && ( $instance['post_category'] == 'PostRelCat' || $instance['post_category'] == 'PostRelTag' || $instance['post_category'] == 'PostRelCatTag' ) )  ){
 
 			// latest of all or any '' category

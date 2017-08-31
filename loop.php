@@ -18,6 +18,30 @@ $sidebar2align = get_theme_mod('imagazine_content_sidebars_sidebar2align', 'left
 $sidebar2respon = get_theme_mod('imagazine_content_sidebars_sidebar2responsive', 'after' );
 
 
+/* post/page/list global settings */
+$post_topwidgets_display = get_theme_mod('imagazine_global_postdisplay_contenttop', 'hide');
+$post_authortime_display = get_theme_mod('imagazine_global_postdisplay_authortime', 'both');
+$post_timeformat_display = get_theme_mod('imagazine_global_postdisplay_timeformat', 'date');
+$post_bottomwidgets_display = get_theme_mod('imagazine_global_postdisplay_contentbottom', 'hide');
+$post_sidebar1_display = get_theme_mod('imagazine_global_postdisplay_sidebar1_pos','none');
+$post_sidebar2_display = get_theme_mod('imagazine_global_postdisplay_sidebar2_pos','none');
+
+$page_topwidgets_display = get_theme_mod('imagazine_global_pagedisplay_contenttop', 'hide');
+$page_authortime_display = get_theme_mod('imagazine_global_pagedisplay_authortime', 'both');
+$page_timeformat_display = get_theme_mod('imagazine_global_pagedisplay_timeformat', 'date');
+$page_bottomwidgets_display = get_theme_mod('imagazine_global_pagedisplay_contentbottom', 'hide');
+
+$list_topwidgets_display = get_theme_mod('imagazine_global_listdisplay_contenttop', 'hide');
+$list_authortime_display = get_theme_mod('imagazine_global_listdisplay_authortime', 'both');
+$list_timeformat_display = get_theme_mod('imagazine_global_listdisplay_timeformat', 'date');
+$list_bottomwidgets_display = get_theme_mod('imagazine_global_listdisplay_contentbottom', 'hide');
+
+$list_sidebar1_display = get_theme_mod('imagazine_global_listdisplay_sidebar1_pos','none');
+$list_sidebar2_display = get_theme_mod('imagazine_global_listdisplay_sidebar2_pos','none');
+
+
+
+
 // overwrite page meta sidebar settings
 if( is_page() ){
 
@@ -43,6 +67,15 @@ echo '<div id="maincontentcontainer">';
 
 
 	/* maincontent sidebar 1 */
+	if( is_single() ){
+		$sidebar1pos = $post_sidebar1_display;
+		$sidebar2pos = $post_sidebar2_display;
+	}
+	if( !is_single() && !is_page() ){
+		$sidebar1pos = $list_sidebar1_display;
+		$sidebar2pos = $list_sidebar2_display;
+	}
+
 	if( $sidebar1pos != 'none' &&  ( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('sidebar') || has_nav_menu( 'sidemenu' ) ) ){
 
 	echo '<div id="sidebar" class="sidecolumn width'.$sidebar1width.' pos-'.$sidebar1pos.' align-'.$sidebar1align.'">';
@@ -88,8 +121,14 @@ echo '<div id="maincontentcontainer">';
 echo '<div id="maincontent">';
 
 $page_contenttop_display = get_post_meta( get_the_ID() , "page-meta-contenttop-display", true);
+$dsparr = array( 1 => 'show', 2 => 'hide');
+if( $page_contenttop_display != 0 ){
+$page_topwidgets_display = $dsparr[$page_contenttop_display];
+}
 
-if( !( is_page() && $page_contenttop_display == 1) ){
+if( !( is_page() && $page_topwidgets_display == 'hide' )
+   && !( is_single() && get_theme_mod('imagazine_global_postdisplay_contenttop', 'hide') == 'hide' )
+  	&& !( is_category() && get_theme_mod('imagazine_global_listdisplay_contenttop', 'hide') == 'hide' ) ){
 
 // maincontent top widgets
 if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('contenttopwidgets') ){
@@ -311,8 +350,15 @@ echo paginate_links( array(
 
 
 $page_contentbottom_display = get_post_meta( get_the_ID() , "page-meta-contentbottom-display", true);
+$dsparr = array( 1 => 'show', 2 => 'hide');
+if( $page_contenttop_display != 0 ){
+	$page_bottomwidgets_display = $dsparr[$page_contentbottom_display];
+}
 
-if( !( is_page() && $page_contentbottom_display == 1) ){
+if( !( is_page() && $page_bottomwidgets_display == 'hide' )
+   && !( is_single() && get_theme_mod('imagazine_global_postdisplay_contentbottom', 'hide') == 'hide' )
+   && !( !is_single() && !is_page() && get_theme_mod('imagazine_global_listdisplay_contentbottom', 'hide') == 'hide' )
+  	 ){
 
 // maincontent bottom widgets
 if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('contentbottomwidgets') ){
