@@ -172,6 +172,8 @@ customizer global lists default settings
 - [ ] show/hide author
 - [ ] date display type 
 - [x] show/hide bottom content widget
+- [x] single post sidebar 1 display
+- [x] single post sidebar 2 display
 
 customizer global post default settings
 - [x] show/hide top content widget
@@ -179,7 +181,8 @@ customizer global post default settings
 - [ ] show/hide author
 - [ ] date display type 
 - [x] show/hide bottom content widget
-- [] single post sidebars
+- [x] single post sidebar 1 display
+- [x] single post sidebar 2 display
 
 customizer upperbar menu 
 - [ ] menu alignment left/center/right
@@ -194,10 +197,10 @@ customizer topbar menu
 Theme Widgets
 - [x] dashboard widget latest theme github commits 
 - [x] post listing widget by category or related to current category/tags
-- [ ] image/banner widget with link and subtitle options (extend core image widget?).
+- [ ] image/banner widget with link and subtitle options (extend post listing widget..)
 
 Theme Core Extensions
-- [ ] menu images [in development]
+- [x] menu images [in development]
 - [ ] default filter selected categories
  
 Theme css
