@@ -169,8 +169,14 @@ function imagazine_theme_customizer( $wp_customize ){
         'panel'  => 'imagazine_topbar',
 		'priority' => 90,
     ));
-	$wp_customize->add_section('imagazine_topbar_sidebars', array(
-        'title'    => __('Sidebars', 'imagazine'),
+	$wp_customize->add_section('imagazine_topbar_sidebar1', array(
+        'title'    => __('Sidebar 1', 'imagazine'),
+        'panel'  => 'imagazine_topbar',
+		'priority' => 120,
+    ));
+
+	$wp_customize->add_section('imagazine_topbar_sidebar2', array(
+        'title'    => __('Sidebar 2', 'imagazine'),
         'panel'  => 'imagazine_topbar',
 		'priority' => 120,
     ));
@@ -194,19 +200,32 @@ function imagazine_theme_customizer( $wp_customize ){
 
 	// Footer
 	$wp_customize->add_section('imagazine_footer_behavior', array(
-        'title'    => __('Footer behavior', 'imagazine'),
+        'title'    => __('Behavior', 'imagazine'),
         'panel'  => 'imagazine_footer',
 		'priority' => 120,
     ));
 
 	$wp_customize->add_section('imagazine_footer_columns', array(
-        'title'    => __('Footer columns widgets', 'imagazine'),
+        'title'    => __('Column widgets', 'imagazine'),
         'panel'  => 'imagazine_footer',
 		'priority' => 120,
     ));
 
-	$wp_customize->add_section('imagazine_footer_sidebars', array(
-        'title'    => __('Footer Sidebars', 'imagazine'),
+
+	$wp_customize->add_section('imagazine_footer_menu', array(
+        'title'    => __('Menu ', 'imagazine'),
+        'panel'  => 'imagazine_footer',
+		'priority' => 120,
+    ));
+
+	$wp_customize->add_section('imagazine_footer_sidebar1', array(
+        'title'    => __('Sidebar 1', 'imagazine'),
+        'panel'  => 'imagazine_footer',
+		'priority' => 120,
+    ));
+
+	$wp_customize->add_section('imagazine_footer_sidebar2', array(
+        'title'    => __('Sidebar 2', 'imagazine'),
         'panel'  => 'imagazine_footer',
 		'priority' => 120,
     ));
@@ -1067,7 +1086,7 @@ function imagazine_theme_customizer( $wp_customize ){
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_sidebars_sidebar1pos', array(
             	'label'          => __( 'Sidebar position', 'imagazine' ),
-            	'section'        => 'imagazine_topbar_sidebars',
+            	'section'        => 'imagazine_topbar_sidebar1',
             	'settings'       => 'imagazine_topbar_sidebars_sidebar1pos',
             	'type'           => 'select',
  	    		'description'    => __( 'Select the default top sidebar position.', 'imagazine' ),
@@ -1084,7 +1103,7 @@ function imagazine_theme_customizer( $wp_customize ){
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_sidebars_sidebar1width', array(
             	'label'          => __( 'Sidebar width', 'imagazine' ),
-            	'section'        => 'imagazine_topbar_sidebars',
+            	'section'        => 'imagazine_topbar_sidebar1',
             	'settings'       => 'imagazine_topbar_sidebars_sidebar1width',
             	'type'           => 'number',
  	    		'description'    => __( 'Select sidebar width (percentage).', 'imagazine' ),
@@ -1098,7 +1117,7 @@ function imagazine_theme_customizer( $wp_customize ){
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_sidebars_sidebar1align', array(
             	'label'          => __( 'Sidebar content alignment', 'imagazine' ),
-            	'section'        => 'imagazine_topbar_sidebars',
+            	'section'        => 'imagazine_topbar_sidebar1',
             	'settings'       => 'imagazine_topbar_sidebars_sidebar1align',
             	'type'           => 'select',
  	    		'description'    => __( 'Select the top sidebar content alignment', 'imagazine' ),
@@ -1116,7 +1135,7 @@ function imagazine_theme_customizer( $wp_customize ){
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_sidebars_sidebar1responsive', array(
             	'label'          => __( 'Sidebar responsive position', 'imagazine' ),
-            	'section'        => 'imagazine_topbar_sidebars',
+            	'section'        => 'imagazine_topbar_sidebar1',
             	'settings'       => 'imagazine_topbar_sidebars_sidebar1responsive',
             	'type'           => 'select',
  	    		'description'    => __( 'Select the sidebar positioning on small screens', 'imagazine' ),
@@ -1136,7 +1155,7 @@ function imagazine_theme_customizer( $wp_customize ){
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_sidebars_sidebar2pos', array(
             	'label'          => __( 'Second sidebar position', 'imagazine' ),
-            	'section'        => 'imagazine_topbar_sidebars',
+            	'section'        => 'imagazine_topbar_sidebar2',
             	'settings'       => 'imagazine_topbar_sidebars_sidebar2pos',
             	'type'           => 'select',
  	    		'description'    => __( 'Select the second sidebar position.', 'imagazine' ),
@@ -1153,7 +1172,7 @@ function imagazine_theme_customizer( $wp_customize ){
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_sidebars_sidebar2width', array(
             	'label'          => __( 'Second sidebar width', 'imagazine' ),
-            	'section'        => 'imagazine_topbar_sidebars',
+            	'section'        => 'imagazine_topbar_sidebar2',
             	'settings'       => 'imagazine_topbar_sidebars_sidebar2width',
             	'type'           => 'number',
  	    	'description'    => __( 'Select second sidebar width (percentage).', 'imagazine' ),
@@ -1166,7 +1185,7 @@ function imagazine_theme_customizer( $wp_customize ){
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_sidebars_sidebar2align', array(
             	'label'          => __( 'Second sidebar content alignment', 'imagazine' ),
-            	'section'        => 'imagazine_topbar_sidebars',
+            	'section'        => 'imagazine_topbar_sidebar2',
             	'settings'       => 'imagazine_topbar_sidebars_sidebar2align',
             	'type'           => 'select',
  	    		'description'    => __( 'Select the second sidebar content alignment', 'imagazine' ),
@@ -1184,7 +1203,7 @@ function imagazine_theme_customizer( $wp_customize ){
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_sidebars_sidebar2responsive', array(
             	'label'          => __( 'Second sidebar responsive position', 'imagazine' ),
-            	'section'        => 'imagazine_topbar_sidebars',
+            	'section'        => 'imagazine_topbar_sidebar2',
             	'settings'       => 'imagazine_topbar_sidebars_sidebar2responsive',
             	'type'           => 'select',
  	    		'description'    => __( 'Select the second sidebar positioning on small screens', 'imagazine' ),
@@ -1655,6 +1674,68 @@ function imagazine_theme_customizer( $wp_customize ){
 		)));
 
 
+
+		$wp_customize->add_setting( 'imagazine_footer_menu_textalign' , array(
+			'default' => 'center',
+			'sanitize_callback' => 'imagazine_sanitize_default',
+			'priority' => 60,
+		));
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_footer_menu_textalign', array(
+				'label'          => __( 'Menu text alignment', 'imagazine' ),
+				'section'        => 'imagazine_footer_menu',
+				'settings'       => 'imagazine_footer_menu_textalign',
+				'type'           => 'select',
+				'description'    => __( 'Align footer navigation menu text', 'imagazine' ),
+				'choices'        => array(
+					'left'   => __( 'left', 'imagazine' ),
+					'center'   => __( 'center', 'imagazine' ),
+					'right'   => __( 'right', 'imagazine' ),
+				)
+		)));
+
+
+		$wp_customize->add_setting( 'imagazine_footer_menu_layout' , array(
+			'default' => 'hor',
+			'sanitize_callback' => 'imagazine_sanitize_default',
+			'priority' => 60,
+		));
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_footer_menu_layout', array(
+				'label'          => __( 'Menu positioning', 'imagazine' ),
+				'section'        => 'imagazine_footer_menu',
+				'settings'       => 'imagazine_footer_menu_layout',
+				'type'           => 'select',
+				'description'    => __( 'Navigation menu layout', 'imagazine' ),
+				'choices'        => array(
+					'hor'   => __( 'Horizontal', 'imagazine' ),
+					'ver'   => __( 'Vertical', 'imagazine' ),
+				)
+		)));
+
+		$wp_customize->add_setting( 'imagazine_footer_menu_subs' , array(
+			'default' => 'ver',
+			'sanitize_callback' => 'imagazine_sanitize_default',
+			'priority' => 60,
+		));
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_footer_menu_subs', array(
+				'label'          => __( 'Submenu behavior', 'imagazine' ),
+				'section'        => 'imagazine_footer_menu',
+				'settings'       => 'imagazine_footer_menu_subs',
+				'type'           => 'select',
+				'description'    => __( 'Navigation submenu behavior', 'imagazine' ),
+				'choices'        => array(
+					'none'   => __( 'Do not use submenu\'s here', 'imagazine' ),
+					'hor'   => __( 'Horizontal below footermenu', 'imagazine' ),
+					'ver'   => __( 'Vertical on top of footermenu', 'imagazine' ),
+				)
+		)));
+
+
+
+
+
 		$wp_customize->add_setting( 'imagazine_footer_columns_position' , array(
 			'default' => 'top',
 			'sanitize_callback' => 'imagazine_sanitize_default',
@@ -1674,16 +1755,13 @@ function imagazine_theme_customizer( $wp_customize ){
 		)));
 
 
-
-
-
 		$wp_customize->add_setting( 'imagazine_footer_sidebars_sidebar1pos' , array(
 		'default' => 'none',
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_footer_sidebars_sidebar1pos', array(
             	'label'          => __( 'Sidebar position', 'imagazine' ),
-            	'section'        => 'imagazine_footer_sidebars',
+            	'section'        => 'imagazine_footer_sidebar1',
             	'settings'       => 'imagazine_footer_sidebars_sidebar1pos',
             	'type'           => 'select',
  	    		'description'    => __( 'Select the default content sidebar position.', 'imagazine' ),
@@ -1700,7 +1778,7 @@ function imagazine_theme_customizer( $wp_customize ){
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_footer_sidebars_sidebar1width', array(
             	'label'          => __( 'Sidebar width', 'imagazine' ),
-            	'section'        => 'imagazine_footer_sidebars',
+            	'section'        => 'imagazine_footer_sidebar1',
             	'settings'       => 'imagazine_footer_sidebars_sidebar1width',
             	'type'           => 'number',
  	    		'description'    => __( 'Select sidebar width (percentage).', 'imagazine' ),
@@ -1714,7 +1792,7 @@ function imagazine_theme_customizer( $wp_customize ){
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_footer_sidebars_sidebar1align', array(
             	'label'          => __( 'Sidebar content alignment', 'imagazine' ),
-            	'section'        => 'imagazine_footer_sidebars',
+            	'section'        => 'imagazine_footer_sidebar1',
             	'settings'       => 'imagazine_footer_sidebars_sidebar1align',
             	'type'           => 'select',
  	    		'description'    => __( 'Select the sidebar content alignment', 'imagazine' ),
@@ -1732,7 +1810,7 @@ function imagazine_theme_customizer( $wp_customize ){
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_footer_sidebars_sidebar1responsive', array(
             	'label'          => __( 'Sidebar responsive position', 'imagazine' ),
-            	'section'        => 'imagazine_footer_sidebars',
+            	'section'        => 'imagazine_footer_sidebar1',
             	'settings'       => 'imagazine_footer_sidebars_sidebar1responsive',
             	'type'           => 'select',
  	    		'description'    => __( 'Select the content sidebar positioning on small screens', 'imagazine' ),
@@ -1752,7 +1830,7 @@ function imagazine_theme_customizer( $wp_customize ){
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_footer_sidebars_sidebar2pos', array(
             	'label'          => __( 'Second content sidebar position', 'imagazine' ),
-            	'section'        => 'imagazine_footer_sidebars',
+            	'section'        => 'imagazine_footer_sidebar2',
             	'settings'       => 'imagazine_footer_sidebars_sidebar2pos',
             	'type'           => 'select',
  	    		'description'    => __( 'Select the second content sidebar position.', 'imagazine' ),
@@ -1769,7 +1847,7 @@ function imagazine_theme_customizer( $wp_customize ){
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_footer_sidebars_sidebar2width', array(
             	'label'          => __( 'Second content sidebar width', 'imagazine' ),
-            	'section'        => 'imagazine_footer_sidebars',
+            	'section'        => 'imagazine_footer_sidebar2',
             	'settings'       => 'imagazine_footer_sidebars_sidebar2width',
             	'type'           => 'number',
  	    	'description'    => __( 'Select second content sidebar width (percentage).', 'imagazine' ),
@@ -1782,7 +1860,7 @@ function imagazine_theme_customizer( $wp_customize ){
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_footer_sidebars_sidebar2align', array(
             	'label'          => __( 'Second sidebar content alignment', 'imagazine' ),
-            	'section'        => 'imagazine_footer_sidebars',
+            	'section'        => 'imagazine_footer_sidebar2',
             	'settings'       => 'imagazine_footer_sidebars_sidebar2align',
             	'type'           => 'select',
  	    		'description'    => __( 'Select the second sidebar content alignment', 'imagazine' ),
@@ -1800,7 +1878,7 @@ function imagazine_theme_customizer( $wp_customize ){
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_footer_sidebars_sidebar2responsive', array(
             	'label'          => __( 'Second sidebar responsive position', 'imagazine' ),
-            	'section'        => 'imagazine_footer_sidebars',
+            	'section'        => 'imagazine_footer_sidebar2',
             	'settings'       => 'imagazine_footer_sidebars_sidebar2responsive',
             	'type'           => 'select',
  	    		'description'    => __( 'Select the second content sidebar positioning on small screens', 'imagazine' ),
@@ -2028,6 +2106,19 @@ function imagazine_customize_adaptive(){
 	}
 
 
+
+	/* footer */
+
+	<?php
+	if( get_theme_mod('imagazine_footer_menu_layout', 'hor') == 'hor'){
+	?>
+	#footermenu ul.menu li
+	{
+	display:inline;
+	}
+	<?php
+	}
+	?>
 
 
 	}

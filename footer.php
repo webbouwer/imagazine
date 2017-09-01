@@ -7,9 +7,10 @@ $footerwidth = get_theme_mod('imagazine_footer_behavior_width', 'margin' );
 	// - top / bottom
 $footercolumnspos = get_theme_mod('imagazine_footer_columns_position', 'margin' );
 
+$footermenualign = get_theme_mod('imagazine_footer_menu_textalign', 'left' );
+$footermenulayout = get_theme_mod('imagazine_footer_menu_layout', 'hor' );
+$footersubmenu = get_theme_mod('imagazine_footer_menu_subs', 'ver' );
 
-// content widget
-	// - above / below
 
 
 // sidebars
@@ -59,14 +60,18 @@ echo '<div id="footercontainer">';
 
 	echo '<div id="footermainbar" class="maincolumn">';
 
+
+	if ( has_nav_menu( 'footermenu' ) ) {
 		// menu / content widget// topmenu
-		echo '<div id="footermenu"><nav><div class="innerpadding">';
-		if ( has_nav_menu( 'footermenu' ) ) {
+		echo '<div id="footermenu" class="align-'.$footermenualign.'"><nav><div class="innerpadding">';
+
 			wp_nav_menu( array( 'theme_location' => 'footermenu' ) );
-		}else{
-			wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav-menu' ) );
-		}
+
 		echo '<div class="clr"></div></div></nav></div>';
+
+	}else{
+		//wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav-menu' ) );
+	}
 
 	echo '<div class="clr"></div></div>';
 

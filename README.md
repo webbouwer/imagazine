@@ -34,12 +34,20 @@ customizer global post default settings
 customizer upperbar menu 
 - [x] menu alignment left/center/right
 - [ ] submenu horizontal/vertical
-- [ ] submenu compact .. /fullwidth/fullscreen
+- [ ] submenu type compactbox/fullwidth/fullscreen
 
 customizer topbar menu 
 - [x] menu alignment left/center/right
 - [ ] submenu horizontal/vertical
-- [ ] submenu compact .. /fullwidth/fullscreen
+- [ ] submenu type compactbox/fullwidth/fullscreen
+
+customizer sidebar menu 
+- [ ] menu alignment left/center/right
+
+customizer footer menu 
+- [x] menu alignment left/center/right
+- [x] menu type horizontal/vertical 
+- [ ] submenu horizontal below/vertical on top
 
 Theme Widgets
 - [x] dashboard widget latest theme github commits 
