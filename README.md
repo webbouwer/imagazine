@@ -23,6 +23,7 @@ At the moment only the most basic needed css styling for element positioning wit
 	
 + Admin Dashboard Theme Commit Updates from Github 
 
+For amore complete list of options see [the theme wiki](https://github.com/oddsized/imagazine/wiki/Imagazine-Theme-Options)
 (More functions allready available, will be updated soon)
 
 ### Following is in development
