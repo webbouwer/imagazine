@@ -161,15 +161,13 @@ Customizer and meta options
 page meta box
 - [x] show/hide page top content widget
 - [x] show/hide page main content
-- [ ] show/hide date
-- [ ] show/hide author
-- [ ] date display type 
+- [x] show/hide date/author
+- [x] date display type 
 - [x] show/hide page bottom content widget
 
 customizer global lists default settings
 - [x] show/hide top content widget
-- [x] show/hide date
-- [x] show/hide author
+- [x] show/hide date/author
 - [x] date display type 
 - [x] show/hide bottom content widget
 - [x] single post sidebar 1 display
@@ -177,9 +175,8 @@ customizer global lists default settings
 
 customizer global post default settings
 - [x] show/hide top content widget
-- [ ] show/hide date
-- [ ] show/hide author
-- [ ] date display type 
+- [x] show/hide date/author
+- [x] date display type 
 - [x] show/hide bottom content widget
 - [x] single post sidebar 1 display
 - [x] single post sidebar 2 display
