@@ -64,7 +64,7 @@ require get_template_directory() . '/assets/widgets.php'; // widget functions
 	function wp_time_ago( $t ) {
 		// https://codex.wordpress.org/Function_Reference/human_time_diff
 		//get_the_time( 'U' )
-		printf( _x( '%s '.__('geleden','protago'), '%s = human-readable time difference', 'imagazine' ), human_time_diff( $t, current_time( 'timestamp' ) ) );
+		printf( _x( '%s '.__('geleden','imagazine'), '%s = human-readable time difference', 'imagazine' ), human_time_diff( $t, current_time( 'timestamp' ) ) );
 	}
 
 	/* set date display
@@ -80,7 +80,6 @@ require get_template_directory() . '/assets/widgets.php'; // widget functions
 
 	}
 	*/
-
 
 
 

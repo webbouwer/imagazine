@@ -19,6 +19,13 @@ $sidebar2respon = get_theme_mod('imagazine_content_sidebars_sidebar2responsive',
 
 
 /* post/page/list global settings */
+$list_topwidgets_display = get_theme_mod('imagazine_global_listdisplay_contenttop', 'hide');
+$list_authortime_display = get_theme_mod('imagazine_global_listdisplay_authortime', 'both');
+$list_timeformat_display = get_theme_mod('imagazine_global_listdisplay_timeformat', 'date');
+$list_bottomwidgets_display = get_theme_mod('imagazine_global_listdisplay_contentbottom', 'hide');
+$list_sidebar1_display = get_theme_mod('imagazine_global_listdisplay_sidebar1_pos','none');
+$list_sidebar2_display = get_theme_mod('imagazine_global_listdisplay_sidebar2_pos','none');
+
 $post_topwidgets_display = get_theme_mod('imagazine_global_postdisplay_contenttop', 'hide');
 $post_authortime_display = get_theme_mod('imagazine_global_postdisplay_authortime', 'both');
 $post_timeformat_display = get_theme_mod('imagazine_global_postdisplay_timeformat', 'date');
@@ -30,15 +37,6 @@ $page_topwidgets_display = get_theme_mod('imagazine_global_pagedisplay_contentto
 $page_authortime_display = get_theme_mod('imagazine_global_pagedisplay_authortime', 'both');
 $page_timeformat_display = get_theme_mod('imagazine_global_pagedisplay_timeformat', 'date');
 $page_bottomwidgets_display = get_theme_mod('imagazine_global_pagedisplay_contentbottom', 'hide');
-
-$list_topwidgets_display = get_theme_mod('imagazine_global_listdisplay_contenttop', 'hide');
-$list_authortime_display = get_theme_mod('imagazine_global_listdisplay_authortime', 'both');
-$list_timeformat_display = get_theme_mod('imagazine_global_listdisplay_timeformat', 'date');
-$list_bottomwidgets_display = get_theme_mod('imagazine_global_listdisplay_contentbottom', 'hide');
-
-$list_sidebar1_display = get_theme_mod('imagazine_global_listdisplay_sidebar1_pos','none');
-$list_sidebar2_display = get_theme_mod('imagazine_global_listdisplay_sidebar2_pos','none');
-
 
 
 
@@ -172,13 +170,38 @@ echo '<a href="'.get_the_permalink().'" title="'.get_the_title().'" >';
 the_post_thumbnail('big-thumb');
 echo '</a>';
 }
-/*
-if( get_theme_mod('imagazine_settings_content_authordisplay', 'list') == 'list' || get_theme_mod('imagazine_settings_content_authordisplay', 'list') == 'all' ){
-imagazine_display_author();
+
+
+
+
+
+
+
+
+
+if( $list_authortime_display == 'both' || $list_authortime_display == 'date'){
+
+	/* set date display */
+	if( $list_timeformat_display == 'date' ){
+		echo '<span class="post-date date-time">'.get_the_date().'</span> ';
+	}elseif( $list_timeformat_display == 'full' ){
+		echo '<span class="post-date date-time">'.get_the_date().' '.__('om','imagazine').' '.get_the_time().'</span> ';
+	}else{
+		echo '<span class="post-date time-ago">';
+		wp_time_ago(get_the_time( 'U' ));
+		echo '</span>';
+	}
 }
-if( get_theme_mod('imagazine_settings_content_datedisplay', 'list') == 'list' || get_theme_mod('imagazine_settings_content_datedisplay', 'list') == 'all' ){
-imagazine_display_date();
-}*/
+
+if( $list_authortime_display == 'both' || $list_authortime_display == 'author'){
+/* set author display */
+echo ' <span class="post-author">'.__('door','imagazine').' '.get_the_author().'</span> ';
+}
+
+
+
+
+
 if ( is_super_admin() ) {
 edit_post_link( __( 'Bewerk' , 'imagazine' ), '<span class="edit-link">', '</span>' );
 }
@@ -219,17 +242,36 @@ the_post_thumbnail('medium');
 if($headertitle != 'head'){
 echo '<h1><a href="'.get_the_permalink().'">'.get_the_title().'</a></h1>';
 }
-/*
-if( get_theme_mod('imagazine_settings_content_authordisplay', 'list') == 'single' || get_theme_mod('imagazine_settings_content_authordisplay', 'list') == 'list' || get_theme_mod('imagazine_settings_content_authordisplay', 'list') == 'all' ){
-imagazine_display_author();
+
+
+
+
+if( $post_authortime_display == 'both' || $post_authortime_display == 'date'){
+
+	/* set date display */
+	if( $post_timeformat_display == 'date' ){
+		echo '<span class="post-date date-time">'.get_the_date().'</span> ';
+	}elseif( $post_timeformat_display == 'full' ){
+		echo '<span class="post-date date-time">'.get_the_date().' '.__('om','imagazine').' '.get_the_time().'</span> ';
+	}else{
+		echo '<span class="post-date time-ago">';
+		wp_time_ago(get_the_time( 'U' ));
+		echo '</span>';
+	}
 }
-if( get_theme_mod('imagazine_settings_content_datedisplay', 'list') == 'single' || get_theme_mod('imagazine_settings_content_datedisplay', 'list') == 'list' || get_theme_mod('imagazine_settings_content_datedisplay', 'list') == 'all' ){
-imagazine_display_date();
+
+if( $post_authortime_display == 'both' || $post_authortime_display == 'author'){
+/* set author display */
+echo ' <span class="post-author">'.__('door','imagazine').' '.get_the_author().'</span> ';
 }
+
+
+
+
 if ( is_super_admin() ) {
 edit_post_link( __( 'Edit' , 'imagazine' ), '<span class="edit-link">', '</span>' );
 }
-*/
+
 echo '<div class="innerpadding">';
 echo apply_filters('the_content', get_the_content());
 echo '</div>';
@@ -278,14 +320,30 @@ the_post_thumbnail('medium');
 if( ( $headertitle != 'head' && $page_title_display == 0 ) || ( $headertitle != 'head' && $page_title_display != 3 ) || $page_title_display == 1 ){
 echo '<h1><a href="'.get_the_permalink().'">'.get_the_title().'</a></h1>';
 }
-/*
-if( get_theme_mod('imagazine_settings_content_authordisplay', 'list') == 'page' || get_theme_mod('imagazine_settings_content_authordisplay', 'list') == 'all' ){
-imagazine_display_author();
+
+
+if( $page_authortime_display == 'both' || $page_authortime_display == 'date'){
+
+	/* set date display */
+	if( $page_timeformat_display == 'date' ){
+		echo '<span class="post-date date-time">'.get_the_date().'</span> ';
+	}elseif( $page_timeformat_display == 'full' ){
+		echo '<span class="post-date date-time">'.get_the_date().' '.__('om','imagazine').' '.get_the_time().'</span> ';
+	}else{
+		echo '<span class="post-date time-ago">';
+		wp_time_ago(get_the_time( 'U' ));
+		echo '</span>';
+	}
 }
-if( get_theme_mod('imagazine_settings_content_datedisplay', 'list') == 'page' || get_theme_mod('imagazine_settings_content_datedisplay', 'list') == 'all' ){
-imagazine_display_date();
+
+if( $page_authortime_display == 'both' || $page_authortime_display == 'author'){
+/* set author display */
+echo ' <span class="post-author">'.__('door','imagazine').' '.get_the_author().'</span> ';
 }
-*/
+
+
+
+
 if ( is_super_admin() ) {
 edit_post_link( __( 'Edit' , 'imagazine' ), '<span class="edit-link">', '</span>' );
 }
