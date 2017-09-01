@@ -53,12 +53,12 @@ customizer global post default settings
 - [x] single post sidebar 2 display
 
 customizer upperbar menu 
-- [ ] menu alignment left/center/right
+- [x] menu alignment left/center/right
 - [ ] submenu horizontal/vertical
 - [ ] submenu compact .. /fullwidth/fullscreen
 
 customizer topbar menu 
-- [ ] menu alignment left/center/right
+- [x] menu alignment left/center/right
 - [ ] submenu horizontal/vertical
 - [ ] submenu compact .. /fullwidth/fullscreen
 

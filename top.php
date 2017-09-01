@@ -113,7 +113,7 @@ if( is_page() ){
 
 		// uppermenu
 		if ( has_nav_menu( 'uppermenu' ) ){
-		echo '<div id="uppermenubox"><div id="uppermenu" class="pos-small-'.$uppermenusmallpos.' pos-large-'.$uppermenulargepos.'"><nav><div class="innerpadding">';
+		echo '<div id="uppermenubox"><div id="uppermenu" class="pos-small-'.$uppermenusmallpos.' pos-large-'.$uppermenulargepos.' align-'.$uppermenutextalign.'"><nav><div class="innerpadding">';
 		wp_nav_menu( array( 'theme_location' => 'uppermenu' ) );
 		echo '<div class="clr"></div></div></nav></div></div>';
 		}

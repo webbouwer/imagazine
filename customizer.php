@@ -749,20 +749,22 @@ function imagazine_theme_customizer( $wp_customize ){
 	$wp_customize->add_setting( 'imagazine_upperbar_menu_textalign' , array(
 		'default' => 'center',
 		'sanitize_callback' => 'imagazine_sanitize_default',
-		'priority' => 70,
+		'priority' => 60,
     ));
+
     $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_upperbar_menu_textalign', array(
             'label'          => __( 'Navigation text alignment', 'imagazine' ),
-            'section'        => 'imagazine_uppperbar_menu',
+            'section'        => 'imagazine_upperbar_menu',
             'settings'       => 'imagazine_upperbar_menu_textalign',
             'type'           => 'select',
- 	    	'description'    => __( 'Align navigation menu text', 'imagazine' ),
+ 	    	'description'    => __( 'Align upperbar navigation menu text', 'imagazine' ),
             'choices'        => array(
                 'left'   => __( 'left', 'imagazine' ),
                 'center'   => __( 'center', 'imagazine' ),
                 'right'   => __( 'right', 'imagazine' ),
             )
     )));
+
 
 
 
