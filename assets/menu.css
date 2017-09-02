@@ -42,37 +42,6 @@ display:inline-block;
 }
 
 
-/*
-.navbox,
-.navbox > div,
-.navbox > div ul.nav-menu,
-.widget_nav_menu ul.menu
-{
-display:block;
-min-width:100%;
-padding:0;
-}
-
-ul.nav-menu li,
-ul.menu li
-{
-display:block;
-list-style-type:none;
-padding:0px;
-}
-
-.menu-item a
-{
-display:block;
-}
-.menu-item a .nav-item-box
-{
-display:block;
-text-align:left;
-}
-
-
-
 
 /** Start Menu_image
  * @package Menu_Image
@@ -124,6 +93,7 @@ text-align:left;
 .menu-item a.menu-image-title-hide .menu-image-title {
 	display: none;
 }
+*/
 /**
  * End Menu_image
  */
@@ -135,14 +105,12 @@ text-align:left;
 
 
 
-/* title text wrapper
+/* title text wrapper */
 .menu-image-textwrap
 {
 }
 .menu-image-description
 {
-	display:block;
-	clear: both;
 }
 
 .menu-image-textwrap .menu-image-title
@@ -161,6 +129,5 @@ text-align:left;
 {
 }
 
-*/
 
 

@@ -113,7 +113,7 @@ if( is_page() ){
 
 		// uppermenu
 		if ( has_nav_menu( 'uppermenu' ) ){
-		echo '<div id="uppermenubox"><div id="uppermenu" class="pos-small-'.$uppermenusmallpos.' pos-large-'.$uppermenulargepos.' align-'.$uppermenutextalign.'"><nav><div class="innerpadding">';
+		echo '<div id="uppermenubox"><div id="uppermenu" class="pos-small-'.$uppermenusmallpos.' pos-large-'.$uppermenulargepos.' align-text-'.$uppermenutextalign.'"><nav><div class="innerpadding">';
 		wp_nav_menu( array( 'theme_location' => 'uppermenu' ) );
 		echo '<div class="clr"></div></div></nav></div></div>';
 		}
@@ -174,7 +174,7 @@ if($topbarlargebehavior != 'none' || $topbarsmallbehavior != 'none'){
 	}
 
 	// topmenu
-	echo '<div id="topmenu" class="pos-'.$topbarmenularge.' align-'.$topbarmenutextalign.'"><nav><div class="innerpadding">';
+	echo '<div id="topmenu" class="pos-small-'.$topbarmenusmall.' pos-large-'.$topbarmenularge.' align-text-'.$topbarmenutextalign.'"><nav><div class="innerpadding">';
 	if ( has_nav_menu( 'topmenu' ) ) {
 		wp_nav_menu( array( 'theme_location' => 'topmenu' ) );
 	}else{

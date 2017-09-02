@@ -67,15 +67,26 @@ display: inline-block;
 display:table-cell;
 vertical-align:middle;
 }
-#topmenu nav div div ul.sub-menu
+nav div div ul.sub-menu
 {
 display:none;
 }
-#topmenu nav div div ul.sub-menu li
+nav div div ul.sub-menu li
 {
 clear:both;
 }
-
+/* default behavior submenu */
+nav div div ul li:hover ul.sub-menu
+{
+position:absolute;
+display:block;
+z-index:399;
+}
+#sidemenu nav div div ul li:hover ul.sub-menu
+{
+position:relative;
+display:block;
+}
 /*
  * upperbar and topbar
  */

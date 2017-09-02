@@ -52,7 +52,6 @@ customizer footer menu
 Theme Widgets
 - [x] dashboard widget latest theme github commits 
 - [x] post listing widget by category or related to current category/tags
-- [ ] image/banner widget with link and subtitle options (extend post listing widget..)
 
 Theme Core Extensions
 - [x] menu images [in development]

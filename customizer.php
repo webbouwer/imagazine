@@ -1956,14 +1956,22 @@ function imagazine_customize_adaptive(){
 	max-width:<?php echo get_theme_mod('imagazine_global_screenmode_smallmargin', 320).'px'; ?> !important;
 	}
 
-	.align-left
+	.align-left,
+	.align-text-left ul.menu li
 	{
 	text-align:left;
 	}
-	.align-right
+	.align-right,
+	.align-text-right ul.menu li
 	{
 	text-align:right;
 	}
+	.align-center,
+	.align-text-right ul.menu li
+	{
+	text-align:center;
+	}
+
 
 	/* topbar */
 	#topmainbar, #topsidebar-1, #topsidebar-2
@@ -2040,7 +2048,8 @@ function imagazine_customize_adaptive(){
 	min-height:<?php echo get_theme_mod('imagazine_topbar_behavior_minheight', 60).'px'; ?> !important;
 	}
 
-	.align-center
+	.align-center,
+	.align-text-center ul.menu li
 	{
 	text-align: center;
 	}
@@ -2057,12 +2066,14 @@ function imagazine_customize_adaptive(){
 	}
 
 	.pos-large-left,
-	.align-left
+	.align-left,
+	.align-text-left ul.menu li
 	{
 	text-align: left;
 	}
 	.pos-large-right,
-	.align-right
+	.align-right,
+	.align-text-right ul.menu li
 	{
 	text-align: right;
 	}
