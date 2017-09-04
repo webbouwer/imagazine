@@ -3,9 +3,13 @@ jQuery(function ($) {
 	$(document).ready( function(){
 
 			var $wp_custom_vars = JSON.parse(site_data['customizer']);//alert( $wp_custom_vars['imagazine_topbar_behavior_minheight'] );
-			var mediumswitch = $wp_custom_vars['imagazine_global_screenmode_mediummin'];
 
+			//alert( JSON.stringify( $wp_custom_vars ) );
 
+			var mediumswitch = 580;
+			if( $wp_custom_vars['imagazine_global_screenmode_mediummin'] && $wp_custom_vars['imagazine_global_screenmode_mediummin'] > 560 ){
+			mediumswitch = $wp_custom_vars['imagazine_global_screenmode_mediummin'];
+			}
 			/* Upperbar */
 			var upperbardisplaysmall = $wp_custom_vars['imagazine_upperbar_behavior_displaysmall'];
 			var upperbardisplaylarge = $wp_custom_vars['imagazine_upperbar_behavior_displaylarge'];

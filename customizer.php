@@ -421,7 +421,7 @@ function imagazine_theme_customizer( $wp_customize ){
     	)));
 
 		$wp_customize->add_setting( 'imagazine_global_postdisplay_contentbottom' , array(
-		'default' => 'hide',
+		'default' => 'show',
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
 
@@ -478,7 +478,7 @@ function imagazine_theme_customizer( $wp_customize ){
 
 
 		$wp_customize->add_setting( 'imagazine_global_pagedisplay_contenttop' , array(
-		'default' => 'hide',
+		'default' => 'show',
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
 
@@ -540,7 +540,7 @@ function imagazine_theme_customizer( $wp_customize ){
 
 
 		$wp_customize->add_setting( 'imagazine_global_pagedisplay_contentbottom' , array(
-		'default' => 'hide',
+		'default' => 'show',
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
 
@@ -1081,7 +1081,7 @@ function imagazine_theme_customizer( $wp_customize ){
 
 
 		$wp_customize->add_setting( 'imagazine_topbar_sidebars_sidebar1pos' , array(
-		'default' => 'none',
+		'default' => 'right',
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_sidebars_sidebar1pos', array(
@@ -1150,7 +1150,7 @@ function imagazine_theme_customizer( $wp_customize ){
 
 
 		$wp_customize->add_setting( 'imagazine_topbar_sidebars_sidebar2pos' , array(
-		'default' => 'none',
+		'default' => 'right',
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
     	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_sidebars_sidebar2pos', array(

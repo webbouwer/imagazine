@@ -29,14 +29,10 @@ height:0;
 line-height: 0;
 }
 
-
-
-
 #pagecontainer
 {
 position: relative;
 }
-
 
 
 /*
@@ -109,4 +105,10 @@ display:block;
 {
 	position: fixed;
 	z-index:298;
+}
+
+/* Default topbar sidebar menu styling */
+#topbarcontainer .sidecolumn ul.menu li
+{
+display:inline-block;
 }

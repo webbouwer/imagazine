@@ -55,6 +55,8 @@ Theme Widgets
 
 Theme Core Extensions
 - [x] menu images [in development]
+- [ ] webicons implement url & functions
+- [ ] googlefonts implement url & functions
 - [ ] default filter selected categories
  
 Theme css
@@ -67,10 +69,11 @@ add most basic css styling for all basic elements
  
  
  
-#### And further more
- 
+#### Also
  * Theme Settings (options) page	
- 	
+ 	- [ ] use webicons optional
+ 	- [ ] use googlefonts optional
+	
  * Customizer options
  	* Add smart controls - http://divjot.co/blog/2015/03/23/smart-controls-wordpress-customizer/
 	

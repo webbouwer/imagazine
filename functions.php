@@ -1,11 +1,11 @@
 <?php
-// Functions setup
+	// Functions setup
 
-require get_template_directory() . '/options.php'; // options functions
-require get_template_directory() . '/customizer.php'; // customizer functions
-require get_template_directory() . '/assets/menu.php'; 	// menu image plugin functions
-require get_template_directory() . '/assets/metaboxes.php'; // post meta functions
-require get_template_directory() . '/assets/widgets.php'; // widget functions
+	require get_template_directory() . '/options.php'; // options functions
+	require get_template_directory() . '/customizer.php'; // customizer functions
+	require get_template_directory() . '/assets/menu.php'; 	// menu image plugin functions
+	require get_template_directory() . '/assets/metaboxes.php'; // post meta functions
+	require get_template_directory() . '/assets/widgets.php'; // widget functions
 
 
 
@@ -67,19 +67,7 @@ require get_template_directory() . '/assets/widgets.php'; // widget functions
 		printf( _x( '%s '.__('geleden','imagazine'), '%s = human-readable time difference', 'imagazine' ), human_time_diff( $t, current_time( 'timestamp' ) ) );
 	}
 
-	/* set date display
-	function display_date(){
 
-		if( get_theme_mod('protago_settings_data_dateformat', 'default') == 'default' ){
-			echo '<span class="post-date date-time">'.get_the_date().'</span> ';
-		}else{
-			echo '<span class="post-date time-ago">';
-			wp_time_ago(get_the_time( 'U' ));
-			echo '</span>';
-		}
-
-	}
-	*/
 
 
 
@@ -417,7 +405,7 @@ require get_template_directory() . '/assets/widgets.php'; // widget functions
 
 
 
-/*
+	/*
 	 * WP CUSTOM VARS LOCATED
 	 * Javascript with customizer variables
 	 * see assets/customizer_topbar.js, assets/global.js
@@ -451,15 +439,14 @@ require get_template_directory() . '/assets/widgets.php'; // widget functions
 
 	add_action('wp_enqueue_scripts', 'imagazine_global_js');
 
-	/*
-	function imagazine_customizer_init_js() {
-	}
-	if ( is_customize_preview() ) {
-	add_action('customize_preview_init', 'imagazine_customizer_init_js');
-	}else{
-	}
-	*/
 
+	// include webicon
+	function onepiece_load_share_widget_icons(){
+
+	wp_enqueue_script('jquery-webicon', '//cdn.rawgit.com/icons8/bower-webicon/v0.10.7/jquery-webicon.min.js');
+
+	}
+	add_action( 'wp_print_scripts', 'onepiece_load_share_widget_icons' );
 
 
 

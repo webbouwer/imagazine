@@ -7,13 +7,13 @@ function imagazine_page_meta_box($object)
     wp_nonce_field(basename(__FILE__), "meta-box-nonce");
 
 
-	$option_upperbar_smalldisplay = array(0=>'Default setting ('.get_theme_mod('imagazine_upperbar_behavior_displaysmall').')', 1=>'fixed', 2=>'relative', 3=>'none');
+	$option_upperbar_smalldisplay = array(0=>'Default setting ('.get_theme_mod('imagazine_upperbar_behavior_displaysmall','relative').')', 1=>'fixed', 2=>'relative', 3=>'none');
 
-	$option_upperbar_largedisplay = array(0=>'Default setting ('.get_theme_mod('imagazine_upperbar_behavior_displaylarge').')', 1=>'fixed', 2=>'relative', 3=>'none');
+	$option_upperbar_largedisplay = array(0=>'Default setting ('.get_theme_mod('imagazine_upperbar_behavior_displaylarge','fixed').')', 1=>'fixed', 2=>'relative', 3=>'none');
 
-	$option_topbar_smalldisplay = array(0=>'Default setting ('.get_theme_mod('imagazine_topbar_behavior_smallposition').')', 1=>'fixed', 2=>'relative', 3=>'none');
+	$option_topbar_smalldisplay = array(0=>'Default setting ('.get_theme_mod('imagazine_topbar_behavior_smallposition','relative').')', 1=>'fixed', 2=>'relative', 3=>'none');
 
-	$option_topbar_largedisplay = array(0=>'Default setting ('.get_theme_mod('imagazine_topbar_behavior_largeposition').')', 1=>'fixed', 2=>'relative', 3=>'none');
+	$option_topbar_largedisplay = array(0=>'Default setting ('.get_theme_mod('imagazine_topbar_behavior_largeposition', 'fixed').')', 1=>'fixed', 2=>'relative', 3=>'none');
 
 
 
@@ -21,19 +21,19 @@ function imagazine_page_meta_box($object)
 
 	$option_header_image = array(0=>'Default setting (featured images:'.get_theme_mod('imagazine_header_featuredimages').')', 1=>'Default header image', 2=>'Page featured image');
 
-	$option_title_display = array(0=>'Default setting ('.get_theme_mod('imagazine_header_pagetitle').')', 1=>'Not in header, only on maintext', 2=>'Title in header and on maintext', 3=>'In header only');
+	$option_title_display = array(0=>'Default setting ('.get_theme_mod('imagazine_header_pagetitle', 'maintext').')', 1=>'Not in header, only on maintext', 2=>'Title in header and on maintext', 3=>'In header only');
 
 
-	$option_contenttop_widgets_display = array( 0 =>'Default ('.get_theme_mod('imagazine_global_pagedisplay_contenttop').')', 1 => 'show', 2 => 'hide');
+	$option_contenttop_widgets_display = array( 0 =>'Default ('.get_theme_mod('imagazine_global_pagedisplay_contenttop', 'show').')', 1 => 'show', 2 => 'hide');
 
 	$option_maincontent_display = array( 0 =>'show', 1 => 'hide');
 
-	$option_contentbottom_widgets_display = array( 0 =>'Default ('.get_theme_mod('imagazine_global_pagedisplay_contentbottom').')', 1 => 'show', 2 => 'hide');
+	$option_contentbottom_widgets_display = array( 0 =>'Default ('.get_theme_mod('imagazine_global_pagedisplay_contentbottom', 'show').')', 1 => 'show', 2 => 'hide');
 
 
-	$option_sidebar1_display = array(0=>'Default setting ('.get_theme_mod('imagazine_content_sidebars_sidebar1pos').')', 1=>'right', 2=>'left', 3=>'none' );
+	$option_sidebar1_display = array(0=>'Default setting ('.get_theme_mod('imagazine_content_sidebars_sidebar1pos', 'right').')', 1=>'right', 2=>'left', 3=>'none' );
 
-	$option_sidebar2_display = array(0=>'Default setting ('.get_theme_mod('imagazine_content_sidebars_sidebar2pos').')', 1=>'right', 2=>'left', 3=>'none');
+	$option_sidebar2_display = array(0=>'Default setting ('.get_theme_mod('imagazine_content_sidebars_sidebar2pos', 'right').')', 1=>'right', 2=>'left', 3=>'none');
 
 
 	?>
