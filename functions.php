@@ -1,13 +1,26 @@
 <?php
-	// Functions setup
-
+	// WP core functions etup
 	require get_template_directory() . '/options.php'; // options functions
 	require get_template_directory() . '/customizer.php'; // customizer functions
 	require get_template_directory() . '/assets/menu.php'; 	// menu image plugin functions
 	require get_template_directory() . '/assets/metaboxes.php'; // post meta functions
 	require get_template_directory() . '/assets/widgets.php'; // widget functions
+	require get_template_directory() . '/assets/widget_postlist.php'; // widget functions
+	require get_template_directory() . '/assets/widget_feedbundle.php'; // widget functions
 
 
+	// Register and load the widgets
+	function imagazine_load_widgets() {
+		register_widget( 'imagazine_postlist_widget' );
+		register_widget( 'imagazine_feedbundle_widget' );
+	}
+
+	add_action( 'widgets_init', 'imagazine_load_widgets' );
+
+	/*
+	 * Return of the Links Manager
+	 */
+	add_filter( 'pre_option_link_manager_enabled', '__return_true' );
 
 	/*
 	 * Register Theme Support
@@ -24,10 +37,6 @@
 	}
 	add_action( 'after_setup_theme', 'imagazine_setup_theme_global' );
 
-
-
-
-
 	/*
 	 * Register menu's
 	 */
@@ -43,108 +52,6 @@
 	}
 	add_action( 'init', 'imagazine_setup_register_menus' );
 
-
-
-
-
-	/*
-	 * Return of the Links Manager
-	 */
-	add_filter( 'pre_option_link_manager_enabled', '__return_true' );
-
-
-
-
-
-
-
-	/*
-	 * Time
-	 */
-	function wp_time_ago( $t ) {
-		// https://codex.wordpress.org/Function_Reference/human_time_diff
-		//get_the_time( 'U' )
-		printf( _x( '%s '.__('geleden','imagazine'), '%s = human-readable time difference', 'imagazine' ), human_time_diff( $t, current_time( 'timestamp' ) ) );
-	}
-
-
-
-
-
-
-	/*
-	 * Adjust excerpt num words max
-	 */
-	function the_excerpt_length( $words = null, $links = true ) {
-		global $_the_excerpt_length_filter;
-
-		if( isset($words) ) {
-			$_the_excerpt_length_filter = $words;
-		}
-
-		add_filter( 'excerpt_length', '_the_excerpt_length_filter' );
-		if( $links == false){
-			echo preg_replace('/(?i)<a([^>]+)>(.+?)<\/a>/','', get_the_excerpt() );
-		}else{
-			the_excerpt();
-		}
-
-		remove_filter( 'excerpt_length', '_the_excerpt_length_filter' );
-
-		// reset the global
-		$_the_excerpt_length_filter = null;
-	}
-
-	function _the_excerpt_length_filter( $default ) {
-		global $_the_excerpt_length_filter;
-
-		if( isset($_the_excerpt_length_filter) ) {
-			return $_the_excerpt_length_filter;
-		}
-
-		return $default;
-	}
-	// the_excerpt_length( 25 );
-
-
-
-
-
-	/* Search highlighting */
-
-	function search_title_highlight() {
-		$title = get_the_title();
-		$keys = implode('|', explode(' ', get_search_query()));
-		$title = preg_replace('/(' . $keys .')/iu', '<strong class="search-highlight">\0</strong>', $title);
-		echo $title;
-	}
-
-	function search_excerpt_highlight($excerpt_length = 20) {
-	$excerpt = the_excerpt_length( $excerpt_length ); //get_the_excerpt();
-	$keys = implode('|', explode(' ', get_search_query()));
-	$excerpt = preg_replace('/(' . $keys .')/iu', '<strong class="search-highlight">\0</strong>', $excerpt);
-	echo $excerpt;
-	}
-
-
-
-
-
-	/* CATEGORY LIST - for metaboxes / customizer functions */
-	function get_categories_select(){
-		$get_cats = get_categories();
-			$results;
-			$count = count($get_cats);
-			for ($i=0; $i < $count; $i++) {
-				if (isset($get_cats[$i]))
-					$results[$get_cats[$i]->slug] = $get_cats[$i]->name;
-				else
-					$count++;
-			}
-		return $results;
-	}
-
-
 	/**
 	 * Keep category select list in hiÎarchy
 	 * source http://wordpress.stackexchange.com/questions/61922/add-post-screen-keep-category-structure
@@ -157,33 +64,6 @@
 
 	}
 	add_filter( 'wp_terms_checklist_args', 'imagazine_wp_terms_checklist_args', 1, 2 );
-
-
-
-	/*
-	 * Editor style WP THEME STANDARD
-	 */
-	function imagazine_editor_styles() {
-		add_editor_style( 'style.css' );
-		//add_editor_style( get_theme_mod('onepiece_identity_stylelayout_stylesheet', 'default.css') );
-	}
-	add_action( 'admin_init', 'imagazine_editor_styles' );
-
-
-	/* JQuery init */
-	function imagazine_frontend_jquery() {
-		wp_enqueue_script('jquery');
-	}
-	add_action( 'init', 'imagazine_frontend_jquery' );
-
-	/* Proper way to enqueue scripts and styles */
-	function imagazine_theme_scripts() {
-		wp_enqueue_style( 'basic-stylesheet', get_stylesheet_uri() );
-		//wp_enqueue_script( 'theme-responsive', get_template_directory_uri()
-		// . '/assets/responsive.js', array(), '1.0.0', true );
-	}
-	add_action( 'wp_enqueue_scripts', 'imagazine_theme_scripts' );
-
 
 	/* Widgets */
 	function imagazine_setup_widgets_init() {
@@ -390,19 +270,29 @@
 	}
 
 
-
-
-
-	/*
-	 * Register global variables (options/customizer)
+/*
+	 * Editor style WP THEME STANDARD
 	 */
-	$wp_global_data = array(); // special var $wp_global_data
-	$wp_global_data['customizer'] = json_encode(get_theme_mods());
+	function imagazine_editor_styles() {
+		add_editor_style( 'style.css' );
+		//add_editor_style( get_theme_mod('onepiece_identity_stylelayout_stylesheet', 'default.css') );
+	}
+	add_action( 'admin_init', 'imagazine_editor_styles' );
 
 
+	/* JQuery init */
+	function imagazine_frontend_jquery() {
+		wp_enqueue_script('jquery');
+	}
+	add_action( 'init', 'imagazine_frontend_jquery' );
 
-
-
+	/* Eenqueue scripts and styles */
+	function imagazine_theme_scripts() {
+		wp_enqueue_style( 'basic-stylesheet', get_stylesheet_uri() );
+		//wp_enqueue_script( 'theme-responsive', get_template_directory_uri()
+		// . '/assets/responsive.js', array(), '1.0.0', true );
+	}
+	add_action( 'wp_enqueue_scripts', 'imagazine_theme_scripts' );
 
 
 	/*
@@ -432,12 +322,105 @@
 		// The script can be enqueued now or later.
 		wp_enqueue_script( 'custom_global_js');
 		//wp_enqueue_script( 'custom_topbar_js');
-
-
-
 	}
 
 	add_action('wp_enqueue_scripts', 'imagazine_global_js');
+
+
+
+
+
+
+
+
+
+
+
+
+	/* Theme global functions */
+
+
+	/*
+	 * Time
+	 */
+	function wp_time_ago( $t ) {
+		// https://codex.wordpress.org/Function_Reference/human_time_diff
+		//get_the_time( 'U' )
+		printf( _x( '%s '.__('geleden','imagazine'), '%s = human-readable time difference', 'imagazine' ), human_time_diff( $t, current_time( 'timestamp' ) ) );
+	}
+
+	/*
+	 * Adjust excerpt num words max
+	 */
+	function the_excerpt_length( $words = null, $links = true ) {
+		global $_the_excerpt_length_filter;
+
+		if( isset($words) ) {
+			$_the_excerpt_length_filter = $words;
+		}
+
+		add_filter( 'excerpt_length', '_the_excerpt_length_filter' );
+		if( $links == false){
+			echo preg_replace('/(?i)<a([^>]+)>(.+?)<\/a>/','', get_the_excerpt() );
+		}else{
+			the_excerpt();
+		}
+
+		remove_filter( 'excerpt_length', '_the_excerpt_length_filter' );
+
+		// reset the global
+		$_the_excerpt_length_filter = null;
+	}
+    // return excerpt
+	function _the_excerpt_length_filter( $default ) {
+		global $_the_excerpt_length_filter;
+
+		if( isset($_the_excerpt_length_filter) ) {
+			return $_the_excerpt_length_filter;
+		}
+
+		return $default;
+	}
+	// the_excerpt_length( 25 );
+
+
+	/* Search highlighting */
+	function search_title_highlight() {
+		$title = get_the_title();
+		$keys = implode('|', explode(' ', get_search_query()));
+		$title = preg_replace('/(' . $keys .')/iu', '<strong class="search-highlight">\0</strong>', $title);
+		echo $title;
+	}
+	function search_excerpt_highlight($excerpt_length = 20) {
+	$excerpt = the_excerpt_length( $excerpt_length ); //get_the_excerpt();
+	$keys = implode('|', explode(' ', get_search_query()));
+	$excerpt = preg_replace('/(' . $keys .')/iu', '<strong class="search-highlight">\0</strong>', $excerpt);
+	echo $excerpt;
+	}
+
+
+	/* CATEGORY LIST - for metaboxes / customizer functions */
+	function get_categories_select(){
+		$get_cats = get_categories();
+			$results;
+			$count = count($get_cats);
+			for ($i=0; $i < $count; $i++) {
+				if (isset($get_cats[$i]))
+					$results[$get_cats[$i]->slug] = $get_cats[$i]->name;
+				else
+					$count++;
+			}
+		return $results;
+	}
+
+
+
+	/*
+	 * Register global variables (options/customizer)
+	 */
+	$wp_global_data = array(); // special var $wp_global_data
+	$wp_global_data['customizer'] = json_encode(get_theme_mods());
+
 
 
 	// include webicon

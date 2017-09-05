@@ -70,9 +70,11 @@ add most basic css styling for all basic elements
  
  
 #### Also
- * Theme Settings (options) page	
- 	- [ ] use webicons optional
- 	- [ ] use googlefonts optional
+ * Theme options page (protected)	
+ 	- [ ] webicons embed
+ 	- [ ] googlefonts embed
+ 	- [ ] google analytics code
+	- [ ] [..]social media..
 	
  * Customizer options
  	* Add smart controls - http://divjot.co/blog/2015/03/23/smart-controls-wordpress-customizer/

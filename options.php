@@ -1,5 +1,9 @@
 <?php // option page
 
+
+
+
+
 function imagazine_admin_menu () {
     $page_title = 'Imagazine Theme settings Page';
     $menu_title = 'Imagazine';
