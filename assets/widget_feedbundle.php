@@ -11,10 +11,10 @@ class imagazine_feedbundle_widget extends WP_Widget {
 	/* Twitter */
 	public $twitterdata = '';
 
-    private $tw_con_ky = '2thkYWAKqgkSNSpshiOUg'; // consumer key
-    private $tw_con_st = 'hKC10MzYUWK6dHY6JghstJZ9xhtbQCi9wKJ24NtPlEc'; // consumer secret
-    private $tw_acc_tk = '98573475-xDXwlzNepYEb5RaStrIbl4VbaBISnZHshu59AQ1nT'; // acces token
-    private $tw_acc_st = 'IAN8KB20MWo5fWjdcSfi8oGZz9GAvzLtv7pjF9LOC6GNk'; // acces token secret
+    private $tw_con_ky = 'xxxxxx'; // consumer key
+    private $tw_con_st = 'xxxxxx'; // consumer secret
+    private $tw_acc_tk = 'xxxxxx'; // acces token
+    private $tw_acc_st = 'xxxxxx'; // acces token secret
 	//private $tw_endpoint = 'https://api.twitter.com/1.1/users/show.json?screen_name=oddsized'; // user profile
 
 
