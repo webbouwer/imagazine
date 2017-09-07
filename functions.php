@@ -7,12 +7,14 @@
 	require get_template_directory() . '/assets/widgets.php'; // widget functions
 	require get_template_directory() . '/assets/widget_postlist.php'; // widget functions
 	require get_template_directory() . '/assets/widget_feedbundle.php'; // widget functions
+	require get_template_directory() . '/assets/widget_stackmyfeeds.php'; // widget functions
 
 
 	// Register and load the widgets
 	function imagazine_load_widgets() {
 		register_widget( 'imagazine_postlist_widget' );
 		register_widget( 'imagazine_feedbundle_widget' );
+		register_widget( 'imagazine_stackmyfeeds_widget' );
 	}
 
 	add_action( 'widgets_init', 'imagazine_load_widgets' );
@@ -424,12 +426,12 @@
 
 
 	// include webicon
-	function onepiece_load_share_widget_icons(){
+	function imagazine_load_share_widget_icons(){
 
 	wp_enqueue_script('jquery-webicon', '//cdn.rawgit.com/icons8/bower-webicon/v0.10.7/jquery-webicon.min.js');
 
 	}
-	add_action( 'wp_print_scripts', 'onepiece_load_share_widget_icons' );
+	add_action( 'wp_print_scripts', 'imagazine_load_share_widget_icons' );
 
 
 
