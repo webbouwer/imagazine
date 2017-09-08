@@ -14,6 +14,12 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 
 	public $stack_max = '';
 	public $stack_order = '';
+	public $stack_titlelength = '';
+	public $stack_showtext = '';
+	public $stack_textlength = '';
+	public $stack_showfrom = '';
+	public $stack_dateformat = '';
+	public $stack_showsource = '';
 
 	private $wordpress_url = '';   // requires wordpress website url
 
@@ -25,6 +31,7 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
     private $twitter_consumer_key = ''; // requires consumer key
     private $twitter_consumer_secret = ''; // requires consumer secret
 
+	private $github_url = '';   // requires wordpress website url
 
 	function __construct() {
 
@@ -77,6 +84,32 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 		if( !empty($var['stack_order']) )
 		$this->stack_order = $var['stack_order'];
 
+		$this->stack_titlelength = 18;
+		if( !empty($var['stack_titlelength']) )
+		$this->stack_titlelength = $var['stack_titlelength'];
+
+		$this->stack_showfrom = 0;
+		if( !empty($var['stack_showfrom']) )
+		$this->stack_showfrom = $var['stack_showfrom'];
+
+		$this->stack_dateformat = 'ago';
+		if( !empty($var['stack_dateformat']) )
+		$this->stack_dateformat = $var['stack_dateformat'];
+
+		$this->stack_showsource = 0;
+		if( !empty($var['stack_showsource']) )
+		$this->stack_showsource = $var['stack_showsource'];
+
+		$this->stack_showtext = 0;
+		if( !empty($var['stack_showtext']) )
+		$this->stack_showtext = $var['stack_showtext'];
+
+		$this->stack_textlength= 24;
+		if( !empty($var['stack_textlength']) )
+		$this->stack_textlength = $var['stack_textlength'];
+
+
+
 		/* feed access variables */
 		$this->wordpress_url = $var['wordpress_url'];
 
@@ -88,6 +121,7 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 		$this->twitter_consumer_key = $var['twitter_consumer_key'];
 		$this->twitter_consumer_secret = $var['twitter_consumer_secret'];
 
+		$this->github_url = $var['github_url'];
 		//..
 
 
@@ -106,6 +140,8 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 			$this->facebookdata = $this->get_facebook_json_to_array();
 		if( $this->twitter_page_id != '' )
 			$this->twitterdata = $this->get_twitter_json_to_array();
+		if( $this->github_url != '' )
+			$this->github_url = $this->get_github_json_to_array();
 
 		//..
 
@@ -117,6 +153,7 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 
 
 		/* filter feed stack */
+		//$this->filter_feedpack();
 		function orderbydate($a, $b){
     		$ad = strtotime($a['pubdate']);
     		$bd = strtotime($b['pubdate']);
@@ -139,10 +176,8 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 
 		}
 
-
-
-
 		/* output stack html */
+
 		$count = 0;
 
 		$output = '<ul>';
@@ -150,59 +185,77 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 		foreach($this->feedstack as $msg){
 
 
-			if( $count++ >= $this->stack_max ) break;
-
-			$output .= '<li>';
-			// date format :: make all the same -> create formats
-			// title and/or text
-			$reference_link_text_open = '';
-			$reference_link_text_close = '';
-			if( !empty( $msg['link'] ) ){
-				$reference_link_text_open = '<a href="'.$msg['link'].'" target="_blank">';
-				$reference_link_text_close = '</a>';
-			}
-
-			if( empty( $msg['title'] ) && !empty($msg['description']) ){
-
-				//$output .= '<h4>'.$msg['description'].' - '.$reference_link_text_open.'Lees meer'.$reference_link_text_close.'</h4>';
-				$output .= '<h4>'.$reference_link_text_open.$msg['description'].$reference_link_text_close.'</h4>';
-
-			}else{
-
-				if( !empty( $msg['title'] ) ){
-				$output .= '<h4>'.$reference_link_text_open.$msg['title'].$reference_link_text_close.'</h4>';
-				}
-				// show available description
-				//if( !empty( $msg['description'] ) ){
-				//$output .= '<p>'.$msg['description'].'</p>';
-				//}
-
-			}
-
 			if( !empty($msg['title']) || !empty($msg['description']) ){
 
-			$output .= $msg['pubdate'];
+				if( $count++ >= $this->stack_max ) break;
 
-			$output .= ' on '.$msg['source'];
+				$output .= '<li class="'.$msg['source'].'">';
+				// date format :: make all the same -> create formats
+				// title and/or text
+				$reference_link_text_open = '';
+				$reference_link_text_close = '';
+				if( !empty( $msg['link'] ) ){
+					$reference_link_text_open = '<a href="'.$msg['link'].'" target="_blank">';
+					$reference_link_text_close = '</a>';
+				}
+
+
+				if( empty( $msg['title'] ) && !empty($msg['description']) ){
+					if( !empty( $msg['link'] ) ){
+						$output .= '<h4>'.$reference_link_text_open.wp_trim_words( $msg['description'], $this->stack_titlelength ).$reference_link_text_close.'</h4>';
+					}else{
+						$output .= '<h4>'.$this->sanitizeText( wp_trim_words( $msg['description'], $this->stack_titlelength ) ).'</h4>';
+					}
+				}else{
+
+					if( !empty( $msg['title'] ) ){
+					$output .= '<h4>'.$reference_link_text_open.wp_trim_words( $msg['title'], $this->stack_titlelength ).$reference_link_text_close.'</h4>';
+					}
+
+					// show available description
+					if( !empty( $msg['description'] ) && $this->stack_showtext == 1){
+
+						$desctext = wp_trim_words( $msg['description'] , $this->stack_textlength );
+						if($this->stack_textlength > 5){
+							$desctext = $this->sanitizeText( $desctext );
+						}
+						$output .= '<p>'.$desctext.'</p>';
+					}
+
+				}
+
+				if( !empty( $msg['from'] ) && $this->stack_showfrom == 1){
+					$output .= '<span class="from">'.$msg['from'].'</span> ';
+				}
+
+				if( !empty( $msg['pubdate'] ) && $this->stack_dateformat != 'none'){
+					$output .= '<span class="pubdate">'.$this->timeFormat( $msg['pubdate'] ).'</span>';
+				}
+				if( !empty( $msg['source'] ) && $this->stack_showsource == 1 ){
+					$output .= ' '. __( 'op', 'imagazine' ) .' <span class="source">'.$msg['source'].'</span>';
+				}
+				$output .= '</li>';
 
 			}
-
-			$output .= '</li>';
 
 
 		} // end output loop
-
 
 		$output .= '</ul>';
 
 		echo $output;
 
 		die();
+
+
 	}
-	//https://wordpress.stackexchange.com/questions/2091/using-widget-options-outside-the-widget
+
+
+	public function filter_feedpack(){
 
 
 
+	}
 
 
 
@@ -216,8 +269,8 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 		/* Wordpress */
 		if( isset( $this->wordpress_url ) ){
 
-		echo $this->wordpress_url;
-		$json = file_get_contents($this->wordpress_url.'/wp-json/wp/v2/posts?per_page='.$this->stack_max);
+		$endpoint = $this->wordpress_url.'/wp-json/wp/v2/posts?per_page='.$this->stack_max;
+		$json = file_get_contents($endpoint);
 		$WPdata = json_decode($json);
 			if( count($WPdata) > 0 && is_array($WPdata) ){
 				$arr = array();
@@ -308,7 +361,8 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 					$arr[$i]['description'] = $this->sanitizeText( $f->description );
 					$arr[$i]['pubdate'] = $f->updated_time; // created_time - date("F j, Y, g:i a", strtotime($f->updated_time) )
 					$arr[$i]['link'] = $f->link;  // object link
-					$arr[$i]['from'] = $f->from->id;  // owner ? fb_pag_id
+					$arr[$i]['from'] = $f->from->name;  // owner ? fb_pag_id
+					$arr[$i]['fromlink'] = 'http://www.facebook.com/'.$f->from->id;  // owner ? fb_pag_id
 				$i++;
 				}
 				$this->feedstack = array_merge($this->feedstack,$arr);
@@ -365,7 +419,8 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 
 			$context  = stream_context_create($opts);
 
-			$endpoint = 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='.$this->twitter_page_id.'&include_entities=false&count='.$this->stack_max;
+			$endpoint = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+			$endpoint .= '?screen_name='.$this->twitter_page_id.'&include_entities=false&count='.$this->stack_max;
 
 			$data = file_get_contents($endpoint, false, $context);
 
@@ -379,7 +434,7 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 					$arr[$i]['source'] = 'twitter';
 					//$arr[$i]['title'] = $t->description;
 					$arr[$i]['description'] = $this->sanitizeText(  $t->text );
-					$arr[$i]['pubdate'] =$t->created_at; // strtotime( )  created_time
+					$arr[$i]['pubdate'] = $t->created_at; // strtotime( )  created_time
 					$arr[$i]['link'] = $t->user->url;  // object link
 					$arr[$i]['from'] = $t->user->name;  // owner ? twitter id
 				$i++;
@@ -397,6 +452,59 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 
 	}
 
+
+	/*
+	 * Github json
+	 */
+	public function get_github_json_to_array(){
+		//echo $this->wordpress_url;
+
+		/* Github */
+		if( isset( $this->github_url ) ){
+
+			$json = wp_remote_get($this->github_url.'/events'); // ?wp_remote_get vs file_get_contents?
+
+			//$gitdata = wp_remote_get('https://api.github.com/users/oddsized');
+			//$gitprofile_data = wp_remote_retrieve_body( $gitdata );
+			//$gitprofile = json_decode( $gitprofile_data );
+			//echo '<a href="'.$gitprofile->html_url.'" target="_blank"><img src="'.$gitprofile->avatar_url.'" style="display:inline-block;vertical-align:text-top;" border="0" width="24" height="auto" />'.$gitprofile->login.' @ github</a>';
+
+			$data = wp_remote_retrieve_body( $json );
+			$GHdata = json_decode( $data );
+
+			if( count($GHdata) > 0 && is_array($GHdata) ){
+
+				$arr = array();
+				$i = 0;
+				foreach ($GHdata as $g ) {
+					if($g->payload->commits[0]->message != ''){
+					$arr[$i]['source'] = 'github';
+					$arr[$i]['title'] = $this->sanitizeText( $g->payload->commits[0]->message );
+					//$arr[$i]['description'] = $this->sanitizeText( $w->excerpt->rendered );
+					$arr[$i]['pubdate'] = $g->created_at ; // created_time
+					$arr[$i]['link'] = 'https://github.com/'.$g->actor->login;  // owner ? pag_id
+					$arr[$i]['from'] = $g->payload->commits[0]->author->name;
+					$i++;
+					}
+				}
+
+				// add to bundle
+				$this->feedstack = array_merge($this->feedstack,$arr);
+				// single stack
+				return $arr;
+
+			}else{
+
+			  	return array('error'=>'Failed retrieving Github feeds');
+			}
+
+		}else{
+
+			return array('error'=>'No Github url');
+
+		}
+
+	}
 
 
 
@@ -447,6 +555,31 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 		}
 	}
 
+
+
+
+	public function timeFormat($datetime, $full = false) {
+
+	$datetime = strtotime($datetime);
+	//$output .= $this->time_elapsed_string( date("D, d M Y H:i:s T", strtotime($msg['pubdate'])) );
+	//date("H:i:s M d, Y ", strtotime( $msg['pubdate'] ));
+	// H:i:s d m Y - http://php.net/manual/en/function.date.php
+
+	if(  $this->stack_dateformat == 'ago'){
+		$date = sprintf( _x( '%s '.__('geleden','imagazine'), '%s = human-readable time difference', 'imagazine' ), human_time_diff( $datetime, current_time( 'timestamp' ) ) );
+
+	}elseif($this->stack_dateformat == 'long'){
+
+		$date = __('om','imagazine').' '.date("H:i:s", $datetime ).' '.__('op','imagazine').' '.date("M d, Y ", $datetime );// date("H:i:s M d, Y ", $datetime );
+
+	}else{
+
+		$date = date("H:i:s M d, Y ", $datetime );
+	}
+	return $date;
+
+
+	}
 
 
 
@@ -502,7 +635,7 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 			$stack_max = 'value="'.$instance[ 'stack_max' ].'" ';
 		}
 		?>
-		<p><label for="<?php echo $this->get_field_id( 'stack_max' ); ?>">Amount feeds to stack:</label>
+		<p><label for="<?php echo $this->get_field_id( 'stack_max' ); ?>">Max feeds in stack:</label>
 		<input type="text" size="3" <?php echo $stack_max; ?>name="<?php echo $this->get_field_name( 'stack_max' ); ?>" id="<?php echo $this->get_field_id( 'stack_max' ); ?>" />
 		</p>
 
@@ -512,12 +645,81 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 		$stack_order = $instance[ 'stack_order' ];
 		}
 		?>
-		<p><label for="<?php echo $this->get_field_id( 'stack_order' ); ?>">List order:</label>
+		<p><label for="<?php echo $this->get_field_id( 'stack_order' ); ?>">Stack order:</label>
 		<select name="<?php echo $this->get_field_name( 'stack_order' ); ?>" id="<?php echo $this->get_field_id( 'stack_order' ); ?>">
 		<option value="DESC" <?php selected( $stack_order, 'DESC' ); ?>>Most recent</option>
 		<option value="ASC" <?php selected( $stack_order, 'ASC' ); ?>>Oldest first</option>
 		</select>
 		</p>
+
+		<?php
+		$stack_titlelength = 'value="18" ';
+		if ( isset( $instance[ 'stack_titlelength' ] ) ) {
+			$stack_titlelength = 'value="'.$instance[ 'stack_titlelength' ].'" ';
+		}
+		?>
+		<p><label for="<?php echo $this->get_field_id( 'stack_titlelength' ); ?>">Max words in title:</label>
+		<input type="text" size="3" <?php echo $stack_titlelength; ?>name="<?php echo $this->get_field_name( 'stack_titlelength' ); ?>" id="<?php echo $this->get_field_id( 'stack_titlelength' ); ?>" />
+		</p>
+
+		<?php
+		$stack_showtext = 0;
+		if ( isset( $instance[ 'stack_showtext' ] ) ) {
+		$stack_showtext = $instance[ 'stack_showtext' ];
+		}
+
+		?>
+		<p><input type="checkbox" name="<?php echo $this->get_field_name( 'stack_showtext' ); ?>" value="1" <?php checked( $stack_showtext, 1 ); ?> />
+		<label for="<?php echo $this->get_field_id( 'stack_showtext' ); ?>">Show text/description (if available)</label>
+		</p>
+
+		<?php
+		$stack_textlength = 'value="18" ';
+		if ( isset( $instance[ 'stack_textlength' ] ) ) {
+			$stack_textlength = 'value="'.$instance[ 'stack_textlength' ].'" ';
+		}
+		?>
+		<p><label for="<?php echo $this->get_field_id( 'stack_textlength' ); ?>">Max words for description text:</label>
+		<input type="text" size="3" <?php echo $stack_textlength; ?>name="<?php echo $this->get_field_name( 'stack_textlength' ); ?>" id="<?php echo $this->get_field_id( 'stack_textlength' ); ?>" />
+		</p>
+
+		<?php
+		$stack_showfrom = 0;
+		if ( isset( $instance[ 'stack_showfrom' ] ) ) {
+		$stack_showfrom = $instance[ 'stack_showfrom' ];
+		}
+		?>
+		<p><input type="checkbox" name="<?php echo $this->get_field_name( 'stack_showfrom' ); ?>" value="1" <?php checked( $stack_showfrom, 1 ); ?> />
+		<label for="<?php echo $this->get_field_id( 'stack_showfrom' ); ?>">Show from name/link</label>
+		</p>
+
+		<?php
+		$stack_dateformat = 'DESC';
+		if ( isset( $instance[ 'stack_dateformat' ] ) ) {
+		$stack_dateformat = $instance[ 'stack_dateformat' ];
+		}
+		?>
+		<p><label for="<?php echo $this->get_field_id( 'stack_dateformat' ); ?>">Stack date display:</label>
+		<select name="<?php echo $this->get_field_name( 'stack_dateformat' ); ?>" id="<?php echo $this->get_field_id( 'stack_dateformat' ); ?>">
+		<option value='none' <?php selected( $stack_dateformat, 'none' ); ?>>Hide</option>
+		<option value='ago' <?php selected( $stack_dateformat, 'ago' ); ?>>Time ago</option>
+		<option value='long' <?php selected( $stack_dateformat, 'long' ); ?>>Date in text</option>
+		<option value='normal' <?php selected( $stack_dateformat, 'normal' ); ?>>Minimal Date</option>
+		</select>
+		</p>
+
+		<?php
+		$stack_showsource = 0;
+		if ( isset( $instance[ 'stack_showsource' ] ) ) {
+		$stack_showsource = $instance[ 'stack_showsource' ];
+		}
+
+		?>
+		<p><input type="checkbox" name="<?php echo $this->get_field_name( 'stack_showsource' ); ?>" value="1" <?php checked( $stack_showsource, 1 ); ?> />
+		<label for="<?php echo $this->get_field_id( 'stack_showsource' ); ?>">Show source</label>
+		</p>
+
+
 
 		<?php
 		/* Wordpress */
@@ -588,6 +790,21 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 		<label for="<?php echo $this->get_field_id( 'twitter_consumer_secret' ); ?>"><?php __( 'Twitter consumer/api secret:', 'imagazine' ); ?></label>
 		<input class="widefat" id="<?php echo $this->get_field_id( 'twitter_consumer_secret' ); ?>" name="<?php echo $this->get_field_name( 'twitter_consumer_secret' ); ?>" type="text" value="<?php echo esc_attr( $this->twitter_consumer_secret ); ?>" />
 		</p>
+
+
+		<?php
+		/* Wordpress */
+		if(isset($instance['github_url']) && $instance['github_url'] !='' )
+			$this->github_url = $instance['github_url']; // user/page key
+		?>
+
+		<strong>Github</strong>
+		<p>
+		<strong><small>Github repository url</small></strong>
+		<label for="<?php echo $this->get_field_id( 'github_url' ); ?>"><?php __( 'Github Repository url:', 'imagazine' ); ?></label>
+		<input class="widefat" id="<?php echo $this->get_field_id( 'github_url' ); ?>" name="<?php echo $this->get_field_name( 'github_url' ); ?>" type="text" value="<?php echo esc_attr( $this->github_url ); ?>" />
+		</p>
+
 		<?php
 	}
 
@@ -602,6 +819,12 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 		/* widget settings */
 		$instance['stack_max'] = ( ! empty( $new_instance['stack_max'] ) ) ? strip_tags( $new_instance['stack_max'] ) : '';
 		$instance['stack_order'] = ( ! empty( $new_instance['stack_order'] ) ) ? strip_tags( $new_instance['stack_order'] ) : '';
+		$instance['stack_titlelength'] = ( ! empty( $new_instance['stack_titlelength'] ) ) ? strip_tags( $new_instance['stack_titlelength'] ) : '';
+		$instance['stack_showtext'] = ( ! empty( $new_instance['stack_showtext'] ) ) ? strip_tags( $new_instance['stack_showtext'] ) : '';
+		$instance['stack_textlength'] = ( ! empty( $new_instance['stack_textlength'] ) ) ? strip_tags( $new_instance['stack_textlength'] ) : '';
+		$instance['stack_showfrom'] = ( ! empty( $new_instance['stack_showfrom'] ) ) ? strip_tags( $new_instance['stack_showfrom'] ) : '';
+		$instance['stack_dateformat'] = ( ! empty( $new_instance['stack_dateformat'] ) ) ? strip_tags( $new_instance['stack_dateformat'] ) : '';
+		$instance['stack_showsource'] = ( ! empty( $new_instance['stack_showsource'] ) ) ? strip_tags( $new_instance['stack_showsource'] ) : '';
 
 		/* Wordpress */
 		$instance['wordpress_url'] = ( ! empty( $new_instance['wordpress_url'] ) ) ? strip_tags( $new_instance['wordpress_url'] ) : '';
@@ -613,6 +836,8 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 		$instance['twitter_page_id'] = ( ! empty( $new_instance['twitter_page_id'] ) ) ? strip_tags( $new_instance['twitter_page_id'] ) : '';
 		$instance['twitter_consumer_key'] = ( ! empty( $new_instance['twitter_consumer_key'] ) ) ? strip_tags( $new_instance['twitter_consumer_key'] ) : '';
 		$instance['twitter_consumer_secret'] = ( ! empty( $new_instance['twitter_consumer_secret'] ) ) ? strip_tags( $new_instance['twitter_consumer_secret'] ) : '';
+		/* Github */
+		$instance['github_url'] = ( ! empty( $new_instance['github_url'] ) ) ? strip_tags( $new_instance['github_url'] ) : '';
 
 		return $instance;
 
