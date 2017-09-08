@@ -6,14 +6,12 @@
 	require get_template_directory() . '/assets/metaboxes.php'; // post meta functions
 	require get_template_directory() . '/assets/widgets.php'; // widget functions
 	require get_template_directory() . '/assets/widget_postlist.php'; // widget functions
-	require get_template_directory() . '/assets/widget_feedbundle.php'; // widget functions
 	require get_template_directory() . '/assets/widget_stackmyfeeds.php'; // widget functions
 
 
 	// Register and load the widgets
 	function imagazine_load_widgets() {
 		register_widget( 'imagazine_postlist_widget' );
-		register_widget( 'imagazine_feedbundle_widget' );
 		register_widget( 'imagazine_stackmyfeeds_widget' );
 	}
 
@@ -350,6 +348,8 @@
 		//get_the_time( 'U' )
 		printf( _x( '%s '.__('geleden','imagazine'), '%s = human-readable time difference', 'imagazine' ), human_time_diff( $t, current_time( 'timestamp' ) ) );
 	}
+
+
 
 	/*
 	 * Adjust excerpt num words max

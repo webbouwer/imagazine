@@ -5,8 +5,10 @@
 			$feedstackbox.addClass( 'spinner' );		// add a .spinner class, to show an animated .GIF
 			$.post( ajaxObject.ajaxurl, data,		// ajaxObject is my namespace, assigned in wp_localize_script()
 				function( response ) {				// success
-					if ( response.length > 2 )		// the ajax request might return -1 or 0
+					if ( response.length > 2 ){		// the ajax request might return -1 or 0
 						$feedstackbox.html( response ).addClass( 'loaded' ); // render the HTML and add the .loaded class to let us know
+
+					}
 				}
 			).always( function() {
 				$feedstackbox.removeClass( 'spinner' );	// remove the .spinner class, whether we got data or not
