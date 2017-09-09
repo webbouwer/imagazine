@@ -33,31 +33,29 @@ customizer global post default settings
 
 customizer upperbar menu 
 - [x] menu alignment left/center/right
+- [ ] submenu horizontal/vertical 
 - [ ] submenu horizontal/vertical
-- [ ] submenu type compactbox/fullwidth/fullscreen
+- [ ] submenu types compactbox/fullwidth/fullscreen
 
 customizer topbar menu 
 - [x] menu alignment left/center/right
-- [ ] submenu horizontal/vertical
+- [x] submenu horizontal/vertical
 - [ ] submenu type compactbox/fullwidth/fullscreen
 
-customizer sidebar menu 
-- [ ] menu alignment left/center/right
+customizer content sidebar menu 
+- [x] menu alignment left/center/right
 
 customizer footer menu 
 - [x] menu alignment left/center/right
 - [x] menu type horizontal/vertical 
-- [ ] submenu horizontal below/vertical on top
+- [x] submenu horizontal below/vertical on top
 
 Theme Widgets
 - [x] dashboard widget latest theme github commits 
 - [x] post listing widget by category or related to current category/tags
 
 Theme Core Extensions
-- [x] menu images [in development]
-- [ ] webicons implement url & functions
-- [ ] googlefonts implement url & functions
-- [ ] default filter selected categories
+- [x] menu images 
  
 Theme css
 add most basic css styling for all basic elements
@@ -74,6 +72,9 @@ add most basic css styling for all basic elements
  	- [ ] webicons embed
  	- [ ] googlefonts embed
  	- [ ] google analytics code
+	- [ ] webicons implement url & functions
+	- [ ] googlefonts implement url & functions
+	- [ ] default filter selected categories
 	- [ ] [..]social media..
 	
  * Customizer options

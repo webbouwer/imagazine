@@ -76,9 +76,9 @@
 				'id'   => 'uppersidebar',
 				'description'   => 'This is for top widget(s) above on top of the topbar.',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget'  => '<div class="clr"></div></div>',
-				'before_title'  => '<h3>',
-				'after_title'   => '</h3>'
+				'after_widget'  => '<div class="clr"></div></div></div>',
+				'before_title'  => '<div class="widget-titlebox"><h3>',
+				'after_title'   => '</h3></div><div class="widget-contentbox">'
 			));
 
 			// the top widgets
@@ -87,9 +87,9 @@
 				'id'   => 'topwidgets',
 				'description'   => 'This is for top widget(s) above on top of the topbar.',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget'  => '<div class="clr"></div></div>',
-				'before_title'  => '<h3>',
-				'after_title'   => '</h3>'
+				'after_widget'  => '<div class="clr"></div></div></div>',
+				'before_title'  => '<div class="widget-titlebox"><h3>',
+				'after_title'   => '</h3></div><div class="widget-contentbox">'
 			));
 
 
@@ -99,9 +99,9 @@
 				'id'   => 'topsidebar-1',
 				'description'   => 'This is the top sidebar 1 adding a widget column in the top navigation bar.',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget'  => '<div class="clr"></div></div>',
-				'before_title'  => '<h3>',
-				'after_title'   => '</h3>'
+				'after_widget'  => '<div class="clr"></div></div></div>',
+				'before_title'  => '<div class="widget-titlebox"><h3>',
+				'after_title'   => '</h3></div><div class="widget-contentbox">'
 			));
 			// the topbar sidebar widget column
 			register_sidebar(array(
@@ -109,9 +109,9 @@
 				'id'   => 'topsidebar-2',
 				'description'   => 'This is the second top sidebar',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget'  => '<div class="clr"></div></div>',
-				'before_title'  => '<h3>',
-				'after_title'   => '</h3>'
+				'after_widget'  => '<div class="clr"></div></div></div>',
+				'before_title'  => '<div class="widget-titlebox"><h3>',
+				'after_title'   => '</h3></div><div class="widget-contentbox">'
 			));
 
 
@@ -122,9 +122,9 @@
 				'id'   => 'headersidebar-1',
 				'description'   => 'This is the header sidebar 1 adding a widget column in the header bar.',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget'  => '<div class="clr"></div></div>',
-				'before_title'  => '<h3>',
-				'after_title'   => '</h3>'
+				'after_widget'  => '<div class="clr"></div></div></div>',
+				'before_title'  => '<div class="widget-titlebox"><h3>',
+				'after_title'   => '</h3></div><div class="widget-contentbox">'
 			));
 			// the header sidebar widget
 			register_sidebar(array(
@@ -132,9 +132,9 @@
 				'id'   => 'headersidebar-2',
 				'description'   => 'This is the header sidebar 2 adding a widget column in the header bar.',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget'  => '<div class="clr"></div></div>',
-				'before_title'  => '<h3>',
-				'after_title'   => '</h3>'
+				'after_widget'  => '<div class="clr"></div></div></div>',
+				'before_title'  => '<div class="widget-titlebox"><h3>',
+				'after_title'   => '</h3></div><div class="widget-contentbox">'
 			));
 
 
@@ -144,11 +144,10 @@
 				'id'   => 'headercolumns',
 				'description'   => 'Header widgetized columns',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget'  => '<div class="clr"></div></div>',
-				'before_title'  => '<h3>',
-				'after_title'   => '</h3>'
+				'after_widget'  => '<div class="clr"></div></div></div>',
+				'before_title'  => '<div class="widget-titlebox"><h3>',
+				'after_title'   => '</h3></div><div class="widget-contentbox">'
 			));
-
 
 
 			// the default wordpress header widget
@@ -157,9 +156,9 @@
 				'id'   => 'widgets-header',
 				'description'   => 'This is a standard wordpress widgetized area.',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget'  => '<div class="clr"></div></div>',
-				'before_title'  => '<h3>',
-				'after_title'   => '</h3>'
+				'after_widget'  => '<div class="clr"></div></div></div>',
+				'before_title'  => '<div class="widget-titlebox"><h3>',
+				'after_title'   => '</h3></div><div class="widget-contentbox">'
 			));
 
 			// the columns below content
@@ -168,9 +167,9 @@
 				'id'   => 'contenttopwidgets',
 				'description'   => 'Before maincontent widgetized area ',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget'  => '<div class="clr"></div></div>',
-				'before_title'  => '<h3>',
-				'after_title'   => '</h3>'
+				'after_widget'  => '<div class="clr"></div></div></div>',
+				'before_title'  => '<div class="widget-titlebox"><h3>',
+				'after_title'   => '</h3></div><div class="widget-contentbox">'
 			));
 
 			// the columns after the main content
@@ -179,9 +178,9 @@
 				'id'   => 'contentbottomwidgets',
 				'description'   => 'After main content widgetized area',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget'  => '<div class="clr"></div></div>',
-				'before_title'  => '<h3>',
-				'after_title'   => '</h3>'
+				'after_widget'  => '<div class="clr"></div></div></div>',
+				'before_title'  => '<div class="widget-titlebox"><h3>',
+				'after_title'   => '</h3></div><div class="widget-contentbox">'
 			));
 
 			// the content sidebar widget
@@ -190,9 +189,9 @@
 				'id'   => 'sidebar',
 				'description'   => 'This is a standard wordpress sidebar widgetized area.',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget'  => '<div class="clr"></div></div>',
-				'before_title'  => '<h3>',
-				'after_title'   => '</h3>'
+				'after_widget'  => '<div class="clr"></div></div></div>',
+				'before_title'  => '<div class="widget-titlebox"><h3>',
+				'after_title'   => '</h3></div><div class="widget-contentbox">'
 			));
 
 			// the content sidebar 2 widget
@@ -201,9 +200,9 @@
 				'id'   => 'sidebar-2',
 				'description'   => 'This is a second main content sidebar widgetized area.',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget'  => '<div class="clr"></div></div>',
-				'before_title'  => '<h3>',
-				'after_title'   => '</h3>'
+				'after_widget'  => '<div class="clr"></div></div></div>',
+				'before_title'  => '<div class="widget-titlebox"><h3>',
+				'after_title'   => '</h3></div><div class="widget-contentbox">'
 			));
 
 
@@ -213,9 +212,9 @@
 				'id'   => 'footercolumns',
 				'description'   => 'Footer widgetized columns',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget'  => '<div class="clr"></div></div>',
-				'before_title'  => '<h3>',
-				'after_title'   => '</h3>'
+				'after_widget'  => '<div class="clr"></div></div></div>',
+				'before_title'  => '<div class="widget-titlebox"><h3>',
+				'after_title'   => '</h3></div><div class="widget-contentbox">'
 			));
 
 			// the footer content
@@ -224,9 +223,9 @@
 				'id'   => 'footercontent',
 				'description'   => 'Footer widgetized content',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget'  => '<div class="clr"></div></div>',
-				'before_title'  => '<h3>',
-				'after_title'   => '</h3>'
+				'after_widget'  => '<div class="clr"></div></div></div>',
+				'before_title'  => '<div class="widget-titlebox"><h3>',
+				'after_title'   => '</h3></div><div class="widget-contentbox">'
 			));
 
 			// the footer sidebar widget column
@@ -235,9 +234,9 @@
 				'id'   => 'footersidebar-1',
 				'description'   => 'This is the footer sidebar adding a widget column in the footer bar.',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget'  => '<div class="clr"></div></div>',
-				'before_title'  => '<h3>',
-				'after_title'   => '</h3>'
+				'after_widget'  => '<div class="clr"></div></div></div>',
+				'before_title'  => '<div class="widget-titlebox"><h3>',
+				'after_title'   => '</h3></div><div class="widget-contentbox">'
 			));
 
 			// the footer sidebar widget column
@@ -246,9 +245,9 @@
 				'id'   => 'footersidebar-2',
 				'description'   => 'This is the footer sidebar adding a widget column in the footer bar.',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget'  => '<div class="clr"></div></div>',
-				'before_title'  => '<h3>',
-				'after_title'   => '</h3>'
+				'after_widget'  => '<div class="clr"></div></div></div>',
+				'before_title'  => '<div class="widget-titlebox"><h3>',
+				'after_title'   => '</h3></div><div class="widget-contentbox">'
 			));
 
 
@@ -269,8 +268,23 @@
 			return count( $the_sidebars[$sidebar_id] );
 	}
 
+	/*
+	 * Widget empty title content wrapper fix
+	 */
+	add_filter( 'dynamic_sidebar_params', 'check_sidebar_params' );
+	function check_sidebar_params( $params ) {
+		global $wp_registered_widgets;
 
-/*
+		$settings_getter = $wp_registered_widgets[ $params[0]['widget_id'] ]['callback'][0];
+		$settings = $settings_getter->get_settings();
+		$settings = $settings[ $params[1]['number'] ];
+
+		if ( $params[0][ 'after_widget' ] == '<div class="clr"></div></div></div>' && isset( $settings[ 'title' ] ) && empty( $settings[ 'title' ] ) )
+			$params[0][ 'before_widget' ] .= '<div class="widget-contentbox">';
+
+		return $params;
+	}
+	/*
 	 * Editor style WP THEME STANDARD
 	 */
 	function imagazine_editor_styles() {

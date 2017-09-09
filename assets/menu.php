@@ -290,10 +290,15 @@ class Menu_Image_Plugin {
 			$margin_size     = $hover_image_src[ 1 ];
 			$image           = "<span class='menu-image-hover-wrapper text-".$position."'>";
 			$image .= wp_get_attachment_image( $item->thumbnail_id, $image_size, false, "class=menu-image {$class}" );
+
+			$margindirection = 'left';
+			if($position == 'before'){
+				$margindirection = 'right';
+			}
 			$image .= wp_get_attachment_image(
 				$item->thumbnail_hover_id, $image_size, false, array(
 					'class' => "hovered-image {$class}",
-					'style' => "margin-left: -{$margin_size}px;",
+					'style' => "margin-".$margindirection.": -{$margin_size}px;",
 				)
 			);
 			$image .= '</span>';

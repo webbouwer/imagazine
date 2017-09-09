@@ -114,3 +114,16 @@ display:block;
 {
 display:inline-block;
 }
+.menu-horizontal ul.menu li,
+.submenu-horizontal ul.sub-menu li,
+.menu-vertical.submenu-horizontal ul.sub-menu li
+{
+display:inline-block;
+}
+.menu-vertical ul.menu li,
+.submenu-vertical ul.sub-menu li
+{
+display:block;
+}
+
+
