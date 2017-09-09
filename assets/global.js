@@ -747,8 +747,11 @@ jQuery(function ($) {
 					if( $('#sidebar').length > 0 ){
 
 						// before, after, collapsed, hide revert for large screen
-						$('#maincontent').parent().prepend( $('#sidebar-2') );
-						$('#maincontent').parent().prepend( $('#sidebar') );
+						$('#maincontent').parent().prepend( $('#sidebar-2').show() );
+						$('#maincontent').parent().prepend( $('#sidebar').show() );
+
+						$('.widget .collapsed,#sidemenu').removeClass('collapsed').slideDown();
+
 
 						// split total width for topmainbar and sidebar 1
 						maincontentwidth = maincontentwidth - sidebar1width;
@@ -783,10 +786,25 @@ jQuery(function ($) {
 					if( $('#sidebar-2').length > 0 && sidebar2respon === 'after' ){
 						$('#sidebar-2').insertAfter( $('#maincontent') );
 					}
+					if( $('#sidebar-2').length > 0 && sidebar2respon === 'hide' ){
+						$('#sidebar-2').hide();
+					}
+					if( $('#sidebar-2').length > 0 && sidebar2respon === 'collapsed' ){
+						$('#sidebar-2').insertAfter( $('#maincontent') );
+						$('#sidebar-2 .widget-contentbox').addClass('collapsed').slideUp();
+					}
 
 					if( $('#sidebar').length > 0 && sidebar1respon === 'after' ){
 						$('#sidebar').insertAfter( $('#maincontent') );
 					}
+					if( $('#sidebar').length > 0 && sidebar1respon === 'hide' ){
+						$('#sidebar').hide();
+					}
+					if( $('#sidebar').length > 0 && sidebar1respon === 'collapsed' ){
+						$('#sidebar').insertAfter( $('#maincontent') );
+						$('#sidebar .widget-contentbox, #sidemenu').addClass('collapsed').slideUp();
+					}
+
 					// revert maincolumn/sidebars full width
 					// .. todo set small width
 					$('#maincontent, #sidebar, #sidebar-2').css({
