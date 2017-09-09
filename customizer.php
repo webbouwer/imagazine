@@ -1043,6 +1043,26 @@ function imagazine_theme_customizer( $wp_customize ){
             )
     )));
 
+	$wp_customize->add_setting( 'imagazine_topbar_menu_subs' , array(
+			'default' => 'vertical',
+			'sanitize_callback' => 'imagazine_sanitize_default',
+			'priority' => 60,
+		));
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_menu_subs', array(
+				'label'          => __( 'Submenu behavior', 'imagazine' ),
+				'section'        => 'imagazine_topbar_menu',
+				'settings'       => 'imagazine_topbar_menu_subs',
+				'type'           => 'select',
+				'description'    => __( 'Navigation submenu behavior', 'imagazine' ),
+				'choices'        => array(
+					'none'   => __( 'Do not use submenu\'s here', 'imagazine' ),
+					'horizontal'   => __( 'Horizontal submenu', 'imagazine' ),
+					'vertical'   => __( 'Vertical submenu', 'imagazine' ),
+				)
+		)));
+
+
 	/* Topbar - Top Widgets */
 	$wp_customize->add_setting( 'imagazine_topbar_widgets_position' , array(
 		'default' => 'full',
@@ -1696,7 +1716,7 @@ function imagazine_theme_customizer( $wp_customize ){
 
 
 		$wp_customize->add_setting( 'imagazine_footer_menu_layout' , array(
-			'default' => 'hor',
+			'default' => 'horizontal',
 			'sanitize_callback' => 'imagazine_sanitize_default',
 			'priority' => 60,
 		));
@@ -1708,13 +1728,13 @@ function imagazine_theme_customizer( $wp_customize ){
 				'type'           => 'select',
 				'description'    => __( 'Navigation menu layout', 'imagazine' ),
 				'choices'        => array(
-					'hor'   => __( 'Horizontal', 'imagazine' ),
-					'ver'   => __( 'Vertical', 'imagazine' ),
+					'horizontal'   => __( 'Horizontal', 'imagazine' ),
+					'vertical'   => __( 'Vertical', 'imagazine' ),
 				)
 		)));
 
 		$wp_customize->add_setting( 'imagazine_footer_menu_subs' , array(
-			'default' => 'ver',
+			'default' => 'vertical',
 			'sanitize_callback' => 'imagazine_sanitize_default',
 			'priority' => 60,
 		));
@@ -1727,8 +1747,8 @@ function imagazine_theme_customizer( $wp_customize ){
 				'description'    => __( 'Navigation submenu behavior', 'imagazine' ),
 				'choices'        => array(
 					'none'   => __( 'Do not use submenu\'s here', 'imagazine' ),
-					'hor'   => __( 'Horizontal below footermenu', 'imagazine' ),
-					'ver'   => __( 'Vertical on top of footermenu', 'imagazine' ),
+					'horizontal'   => __( 'Horizontal submenu', 'imagazine' ),
+					'vertical'   => __( 'Vertical submenu', 'imagazine' ),
 				)
 		)));
 

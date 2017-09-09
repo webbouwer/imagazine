@@ -43,6 +43,8 @@ display:inline-block;
 
 
 
+
+
 /** Start Menu_image
  * @package Menu_Image
  * @version 2.6.4
@@ -57,7 +59,7 @@ display:inline-block;
     vertical-align: middle;
     width: auto;
     display: inline;
-}
+}*/
 .menu-item a.menu-image-hovered img.hovered-image,
 .menu-item a.menu-image-hovered:hover img.menu-image {
     opacity: 0;
@@ -66,14 +68,9 @@ display:inline-block;
 .menu-item a.menu-image-hovered:hover img.hovered-image {
     opacity: 1;
 }
-.menu-item a.menu-image-title-after.menu-image-not-hovered img,
-.menu-item a.menu-image-hovered.menu-image-title-after .menu-image-hover-wrapper {
-    padding-right: 5px;
-}
-.menu-item a.menu-image-title-before.menu-image-not-hovered img,
-.menu-item a.menu-image-hovered.menu-image-title-before .menu-image-hover-wrapper {
-    padding-left: 5px;
-}
+
+
+
 .menu-item a.menu-image-title-above,
 .menu-item a.menu-image-title-below {
     text-align: center;
@@ -84,16 +81,29 @@ display:inline-block;
     padding-top: 10px;
     margin: 0 auto;
 }
+
+.menu-item a.menu-image-title-hide .menu-image-title {
+	display: none;
+}
+
 .menu-item a.menu-image-title-below.menu-image-not-hovered img,
 .menu-item a.menu-image-hovered.menu-image-title-below .menu-image-hover-wrapper {
     display: block;
     padding-bottom: 10px;
     margin: 0 auto;
 }
-.menu-item a.menu-image-title-hide .menu-image-title {
-	display: none;
+
+
+.menu-item a.menu-image-title-after.menu-image-not-hovered img,
+.menu-item a.menu-image-hovered.menu-image-title-after .menu-image-hover-wrapper {
+    padding-right: 5px;
 }
-*/
+.menu-item a.menu-image-title-before.menu-image-not-hovered img,
+.menu-item a.menu-image-hovered.menu-image-title-before .menu-image-hover-wrapper {
+    padding-left: 5px;
+}
+
+
 /**
  * End Menu_image
  */
@@ -106,6 +116,7 @@ display:inline-block;
 
 
 /* title text wrapper */
+
 .menu-image-textwrap
 {
 }
@@ -128,6 +139,11 @@ display:inline-block;
 .text-after .menu-image-description
 {
 }
-
+.text-before .menu-image-textwrap:after,
+.text-after .menu-image-textwrap:after {
+    content: '';
+    display: block;
+    clear: both;
+}
 
 

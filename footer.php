@@ -8,8 +8,8 @@ $footerwidth = get_theme_mod('imagazine_footer_behavior_width', 'margin' );
 $footercolumnspos = get_theme_mod('imagazine_footer_columns_position', 'margin' );
 
 $footermenualign = get_theme_mod('imagazine_footer_menu_textalign', 'left' );
-$footermenulayout = get_theme_mod('imagazine_footer_menu_layout', 'hor' );
-$footersubmenu = get_theme_mod('imagazine_footer_menu_subs', 'ver' );
+$footermenulayout = get_theme_mod('imagazine_footer_menu_layout', 'horizontal' );
+$footersubmenu = get_theme_mod('imagazine_footer_menu_subs', 'vertical' );
 
 
 
@@ -63,7 +63,7 @@ echo '<div id="footercontainer">';
 
 	if ( has_nav_menu( 'footermenu' ) ) {
 		// menu / content widget// topmenu
-		echo '<div id="footermenu" class="align-'.$footermenualign.'"><nav><div class="innerpadding">';
+		echo '<div id="footermenu" class="align-'.$footermenualign.' menu-'.$footermenulayout.'  submenu-'.$footersubmenu.'"><nav><div class="innerpadding">';
 
 			wp_nav_menu( array( 'theme_location' => 'footermenu' ) );
 

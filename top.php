@@ -25,6 +25,7 @@ $uppermenusmallpos = get_theme_mod('imagazine_upperbar_menu_smallscreen', 'none'
 $uppermenulargepos = get_theme_mod('imagazine_upperbar_menu_largescreen', 'left');
 $uppermenutextalign = get_theme_mod('imagazine_upperbar_menu_textalign', 'left');
 
+
 $uppersidebarpos = get_theme_mod('imagazine_upperbar_sidebar_pos', 'none');
 $uppersidebarwidth = get_theme_mod('imagazine_upperbar_sidebar_widht', 30);
 $uppersidebaralign = get_theme_mod('imagazine_upperbar_sidebar_align', 'left');
@@ -41,6 +42,8 @@ $topbarbehaviorwidth =  get_theme_mod('imagazine_topbar_behavior_width', 'margin
 $topbarmenusmall = get_theme_mod('imagazine_topbar_menu_smallscreen', 'collapsed');
 $topbarmenularge = get_theme_mod('imagazine_topbar_menu_largescreen', 'center');
 $topbarmenutextalign = get_theme_mod('imagazine_topbar_menu_textalign', 'center');
+
+$topbarsubmenu = get_theme_mod('imagazine_topbar_menu_subs', 'horizontal');
 
 // widgets
 $topbartopwidgetspos = get_theme_mod('imagazine_topbar_widgets_position', 'full');
@@ -174,7 +177,7 @@ if($topbarlargebehavior != 'none' || $topbarsmallbehavior != 'none'){
 	}
 
 	// topmenu
-	echo '<div id="topmenu" class="pos-small-'.$topbarmenusmall.' pos-large-'.$topbarmenularge.' align-text-'.$topbarmenutextalign.'"><nav><div class="innerpadding">';
+	echo '<div id="topmenu" class="pos-small-'.$topbarmenusmall.' pos-large-'.$topbarmenularge.' align-text-'.$topbarmenutextalign.' submenu-'.$topbarsubmenu.'"><nav><div class="innerpadding">';
 	if ( has_nav_menu( 'topmenu' ) ) {
 		wp_nav_menu( array( 'theme_location' => 'topmenu' ) );
 	}else{
