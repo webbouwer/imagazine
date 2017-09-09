@@ -43,6 +43,8 @@ echo '<div id="footercontainer">';
 	}
 
 
+
+	echo '<div id="footercontent">';
 	// footer sidebar 1
 	if( $footsidebar1pos != 'none' && function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('footersidebar-1') ){
 	echo '<div id="footersidebar-1" class="sidecolumn width'.$footsidebar1width.' pos-'.$footsidebar1pos.' align-'.$footsidebar1align.'">';
@@ -75,6 +77,8 @@ echo '<div id="footercontainer">';
 
 	echo '<div class="clr"></div></div>';
 
+
+	echo '<div class="clr"></div></div>';
 
 	// columns widget bottom
 	if( $footercolumnspos == 'bottom' && function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('footercolumns') ){
