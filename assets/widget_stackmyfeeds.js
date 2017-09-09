@@ -1,12 +1,12 @@
 ( function( $ ){
 	var data = { action: 'feedstack_manager' },		// this is used in add_action('wp_ajax_', ) and add_action('wp_ajax_nopriv_', );
-		$feedstackbox = $( '#feedstackcontainer' ),		// find the (initially) empty DIV
+		$feedstackbox = $( '#feedstackcontainer' ).slideUp(),		// find the (initially) empty DIV
 		loadfeedstack = function() {
 			$feedstackbox.addClass( 'spinner' );		// add a .spinner class, to show an animated .GIF
 			$.post( ajaxObject.ajaxurl, data,		// ajaxObject is my namespace, assigned in wp_localize_script()
 				function( response ) {				// success
 					if ( response.length > 2 ){		// the ajax request might return -1 or 0
-						$feedstackbox.html( response ).addClass( 'loaded' ); // render the HTML and add the .loaded class to let us know
+						$feedstackbox.html( response ).addClass( 'loaded' ).slideDown(); // render the HTML and add the .loaded class to let us know
 
 					}
 				}
