@@ -30,21 +30,33 @@ $footsidebar2respon = get_theme_mod('imagazine_footer_sidebars_sidebar2responsiv
 
 echo '<div id="footercontainer">';
 
-	if( $footerwidth === 'margin'){
-		echo '<div class="outermargin">';
-	}
 
 
 	// columns widget top
 	if( $footercolumnspos == 'top' && function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('footercolumns') ){
+
+	if( $footerwidth === 'margin'){
+		echo '<div class="outermargin">';
+	}
+
 	echo '<div id="footercolumns" class="columnbar colset'.is_sidebar_active('footercolumns').'">';
 	dynamic_sidebar('footercolumns');
 	echo '<div class="clr"></div></div>';
+
+	if( $footerwidth === 'margin'){
+		echo '<div class="clr"></div></div>';
+	}
+
 	}
 
 
 
 	echo '<div id="footercontent">';
+
+	if( $footerwidth === 'margin'){
+		echo '<div class="outermargin">';
+	}
+
 	// footer sidebar 1
 	if( $footsidebar1pos != 'none' && function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('footersidebar-1') ){
 	echo '<div id="footersidebar-1" class="sidecolumn width'.$footsidebar1width.' pos-'.$footsidebar1pos.' align-'.$footsidebar1align.'">';
@@ -77,19 +89,30 @@ echo '<div id="footercontainer">';
 
 	echo '<div class="clr"></div></div>';
 
+	if( $footerwidth === 'margin'){
+		echo '<div class="clr"></div></div>';
+	}
 
 	echo '<div class="clr"></div></div>';
 
 	// columns widget bottom
 	if( $footercolumnspos == 'bottom' && function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('footercolumns') ){
+
+	if( $footerwidth === 'margin'){
+		echo '<div class="outermargin">';
+	}
+
 	echo '<div id="footercolumns" class="columnbar colset'.is_sidebar_active('footercolumns').'">';
 	dynamic_sidebar('footercolumns');
 	echo '<div class="clr"></div></div>';
-	}
 
 	if( $footerwidth === 'margin'){
 		echo '<div class="clr"></div></div>';
 	}
+
+	}
+
+
 
 echo '<div class="clr"></div></div>';
 
