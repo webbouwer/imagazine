@@ -728,7 +728,7 @@ function imagazine_theme_customizer( $wp_customize ){
 
 	/* Upperbar - Menu */
 	$wp_customize->add_setting( 'imagazine_upperbar_menu_smallscreen' , array(
-		'default' => 'collapsed',
+		'default' => 'none',
 		'sanitize_callback' => 'imagazine_sanitize_default',
 		'priority' => 40,
     ));
@@ -740,7 +740,7 @@ function imagazine_theme_customizer( $wp_customize ){
  	    	'description'    => __( 'Select small screen menu display', 'imagazine' ),
             'choices'        => array(
                 'open'   => __( 'Open', 'imagazine' ),
-                //'collapsed'   => __( 'Collapsed', 'imagazine' ),
+                //'collapsed'   => __( 'Collapsed (!in development)', 'imagazine' ),
                 'none'   => __( 'No display', 'imagazine' ),
             )
     )));
@@ -760,7 +760,7 @@ function imagazine_theme_customizer( $wp_customize ){
                 'left'   => __( 'left', 'imagazine' ),
                 'center'   => __( 'center', 'imagazine' ),
                 'right'   => __( 'right', 'imagazine' ),
-                //'collapsed'   => __( 'Collapsed', 'imagazine' ),
+                //'collapsed'   => __( 'Collapsed (!in development)', 'imagazine' ),
                 'none'   => __( 'No display', 'imagazine' ),
             )
     )));
@@ -851,7 +851,7 @@ function imagazine_theme_customizer( $wp_customize ){
             	'choices'        => array(
                 	'before'   => __( 'On top', 'imagazine' ),
                 	'after'   => __( 'After logo/navigation', 'imagazine' ),
-            		'collapsed'   => __( 'Collapsed', 'imagazine' ),
+            		'collapsed'   => __( 'Collapsed (!in development)', 'imagazine' ),
             		'hide'   => __( 'Hide', 'imagazine' ),
             	)
     	)));
@@ -1002,7 +1002,7 @@ function imagazine_theme_customizer( $wp_customize ){
  	    	'description'    => __( 'Select small screen menu display', 'imagazine' ),
             'choices'        => array(
                 'open'   => __( 'Open', 'imagazine' ),
-                'collapsed'   => __( 'Collapsed', 'imagazine' ),
+                'collapsed'   => __( 'Collapsed (!in development)', 'imagazine' ),
                 'none'   => __( 'No display', 'imagazine' ),
             )
     )));
@@ -1021,7 +1021,7 @@ function imagazine_theme_customizer( $wp_customize ){
                 'left'   => __( 'left', 'imagazine' ),
                 'center'   => __( 'center', 'imagazine' ),
                 'right'   => __( 'right', 'imagazine' ),
-                'collapsed'   => __( 'Collapsed', 'imagazine' ),
+                'collapsed'   => __( 'Collapsed (!in development)', 'imagazine' ),
                 'none'   => __( 'No display', 'imagazine' ),
             )
     )));
@@ -1162,7 +1162,7 @@ function imagazine_theme_customizer( $wp_customize ){
             	'choices'        => array(
                 	'before'   => __( 'On top', 'imagazine' ),
                 	'after'   => __( 'After logo/navigation', 'imagazine' ),
-            		'collapsed'   => __( 'Collapsed', 'imagazine' ),
+            		'collapsed'   => __( 'Collapsed (!in development)', 'imagazine' ),
             		'hide'   => __( 'Hide', 'imagazine' ),
             	)
     	)));
@@ -1230,7 +1230,7 @@ function imagazine_theme_customizer( $wp_customize ){
             	'choices'        => array(
                 	'before'   => __( 'On top', 'imagazine' ),
                 	'after'   => __( 'After logo/navigation and sidebar', 'imagazine' ),
-            		'collapsed'   => __( 'Collapsed', 'imagazine' ),
+            		'collapsed'   => __( 'Collapsed (!in development)', 'imagazine' ),
             		'hide'   => __( 'Hide', 'imagazine' ),
             	)
     	)));
@@ -1449,7 +1449,7 @@ function imagazine_theme_customizer( $wp_customize ){
             	'choices'        => array(
                 	'before'   => __( 'On top', 'imagazine' ),
                 	'after'   => __( 'After logo/navigation', 'imagazine' ),
-            		'collapsed'   => __( 'Collapsed', 'imagazine' ),
+            		'collapsed'   => __( 'Collapsed (!in development)', 'imagazine' ),
             		'hide'   => __( 'Hide', 'imagazine' ),
             	)
     	)));
@@ -1517,7 +1517,7 @@ function imagazine_theme_customizer( $wp_customize ){
             	'choices'        => array(
                 	'before'   => __( 'On top', 'imagazine' ),
                 	'after'   => __( 'After logo/navigation and sidebar', 'imagazine' ),
-            		'collapsed'   => __( 'Collapsed', 'imagazine' ),
+            		'collapsed'   => __( 'Collapsed (!in development)', 'imagazine' ),
             		'hide'   => __( 'Hide', 'imagazine' ),
             	)
     	)));
@@ -1594,7 +1594,7 @@ function imagazine_theme_customizer( $wp_customize ){
             	'choices'        => array(
                 	'before'   => __( 'On top of content', 'imagazine' ),
                 	'after'   => __( 'After main content', 'imagazine' ),
-            		'collapsed'   => __( 'Collapsed', 'imagazine' ),
+            		'collapsed'   => __( 'Collapsed (!in development)', 'imagazine' ),
             		'hide'   => __( 'Hide', 'imagazine' ),
             	)
     	)));
@@ -1662,7 +1662,7 @@ function imagazine_theme_customizer( $wp_customize ){
             	'choices'        => array(
                 	'before'   => __( 'On top', 'imagazine' ),
                 	'after'   => __( 'After main content', 'imagazine' ),
-            		'collapsed'   => __( 'Collapsed', 'imagazine' ),
+            		'collapsed'   => __( 'Collapsed (!in development)', 'imagazine' ),
             		'hide'   => __( 'Hide', 'imagazine' ),
             	)
     	)));
@@ -1837,7 +1837,7 @@ function imagazine_theme_customizer( $wp_customize ){
             	'choices'        => array(
                 	'before'   => __( 'On top', 'imagazine' ),
                 	'after'   => __( 'After logo/navigation', 'imagazine' ),
-            		'collapsed'   => __( 'Collapsed', 'imagazine' ),
+            		'collapsed'   => __( 'Collapsed (!in development)', 'imagazine' ),
             		'hide'   => __( 'Hide', 'imagazine' ),
             	)
     	)));
@@ -1905,7 +1905,7 @@ function imagazine_theme_customizer( $wp_customize ){
             	'choices'        => array(
                 	'before'   => __( 'On top', 'imagazine' ),
                 	'after'   => __( 'After logo/navigation and sidebar', 'imagazine' ),
-            		'collapsed'   => __( 'Collapsed', 'imagazine' ),
+            		'collapsed'   => __( 'Collapsed (!in development)', 'imagazine' ),
             		'hide'   => __( 'Hide', 'imagazine' ),
             	)
     	)));
