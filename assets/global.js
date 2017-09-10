@@ -218,118 +218,7 @@ jQuery(function ($) {
 			}
 
 
-				/*
-				// adminbar on top
-				var nst = 0; // window top - uppervoid
-				if( $('#wpadminbar').length > 0 ){
-					$('#wpadminbar').css('top', 0 );
-					$('#wpadminbar').css('position', 'fixed');
-					nst = $('#wpadminbar').outerHeight();
-				}
 
-				// remove spacers
-				$('#upperspacer,#topspacer').remove();
-
-				// onresize set variables
-				if( $('#upperbarcontainer').length > 0 ){
-
-					// fixed positioning
-					if( ( $(window).width() < mediumswitch  && upperbardisplaysmall == 'fixed' ) || ( $(window).width() >= mediumswitch && upperbardisplaylarge == 'fixed' ) ){
-
-						// set absolute pos on nst
-						$('#upperbarcontainer').css('top',nst);
-
-						// set next sticky top
-						var uh = $('#upperbarcontainer').outerHeight();
-						nst += uh;
-
-						// insert relative spacer div
-						$('<div id="upperspacer" style="height:'+uh+'px;"></div>').insertAfter( $('#upperbarcontainer') );
-
-						// set fixed
-						$('#upperbarcontainer').addClass('sticky');
-
-					}else{
-
-						// relative or none positioning
-						$('#upperbarcontainer').removeClass('sticky');
-
-						$('#upperspacer').remove();
-					}
-
-
-				}
-
-				if( $('#topbarcontainer').length > 0 ){
-
-					if( ( $(window).width() < mediumswitch && topbarsmallbehavior == 'fixed' ) || ( $(window).width() >= mediumswitch && topbarlargebehavior == 'fixed') ){
-
-
-						// get offsets
-						var upperbarTop = $('#upperbarcontainer').offset().top;
-						var topbarTop = $('#topbarcontainer').offset().top;
-
-						// get topbarcontainer height
-						var th = $('#topbarcontainer').outerHeight();
-
-						// fixed on top after scrolling upperbar height
-						if( $('#upperbarcontainer').length > 0 ){
-
-							// onscroll
-							$(window).scroll(function(){
-
-								// get scroll top position
-								var windowTop = $(window).scrollTop();
-
-								// check topbar position
-								if ( ( topbarTop - nst )  < windowTop && !$('#topbarcontainer').hasClass('sticky') ){
-
-									// set absolute pos on nst
-									$('#topbarcontainer').css('top',nst);
-
-									// insert relative spacer div
-									$('<div id="topspacer" style="height:'+th+'px;"></div>').insertAfter( $('#topbarcontainer') );
-
-									// set sticky
-									$('#topbarcontainer').addClass('sticky');
-
-								}else if( ( topbarTop - nst ) >= windowTop && $('#topbarcontainer').hasClass('sticky') ) {
-
-									// remove sticky
-									$('#topbarcontainer').removeClass('sticky');
-
-									// remove spacer
-									$('#topspacer').remove();
-
-								}
-
-
-							});
-
-
-						}else{ // fixed on top directly
-
-								// insert relative spacer div
-								$('<div id="topspacer" style="height:'+th+'px;"></div>').insertAfter( $('#topbarcontainer') );
-
-								// set sticky
-								$('#topbarcontainer').addClass('sticky');
-
-
-						}
-
-
-
-					}else{
-								// remove sticky
-								$('#topbarcontainer').removeClass('sticky');
-
-								// remove spacer
-								$('#topspacer').remove();
-
-					}
-
-				}*/
 
 
 
@@ -527,7 +416,7 @@ jQuery(function ($) {
 								$('#topmenu nav div div > ul > li.logo').remove();
 
 								if( toplogopos != 'above' && toplogopos != 'none'){
-									$('#topmenu nav div div > ul > li > a').css( 'height', $('#toplogobox a img').height() );
+									$('#topmenu nav div div > ul > li > a').css( 'height', $('#toplogobox').height() );
 								}else{
 									$('#topmenu nav div div > ul > li > a').css( 'height', 'auto' );
 								}
