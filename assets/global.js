@@ -416,7 +416,7 @@ jQuery(function ($) {
 								$('#topmenu nav div div > ul > li.logo').remove();
 
 								if( toplogopos != 'above' && toplogopos != 'none'){
-									$('#topmenu nav div div > ul > li > a').css( 'height', $('#toplogobox').height() );
+									$('#topmenu nav div div > ul > li > a').css( 'height', $('#topmainbar').height() );
 								}else{
 									$('#topmenu nav div div > ul > li > a').css( 'height', 'auto' );
 								}
