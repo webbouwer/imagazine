@@ -133,3 +133,22 @@ width:100%;
 max-width:100%;
 height:auto;
 }
+
+/* maincontent */
+#maincontent .post,
+#maincontent .page
+{
+position:relative;
+}
+#maincontent .optionmenu /* edit | voice button */
+{
+position:absolute;
+top:0px;
+right:0px;
+z-index:80;
+}
+#maincontent .optionmenu a,
+#maincontent .optionmenu button
+{
+/* | edit (admin) | voice button (responsive text to speech plugin) */
+}

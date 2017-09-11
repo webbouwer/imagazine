@@ -439,17 +439,40 @@
 
 
 
+
+
+
+
+
+	/* Libraries */
+
+
 	// include webicon
-	function imagazine_load_share_widget_icons(){
+	function imagazine_load_webicons(){
 
 	wp_enqueue_script('jquery-webicon', '//cdn.rawgit.com/icons8/bower-webicon/v0.10.7/jquery-webicon.min.js');
 
 	}
-	add_action( 'wp_print_scripts', 'imagazine_load_share_widget_icons' );
+	add_action( 'wp_print_scripts', 'imagazine_load_webicons' );
+
+
+	// include googlefonts
+    function google_fonts() {
+		$query_args = array(
+			'family' => 'Lato|Martel',
+			'subset' => 'latin,latin-ext',
+		);
+		wp_register_style( 'google_fonts', add_query_arg( $query_args, "//fonts.googleapis.com/css" ), array(), null );
+    }
+    add_action('wp_enqueue_scripts', 'google_fonts');
 
 
 
 
+
+
+
+	/* Customized WP elements */
 
 	/* Execute PHP in the default text-widget
 	*/
@@ -461,5 +484,34 @@
 	return $html;
 	}
 	add_filter('widget_text','php_execute',100);
+
+
+
+
+
+
+	/* Plugin output add-ons */
+
+    // include responsive tekst button (if plugin enabled)
+	function imagazine_add_responsive_voice_button(){
+
+		if( function_exists( 'RV_add_voicebox' ) ) {
+
+			$var_lang_voice = array('nl-NL' => 'Dutch Female','en-GB' => 'UK English Female');
+			$lang = get_bloginfo("language"); //get_locale();
+
+			$button = '[responsivevoice_button voice="'.$var_lang_voice[$lang].'" buttontext="'.__( "Lees voor", "imagazine").'"]';
+			echo do_shortcode($button);
+
+		/* Array translation needed..
+		// https://github.com/wp-plugins/responsivevoice-text-to-speech/blob/master/responsivevoice-text-to-speech.php
+		UK English Female, UK English Male, US English Female, Spanish Female, French Female, Deutsch Female, Italian Female, Greek Female, Hungarian Female, Turkish Female, Russian Female, Dutch Female, Swedish Female, Norwegian Female, Japanese Female, Korean Female, Chinese Female, Hindi Female, Serbian Male, Croatian Male, Bosnian Male, Romanian Male, Catalan Male, Australian Female, Finnish Female, Afrikaans Male, Albanian Male, Arabic Male, Armenian Male, Czech Female, Danish Female, Esperanto Male, Hatian Creole Female, Icelandic Male, Indonesian Female, Latin Female, Latvian Male, Macedonian Male, Moldavian Male, Montenegrin Male, Polish Female, Brazilian Portuguese Female, Portuguese Female, Serbo-Croatian Male, Slovak Female, Spanish Latin American Female, Swahili Male, Tamil Male, Thai Female, Vietnamese Male, Welsh Male
+		*/
+
+		}
+
+	}
+
+
 
 ?>
