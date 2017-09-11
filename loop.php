@@ -40,6 +40,11 @@ $page_bottomwidgets_display = get_theme_mod('imagazine_global_pagedisplay_conten
 
 
 
+
+
+
+
+
 // overwrite page meta sidebar settings
 if( is_page() ){
 
@@ -147,8 +152,6 @@ echo '<div class="searchheader">'.__('Resultaten voor ', 'imagazine' ).'<strong>
 
 
 
-
-
 // get post(s)
 if ( have_posts() ) :
 while( have_posts() ) : the_post();
@@ -161,9 +164,6 @@ if ( !is_single() && !is_page() ) {
 <div id="post-<?php echo get_the_ID(); ?>" <?php post_class(); ?>>
 
 <?php
-echo '<h2><a href="'.get_the_permalink().'">';
-if( is_search() ){ echo search_title_highlight(); }else{ echo get_the_title(); }
-echo '</a></h2>';
 
 if ( has_post_thumbnail() ) {
 echo '<a href="'.get_the_permalink().'" title="'.get_the_title().'" >';
@@ -172,11 +172,15 @@ echo '</a>';
 }
 
 
+echo '<div class="listitemtitlebar">';
 
 
+echo '<h2><a href="'.get_the_permalink().'">';
+if( is_search() ){ echo search_title_highlight(); }else{ echo get_the_title(); }
+echo '</a></h2>';
 
 
-
+echo '<div class="metabox">';
 
 
 if( $list_authortime_display == 'both' || $list_authortime_display == 'date'){
@@ -200,11 +204,22 @@ echo ' <span class="post-author">'.__('door','imagazine').' '.get_the_author().'
 
 
 
+echo '<div class="clr"></div></div>';
 
+echo '<div class="clr"></div></div>';
+
+
+echo '<div class="optionmenu">';
 
 if ( is_super_admin() ) {
 edit_post_link( __( 'Bewerk' , 'imagazine' ), '<span class="edit-link">', '</span>' );
 }
+
+
+
+echo '<div class="clr"></div></div>';
+
+
 
 echo '<div class="innerpadding">';
 if( is_search() ) {
@@ -239,12 +254,16 @@ if ( has_post_thumbnail() && $headerfeaturedimg != 'yes') {
 the_post_thumbnail('medium');
 }
 
+
+echo '<div class="maintitlebar">';
+
 if($headertitle != 'head'){
 echo '<h1><a href="'.get_the_permalink().'">'.get_the_title().'</a></h1>';
 }
 
 
 
+echo '<div class="metabox">';
 
 if( $post_authortime_display == 'both' || $post_authortime_display == 'date'){
 
@@ -267,10 +286,22 @@ echo ' <span class="post-author">'.__('door','imagazine').' '.get_the_author().'
 
 
 
+echo '<div class="clr"></div></div>';
+
+echo '<div class="clr"></div></div>';
+
+
+echo '<div class="optionmenu">';
 
 if ( is_super_admin() ) {
 edit_post_link( __( 'Edit' , 'imagazine' ), '<span class="edit-link">', '</span>' );
 }
+
+/* add voice button if available */
+imagazine_add_responsive_voice_button();
+
+echo '<div class="clr"></div></div>';
+
 
 echo '<div class="innerpadding">';
 echo apply_filters('the_content', get_the_content());
@@ -317,11 +348,15 @@ the_post_thumbnail('medium');
 }
 
 
+
+echo '<div class="maintitlebar">';
+
 if( ( $headertitle != 'head' && $page_title_display == 0 ) || ( $headertitle != 'head' && $page_title_display != 3 ) || $page_title_display == 1 ){
 echo '<h1><a href="'.get_the_permalink().'">'.get_the_title().'</a></h1>';
 }
 
 
+echo '<div class="metabox">';
 if( $page_authortime_display == 'both' || $page_authortime_display == 'date'){
 
 	/* set date display */
@@ -342,11 +377,21 @@ echo ' <span class="post-author">'.__('door','imagazine').' '.get_the_author().'
 }
 
 
+echo '<div class="clr"></div></div>';
 
+echo '<div class="clr"></div></div>';
+
+
+echo '<div class="optionmenu">';
 
 if ( is_super_admin() ) {
 edit_post_link( __( 'Edit' , 'imagazine' ), '<span class="edit-link">', '</span>' );
 }
+
+/* add voice button if available */
+imagazine_add_responsive_voice_button();
+
+echo '<div class="clr"></div></div>';
 
 
 echo '<div class="innerpadding">';
@@ -435,5 +480,3 @@ echo '<div class="clr"></div></div>'; // end margin
 
 echo '<div class="clr"></div></div>'; // end maincontent container
 ?>
-
-
