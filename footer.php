@@ -74,6 +74,11 @@ echo '<div id="footercontainer">';
 
 	echo '<div id="footermainbar" class="maincolumn">';
 
+	if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('footercontent') ){
+	echo '<div id="footercontentwidget">';
+	dynamic_sidebar('footercontent');
+	echo '<div class="clr"></div></div>';
+	}
 
 	if ( has_nav_menu( 'footermenu' ) ) {
 		// menu / content widget// topmenu

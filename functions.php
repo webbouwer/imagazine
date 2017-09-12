@@ -497,7 +497,7 @@
 
 		if( function_exists( 'RV_add_voicebox' ) ) {
 
-			$var_lang_voice = array('nl-NL' => 'Dutch Female','en-GB' => 'UK English Female');
+			$var_lang_voice = array('nl' => 'Dutch Female','en-GB' => 'UK English Female');
 			$lang = get_bloginfo("language"); //get_locale();
 
 			$button = '[responsivevoice_button voice="'.$var_lang_voice[$lang].'" buttontext="'.__( "Lees voor", "imagazine").'"]';
