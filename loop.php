@@ -39,8 +39,8 @@ $page_timeformat_display = get_theme_mod('imagazine_global_pagedisplay_timeforma
 $page_bottomwidgets_display = get_theme_mod('imagazine_global_pagedisplay_contentbottom', 'hide');
 
 
-
-
+$post_categories_display = 'hide';
+$post_tags_display = 'hide';
 
 
 
@@ -310,8 +310,14 @@ echo '</div>';
 echo '</article>';
 
 // post categories
+if($post_categories_display != 'hide'){
 the_category(', ');
+}
+
+// post tags
+if($post_tags_display != 'hide'){
 the_tags('Tags: ',' ');
+}
 
 // prev / next posts
 previous_post_link('%link', __('vorige', 'imagazine' ).': %title', TRUE);
