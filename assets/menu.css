@@ -139,6 +139,7 @@ display:inline-block;
 .text-after .menu-image-description
 {
 }
+
 .text-before .menu-image-textwrap:after,
 .text-after .menu-image-textwrap:after {
     content: '';

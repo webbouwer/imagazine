@@ -60,7 +60,8 @@ display: inline-block;
 {
 display: inline-block;
 }
-#topmenu nav div div ul > li > a
+#topmenu nav div div ul > li > a,
+#topmenu nav div div ul > li > div > a
 {
 display:table-cell;
 vertical-align:middle;
