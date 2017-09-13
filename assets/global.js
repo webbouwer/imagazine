@@ -406,7 +406,7 @@ jQuery(function ($) {
 								$('#topmenu nav div div > ul li.logo').append( $('#toplogobox') );
 								// adjust menu height to logo
 								// .. todo: logo min height
-								$('#topmenu nav div div > ul > li > a').css( 'height', $('#toplogobox a img').height() );
+								$('#topmenu nav div div > ul > li > a').css( 'height', $('#toplogobox').outerHeight() );
 
 
 							}else{
@@ -418,9 +418,12 @@ jQuery(function ($) {
 								if( toplogopos != 'above' && toplogopos != 'none'){
 
 									var topnavheight = ( $('#toplogobox').outerHeight() > topbarminheight ? $('#toplogobox').outerHeight() : topbarminheight);
-									$('#topmenu nav div div > ul > li > a').css( 'height', topnavheight+'px' );//$('#topmainbar').height() );
+									$('#topmenu nav div div > ul > li > a').css( 'height', topnavheight+'px' );
+
 								}else{
+
 									$('#topmenu nav div div > ul > li > a').css( 'height', 'auto' );
+
 								}
 
 							}
