@@ -30,6 +30,7 @@
 		add_image_size( 'big-thumb', 320, 9999 );
 		add_image_size( 'medium', 480, 9999 );
 		add_image_size( 'normal', 960, 9999 );
+		add_image_size( 'slide', 1800, 640, array( 'center', 'center' ) );
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'automatic-feed-links' );
 		add_theme_support( 'custom-header' );

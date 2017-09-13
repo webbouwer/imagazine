@@ -41,7 +41,7 @@ jQuery(function ($) {
 			var toplogopos = $wp_custom_vars['imagazine_topbar_logo_position'];
 			var toplogominw = $wp_custom_vars['imagazine_topbar_logo_minwidth'];
 			var toplogomaxw = $wp_custom_vars['imagazine_topbar_logo_maxwidth'];
-
+			var topbarminheight = $wp_custom_vars['imagazine_topbar_behavior_minheight'];
 		    var topwidgetspos = $wp_custom_vars['imagazine_topbar_widgets_position'];
 
 
@@ -416,7 +416,9 @@ jQuery(function ($) {
 								$('#topmenu nav div div > ul > li.logo').remove();
 
 								if( toplogopos != 'above' && toplogopos != 'none'){
-									$('#topmenu nav div div > ul > li > a').css( 'height', $('#topmainbar').height() );
+
+									var topnavheight = ( $('#toplogobox').outerHeight() > topbarminheight ? $('#toplogobox').outerHeight() : topbarminheight);
+									$('#topmenu nav div div > ul > li > a').css( 'height', topnavheight+'px' );//$('#topmainbar').height() );
 								}else{
 									$('#topmenu nav div div > ul > li > a').css( 'height', 'auto' );
 								}
