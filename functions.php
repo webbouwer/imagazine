@@ -496,7 +496,7 @@
     // include responsive tekst button (if plugin enabled)
 	function imagazine_add_responsive_voice_button(){
 
-		if( function_exists( 'RV_add_voicebox' ) ) {
+		if( function_exists( 'RV_add_voicebox' ) ) { // Responsive voice text used
 
 			$var_lang_voice = array('nl' => 'Dutch Female','en-GB' => 'UK English Female');
 			$lang = get_bloginfo("language"); //get_locale();
@@ -509,9 +509,29 @@
 		UK English Female, UK English Male, US English Female, Spanish Female, French Female, Deutsch Female, Italian Female, Greek Female, Hungarian Female, Turkish Female, Russian Female, Dutch Female, Swedish Female, Norwegian Female, Japanese Female, Korean Female, Chinese Female, Hindi Female, Serbian Male, Croatian Male, Bosnian Male, Romanian Male, Catalan Male, Australian Female, Finnish Female, Afrikaans Male, Albanian Male, Arabic Male, Armenian Male, Czech Female, Danish Female, Esperanto Male, Hatian Creole Female, Icelandic Male, Indonesian Female, Latin Female, Latvian Male, Macedonian Male, Moldavian Male, Montenegrin Male, Polish Female, Brazilian Portuguese Female, Portuguese Female, Serbo-Croatian Male, Slovak Female, Spanish Latin American Female, Swahili Male, Tamil Male, Thai Female, Vietnamese Male, Welsh Male
 		*/
 
+		// Add webicon
+		if( function_exists( 'imagazine_load_webicons' ) ) {
+			echo '<a href="#" id="ttsbutton" title="Listen">';
+			echo '<span class="buttonicon"><webicon icon="foundation:hearing-aid" /></span>';
+			echo '<span class="buttontext">'.__( "Lees voor", "imagazine").'</span></a>';
+			echo '
+			<script>
+			jQuery(function ($) { $(document).ready( function(){
+			/* Replace text to speech button */
+			$("#ttsbutton").on( "click", function(){
+				//alert("De tekst wordt nu voorgelezen");
+				$( ".optionmenu button.responsivevoice-button" ).trigger( "click" );
+				return false;
+			});
+			});});
+			</script>';
+
+		}
+
 		}
 
 	}
+
 
 
 

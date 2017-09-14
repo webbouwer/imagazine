@@ -420,6 +420,27 @@ function imagazine_theme_customizer( $wp_customize ){
             	)
     	)));
 
+
+		$wp_customize->add_setting( 'imagazine_global_postdisplay_imageposition' , array(
+		'default' => 'top',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_global_postdisplay_imageposition', array(
+            	'label'          => __( 'Default image position', 'imagazine' ),
+            	'section'        => 'imagazine_global_postdisplay',
+            	'settings'       => 'imagazine_global_postdisplay_imageposition',
+            	'type'           => 'select',
+ 	    	'description'    => __( 'Where to position the post featured image', 'imagazine' ),
+            	'choices'        => array(
+                	'top'   => __( 'On top', 'imagazine' ),
+                	'left'   => __( 'Inline on the left', 'imagazine' ),
+                	'right'   => __( 'Inline on the right', 'imagazine' ),
+                	'none'   => __( 'Do not show', 'imagazine' ),
+            	)
+    	)));
+
+
 		$wp_customize->add_setting( 'imagazine_global_postdisplay_contentbottom' , array(
 		'default' => 'show',
 		'sanitize_callback' => 'imagazine_sanitize_default',
@@ -534,6 +555,25 @@ function imagazine_theme_customizer( $wp_customize ){
                 	'date'   => __( 'Date only', 'imagazine' ),
                 	'full'   => __( 'Date & Time', 'imagazine' ),
                 	'ago'   => __( 'Display as time-ago', 'imagazine' ),
+            	)
+    	)));
+
+		$wp_customize->add_setting( 'imagazine_global_pagedisplay_imageposition' , array(
+		'default' => 'top',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_global_pagedisplay_imageposition', array(
+            	'label'          => __( 'Default image position', 'imagazine' ),
+            	'section'        => 'imagazine_global_pagedisplay',
+            	'settings'       => 'imagazine_global_pagedisplay_imageposition',
+            	'type'           => 'select',
+ 	    	'description'    => __( 'Where to position the page featured image', 'imagazine' ),
+            	'choices'        => array(
+                	'top'   => __( 'On top', 'imagazine' ),
+                	'left'   => __( 'Inline on the left', 'imagazine' ),
+                	'right'   => __( 'Inline on the right', 'imagazine' ),
+                	'none'   => __( 'Do not show', 'imagazine' ),
             	)
     	)));
 
