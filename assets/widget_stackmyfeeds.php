@@ -269,7 +269,7 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 		/* Wordpress */
 		if( isset( $this->wordpress_url ) ){
 
-		$endpoint = $this->wordpress_url.'/wp-json/wp/v2/posts?per_page='.$this->stack_max;
+		$endpoint = $this->wordpress_url.'/wp-json/wp/v2/posts?per_page='.($this->stack_max * 5);
 		$json = file_get_contents($endpoint);
 		$WPdata = json_decode($json);
 			if( count($WPdata) > 0 && is_array($WPdata) ){
@@ -326,7 +326,7 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 
 			$endpoint = 'https://graph.facebook.com/'.$this->facebook_page_id.'/feed';
 			$endpoint .= '?fields=id,type,status_type,updated_time,created_time,story,description,picture,from,link,likes.summary(true)';
-			$endpoint .= '&limit='.$this->stack_max;
+			$endpoint .= '&limit='.($this->stack_max * 5);
 
 			if (isset($token["token_type"]) && $token["token_type"] == "bearer"){
 
@@ -420,7 +420,7 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 			$context  = stream_context_create($opts);
 
 			$endpoint = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
-			$endpoint .= '?screen_name='.$this->twitter_page_id.'&include_entities=false&count='.$this->stack_max;
+			$endpoint .= '?screen_name='.$this->twitter_page_id.'&include_entities=false&count='.($this->stack_max * 5);
 
 			$data = file_get_contents($endpoint, false, $context);
 

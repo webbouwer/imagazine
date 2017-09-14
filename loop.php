@@ -29,6 +29,7 @@ $list_sidebar2_display = get_theme_mod('imagazine_global_listdisplay_sidebar2_po
 $post_topwidgets_display = get_theme_mod('imagazine_global_postdisplay_contenttop', 'hide');
 $post_authortime_display = get_theme_mod('imagazine_global_postdisplay_authortime', 'both');
 $post_timeformat_display = get_theme_mod('imagazine_global_postdisplay_timeformat', 'date');
+$post_featuredimage_display = get_theme_mod('imagazine_global_postdisplay_imageposition', 'top');
 $post_bottomwidgets_display = get_theme_mod('imagazine_global_postdisplay_contentbottom', 'hide');
 $post_sidebar1_display = get_theme_mod('imagazine_global_postdisplay_sidebar1_pos','none');
 $post_sidebar2_display = get_theme_mod('imagazine_global_postdisplay_sidebar2_pos','none');
@@ -36,6 +37,7 @@ $post_sidebar2_display = get_theme_mod('imagazine_global_postdisplay_sidebar2_po
 $page_topwidgets_display = get_theme_mod('imagazine_global_pagedisplay_contenttop', 'hide');
 $page_authortime_display = get_theme_mod('imagazine_global_pagedisplay_authortime', 'both');
 $page_timeformat_display = get_theme_mod('imagazine_global_pagedisplay_timeformat', 'date');
+$page_featuredimage_display = get_theme_mod('imagazine_global_pagedisplay_imageposition', 'top');
 $page_bottomwidgets_display = get_theme_mod('imagazine_global_pagedisplay_contentbottom', 'hide');
 
 
@@ -222,11 +224,13 @@ echo '<div class="clr"></div></div>';
 
 
 echo '<div class="innerpadding">';
-if( is_search() ) {
-echo search_excerpt_highlight();
-}else{
-echo apply_filters('the_excerpt', get_the_excerpt());
+if( has_post_humbnail() ){
+echo '<a href="'.get_the_permalink().'" title="'.get_the_title().'" style="float:'.$page_featuredimage_display.';">';
+the_post_thumbnail('big-thumb');
+echo '</a>';
 }
+
+
 
 echo ' <a href="'.get_the_permalink().'">'.__('Lees meer', 'imagazine' ).'</a>';
 
@@ -250,8 +254,10 @@ echo '<div class="clr"></div></div>'; // end page(post) container
 <?php
 echo '<article>';
 
-if ( has_post_thumbnail() && $headerfeaturedimg != 'yes') {
-the_post_thumbnail('medium');
+if ( has_post_thumbnail() && $headerfeaturedimg != 'yes' && $post_featuredimage_display == "top" ){
+echo '<a href="'.get_the_permalink().'" title="'.get_the_title().'" style="display:block;width:100%;height:auto;">';
+echo get_the_post_thumbnail( get_the_ID(), 'big-thumb', array( 'class' => $align , style => 'width:100%;height:auto;' )); //the_post_thumbnail('big-thumb');
+echo '</a>';
 }
 
 
@@ -304,11 +310,20 @@ echo '<div class="clr"></div></div>';
 
 
 echo '<div class="innerpadding">';
+
+if ( has_post_thumbnail() && $headerfeaturedimg != 'yes' && ( $post_featuredimage_display == "left" || $post_featuredimage_display == "right" ) ){
+echo '<a href="'.get_the_permalink().'" title="'.get_the_title().'" style="float:'.$page_featuredimage_display.';">';
+the_post_thumbnail('big-thumb');
+echo '</a>';
+}
+
 echo apply_filters('the_content', get_the_content());
+
 echo '</div>';
 
 echo '</article>';
 
+/* TODO option in customizer /page/post meta
 // post categories
 if($post_categories_display != 'hide'){
 the_category(', ');
@@ -322,7 +337,7 @@ the_tags('Tags: ',' ');
 // prev / next posts
 previous_post_link('%link', __('vorige', 'imagazine' ).': %title', TRUE);
 next_post_link('%link', __('volgende', 'imagazine' ).': %title', TRUE);
-
+*/
 // post comments
 if ( comments_open() || get_comments_number() ) {
 comments_template(); // WP THEME STANDARD: comments_template( $file, $separate_comments );
@@ -349,8 +364,10 @@ if( $page_maincontent_display != 1 ){
 <?php
 
 echo '<article>';
-if ( has_post_thumbnail() && $headerfeaturedimg != 'yes' ) {
+if ( has_post_thumbnail()  && $page_featuredimage_display == "top" && $headerfeaturedimg != 'yes') {
+echo '<a href="'.get_the_permalink().'" title="'.get_the_title().'" >';
 the_post_thumbnail('medium');
+echo '</a>';
 }
 
 
@@ -401,11 +418,20 @@ echo '<div class="clr"></div></div>';
 
 
 echo '<div class="innerpadding">';
+
+if ( has_post_thumbnail() && $headerfeaturedimg != 'yes' && ( $page_featuredimage_display == "left" || $page_featuredimage_display == "right" ) ){
+echo '<a href="'.get_the_permalink().'" title="'.get_the_title().'" style="float:'.$page_featuredimage_display.';">';
+the_post_thumbnail('big-thumb');
+echo '</a>';
+}
+
 echo apply_filters('the_content', get_the_content());
+
 echo '</div>';
 
 echo '</article>';
 
+/*
 $defaults = array(
 		'before'           => '<div>' . __( 'Pagina\'s:'  , 'imagazine' ),
 		'after'            => '</div>',
@@ -419,20 +445,13 @@ $defaults = array(
 		'echo'             => 1
 );
 wp_link_pages( $defaults );
-
+*/
 
 echo '<div class="clr"></div></div>'; // end page(post) container
 
 } // end if page meta content
 
 } // end page in loop
-
-
-
-
-
-
-
 
 endwhile;
 endif;

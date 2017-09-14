@@ -127,7 +127,7 @@ display:inline-block;
 display:block;
 }
 
-
+/* Widgets */
 .widget-contentbox img
 {
 width:100%;
@@ -141,6 +141,8 @@ height:auto;
 {
 position:relative;
 }
+
+
 #maincontent .optionmenu /* edit | voice button */
 {
 position:absolute;
@@ -149,7 +151,40 @@ right:0px;
 z-index:80;
 }
 #maincontent .optionmenu a,
-#maincontent .optionmenu button
+#maincontent .optionmenu button,
+#ttsbutton
 {
+display:inline-block;
+padding:3px;
 /* | edit (admin) | voice button (responsive text to speech plugin) */
+}
+#maincontent .optionmenu button.responsivevoice-button
+{
+display:none;
+}
+#ttsbutton
+{
+position:relative;
+display:inline-block;
+}
+
+#ttsbutton:hover
+{
+cursor: pointer;
+cursor: hand;
+}
+.edit-link a,
+#ttsbutton span.buttontext
+{
+position:relative;
+display:inline-block;
+margin-top:10px;
+}
+#ttsbutton span webicon
+{
+position:relative;
+display:block;
+float:left;
+width:32px;
+height:32px;
 }
