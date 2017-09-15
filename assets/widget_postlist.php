@@ -161,7 +161,10 @@ class imagazine_postlist_widget extends WP_Widget {
 
 		if ( has_post_thumbnail() && $dsp_image != 'none' ) {
 			$align = 'align-'.$dsp_image;
-			echo get_the_post_thumbnail( get_the_ID(), 'big-thumb', array( 'class' => $align )); //the_post_thumbnail('big-thumb');
+			// check oriëntation
+			$orient = check_image_orientation( get_the_ID() );
+			echo get_the_post_thumbnail( get_the_ID(), 'medium', array( 'class' => $align.' '.$orient )); //the_post_thumbnail('big-thumb');
+
     	}
 
 		// Post intro content
@@ -340,78 +343,6 @@ class imagazine_postlist_widget extends WP_Widget {
 		<option value="1" <?php selected( $dsp_tags, '1' ); ?>>Show</option>
 		</select>
 		</p>
-		<?php
-		/*
-		<h4>Product options</h4>
-		<?php
-		$dsp_label = 0;
-		if ( isset( $instance[ 'dsp_label' ] ) ) {
-		$dsp_label = $instance[ 'dsp_label' ];
-		}
-		?>
-		<p><label for="<?php echo $this->get_field_id( 'dsp_label' ); ?>">Show label:</label>
-		<select name="<?php echo $this->get_field_name( 'dsp_label' ); ?>" id="<?php echo $this->get_field_id( 'dsp_label' ); ?>">
-		<option value="0" <?php selected( $dsp_label, '0' ); ?>>Hide</option>
-		<option value="1" <?php selected( $dsp_label, '1' ); ?>>Show</option>
-		</select>
-		</p>
-
-		<?php
-		$dsp_size = 0;
-		if ( isset( $instance[ 'dsp_size' ] ) ) {
-		$dsp_size = $instance[ 'dsp_size' ];
-		}
-		?>
-		<p><label for="<?php echo $this->get_field_id( 'dsp_size' ); ?>">Show size:</label>
-		<select name="<?php echo $this->get_field_name( 'dsp_size' ); ?>" id="<?php echo $this->get_field_id( 'dsp_size' ); ?>">
-		<option value="0" <?php selected( $dsp_size, '0' ); ?>>Hide</option>
-		<option value="1" <?php selected( $dsp_size, '1' ); ?>>Show</option>
-		</select>
-		</p>
-
-		<?php
-		$dsp_price = 0;
-		if ( isset( $instance[ 'dsp_price' ] ) ) {
-		$dsp_price = $instance[ 'dsp_price' ];
-		}
-
-		?>
-		<p><label for="<?php echo $this->get_field_id( 'dsp_price' ); ?>">Show price (incl. discount):</label>
-		<select name="<?php echo $this->get_field_name( 'dsp_price' ); ?>" id="<?php echo $this->get_field_id( 'dsp_price' ); ?>">
-		<option value="0" <?php selected( $dsp_price, '0' ); ?>>Hide</option>
-		<option value="1" <?php selected( $dsp_price, '1' ); ?>>Show</option>
-		</select>
-		</p>
-
-		<?php
-		$dsp_packweight = 0;
-		if ( isset( $instance[ 'dsp_packweight' ] ) ) {
-		$dsp_packweight = $instance[ 'dsp_packweight' ];
-		}
-
-		?>
-		<p><label for="<?php echo $this->get_field_id( 'dsp_packweight' ); ?>">Show package weight and size:</label>
-		<select name="<?php echo $this->get_field_name( 'dsp_packweight' ); ?>" id="<?php echo $this->get_field_id( 'dsp_packweight' ); ?>">
-		<option value="0" <?php selected( $dsp_packweight, '0' ); ?>>Hide</option>
-		<option value="1" <?php selected( $dsp_packweight, '1' ); ?>>Show</option>
-		</select>
-		</p>
-
-
-		<?php
-		$dsp_order = 0;
-		if ( isset( $instance[ 'dsp_order' ] ) ) {
-		$dsp_order = $instance[ 'dsp_order' ];
-		}
-
-		?>
-		<p><label for="<?php echo $this->get_field_id( 'dsp_order' ); ?>">Show order option(s):</label>
-		<select name="<?php echo $this->get_field_name( 'dsp_order' ); ?>" id="<?php echo $this->get_field_id( 'dsp_order' ); ?>">
-		<option value="0" <?php selected( $dsp_order, '0' ); ?>>Hide</option>
-		<option value="1" <?php selected( $dsp_order, '1' ); ?>>Show</option>
-		</select>
-		</p>
-		*/ ?>
 
 		<?php
 
@@ -421,7 +352,6 @@ class imagazine_postlist_widget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
 		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-		//$instance['function_type'] = ( ! empty( $new_instance['function_type'] ) ) ? strip_tags( $new_instance['function_type'] ) : '';
 		$instance['post_category'] = ( ! empty( $new_instance['post_category'] ) ) ? strip_tags( $new_instance['post_category'] ) : '';
 		$instance['itemcount'] = ( ! empty( $new_instance['itemcount'] ) ) ? strip_tags( $new_instance['itemcount'] ) : '';
 		$instance['itemorder'] = ( ! empty( $new_instance['itemorder'] ) ) ? strip_tags( $new_instance['itemorder'] ) : '';
@@ -431,16 +361,9 @@ class imagazine_postlist_widget extends WP_Widget {
 		$instance['dsp_author'] = ( ! empty( $new_instance['dsp_author'] ) ) ? strip_tags( $new_instance['dsp_author'] ) : '';
 		$instance['dsp_tags'] = ( ! empty( $new_instance['dsp_tags'] ) ) ? strip_tags( $new_instance['dsp_tags'] ) : '';
 
-		/* Products
-		$instance['dsp_label'] = ( ! empty( $new_instance['dsp_label'] ) ) ? strip_tags( $new_instance['dsp_label'] ) : '';
-		$instance['dsp_size'] = ( ! empty( $new_instance['dsp_size'] ) ) ? strip_tags( $new_instance['dsp_size'] ) : '';
-		$instance['dsp_price'] = ( ! empty( $new_instance['dsp_price'] ) ) ? strip_tags( $new_instance['dsp_price'] ) : '';
-		$instance['dsp_packweight'] = ( ! empty( $new_instance['dsp_packweight'] ) ) ? strip_tags( $new_instance['dsp_packweight'] ) : '';
-		$instance['dsp_order'] = ( ! empty( $new_instance['dsp_order'] ) ) ? strip_tags( $new_instance['dsp_order'] ) : '';
-		*/
 		return $instance;
 	}
 
-} // Class wpb_widget ends here
+} // Class ends here
 
 ?>

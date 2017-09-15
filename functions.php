@@ -353,7 +353,22 @@
 
 
 	/* Theme global functions */
+	function check_image_orientation($pid){
+		// check oriëntation
+			$orient = 'square';
+			$image = wp_get_attachment_image_src( get_post_thumbnail_id($pid), '');
+			$image_w = $image[1];
+			$image_h = $image[2];
 
+			if ($image_w > $image_h) {
+				$orient = 'landscape';
+			}elseif ($image_w == $image_h) {
+				$orient = 'square';
+			}else {
+				$orient = 'portrait';
+			}
+			return $orient;
+	}
 
 	/*
 	 * Time
