@@ -70,6 +70,7 @@ echo '<div id="maincontentcontainer">';
 	echo '<div class="outermargin">';
 
 
+
 	/* maincontent sidebar 1 */
 	if( is_single() ){
 		$sidebar1pos = $post_sidebar1_display;
@@ -167,7 +168,7 @@ if ( !is_single() && !is_page() ) {
 <?php
 
 if ( has_post_thumbnail() ) {
-echo '<a class="postlist-coverimage" href="'.get_the_permalink().'" title="'.get_the_title().'" >';
+echo '<a href="'.get_the_permalink().'" title="'.get_the_title().'" >';
 the_post_thumbnail('big-thumb');
 echo '</a>';
 }
@@ -223,13 +224,9 @@ echo '<div class="clr"></div></div>';
 
 
 echo '<div class="innerpadding">';
-if( has_post_humbnail() ){
-echo '<a href="'.get_the_permalink().'" title="'.get_the_title().'" style="float:'.$page_featuredimage_display.';">';
-the_post_thumbnail('big-thumb');
-echo '</a>';
-}
 
 
+echo apply_filters('the_excerpt', get_the_excerpt());
 
 echo ' <a href="'.get_the_permalink().'">'.__('Lees meer', 'imagazine' ).'</a>';
 
@@ -254,9 +251,8 @@ echo '<div class="clr"></div></div>'; // end page(post) container
 echo '<article>';
 
 if ( has_post_thumbnail() && $headerfeaturedimg != 'yes' && $post_featuredimage_display == "top" ){
-$orient = check_image_orientation( get_the_ID() );
-echo '<a class="singlepost-top-coverimage" href="'.get_the_permalink().'" title="'.get_the_title().'">';
-echo get_the_post_thumbnail( get_the_ID(), 'big-thumb', array( 'class' => $align.' '.$orient , style => 'width:100%;height:auto;' )); //the_post_thumbnail('big-thumb');
+echo '<a href="'.get_the_permalink().'" title="'.get_the_title().'" style="display:block;width:100%;height:auto;">';
+echo get_the_post_thumbnail( get_the_ID(), 'big-thumb', array( 'class' => $align , style => 'width:100%;height:auto;' )); //the_post_thumbnail('big-thumb');
 echo '</a>';
 }
 
@@ -312,12 +308,10 @@ echo '<div class="clr"></div></div>';
 echo '<div class="innerpadding">';
 
 if ( has_post_thumbnail() && $headerfeaturedimg != 'yes' && ( $post_featuredimage_display == "left" || $post_featuredimage_display == "right" ) ){
-$orient = check_image_orientation( get_the_ID() );
-echo '<a class="singlepost-'.$post_featuredimage_display.'-coverimage" href="'.get_the_permalink().'" title="'.get_the_title().'">';
-echo get_the_post_thumbnail( get_the_ID(), 'big-thumb', array( 'class' => $orient.' pos-'.$post_featuredimage_display, style => 'width:auto;height:auto;' )); //the_post_thumbnail('big-thumb');
+echo '<a href="'.get_the_permalink().'" title="'.get_the_title().'" style="float:'.$page_featuredimage_display.';">';
+the_post_thumbnail('big-thumb');
 echo '</a>';
 }
-
 
 echo apply_filters('the_content', get_the_content());
 
@@ -366,14 +360,11 @@ if( $page_maincontent_display != 1 ){
 <?php
 
 echo '<article>';
-
-if ( has_post_thumbnail() && $headerfeaturedimg != 'yes' && $page_featuredimage_display == "top" ){
-$orient = check_image_orientation( get_the_ID() );
-echo '<a class="page-top-coverimage" href="'.get_the_permalink().'" title="'.get_the_title().'">';
-echo get_the_post_thumbnail( get_the_ID(), 'medium', array( 'class' => $align.' '.$orient , style => 'width:100%;height:auto;' )); //the_post_thumbnail('big-thumb');
+if ( has_post_thumbnail()  && $page_featuredimage_display == "top" && $headerfeaturedimg != 'yes') {
+echo '<a href="'.get_the_permalink().'" title="'.get_the_title().'" >';
+the_post_thumbnail('medium');
 echo '</a>';
 }
-
 
 
 
@@ -425,9 +416,8 @@ echo '<div class="clr"></div></div>';
 echo '<div class="innerpadding">';
 
 if ( has_post_thumbnail() && $headerfeaturedimg != 'yes' && ( $page_featuredimage_display == "left" || $page_featuredimage_display == "right" ) ){
-$orient = check_image_orientation( get_the_ID() );
-echo '<a class="page-'.$page_featuredimage_display.'-coverimage" href="'.get_the_permalink().'" title="'.get_the_title().'">';
-echo get_the_post_thumbnail( get_the_ID(), 'big-thumb', array( 'class' => $orient.' pos-'.$page_featuredimage_display, style => 'width:auto;height:auto;' )); //the_post_thumbnail('big-thumb');
+echo '<a href="'.get_the_permalink().'" title="'.get_the_title().'" style="float:'.$page_featuredimage_display.';">';
+the_post_thumbnail('big-thumb');
 echo '</a>';
 }
 
