@@ -69,7 +69,7 @@ add most basic css styling for all basic elements
  
 #### Also
  * Theme options page (protected)	
- 	- [ ] webicons embed
+ 	- [x] webicons embed
  	- [ ] googlefonts embed
  	- [ ] google analytics code
 	- [ ] webicons implement url & functions
