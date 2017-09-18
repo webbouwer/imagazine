@@ -170,7 +170,11 @@ if( $headerdisplay != 'none' ){
 		echo '<div class="maincolumnbox">';
 
 		// display title
-		if( ( $headertitle != 'no' && $page_title_display == 0 ) || $page_title_display != 1 ){
+		//if( ( $headertitle != 'no' && $page_title_display == 0 ) || $page_title_display != 1 ){
+		if( is_page() && ( $page_title_display == 1 ) ){
+			$headertitle = 'no';
+		}
+		if( $headertitle != 'no' ){
 
 		echo '<h1>'.$headmaintitle.'</h1>';
 

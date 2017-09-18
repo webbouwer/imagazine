@@ -194,14 +194,17 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 				// title and/or text
 				$reference_link_text_open = '';
 				$reference_link_text_close = '';
-				if( !empty( $msg['link'] ) ){
+				if( !empty( $msg['fromlink'] ) && $this->stack_showfrom != 1 ){
+					$reference_link_text_open = '<a href="'.$msg['fromlink'].'" target="_blank">';
+					$reference_link_text_close = '</a>';
+				}else if( !empty( $msg['link'] ) ){
 					$reference_link_text_open = '<a href="'.$msg['link'].'" target="_blank">';
 					$reference_link_text_close = '</a>';
 				}
 
 
 				if( empty( $msg['title'] ) && !empty($msg['description']) ){
-					if( !empty( $msg['link'] ) ){
+					if( (!empty( $msg['fromlink'] ) && $this->stack_showfrom != 1 ) || !empty( $msg['link'] ) ){
 						$output .= '<h4>'.$reference_link_text_open.wp_trim_words( $msg['description'], $this->stack_titlelength ).$reference_link_text_close.'</h4>';
 					}else{
 						$output .= '<h4>'.$this->sanitizeText( wp_trim_words( $msg['description'], $this->stack_titlelength ) ).'</h4>';
@@ -225,7 +228,7 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 				}
 
 				if( !empty( $msg['from'] ) && $this->stack_showfrom == 1){
-					$output .= '<span class="from">'.$msg['from'].'</span> ';
+					$output .= '<span class="from"><a href="'.$msg['fromlink'].'" target="_blank">'.$msg['from'].'</a></span> ';
 				}
 
 				if( !empty( $msg['pubdate'] ) && $this->stack_dateformat != 'none'){
@@ -269,7 +272,7 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 		/* Wordpress */
 		if( isset( $this->wordpress_url ) ){
 
-		$endpoint = $this->wordpress_url.'/wp-json/wp/v2/posts?per_page='.($this->stack_max * 5);
+		$endpoint = $this->wordpress_url.'/wp-json/wp/v2/posts?per_page='.($this->stack_max * 2);
 		$json = file_get_contents($endpoint);
 		$WPdata = json_decode($json);
 			if( count($WPdata) > 0 && is_array($WPdata) ){
@@ -326,7 +329,7 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 
 			$endpoint = 'https://graph.facebook.com/'.$this->facebook_page_id.'/feed';
 			$endpoint .= '?fields=id,type,status_type,updated_time,created_time,story,description,picture,from,link,likes.summary(true)';
-			$endpoint .= '&limit='.($this->stack_max * 5);
+			$endpoint .= '&limit='.($this->stack_max * 2);
 
 			if (isset($token["token_type"]) && $token["token_type"] == "bearer"){
 
@@ -357,12 +360,17 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 				$i = 0;
 				foreach ($FBdata->data as $f ) {
 					$arr[$i]['source'] = 'facebook';
+					if( isset($f->story) ){
 					$arr[$i]['title'] = $this->sanitizeText( $f->story );
+					}
+					if( isset($f->description) ){
 					$arr[$i]['description'] = $this->sanitizeText( $f->description );
+					}
 					$arr[$i]['pubdate'] = $f->updated_time; // created_time - date("F j, Y, g:i a", strtotime($f->updated_time) )
 					$arr[$i]['link'] = $f->link;  // object link
 					$arr[$i]['from'] = $f->from->name;  // owner ? fb_pag_id
 					$arr[$i]['fromlink'] = 'http://www.facebook.com/'.$f->from->id;  // owner ? fb_pag_id
+					$arr[$i]['likes'] = $f->likes;  // object likes
 				$i++;
 				}
 				$this->feedstack = array_merge($this->feedstack,$arr);
@@ -420,7 +428,7 @@ class imagazine_stackmyfeeds_widget extends WP_Widget {
 			$context  = stream_context_create($opts);
 
 			$endpoint = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
-			$endpoint .= '?screen_name='.$this->twitter_page_id.'&include_entities=false&count='.($this->stack_max * 5);
+			$endpoint .= '?screen_name='.$this->twitter_page_id.'&include_entities=false&count='.($this->stack_max * 2);
 
 			$data = file_get_contents($endpoint, false, $context);
 

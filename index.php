@@ -12,7 +12,14 @@ get_template_part('htmlhead');
 
 echo '</head><body ';
 body_class();
-echo '><div id="pagecontainer">';
+echo '>';
+
+// start tracking code
+if( get_option( 'second_field_option' ) != '' ){
+echo get_option( 'second_field_option' );
+} // end tracking codepress_footer_js()
+echo '<div id="pagecontainer">';
+
 
 /*
  * TOPBAR

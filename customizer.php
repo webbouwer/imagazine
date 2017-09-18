@@ -78,26 +78,7 @@ function imagazine_theme_customizer( $wp_customize ){
     ));
 
 
-	// Global sections
-
-	$wp_customize->add_section('imagazine_global_listdisplay', array(
-        'title'    => __('Post lists', 'imagazine'),
-        'panel'  => 'imagazine_global',
-		'priority' => 80,
-    ));
-
-	$wp_customize->add_section('imagazine_global_postdisplay', array(
-        'title'    => __('Posts', 'imagazine'),
-        'panel'  => 'imagazine_global',
-		'priority' => 90,
-    ));
-
-	$wp_customize->add_section('imagazine_global_pagedisplay', array(
-        'title'    => __('Pages', 'imagazine'),
-        'panel'  => 'imagazine_global',
-		'priority' => 100,
-    ));
-
+	// Global custom sections
 
 	$wp_customize->add_section('imagazine_global_screenmode', array(
         'title'    => __('Screen modes', 'imagazine'),
@@ -181,7 +162,24 @@ function imagazine_theme_customizer( $wp_customize ){
 		'priority' => 120,
     ));
 
+	// content types settings
+	$wp_customize->add_section('imagazine_content_listdisplay', array(
+        'title'    => __('Post lists', 'imagazine'),
+        'panel'  => 'imagazine_content',
+		'priority' => 80,
+    ));
 
+	$wp_customize->add_section('imagazine_global_postdisplay', array(
+        'title'    => __('Posts', 'imagazine'),
+        'panel'  => 'imagazine_content',
+		'priority' => 90,
+    ));
+
+	$wp_customize->add_section('imagazine_global_pagedisplay', array(
+        'title'    => __('Pages', 'imagazine'),
+        'panel'  => 'imagazine_content',
+		'priority' => 100,
+    ));
 	// main content sidebar 1
 	$wp_customize->add_section('imagazine_content_sidebar1', array(
         'title'    => __('Sidebar 1', 'imagazine'),
@@ -250,115 +248,6 @@ function imagazine_theme_customizer( $wp_customize ){
 
 
 
-
-
-
-
-		$wp_customize->add_setting( 'imagazine_global_listdisplay_contenttop' , array(
-		'default' => 'hide',
-		'sanitize_callback' => 'imagazine_sanitize_default',
-    	));
-
-		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_global_listdisplay_contenttop', array(
-            	'label'          => __( 'Show top widgets', 'imagazine' ),
-            	'section'        => 'imagazine_global_listdisplay',
-            	'settings'       => 'imagazine_global_listdisplay_contenttop',
-            	'type'           => 'select',
- 	    	'description'    => __( 'Content top widgets by default', 'imagazine' ),
-            	'choices'        => array(
-                	'hide'   => __( 'No display on post list page', 'imagazine' ),
-                	'show'   => __( 'Show top widgets', 'imagazine' ),
-            	)
-    	)));
-
-		$wp_customize->add_setting( 'imagazine_global_listdisplay_authortime' , array(
-		'default' => 'none',
-		'sanitize_callback' => 'imagazine_sanitize_default',
-    	));
-
-		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_global_listdisplay_authortime', array(
-            	'label'          => __( 'Date/time & Author', 'imagazine' ),
-            	'section'        => 'imagazine_global_listdisplay',
-            	'settings'       => 'imagazine_global_listdisplay_authortime',
-            	'type'           => 'select',
- 	    	'description'    => __( 'Display date/time & author name in lists', 'imagazine' ),
-            	'choices'        => array(
-                	'none'   => __( 'No display', 'imagazine' ),
-                	'both'   => __( 'Display both', 'imagazine' ),
-                	'date'   => __( 'Display date only', 'imagazine' ),
-                	'author'   => __( 'Display author name only', 'imagazine' ),
-            	)
-    	)));
-
-		$wp_customize->add_setting( 'imagazine_global_listdisplay_timeformat' , array(
-		'default' => 'date',
-		'sanitize_callback' => 'imagazine_sanitize_default',
-    	));
-
-		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_global_listdisplay_timeformat', array(
-            	'label'          => __( 'Date/time format', 'imagazine' ),
-            	'section'        => 'imagazine_global_listdisplay',
-            	'settings'       => 'imagazine_global_listdisplay_timeformat',
-            	'type'           => 'select',
- 	    	'description'    => __( 'Time display format in lists', 'imagazine' ),
-            	'choices'        => array(
-                	'date'   => __( 'Date only', 'imagazine' ),
-                	'full'   => __( 'Date & Time', 'imagazine' ),
-                	'ago'   => __( 'Display as time-ago', 'imagazine' ),
-            	)
-    	)));
-
-
-		$wp_customize->add_setting( 'imagazine_global_listdisplay_contentbottom' , array(
-		'default' => 'hide',
-		'sanitize_callback' => 'imagazine_sanitize_default',
-    	));
-
-		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_global_listdisplay_contentbottom', array(
-            	'label'          => __( 'Show bottom widgets', 'imagazine' ),
-            	'section'        => 'imagazine_global_listdisplay',
-            	'settings'       => 'imagazine_global_listdisplay_contentbottom',
-            	'type'           => 'select',
- 	    	'description'    => __( 'Content bottom widgets by default', 'imagazine' ),
-            	'choices'        => array(
-                	'hide'   => __( 'No display on post lists', 'imagazine' ),
-                	'show'   => __( 'Show bottom widgets', 'imagazine' ),
-            	)
-    	)));
-
-		$wp_customize->add_setting( 'imagazine_global_listdisplay_sidebar1_pos' , array(
-		'default' => 'none',
-		'sanitize_callback' => 'imagazine_sanitize_default',
-    	));
-    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_global_listdisplay_sidebar1_pos', array(
-            	'label'          => __( 'Sidebar 1 display', 'imagazine' ),
-            	'section'        => 'imagazine_global_listdisplay',
-            	'settings'       => 'imagazine_global_listdisplay_sidebar1_pos',
-            	'type'           => 'select',
- 	    		'description'    => __( 'Select sidebar 1 display in list view (default overwrite).', 'imagazine' ),
-            	'choices'        => array(
-                	'none'   => __( 'none', 'imagazine' ),
-                	'left'   => __( 'left', 'imagazine' ),
-            		'right'   => __( 'right', 'imagazine' ),
-            	)
-    	)));
-
-		$wp_customize->add_setting( 'imagazine_global_listdisplay_sidebar2_pos' , array(
-		'default' => 'none',
-		'sanitize_callback' => 'imagazine_sanitize_default',
-    	));
-    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_global_listdisplay_sidebar2_pos', array(
-            	'label'          => __( 'Sidebar 2 display', 'imagazine' ),
-            	'section'        => 'imagazine_global_listdisplay',
-            	'settings'       => 'imagazine_global_listdisplay_sidebar2_pos',
-            	'type'           => 'select',
- 	    		'description'    => __( 'Select sidebar 2 display in list view (default overwrite).', 'imagazine' ),
-            	'choices'        => array(
-                	'none'   => __( 'none', 'imagazine' ),
-                	'left'   => __( 'left', 'imagazine' ),
-            		'right'   => __( 'right', 'imagazine' ),
-            	)
-    	)));
 
 
 
@@ -1565,6 +1454,112 @@ function imagazine_theme_customizer( $wp_customize ){
 
 
 
+		/* main content widget settings */
+			$wp_customize->add_setting( 'imagazine_content_listdisplay_contenttop' , array(
+		'default' => 'hide',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_listdisplay_contenttop', array(
+            	'label'          => __( 'Show top widgets', 'imagazine' ),
+            	'section'        => 'imagazine_content_listdisplay',
+            	'settings'       => 'imagazine_content_listdisplay_contenttop',
+            	'type'           => 'select',
+ 	    	'description'    => __( 'Content top widgets by default', 'imagazine' ),
+            	'choices'        => array(
+                	'hide'   => __( 'No display on post list page', 'imagazine' ),
+                	'show'   => __( 'Show top widgets', 'imagazine' ),
+            	)
+    	)));
+
+		$wp_customize->add_setting( 'imagazine_content_listdisplay_authortime' , array(
+		'default' => 'none',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_listdisplay_authortime', array(
+            	'label'          => __( 'Date/time & Author', 'imagazine' ),
+            	'section'        => 'imagazine_content_listdisplay',
+            	'settings'       => 'imagazine_content_listdisplay_authortime',
+            	'type'           => 'select',
+ 	    	'description'    => __( 'Display date/time & author name in lists', 'imagazine' ),
+            	'choices'        => array(
+                	'none'   => __( 'No display', 'imagazine' ),
+                	'both'   => __( 'Display both', 'imagazine' ),
+                	'date'   => __( 'Display date only', 'imagazine' ),
+                	'author'   => __( 'Display author name only', 'imagazine' ),
+            	)
+    	)));
+
+		$wp_customize->add_setting( 'imagazine_content_listdisplay_timeformat' , array(
+		'default' => 'date',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_listdisplay_timeformat', array(
+            	'label'          => __( 'Date/time format', 'imagazine' ),
+            	'section'        => 'imagazine_content_listdisplay',
+            	'settings'       => 'imagazine_content_listdisplay_timeformat',
+            	'type'           => 'select',
+ 	    	'description'    => __( 'Time display format in lists', 'imagazine' ),
+            	'choices'        => array(
+                	'date'   => __( 'Date only', 'imagazine' ),
+                	'full'   => __( 'Date & Time', 'imagazine' ),
+                	'ago'   => __( 'Display as time-ago', 'imagazine' ),
+            	)
+    	)));
+
+
+		$wp_customize->add_setting( 'imagazine_content_listdisplay_contentbottom' , array(
+		'default' => 'hide',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_listdisplay_contentbottom', array(
+            	'label'          => __( 'Show bottom widgets', 'imagazine' ),
+            	'section'        => 'imagazine_content_listdisplay',
+            	'settings'       => 'imagazine_content_listdisplay_contentbottom',
+            	'type'           => 'select',
+ 	    	'description'    => __( 'Content bottom widgets by default', 'imagazine' ),
+            	'choices'        => array(
+                	'hide'   => __( 'No display on post lists', 'imagazine' ),
+                	'show'   => __( 'Show bottom widgets', 'imagazine' ),
+            	)
+    	)));
+
+		$wp_customize->add_setting( 'imagazine_content_listdisplay_sidebar1_pos' , array(
+		'default' => 'none',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_listdisplay_sidebar1_pos', array(
+            	'label'          => __( 'Sidebar 1 display', 'imagazine' ),
+            	'section'        => 'imagazine_content_listdisplay',
+            	'settings'       => 'imagazine_content_listdisplay_sidebar1_pos',
+            	'type'           => 'select',
+ 	    		'description'    => __( 'Select sidebar 1 display in list view (default overwrite).', 'imagazine' ),
+            	'choices'        => array(
+                	'none'   => __( 'none', 'imagazine' ),
+                	'left'   => __( 'left', 'imagazine' ),
+            		'right'   => __( 'right', 'imagazine' ),
+            	)
+    	)));
+
+		$wp_customize->add_setting( 'imagazine_content_listdisplay_sidebar2_pos' , array(
+		'default' => 'none',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_listdisplay_sidebar2_pos', array(
+            	'label'          => __( 'Sidebar 2 display', 'imagazine' ),
+            	'section'        => 'imagazine_content_listdisplay',
+            	'settings'       => 'imagazine_content_listdisplay_sidebar2_pos',
+            	'type'           => 'select',
+ 	    		'description'    => __( 'Select sidebar 2 display in list view (default overwrite).', 'imagazine' ),
+            	'choices'        => array(
+                	'none'   => __( 'none', 'imagazine' ),
+                	'left'   => __( 'left', 'imagazine' ),
+            		'right'   => __( 'right', 'imagazine' ),
+            	)
+    	)));
 
 
 
