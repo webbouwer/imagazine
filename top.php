@@ -176,6 +176,7 @@ if($topbarlargebehavior != 'none' || $topbarsmallbehavior != 'none'){
 	echo '<div id="toplogobox" class="pos-'.$topbarlogopos.'"><a href="'.esc_url( home_url( '/' ) ).'" class="site-logo" title="'.esc_attr( get_bloginfo( 'name', 'display' ) ).'" rel="home"><img src="'.$topbarlogo.'" alt="'.esc_attr( get_bloginfo( 'name', 'display' ) ).' - '.get_bloginfo( 'description' ).'"></a></div>';
 	}
 
+
 	// topmenu
 	echo '<div id="topmenu" class="pos-small-'.$topbarmenusmall.' pos-large-'.$topbarmenularge.' align-text-'.$topbarmenutextalign.' submenu-'.$topbarsubmenu.'"><nav><div class="innerpadding">';
 	if ( has_nav_menu( 'topmenu' ) ) {
@@ -189,14 +190,12 @@ if($topbarlargebehavior != 'none' || $topbarsmallbehavior != 'none'){
 
 
 
-
-
 	if( $topbarbehaviorwidth === 'margin'){
-		echo '</div>';
+		echo '<div class="clr"></div></div>';
 	}
 
 
-	echo '<div class="clr"></div></div>';
+	echo '</div>';
 
 }// end use topbar
 

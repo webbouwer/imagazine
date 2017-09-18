@@ -2037,9 +2037,14 @@ function imagazine_customize_adaptive(){
 
 	#toplogobox .site-logo img
 	{
+
 	min-width:<?php echo get_theme_mod('imagazine_topbar_logo_minwidth', 60).'px'; ?> !important;
 	max-width:<?php echo get_theme_mod('imagazine_topbar_logo_maxwidth', 120).'px'; ?> !important;
-	height:auto;
+	min-height:auto !important;
+		/*
+	width:auto !important;
+	height:auto !important;
+		*/
 	}
 
 
@@ -2097,11 +2102,13 @@ function imagazine_customize_adaptive(){
 		width:15%;
 	}
 
-
-	#topbarcontainer
+	#topbarcontainer,
+	#topbarcontainer .outermargin,
+	#topmainbar
 	{
 	min-height:<?php echo get_theme_mod('imagazine_topbar_behavior_minheight', 60).'px'; ?> !important;
 	}
+
 
 	.align-center,
 	.align-text-center ul.menu li

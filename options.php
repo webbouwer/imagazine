@@ -30,7 +30,10 @@ function options_callback(){
 //$options = get_option( 'first_field_option' );
 //echo '<p><input name="first_field_option" id="first_field_option" type="checkbox" value="1" class="code" ' . checked( 1, $options, false ) . ' /> Check for enabling custom help text.</p>';
 
-$options2 = get_option( 'second_field_option' );
+$options2 = '';
+if( get_option( 'second_field_option' ) != '' && get_option( 'second_field_option' ) != 1 ){
+	$options2 = get_option( 'second_field_option' );
+}
 echo '<p><textarea name="second_field_option" id="second_field_option" rows="7" cols="50" type="textarea">'.$options2.'</textarea></p>';
 
 }

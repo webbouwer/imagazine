@@ -390,7 +390,7 @@ jQuery(function ($) {
 							// menu available
 							$('#topmenu').show();
 
-
+							var topnavheight = ( $('#toplogobox').outerHeight() > topbarminheight ? $('#toplogobox').outerHeight() : topbarminheight);
 
 							//  logo positioning inside
 							if( toplogopos == 'middle'){
@@ -398,6 +398,7 @@ jQuery(function ($) {
 								// compute menu middle
 								var total_menu_items = $('#topmenu nav div div > ul > li').length;
 								var middle = Math.ceil(total_menu_items / 2);
+
 								// place logo menu html wrapper in menu list
 								if( $('#topmenu nav div div > ul li.logo').length < 1){
 									$('#topmenu nav div div > ul > li:nth-child(' + middle + ')').after( $( menu_logo_html ) );
@@ -406,8 +407,7 @@ jQuery(function ($) {
 								$('#topmenu nav div div > ul li.logo').append( $('#toplogobox') );
 								// adjust menu height to logo
 								// .. todo: logo min height
-								$('#topmenu nav div div > ul > li > a').css( 'height', $('#toplogobox').outerHeight() );
-
+								$('#topmenu, #topmenu nav div div > ul > li > a, #topmenu nav div div > ul > li > #toplogobox > a').css( 'height', topnavheight );
 
 							}else{
 
@@ -417,12 +417,11 @@ jQuery(function ($) {
 
 								if( toplogopos != 'above' && toplogopos != 'none'){
 
-									var topnavheight = ( $('#toplogobox').outerHeight() > topbarminheight ? $('#toplogobox').outerHeight() : topbarminheight);
-									$('#topmenu nav div div > ul > li > a').css( 'height', topnavheight+'px' );
+									$('#topmenu, #topmenu nav div div > ul > li > a, #topmenu nav div div > ul > li > #toplogobox > a').css( 'height', topnavheight  );
 
 								}else{
 
-									$('#topmenu nav div div > ul > li > a').css( 'height', 'auto' );
+									$('#topmenu, #topmenu nav div div > ul > li > a, #topmenu nav div div > ul > li > #toplogobox > a').css( 'height', 'auto' );
 
 								}
 
@@ -445,12 +444,11 @@ jQuery(function ($) {
 
 
 
-
-
 					// logo default
 					$('#topmainbar').prepend( $('#toplogobox') );
 					$('li.logo').remove();
-					$('#topmenu nav div div > ul > li > a').css( 'height', 'auto' );
+					$('#topmenu, #topmenu nav div div > ul > li > a, #topmenu nav div div > ul > li > #toplogobox > a').css( 'height', 'auto' );
+
 
 					// move sidebars before, after, collapsed, hide
 					if( $('#topsidebar-2').length > 0 ){
@@ -517,12 +515,12 @@ jQuery(function ($) {
 
 
 
-				}
+				} // end smaller screens
 
-				} //
+				} // end if upperbar / topbar available
 
 
-			}
+			} // end function
 
 
 

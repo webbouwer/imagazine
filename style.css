@@ -12,6 +12,7 @@ Text Domain: imagazine
 GitHub Theme URI: https://github.com/Oddsized/imagazine
 GitHub Branch: development
 
+
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
@@ -29,6 +30,7 @@ margin:0;
 clear:both;
 height:0;
 line-height: 0;
+font-size: 0;
 }
 
 #pagecontainer
@@ -100,15 +102,28 @@ display:block;
 }
 
 /* top fixed */
-#topbarcontainer{
+#topbarcontainer
+{
 	position: relative;
 	width:100%;
+	background-color: aqua;
 }
 #topbarcontainer.sticky
 {
 	position: fixed;
 	z-index:298;
 }
+
+#topbarcontainer .outermargin
+{
+	background-color: burlywood;
+}
+
+#toplogobox
+{
+background-color: aquamarine;
+}
+
 
 /* Default topbar sidebar menu styling */
 #topbarcontainer .sidecolumn ul.menu li
