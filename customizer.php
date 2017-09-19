@@ -175,7 +175,7 @@ function imagazine_theme_customizer( $wp_customize ){
 		'priority' => 90,
     ));
 
-	$wp_customize->add_section('imagazine_content_postdisplay', array(
+	$wp_customize->add_section('imagazine_content_pagedisplay', array(
         'title'    => __('Pages', 'imagazine'),
         'panel'  => 'imagazine_content',
 		'priority' => 100,
