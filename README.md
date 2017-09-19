@@ -15,21 +15,32 @@ page meta box
 - [x] date display type 
 - [x] show/hide page bottom content widget
 
-customizer global lists default settings
+customizer content lists default settings
 - [x] show/hide top content widget
 - [x] show/hide date/author
 - [x] date display type 
+- [] default image position
 - [x] show/hide bottom content widget
 - [x] single post sidebar 1 display
 - [x] single post sidebar 2 display
 
-customizer global post default settings
+customizer content post default settings
+[ ] (change custom var name) 
 - [x] show/hide top content widget
 - [x] show/hide date/author
 - [x] date display type 
-- [x] show/hide bottom content widget
+- [x] default image position
+- [x] date display type ent widget
 - [x] single post sidebar 1 display
 - [x] single post sidebar 2 display
+
+customizer content page default settings
+[ ] (change custom var name) 
+- [x] show/hide top content widget
+- [x] show/hide date/author
+- [x] date display type 
+- [x] default image position
+- [x] date display type ent widget
 
 customizer upperbar menu 
 - [x] menu alignment left/center/right

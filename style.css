@@ -107,7 +107,6 @@ display:block;
 {
 	position: relative;
 	width:100%;
-	background-color: aqua;
 }
 #topbarcontainer.sticky
 {
@@ -117,12 +116,10 @@ display:block;
 
 #topbarcontainer .outermargin
 {
-	background-color: burlywood;
 }
 
 #toplogobox
 {
-background-color: aquamarine;
 }
 
 
