@@ -26,19 +26,27 @@ $list_bottomwidgets_display = get_theme_mod('imagazine_content_listdisplay_conte
 $list_sidebar1_display = get_theme_mod('imagazine_content_listdisplay_sidebar1_pos','none');
 $list_sidebar2_display = get_theme_mod('imagazine_content_listdisplay_sidebar2_pos','none');
 
-$post_topwidgets_display = get_theme_mod('imagazine_global_postdisplay_contenttop', 'hide');
-$post_authortime_display = get_theme_mod('imagazine_global_postdisplay_authortime', 'both');
-$post_timeformat_display = get_theme_mod('imagazine_global_postdisplay_timeformat', 'date');
-$post_featuredimage_display = get_theme_mod('imagazine_global_postdisplay_imageposition', 'top');
-$post_bottomwidgets_display = get_theme_mod('imagazine_global_postdisplay_contentbottom', 'hide');
-$post_sidebar1_display = get_theme_mod('imagazine_global_postdisplay_sidebar1_pos','none');
-$post_sidebar2_display = get_theme_mod('imagazine_global_postdisplay_sidebar2_pos','none');
 
-$page_topwidgets_display = get_theme_mod('imagazine_global_pagedisplay_contenttop', 'hide');
-$page_authortime_display = get_theme_mod('imagazine_global_pagedisplay_authortime', 'both');
-$page_timeformat_display = get_theme_mod('imagazine_global_pagedisplay_timeformat', 'date');
-$page_featuredimage_display = get_theme_mod('imagazine_global_pagedisplay_imageposition', 'top');
-$page_bottomwidgets_display = get_theme_mod('imagazine_global_pagedisplay_contentbottom', 'hide');
+
+
+$post_topwidgets_display = get_theme_mod('imagazine_content_postdisplay_contenttop', 'hide');
+$post_authortime_display = get_theme_mod('imagazine_content_postdisplay_authortime', 'both');
+$post_timeformat_display = get_theme_mod('imagazine_content_postdisplay_timeformat', 'date');
+$post_featuredimage_display = get_theme_mod('imagazine_content_postdisplay_imageposition', 'top');
+$post_bottomwidgets_display = get_theme_mod('imagazine_content_postdisplay_contentbottom', 'hide');
+$post_sidebar1_display = get_theme_mod('imagazine_content_postdisplay_sidebar1_pos','none');
+$post_sidebar2_display = get_theme_mod('imagazine_content_postdisplay_sidebar2_pos','none');
+
+$page_topwidgets_display = get_theme_mod('imagazine_content_pagedisplay_contenttop', 'hide');
+$page_authortime_display = get_theme_mod('imagazine_content_pagedisplay_authortime', 'both');
+$page_timeformat_display = get_theme_mod('imagazine_content_pagedisplay_timeformat', 'date');
+$page_featuredimage_display = get_theme_mod('imagazine_content_pagedisplay_imageposition', 'top');
+$page_bottomwidgets_display = get_theme_mod('imagazine_content_pagedisplay_contentbottom', 'hide');
+
+
+
+
+
 
 
 $post_categories_display = 'hide';
