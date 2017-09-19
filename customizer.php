@@ -2166,7 +2166,7 @@ function imagazine_customize_adaptive(){
 
 
 	/* Header */
-		/* height set in global.js
+		/* height set in global.js */
 	#headermedia,
 	#headermedia > .outermargin
 	{
@@ -2186,7 +2186,7 @@ function imagazine_customize_adaptive(){
 	  transform: translateY(-50%);
 	}
 
-		*/
+
 
 	/* maincontent */
 	#maincontent, #sidebar, #sidebar-2

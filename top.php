@@ -195,7 +195,7 @@ if($topbarlargebehavior != 'none' || $topbarsmallbehavior != 'none'){
 	}
 
 
-	echo '</div>';
+	echo '<div class="clr"></div></div>';
 
 }// end use topbar
 
