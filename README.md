@@ -25,7 +25,7 @@ customizer content lists default settings
 - [x] single post sidebar 2 display
 
 customizer content post default settings
-[ ] (change custom var name) 
+[x] (change custom var name) 
 - [x] show/hide top content widget
 - [x] show/hide date/author
 - [x] date display type 
@@ -35,7 +35,7 @@ customizer content post default settings
 - [x] single post sidebar 2 display
 
 customizer content page default settings
-[ ] (change custom var name) 
+[x] (change custom var name) 
 - [x] show/hide top content widget
 - [x] show/hide date/author
 - [x] date display type 

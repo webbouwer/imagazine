@@ -288,36 +288,8 @@
 	}
 	add_filter( 'dynamic_sidebar_params', 'check_sidebar_params' );
 
-/*
-	function widget_title_hack_191120($title, $instance) {
-	  if (empty($instance['title'])) {
-		$title = '';
-	  }
-	  return $title;
-	}
-	add_filter('widget_title','widget_title_hack_191120', 10, 2);
-*/
-/*
-	function check_sidebar_empty_title($title, $instance, $base) {
-		if ($base == 'pages'
-			|| $base == 'meta'
-			|| $base == 'categories'
-			|| $base == 'tag_cloud'
-			|| $base == 'recent-posts'
-			|| $base == 'recent-comments'
-			|| $base == 'rss'
-			|| $base == 'links'
-			|| $base == 'archives'
-			|| $base == 'calendar'
-		   	){
-			if ( trim($instance['title']) == '' )
-				return '';
-		}
-		return $title;
-	}
-	add_filter('widget_title', 'check_sidebar_empty_title', 10, 3);
 
- */
+
 
 	/*
 	 * Editor style WP THEME STANDARD
