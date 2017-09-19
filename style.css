@@ -63,7 +63,8 @@ display: inline-block;
 display: inline-block;
 }
 #topmenu nav div div ul > li > a,
-#topmenu nav div div ul > li > div > a
+#topmenu nav div div ul > li > div > a,
+#toplogobox > a
 {
 display:table-cell;
 vertical-align:middle;

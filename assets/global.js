@@ -42,6 +42,8 @@ jQuery(function ($) {
 			var toplogominw = $wp_custom_vars['imagazine_topbar_logo_minwidth'];
 			var toplogomaxw = $wp_custom_vars['imagazine_topbar_logo_maxwidth'];
 			var topbarminheight = $wp_custom_vars['imagazine_topbar_behavior_minheight'];
+			var topbarmaxheight = $wp_custom_vars['imagazine_topbar_behavior_maxheight'];
+			var topbarscroll = $wp_custom_vars['imagazine_topbar_behavior_scroll'];
 		    var topwidgetspos = $wp_custom_vars['imagazine_topbar_widgets_position'];
 
 
@@ -92,6 +94,11 @@ jQuery(function ($) {
 			var footsidebar2align = $wp_custom_vars['imagazine_footer_sidebars_sidebar2align'];
 			var footsidebar2respon = $wp_custom_vars['imagazine_footer_sidebars_sidebar2responsive'];
 
+
+
+
+		 	/* */
+			var lbform = $("#toplogobox img").clientWidth / $("#toplogobox img").clientHeight;
 
 
 
@@ -168,6 +175,7 @@ jQuery(function ($) {
 						// get topbarcontainer height
 						var th = $('#topbarcontainer').outerHeight();
 
+
 						// fixed on top after scrolling upperbar height
 
 							// onscroll
@@ -188,6 +196,13 @@ jQuery(function ($) {
 									// set sticky
 									$('#topbarcontainer').addClass('sticky');
 
+									if(topbarscroll == 'mini'){
+									$("#toplogobox img").animate({
+									  width: toplogominw+'px'
+									});
+
+									$("#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a").animate({ height: topbarminheight });
+									}
 								}else if( topbarTop >= windowTop && $('#topbarcontainer').hasClass('sticky') ) {
 
 									// remove sticky
@@ -198,6 +213,17 @@ jQuery(function ($) {
 
 									// remove spacer
 									$('#topspacer').remove();
+
+
+									if(topbarscroll == 'mini'){
+									$("#toplogobox img").animate({
+									  width: toplogomaxw+'px'
+									});
+
+									$("#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a").animate({ height: topbarmaxheight });
+									}
+
+
 
 								}
 
@@ -390,7 +416,7 @@ jQuery(function ($) {
 							// menu available
 							$('#topmenu').show();
 
-							var topnavheight = ( $('#toplogobox').outerHeight() > topbarminheight ? $('#toplogobox').outerHeight() : topbarminheight);
+							//var topnavheight = ( $('#toplogobox').outerHeight() > topbarminheight ? $('#toplogobox').outerHeight() : topbarminheight);
 
 							//  logo positioning inside
 							if( toplogopos == 'middle'){
@@ -407,7 +433,8 @@ jQuery(function ($) {
 								$('#topmenu nav div div > ul li.logo').append( $('#toplogobox') );
 								// adjust menu height to logo
 								// .. todo: logo min height
-								$('#topmenu, #topmenu nav div div > ul > li > a, #topmenu nav div div > ul > li > #toplogobox > a').css( 'height', topnavheight );
+									$('#topmenu, #topmenu nav div div > ul > li > a').css( 'height', topbarmaxheight  );
+									$('#toplogobox > a').css( 'height', topbarmaxheight  );
 
 							}else{
 
@@ -417,11 +444,12 @@ jQuery(function ($) {
 
 								if( toplogopos != 'above' && toplogopos != 'none'){
 
-									$('#topmenu, #topmenu nav div div > ul > li > a, #topmenu nav div div > ul > li > #toplogobox > a').css( 'height', topnavheight  );
+									$('#topmenu, #topmenu nav div div > ul > li > a').css( 'height', topbarmaxheight  );
+									$('#toplogobox > a').css( 'height', topbarmaxheight  );
 
 								}else{
 
-									$('#topmenu, #topmenu nav div div > ul > li > a, #topmenu nav div div > ul > li > #toplogobox > a').css( 'height', 'auto' );
+									$('#topmenu, #topmenu nav div div > ul > li > a, #toplogobox > a').css( 'height', topbarminheight );
 
 								}
 

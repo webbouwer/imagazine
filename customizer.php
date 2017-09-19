@@ -844,6 +844,36 @@ function imagazine_theme_customizer( $wp_customize ){
  	    	'description'    => __( 'Select minimal height (pixels)', 'imagazine' ),
     )));
 
+	$wp_customize->add_setting( 'imagazine_topbar_behavior_maxheight' , array(
+		'default' => 160,
+		'sanitize_callback' => 'imagazine_sanitize_default',
+		'priority' => 90,
+    ));
+    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_behavior_maxheight', array(
+            'label'          => __( 'Topbar max height', 'imagazine' ),
+            'section'        => 'imagazine_topbar_behavior',
+            'settings'       => 'imagazine_topbar_behavior_maxheight',
+            'type'           => 'number',
+ 	    	'description'    => __( 'Select max height (pixels)', 'imagazine' ),
+    )));
+
+	$wp_customize->add_setting( 'imagazine_topbar_behavior_scroll' , array(
+		'default' => 'mini',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+		'priority' => 20,
+    ));
+    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_behavior_scroll', array(
+            'label'          => __( 'Topbar sticky height', 'imagazine' ),
+            'section'        => 'imagazine_topbar_behavior',
+            'settings'       => 'imagazine_topbar_behavior_scroll',
+            'type'           => 'select',
+ 	    	'description'    => __( 'Select topbar height resizing on sticky position', 'imagazine' ),
+            'choices'        => array(
+                'none'   => __( 'No effect', 'imagazine' ),
+                'mini'   => __( 'Minimal height', 'imagazine' ),
+            )
+    )));
+
 	$wp_customize->add_setting( 'imagazine_topbar_behavior_width' , array(
 		'default' => 'full',
 		'sanitize_callback' => 'imagazine_sanitize_default',
@@ -2037,15 +2067,11 @@ function imagazine_customize_adaptive(){
 
 	#toplogobox .site-logo img
 	{
-
 	min-width:<?php echo get_theme_mod('imagazine_topbar_logo_minwidth', 60).'px'; ?> !important;
 	max-width:<?php echo get_theme_mod('imagazine_topbar_logo_maxwidth', 120).'px'; ?> !important;
-	min-height:auto !important;
-		/*
-	width:auto !important;
 	height:auto !important;
-		*/
 	}
+
 
 
 	#headermedia,
@@ -2102,8 +2128,6 @@ function imagazine_customize_adaptive(){
 		width:15%;
 	}
 
-	#topbarcontainer,
-	#topbarcontainer .outermargin,
 	#topmainbar
 	{
 	min-height:<?php echo get_theme_mod('imagazine_topbar_behavior_minheight', 60).'px'; ?> !important;
