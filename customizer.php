@@ -148,7 +148,7 @@ function imagazine_theme_customizer( $wp_customize ){
 	$wp_customize->add_section('imagazine_topbar_widgets', array(
         'title'    => __('Widgets', 'imagazine'),
         'panel'  => 'imagazine_topbar',
-		'priority' => 90,
+		'priority' => 100,
     ));
 	$wp_customize->add_section('imagazine_topbar_sidebar1', array(
         'title'    => __('Sidebar 1', 'imagazine'),

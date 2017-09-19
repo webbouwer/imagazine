@@ -52,7 +52,7 @@ if( ( is_single() || is_page() ) && ( $headerfeaturedimg == 'yes' || $headertitl
 
 }else if( $headertitle != 'no'  ){
 
-	$headmaintitle = single_cat_title("Category ", false);
+	$headmaintitle = single_cat_title("", false);
 
 	if(!$headmaintitle){
 	$headmaintitle = get_bloginfo('name');

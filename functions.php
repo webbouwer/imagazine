@@ -280,11 +280,42 @@
 		$settings = $settings_getter->get_settings();
 		$settings = $settings[ $params[1]['number'] ];
 
-		if ( $params[0][ 'after_widget' ] == '<div class="clr"></div></div></div>' && isset( $settings[ 'title' ] ) && empty( $settings[ 'title' ] ) )
+		$id = $params[0]['widget_id'];
+		$wdgtvar = 'widget_'._get_widget_id_base( $id );
+        $idvar = _get_widget_id_base( $id );
+        $instance = get_option( $wdgtvar );
+        //$idbs = str_replace( $idvar.'-', '', $id );
+
+
+
+		if ( $params[0][ 'after_widget' ] == '<div class="clr"></div></div></div>' && isset( $settings[ 'title' ] ) &&  empty( $settings[ 'title' ] ) )
 			$params[0][ 'before_widget' ] .= '<div class="widget-contentbox">';
 
 		return $params;
 	}
+
+
+	function check_sidebar_empty_title($title, $instance, $base) {
+		if ($base == 'pages'
+			|| $base == 'meta'
+			|| $base == 'categories'
+			|| $base == 'tag_cloud'
+			|| $base == 'recent-posts'
+			|| $base == 'recent-comments'
+			|| $base == 'rss'
+			|| $base == 'links'
+			|| $base == 'archives'
+			|| $base == 'calendar'
+		   	){
+			if ( trim($instance['title']) == '' )
+				return '';
+		}
+		return $title;
+	}
+	add_filter('widget_title', 'check_sidebar_empty_title', 10, 3);
+
+
+
 	/*
 	 * Editor style WP THEME STANDARD
 	 */
