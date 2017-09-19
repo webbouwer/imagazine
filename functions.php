@@ -273,8 +273,6 @@
 	 * Widget empty title content wrapper fix
 	*/
 
-
-	add_filter( 'dynamic_sidebar_params', 'check_sidebar_params' );
 	function check_sidebar_params( $params ) {
 		global $wp_registered_widgets;
 
@@ -282,18 +280,15 @@
 		$settings = $settings_getter->get_settings();
 		$settings = $settings[ $params[1]['number'] ];
 
-		//$id = $params[0]['widget_id'];
-		//$wdgtvar = 'widget_'._get_widget_id_base( $id );
-        //$idvar = _get_widget_id_base( $id );
-        //$instance = get_option( $wdgtvar );
-        //$idbs = str_replace( $idvar.'-', '', $id );
-
-		if ( $params[0][ 'after_widget' ] == '<div class="clr"></div></div></div>' && isset( $settings[ 'title' ] ) &&  empty( $settings[ 'title' ] ) )
+		if ( $params[0][ 'after_widget' ] == '<div class="clr"></div></div></div>' && isset( $settings[ 'title' ] ) &&  empty( $settings[ 'title' ] ) ){
 			$params[0][ 'before_widget' ] .= '<div class="widget-contentbox">';
+		}
 
 		return $params;
 	}
+	add_filter( 'dynamic_sidebar_params', 'check_sidebar_params' );
 
+/*
 	function widget_title_hack_191120($title, $instance) {
 	  if (empty($instance['title'])) {
 		$title = '';
@@ -301,7 +296,7 @@
 	  return $title;
 	}
 	add_filter('widget_title','widget_title_hack_191120', 10, 2);
-
+*/
 /*
 	function check_sidebar_empty_title($title, $instance, $base) {
 		if ($base == 'pages'
