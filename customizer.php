@@ -969,13 +969,30 @@ function imagazine_theme_customizer( $wp_customize ){
             	'type'           => 'select',
  	    		'description'    => __( 'Header default display type.', 'imagazine' ),
             	'choices'        => array(
-                	'image'   => __( 'Image only', 'imagazine' ),
+                	'image'   => __( 'Image or slider shortcode', 'imagazine' ),
             		'overlay'   => __( 'Image with overlay widget column(s)', 'imagazine' ),
             		'split'   => __( 'Image in maincolumn besides optional column(s)', 'imagazine' ),
                 	'none'   => __( 'No header', 'imagazine' ),
             	)
     	)));
 
+		$wp_customize->add_setting( 'imagazine_header_display_shortcode' , array(
+		'default' => '',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+		'priority' => 20,
+    	));
+    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_header_display_shortcode', array(
+            	'label'          => __( 'Header shortcode' , 'imagazine' ),
+            	'section'        => 'imagazine_header_settings',
+            	'type'           => 'text',
+ 	    		'description'    => __( 'Copy a shortcode here for replacing the theme header with your fav header plugin.', 'imagazine' ),
+    	)));
+		/*$wp_customize->add_control( 'imagazine_header_display_shortcode', array(
+		  'type' => 'text',
+		  'section' => 'imagazine_header_settings', // Add a default or your own section
+		  'label' => __( 'Shortcode for slider or other plugin replacing the header' ),
+		  'description' => __( 'This is a custom text box.' ),
+		) );*/
 
 		$wp_customize->add_setting( 'imagazine_header_pagetitle' , array(
 		'default' => 'no',

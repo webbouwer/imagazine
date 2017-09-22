@@ -10,7 +10,7 @@
 function theme_option_page() {
 ?>
 <div class="wrap">
-<h1>Custom Theme Options Page</h1>
+<h1>Imagazine Theme Options</h1>
 <form method="post" action="options.php">
 <?php
 // display all sections for theme-options page
@@ -23,18 +23,18 @@ submit_button();
 <?php
 }
 function theme_section_description(){
-echo '<p>Theme Option Section</p>';
+echo '<p>Theme Global Settings</p>';
 }
 
 function options_callback(){
 //$options = get_option( 'first_field_option' );
 //echo '<p><input name="first_field_option" id="first_field_option" type="checkbox" value="1" class="code" ' . checked( 1, $options, false ) . ' /> Check for enabling custom help text.</p>';
 
-$options2 = '';
-if( get_option( 'second_field_option' ) != '' && get_option( 'second_field_option' ) != 1 ){
-	$options2 = get_option( 'second_field_option' );
+$tracking_code_bodytop = '';
+if( get_option( 'tracking_code_bodytop' ) != '' && get_option( 'tracking_code_bodytop' ) != 1 ){
+	$tracking_code_bodytop = get_option( 'tracking_code_bodytop' );
 }
-echo '<p><textarea name="second_field_option" id="second_field_option" rows="7" cols="50" type="textarea">'.$options2.'</textarea></p>';
+echo '<p><textarea name="tracking_code_bodytop" id="tracking_code_bodytop" rows="7" cols="50" type="textarea">'.$tracking_code_bodytop.'</textarea></p>';
 
 }
 
@@ -47,17 +47,17 @@ function imagazine_theme_settings(){
 //add_settings_field('first_field_option','Test Settings Field','options_callback','imagazine_optionpage','first_section');//add settings field to the “first_section”
 //register_setting( 'imagazine_optionpage_grp', 'first_field_option');
 
-add_option('second_field_option',1);// add theme option to database
-add_settings_section( 'second_section', 'New Theme Options Section 2','theme_section_description','imagazine_optionpage');
+add_option( 'tracking_code_bodytop', '');// add theme option to database
+add_settings_section( 'global_section', 'Global Settings','theme_section_description','imagazine_optionpage');
 
-add_settings_field('second_field_option', 'Tracking code', 'options_callback', 'imagazine_optionpage', 'second_section');
-register_setting( 'imagazine_optionpage_grp', 'second_field_option');
+add_settings_field('tracking_code_bodytop', 'Tracking code (body top)', 'options_callback', 'imagazine_optionpage', 'global_section');
+register_setting( 'imagazine_optionpage_grp', 'tracking_code_bodytop');
 
 }
 add_action('admin_init','imagazine_theme_settings');
 
 function imagazine_admin_menu () {
-    $page_title = 'Imagazine Theme settings Page';
+    $page_title = 'Imagazine Theme Options';
     $menu_title = 'Imagazine';
     $capability = 'edit_posts';
     $menu_slug = 'imagazine_optionpage';

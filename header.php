@@ -1,5 +1,8 @@
 <?php
 $headerdisplay = get_theme_mod('imagazine_header_display_type', 'image');
+
+$headershortcode = get_theme_mod('imagazine_header_display_shortcode', '');
+
 $headertitle = get_theme_mod('imagazine_header_pagetitle', 'no');
 
 $blogtitle = get_theme_mod('blogname', 'No title');
@@ -26,6 +29,44 @@ $headersidebar2respon = get_theme_mod('imagazine_header_sidebar2responsive', 'af
 
 
 $header_image = get_header_image();
+
+
+
+$headerready = 0;
+
+// header shortcode
+
+if( $headershortcode != '' &&  $headerdisplay == 'image' ){
+
+	//if( shortcode_exists( $headershortcode ) ) {
+
+
+    	// The short code does  exists > header area for plugin
+		if($headerbgwidth == 'full'){
+			echo '<div id="headercodebox" class="fullwidth"'.$headerbgstyle.'>';
+		}else{
+			echo '<div id="headercodebox" class="outermargin"'.$headerbgstyle.'>';
+		}
+
+		echo do_shortcode( $headershortcode );
+
+		echo '</div>';
+
+
+		$headerready = 1;
+	//}
+}
+
+
+
+
+
+// theme header
+if( $headerready != 1 ){
+
+
+
+
 
 
 // header title
@@ -62,6 +103,12 @@ if( ( is_single() || is_page() ) && ( $headerfeaturedimg == 'yes' || $headertitl
 
 
 
+
+
+
+
+
+
 	// check page meta overwrite
  	$page_meta_header_type = "";
     $page_meta_header_display = "";
@@ -87,6 +134,11 @@ if( ( is_single() || is_page() ) && ( $headerfeaturedimg == 'yes' || $headertitl
 		//$headerdisplay = get_theme_mod('imagazine_header_display_type', 'image');
 		//$headertitle = get_theme_mod('imagazine_header_pagetitle', 'no');
 	}
+
+
+
+
+
 
 
 
@@ -205,4 +257,6 @@ if( $headerdisplay != 'none' ){
 
 	} // header used
 	} // image available
+
+} // end theme header
 ?>

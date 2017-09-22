@@ -272,7 +272,6 @@
 	/*
 	 * Widget empty title content wrapper fix
 	*/
-
 	function check_sidebar_params( $params ) {
 		global $wp_registered_widgets;
 
@@ -287,8 +286,6 @@
 		return $params;
 	}
 	add_filter( 'dynamic_sidebar_params', 'check_sidebar_params' );
-
-
 
 
 	/*
