@@ -7,8 +7,12 @@ jQuery(function ($) {
 			//alert( JSON.stringify( $wp_custom_vars ) );
 
 			var mediumswitch = 580;
-			if( $wp_custom_vars['imagazine_global_screenmode_mediummin'] && $wp_custom_vars['imagazine_global_screenmode_mediummin'] > 560 ){
+			var largeswitch = 1150;
+			if( $wp_custom_vars['imagazine_global_screenmode_mediummin'] && $wp_custom_vars['imagazine_global_screenmode_mediummin'] > 580 ){
 			mediumswitch = $wp_custom_vars['imagazine_global_screenmode_mediummin'];
+			}
+			if( $wp_custom_vars['imagazine_global_screenmode_largemin'] && $wp_custom_vars['imagazine_global_screenmode_largemin'] > 1150 ){
+			largeswitch = $wp_custom_vars['imagazine_global_screenmode_largemin'];
 			}
 			/* Upperbar */
 			var upperbardisplaysmall = $wp_custom_vars['imagazine_upperbar_behavior_displaysmall'];
@@ -93,7 +97,6 @@ jQuery(function ($) {
 			var footsidebar2width = $wp_custom_vars['imagazine_footer_sidebars_sidebar2width'];
 			var footsidebar2align = $wp_custom_vars['imagazine_footer_sidebars_sidebar2align'];
 			var footsidebar2respon = $wp_custom_vars['imagazine_footer_sidebars_sidebar2responsive'];
-
 
 
 
@@ -880,6 +883,17 @@ jQuery(function ($) {
 
 
 				}
+
+
+				// add mobile class
+				var screensizeclass = 'smallscreen';
+				if( $(window).width() > largeswitch ){
+					screensizeclass = 'largescreen';
+				}else if( $(window).width() > mediumswitch ){
+					screensizeclass = 'mediumscreen';
+				}
+				$('body').removeClass('smallscreen mediumscreen largescreen').addClass(screensizeclass);
+
 
 			}
 
