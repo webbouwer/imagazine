@@ -52,8 +52,6 @@ function imagazine_theme_customizer( $wp_customize ){
 
 
 	// move sections
-
-
 	$wp_customize->add_section('title_tagline', array(
         'title'    => __('Identity', 'imagazine'),
         'panel'  => 'imagazine_global',
@@ -80,11 +78,19 @@ function imagazine_theme_customizer( $wp_customize ){
 
 	// Global custom sections
 
+	$wp_customize->add_section('imagazine_global_styles', array(
+        'title'    => __('Styles', 'imagazine'),
+        'panel'  => 'imagazine_global',
+		'priority' => 20,
+    ));
+
 	$wp_customize->add_section('imagazine_global_screenmode', array(
         'title'    => __('Screen modes', 'imagazine'),
         'panel'  => 'imagazine_global',
 		'priority' => 120,
     ));
+
+
 
 
 
@@ -107,7 +113,6 @@ function imagazine_theme_customizer( $wp_customize ){
 
 
 	// upperbar
-
 	$wp_customize->add_section('imagazine_upperbar_behavior', array(
         'title'    => __('Behavior', 'imagazine'),
         'panel'  => 'imagazine_upperbar',
@@ -247,8 +252,28 @@ function imagazine_theme_customizer( $wp_customize ){
    	) ) );
 
 
-
-
+	$wp_customize->add_setting( 'imagazine_global_styles_mainfont' , array(
+		'default' => 'Lato|Martel',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+		'priority' => 20,
+    	));
+    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_global_styles_mainfont', array(
+            	'label'          => __( 'Font style family (google fonts)' , 'imagazine' ),
+            	'section'        => 'imagazine_global_styles',
+            	'type'           => 'text',
+ 	    		'description'    => __( 'Copy the google font syntax ( fontname | fontname | ..) here', 'imagazine' ),
+    )));
+	$wp_customize->add_setting( 'imagazine_global_styles_subsetfont' , array(
+		'default' => 'latin,latin-ext',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+		'priority' => 20,
+    	));
+    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_global_styles_subsetfont', array(
+            	'label'          => __( 'Font style subset (google fonts)' , 'imagazine' ),
+            	'section'        => 'imagazine_global_styles',
+            	'type'           => 'text',
+ 	    		'description'    => __( 'Copy the google font syntax ( fontname | fontname | ..) here', 'imagazine' ),
+    )));
 
 
 	/* Global - Sreen modes */
@@ -2031,14 +2056,34 @@ add_action( 'customize_register', 'imagazine_theme_customizer' );
 
 
 
-
-
-
-
 function imagazine_customize_adaptive(){
 
 	// start output css ?>
 	<style>
+
+
+	/* Fonts */
+	<?php
+	$fontarray = explode('|', get_theme_mod("imagazine_global_styles_mainfont", "Lato|Martel" ) );
+	?>
+
+	body
+	{
+
+		<?php
+		if( is_array($fontarray) ){
+			$fontname =  $fontarray[0];
+			echo 'font-family: "'.$fontname.'", '.get_theme_mod("imagazine_global_styles_subsetfont", "latin,latin-ext").';';
+
+		}else{
+
+			echo 'font-family: "'.get_theme_mod("imagazine_global_styles_mainfont", "Lato" ).'", '.get_theme_mod("imagazine_global_styles_subsetfont", "latin,latin-ext").';';
+
+		}
+		?>
+
+	}
+
 
 	/*
 	 * SMALL SCREEN DEFAULTS

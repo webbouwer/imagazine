@@ -476,14 +476,26 @@
 
 
 	// include googlefonts
+/*
     function google_fonts() {
 		$query_args = array(
-			'family' => 'Lato|Martel',
-			'subset' => 'latin,latin-ext',
+			'family' => get_theme_mod("imagazine_global_styles_mainfont", "Lato|Martel"),
+			'subset' => get_theme_mod("imagazine_global_styles_subsetfont", "latin,latin-ext"),
 		);
-		wp_register_style( 'google_fonts', add_query_arg( $query_args, "//fonts.googleapis.com/css" ), array(), null );
+		wp_enqueue_style( 'google_fonts', add_query_arg( $query_args, "//fonts.googleapis.com/css" ), array(), null );
+		// wp_register_style
     }
+
+
     add_action('wp_enqueue_scripts', 'google_fonts');
+*/
+
+    function load_fonts() {
+		wp_register_style( 'google_fonts', 'https://fonts.googleapis.com/css?family='.get_theme_mod("imagazine_global_styles_mainfont", "Lato|Martel") );
+        wp_enqueue_style( 'google_fonts');
+    }
+
+    add_action('wp_print_styles', 'load_fonts');
 
 
 
