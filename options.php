@@ -62,8 +62,8 @@ function imagazine_admin_menu () {
     $capability = 'edit_posts';
     $menu_slug = 'imagazine_optionpage';
     $function = 'theme_option_page';
-    $icon_url = '';
-    $position = 110;
+    $icon_url = 'dashicons-welcome-view-site';
+    $position = 60;
 
     add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
 }

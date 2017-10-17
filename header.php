@@ -36,7 +36,7 @@ $headerready = 0;
 
 // header shortcode
 
-if( $headershortcode != '' &&  $headerdisplay == 'image' ){
+if( $headershortcode != '' ){
 
 	//if( shortcode_exists( $headershortcode ) ) {
 
@@ -110,18 +110,7 @@ if( ( is_single() || is_page() ) && ( $headerfeaturedimg == 'yes' || $headertitl
 
 
 	// check page meta overwrite
- 	$page_meta_header_type = "";
-    $page_meta_header_display = "";
-	$page_title_display = "";
 	if( is_page() ){
-
-		$page_header_type = get_post_meta( get_the_ID() , "page-meta-header-type", true);
-		$page_header_display = get_post_meta( get_the_ID() , "page-meta-header-display", true);
-		$page_title_display = get_post_meta( get_the_ID() , "page-meta-title-display", true);
-
-		$typearr = array(1 => 'image', 2 => 'overlay', 3 => 'split', 4 => 'none');
-		$displayarr = array( 1 => 'yes', 2 => 'no');
-
 
 		if( $page_header_type != 0 ){
 			$headerdisplay = $typearr[ $page_header_type ];
