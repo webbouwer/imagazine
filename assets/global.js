@@ -836,7 +836,7 @@ jQuery(function ($) {
 			}
 
 
-		$(window).load(function() {
+		//$(window).load(function() {
 			/*
 			 * on resize end function
 			 */
@@ -900,7 +900,7 @@ jQuery(function ($) {
 			// init resize end on document ready
 			customizer_resizeend();
 
-		}); //end onload
+		//}); //end onload
 
 	}); //end on ready
 

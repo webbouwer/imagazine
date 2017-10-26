@@ -39,15 +39,6 @@ position: relative;
 }
 
 
-/* default load spinner*/
-.spinner
-{
-min-height:160px;
-min-width:160px;
-background-image: url(spinner.gif);
-background-position: center;
-}
-
 /*
  * upperbar and topbar
  */
@@ -186,6 +177,18 @@ margin:3px 3px 4px 10px;
 }
 
 
+/* default load spinner*/
+#feedstackcontainer
+{
+}
+#feedstackcontainer.spinner
+{
+background-color:#ffffff;
+background-image:url(spinner.gif);
+background-position: center 10%;
+background-repeat: no-repeat;
+background-size:60px 60px;
+}
 
 
 
