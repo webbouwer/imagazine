@@ -180,14 +180,14 @@ margin:3px 3px 4px 10px;
 /* default load spinner*/
 #feedstackcontainer
 {
-}
-#feedstackcontainer.spinner
-{
 background-color:#ffffff;
-background-image:url(spinner.gif);
-background-position: center 10%;
+}
+.spinner
+{
+background-image: url(spinner.gif);
+background-size: 64px 64px;
 background-repeat: no-repeat;
-background-size:60px 60px;
+background-position: center;
 }
 
 
