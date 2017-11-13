@@ -520,7 +520,7 @@ echo '<div class="clr"></div></div>'; // end maincontent container
 
 
 
-echo '<div id="subcontentcontainer">';
+echo '<div id="subcontentcontainer"><div class="outermargin">';
 
 // maincontent bottom widgets
 if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('subcontentwidgets') ){
@@ -529,6 +529,6 @@ if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') &
 	echo '<div class="clr"></div></div>';
 }
 
-echo '<div class="clr"></div></div>'; // end maincontent container
+echo '<div class="clr"></div></div></div>'; // end maincontent container
 
 ?>
