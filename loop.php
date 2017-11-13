@@ -513,22 +513,24 @@ if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') &
 echo '<div class="clr"></div></div>'; // end maincontent
 
 
-echo '<div class="clr"></div></div>'; // end margin
-
-
-echo '<div class="clr"></div></div>'; // end maincontent container
-
-
-
-echo '<div id="subcontentcontainer"><div class="outermargin">';
-
-// maincontent bottom widgets
+echo '<div id="subcontentcontainer">';
+// subcontent widgets
 if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('subcontentwidgets') ){
 	echo '<div class="clr"></div><div id="subcontentwidgets" class="subcontentwidgets">';
 	dynamic_sidebar('subcontentwidgets');
 	echo '<div class="clr"></div></div>';
 }
 
-echo '<div class="clr"></div></div></div>'; // end maincontent container
+echo '<div class="clr"></div></div>'; // end subcontent container
+
+
+
+echo '<div class="clr"></div></div>'; // end margin
+
+echo '<div class="clr"></div></div>'; // end maincontent container
+
+
+
+
 
 ?>
