@@ -199,6 +199,13 @@ function imagazine_theme_customizer( $wp_customize ){
 		'priority' => 120,
     ));
 
+	// sub content
+	$wp_customize->add_section('imagazine_content_subcontent', array(
+        'title'    => __('Subcontent', 'imagazine'),
+        'panel'  => 'imagazine_content',
+		'priority' => 120,
+    ));
+
 
 
 	// Footer
@@ -1012,12 +1019,7 @@ function imagazine_theme_customizer( $wp_customize ){
             	'type'           => 'text',
  	    		'description'    => __( 'Copy a shortcode here for replacing the theme header with your fav header plugin.', 'imagazine' ),
     	)));
-		/*$wp_customize->add_control( 'imagazine_header_display_shortcode', array(
-		  'type' => 'text',
-		  'section' => 'imagazine_header_settings', // Add a default or your own section
-		  'label' => __( 'Shortcode for slider or other plugin replacing the header' ),
-		  'description' => __( 'This is a custom text box.' ),
-		) );*/
+
 
 		$wp_customize->add_setting( 'imagazine_header_pagetitle' , array(
 		'default' => 'no',
@@ -1767,7 +1769,18 @@ function imagazine_theme_customizer( $wp_customize ){
     	)));
 
 
-
+		$wp_customize->add_setting( 'imagazine_content_subcontent_shortcode' , array(
+		'default' => '',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+		'priority' => 20,
+    	));
+    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_subcontent_shortcode', array(
+            	'label'          => __( 'Subcontent shortcode' , 'imagazine' ),
+            	'section'        => 'imagazine_content_subcontent',
+				'settings'       => 'imagazine_content_subcontent_shortcode',
+            	'type'           => 'text',
+ 	    		'description'    => __( 'Copy a shortcode here to use subcontent with your shortcode plugin.', 'imagazine' ),
+    	)));
 
 
 

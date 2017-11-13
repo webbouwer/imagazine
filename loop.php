@@ -44,7 +44,7 @@ $page_featuredimage_display = get_theme_mod('imagazine_content_pagedisplay_image
 $page_bottomwidgets_display = get_theme_mod('imagazine_content_pagedisplay_contentbottom', 'hide');
 
 
-
+$subcontentshortcode = get_theme_mod('imagazine_content_subcontent_shortcode', '');
 
 
 
@@ -513,7 +513,13 @@ if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') &
 echo '<div class="clr"></div></div>'; // end maincontent
 
 
-echo '<div id="subcontentcontainer">';
+echo '<div class="clr"></div><div id="subcontentcontainer">';
+
+// subcontent shortcode
+if( $subcontentshortcode != ""){
+	echo do_shortcode( $subcontentshortcode ) .'<div class="clr"></div>';
+}
+
 // subcontent widgets
 if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('subcontentwidgets') ){
 	echo '<div class="clr"></div><div id="subcontentwidgets" class="subcontentwidgets">';
