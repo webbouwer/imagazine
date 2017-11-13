@@ -207,6 +207,18 @@
 			));
 
 
+			// the full spread content after the main content before the footer
+			register_sidebar(array(
+				'name' => 'Content subcontent widgets',
+				'id'   => 'subcontentwidgets',
+				'description'   => 'Full spread content after the main content before the footer',
+				'before_widget' => '<div id="%1$s" class="widget %2$s">',
+				'after_widget'  => '<div class="clr"></div></div></div>',
+				'before_title'  => '<div class="widget-titlebox"><h3>',
+				'after_title'   => '</h3></div><div class="widget-contentbox">'
+			));
+
+
 			// the footer  columns
 			register_sidebar(array(
 				'name' => 'Footer Column Widgets',
