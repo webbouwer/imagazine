@@ -516,6 +516,8 @@
 
 
 	/* Customized WP elements */
+	// Enable the use of shortcodes in text widgets.
+	add_filter( 'widget_text', 'do_shortcode' );
 
 	/* Execute PHP in the default text-widget
 	*/
