@@ -4,6 +4,7 @@
 	require get_template_directory() . '/customizer.php'; // customizer functions
 	require get_template_directory() . '/assets/menu.php'; 	// menu image plugin functions
 	require get_template_directory() . '/assets/metaboxes.php'; // post meta functions
+	require get_template_directory() . '/assets/userlogin.php'; // frontend login functions
 	require get_template_directory() . '/assets/widgets.php'; // widget functions
 	require get_template_directory() . '/assets/widget_postlist.php'; // widget functions
 	require get_template_directory() . '/assets/widget_stackmyfeeds.php'; // widget functions
@@ -11,6 +12,7 @@
 
 	// Register and load the widgets
 	function imagazine_load_widgets() {
+		register_widget( 'imagazine_login_widget' );
 		register_widget( 'imagazine_postlist_widget' );
 		register_widget( 'imagazine_stackmyfeeds_widget' );
 	}
@@ -334,8 +336,9 @@
 	// http://wordpress.stackexchange.com/questions/57386/how-do-i-force-wp-enqueue-scripts-to-load-at-the-end-of-head
 	function imagazine_global_js() {
 
-		// Register the script first.
+		// Register the script(s)
 		wp_register_script( 'custom_global_js', get_template_directory_uri().'/assets/global.js', 99, '1.0', false);
+		wp_register_script( 'custom_login_js', get_template_directory_uri().'/assets/userlogin.js', 99, '1.0', false);
 		//wp_register_script( 'custom_topbar_js', get_template_directory_uri().'/assets/customizer_topbar.js', 99, '1.0', false);
 
 		// Get the global data list.
@@ -345,12 +348,15 @@
 		wp_localize_script( 'custom_global_js', 'site_data', $wp_global_data );
 		//wp_localize_script( 'custom_topbar_js', 'site_data', $wp_global_data );
 
+
+
 		// localize the script with specific data.
 		//$color_array = array( 'color1' => get_theme_mod('color1'), 'color2' => '#000099' );
 		//wp_localize_script( 'custom_global_js', 'object_name', $color_array );
 
 		// The script can be enqueued now or later.
 		wp_enqueue_script( 'custom_global_js');
+		wp_enqueue_script( 'custom_login_js');
 		//wp_enqueue_script( 'custom_topbar_js');
 	}
 
