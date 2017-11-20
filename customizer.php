@@ -291,7 +291,7 @@ function imagazine_theme_customizer( $wp_customize ){
     large screen switch
     large screen outermargin
 	*/
-	$wp_customize->add_setting( 'imagazine_global_screenmode_smallwidth' , array(
+		$wp_customize->add_setting( 'imagazine_global_screenmode_smallwidth' , array(
 		'default' => 100,
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
@@ -303,7 +303,7 @@ function imagazine_theme_customizer( $wp_customize ){
  	    	'description'    => __( 'Define content width for small screen mode (%).', 'imagazine' ),
     	)));
 
-	$wp_customize->add_setting( 'imagazine_global_screenmode_smallmargin' , array(
+		$wp_customize->add_setting( 'imagazine_global_screenmode_smallmargin' , array(
 		'default' => 320,
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
@@ -315,7 +315,7 @@ function imagazine_theme_customizer( $wp_customize ){
  	    	'description'    => __( 'Define outermargin for small screen mode (px).', 'imagazine' ),
     	)));
 
-	$wp_customize->add_setting( 'imagazine_global_screenmode_mediummin' , array(
+		$wp_customize->add_setting( 'imagazine_global_screenmode_mediummin' , array(
 		'default' => 580,
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
@@ -328,7 +328,7 @@ function imagazine_theme_customizer( $wp_customize ){
     	)));
 
 
-	$wp_customize->add_setting( 'imagazine_global_screenmode_mediumwidth' , array(
+		$wp_customize->add_setting( 'imagazine_global_screenmode_mediumwidth' , array(
 		'default' => 94,
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
@@ -340,7 +340,7 @@ function imagazine_theme_customizer( $wp_customize ){
  	    	'description'    => __( 'Define content width for medium screen mode (%).', 'imagazine' ),
     	)));
 
-	$wp_customize->add_setting( 'imagazine_global_screenmode_mediummargin' , array(
+		$wp_customize->add_setting( 'imagazine_global_screenmode_mediummargin' , array(
 		'default' => 960,
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
@@ -353,7 +353,7 @@ function imagazine_theme_customizer( $wp_customize ){
     	)));
 
 
-	$wp_customize->add_setting( 'imagazine_global_screenmode_largemin' , array(
+		$wp_customize->add_setting( 'imagazine_global_screenmode_largemin' , array(
 		'default' => 1150,
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
@@ -364,7 +364,7 @@ function imagazine_theme_customizer( $wp_customize ){
             	'type'           => 'number',
  	    	'description'    => __( 'Define min. width for large screen mode (px).', 'imagazine' ),
     	)));
-	$wp_customize->add_setting( 'imagazine_global_screenmode_largewidth' , array(
+		$wp_customize->add_setting( 'imagazine_global_screenmode_largewidth' , array(
 		'default' => 96,
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
@@ -376,7 +376,7 @@ function imagazine_theme_customizer( $wp_customize ){
  	    	'description'    => __( 'Define content width for large screen mode (%).', 'imagazine' ),
     	)));
 
-	$wp_customize->add_setting( 'imagazine_global_screenmode_largemargin' , array(
+		$wp_customize->add_setting( 'imagazine_global_screenmode_largemargin' , array(
 		'default' => 1280,
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
@@ -386,6 +386,29 @@ function imagazine_theme_customizer( $wp_customize ){
             	'settings'       => 'imagazine_global_screenmode_largemargin',
             	'type'           => 'number',
  	    	'description'    => __( 'Define outermargin for Large screen mode (px).', 'imagazine' ),
+    	)));
+
+		$wp_customize->add_setting( 'imagazine_global_screenmode_pagewidth' , array(
+		'default' => 96,
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_global_screenmode_pagewidth', array(
+            	'label'          => __( 'Page width', 'imagazine' ),
+            	'section'        => 'imagazine_global_screenmode',
+            	'settings'       => 'imagazine_global_screenmode_pagewidth',
+            	'type'           => 'number',
+ 	    	'description'    => __( 'Define page constant width for all content(%).', 'imagazine' ),
+    	)));
+		$wp_customize->add_setting( 'imagazine_global_screenmode_pagemaxwidth' , array(
+		'default' => 1480,
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_global_screenmode_pagemaxwidth', array(
+            	'label'          => __( 'Page max width', 'imagazine' ),
+            	'section'        => 'imagazine_global_screenmode',
+            	'settings'       => 'imagazine_global_screenmode_pagemaxwidth',
+            	'type'           => 'number',
+ 	    	'description'    => __( 'Define max full width for all page content(px).', 'imagazine' ),
     	)));
 
 
@@ -2095,6 +2118,16 @@ function imagazine_customize_adaptive(){
 		}
 		?>
 
+	}
+
+	/*
+	 * ALL SCREENS
+	 */
+	.pagemargin
+	{
+	margin:0px auto;
+	width:<?php echo get_theme_mod('imagazine_global_screenmode_pagewidth', '100' ).'%'; ?>;
+	max-width:<?php echo get_theme_mod('imagazine_global_screenmode_pagemaxwidth', '1480' ).'px'; ?>;
 	}
 
 
