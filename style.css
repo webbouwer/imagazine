@@ -12,6 +12,7 @@ Text Domain: imagazine
 GitHub Theme URI: https://github.com/Oddsized/imagazine
 GitHub Branch: development
 
+
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
@@ -29,6 +30,7 @@ margin:0;
 clear:both;
 height:0;
 line-height: 0;
+font-size: 0;
 }
 
 #pagecontainer
@@ -40,7 +42,6 @@ position: relative;
 /*
  * upperbar and topbar
  */
-
 #uppermenu,
 #topwidgets
 {
@@ -61,7 +62,8 @@ display: inline-block;
 display: inline-block;
 }
 #topmenu nav div div ul > li > a,
-#topmenu nav div div ul > li > div > a
+#topmenu nav div div ul > li > div > a,
+#toplogobox > a
 {
 display:table-cell;
 vertical-align:middle;
@@ -100,15 +102,26 @@ display:block;
 }
 
 /* top fixed */
-#topbarcontainer{
+#topbarcontainer
+{
 	position: relative;
 	width:100%;
+	z-index:99;
 }
 #topbarcontainer.sticky
 {
 	position: fixed;
 	z-index:298;
 }
+
+#topbarcontainer .outermargin
+{
+}
+
+#toplogobox
+{
+}
+
 
 /* Default topbar sidebar menu styling */
 #topbarcontainer .sidecolumn ul.menu li
@@ -164,6 +177,18 @@ margin:3px 3px 4px 10px;
 }
 
 
+/* default load spinner*/
+#feedstackcontainer
+{
+background-color:#ffffff;
+}
+.spinner
+{
+background-image: url(spinner.gif);
+background-size: 64px 64px;
+background-repeat: no-repeat;
+background-position: center;
+}
 
 
 
@@ -181,6 +206,12 @@ z-index:80;
 {
 display:inline-block;
 padding:3px;
+
+
+
+
+
+
 /* | edit (admin) | voice button (responsive text to speech plugin) */
 }
 #maincontent .optionmenu button.responsivevoice-button

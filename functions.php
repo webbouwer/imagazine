@@ -4,6 +4,7 @@
 	require get_template_directory() . '/customizer.php'; // customizer functions
 	require get_template_directory() . '/assets/menu.php'; 	// menu image plugin functions
 	require get_template_directory() . '/assets/metaboxes.php'; // post meta functions
+	require get_template_directory() . '/assets/userlogin.php'; // frontend login functions
 	require get_template_directory() . '/assets/widgets.php'; // widget functions
 	require get_template_directory() . '/assets/widget_postlist.php'; // widget functions
 	require get_template_directory() . '/assets/widget_stackmyfeeds.php'; // widget functions
@@ -11,6 +12,7 @@
 
 	// Register and load the widgets
 	function imagazine_load_widgets() {
+		register_widget( 'imagazine_login_widget' );
 		register_widget( 'imagazine_postlist_widget' );
 		register_widget( 'imagazine_stackmyfeeds_widget' );
 	}
@@ -207,6 +209,18 @@
 			));
 
 
+			// the full spread content after the main content before the footer
+			register_sidebar(array(
+				'name' => 'Content subcontent widgets',
+				'id'   => 'subcontentwidgets',
+				'description'   => 'Full spread content after the main content before the footer',
+				'before_widget' => '<div id="%1$s" class="widget %2$s">',
+				'after_widget'  => '<div class="clr"></div></div></div>',
+				'before_title'  => '<div class="widget-titlebox"><h3>',
+				'after_title'   => '</h3></div><div class="widget-contentbox">'
+			));
+
+
 			// the footer  columns
 			register_sidebar(array(
 				'name' => 'Footer Column Widgets',
@@ -271,8 +285,7 @@
 
 	/*
 	 * Widget empty title content wrapper fix
-	 */
-	add_filter( 'dynamic_sidebar_params', 'check_sidebar_params' );
+	*/
 	function check_sidebar_params( $params ) {
 		global $wp_registered_widgets;
 
@@ -280,11 +293,15 @@
 		$settings = $settings_getter->get_settings();
 		$settings = $settings[ $params[1]['number'] ];
 
-		if ( $params[0][ 'after_widget' ] == '<div class="clr"></div></div></div>' && isset( $settings[ 'title' ] ) && empty( $settings[ 'title' ] ) )
+		if ( $params[0][ 'after_widget' ] == '<div class="clr"></div></div></div>' && isset( $settings[ 'title' ] ) &&  empty( $settings[ 'title' ] ) ){
 			$params[0][ 'before_widget' ] .= '<div class="widget-contentbox">';
+		}
 
 		return $params;
 	}
+	add_filter( 'dynamic_sidebar_params', 'check_sidebar_params' );
+
+
 	/*
 	 * Editor style WP THEME STANDARD
 	 */
@@ -319,8 +336,9 @@
 	// http://wordpress.stackexchange.com/questions/57386/how-do-i-force-wp-enqueue-scripts-to-load-at-the-end-of-head
 	function imagazine_global_js() {
 
-		// Register the script first.
+		// Register the script(s)
 		wp_register_script( 'custom_global_js', get_template_directory_uri().'/assets/global.js', 99, '1.0', false);
+		wp_register_script( 'custom_login_js', get_template_directory_uri().'/assets/userlogin.js', 99, '1.0', false);
 		//wp_register_script( 'custom_topbar_js', get_template_directory_uri().'/assets/customizer_topbar.js', 99, '1.0', false);
 
 		// Get the global data list.
@@ -330,12 +348,15 @@
 		wp_localize_script( 'custom_global_js', 'site_data', $wp_global_data );
 		//wp_localize_script( 'custom_topbar_js', 'site_data', $wp_global_data );
 
+
+
 		// localize the script with specific data.
 		//$color_array = array( 'color1' => get_theme_mod('color1'), 'color2' => '#000099' );
 		//wp_localize_script( 'custom_global_js', 'object_name', $color_array );
 
 		// The script can be enqueued now or later.
 		wp_enqueue_script( 'custom_global_js');
+		wp_enqueue_script( 'custom_login_js');
 		//wp_enqueue_script( 'custom_topbar_js');
 	}
 
@@ -473,14 +494,26 @@
 
 
 	// include googlefonts
+/*
     function google_fonts() {
 		$query_args = array(
-			'family' => 'Lato|Martel',
-			'subset' => 'latin,latin-ext',
+			'family' => get_theme_mod("imagazine_global_styles_mainfont", "Lato|Martel"),
+			'subset' => get_theme_mod("imagazine_global_styles_subsetfont", "latin,latin-ext"),
 		);
-		wp_register_style( 'google_fonts', add_query_arg( $query_args, "//fonts.googleapis.com/css" ), array(), null );
+		wp_enqueue_style( 'google_fonts', add_query_arg( $query_args, "//fonts.googleapis.com/css" ), array(), null );
+		// wp_register_style
     }
+
+
     add_action('wp_enqueue_scripts', 'google_fonts');
+*/
+
+    function load_fonts() {
+		wp_register_style( 'google_fonts', 'https://fonts.googleapis.com/css?family='.get_theme_mod("imagazine_global_styles_mainfont", "Lato|Martel") );
+        wp_enqueue_style( 'google_fonts');
+    }
+
+    add_action('wp_print_styles', 'load_fonts');
 
 
 
@@ -489,6 +522,8 @@
 
 
 	/* Customized WP elements */
+	// Enable the use of shortcodes in text widgets.
+	add_filter( 'widget_text', 'do_shortcode' );
 
 	/* Execute PHP in the default text-widget
 	*/

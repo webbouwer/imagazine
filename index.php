@@ -12,7 +12,14 @@ get_template_part('htmlhead');
 
 echo '</head><body ';
 body_class();
-echo '><div id="pagecontainer">';
+echo '>';
+
+// start tracking code
+if( get_option( 'tracking_code_bodytop' ) != '' && get_option( 'tracking_code_bodytop' ) != 1){
+echo get_option( 'tracking_code_bodytop' );
+} // end tracking codepress_footer_js()
+
+echo '<div id="pagecontainer" class="pagemargin">';
 
 /*
  * TOPBAR

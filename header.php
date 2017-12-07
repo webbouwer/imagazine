@@ -1,5 +1,8 @@
 <?php
 $headerdisplay = get_theme_mod('imagazine_header_display_type', 'image');
+
+$headershortcode = get_theme_mod('imagazine_header_display_shortcode', '');
+
 $headertitle = get_theme_mod('imagazine_header_pagetitle', 'no');
 
 $blogtitle = get_theme_mod('blogname', 'No title');
@@ -28,6 +31,44 @@ $headersidebar2respon = get_theme_mod('imagazine_header_sidebar2responsive', 'af
 $header_image = get_header_image();
 
 
+
+$headerready = 0;
+
+// header shortcode
+
+if( $headershortcode != '' ){
+
+	//if( shortcode_exists( $headershortcode ) ) {
+
+
+    	// The short code does  exists > header area for plugin
+		if($headerbgwidth == 'full'){
+			echo '<div id="headercodebox" class="fullwidth"'.$headerbgstyle.'>';
+		}else{
+			echo '<div id="headercodebox" class="outermargin"'.$headerbgstyle.'>';
+		}
+
+		echo do_shortcode( $headershortcode );
+
+		echo '</div>';
+
+
+		$headerready = 1;
+	//}
+}
+
+
+
+
+
+// theme header
+if( $headerready != 1 ){
+
+
+
+
+
+
 // header title
 
 $headmaintitle = '';
@@ -52,7 +93,7 @@ if( ( is_single() || is_page() ) && ( $headerfeaturedimg == 'yes' || $headertitl
 
 }else if( $headertitle != 'no'  ){
 
-	$headmaintitle = single_cat_title("Category ", false);
+	$headmaintitle = single_cat_title("", false);
 
 	if(!$headmaintitle){
 	$headmaintitle = get_bloginfo('name');
@@ -62,19 +103,14 @@ if( ( is_single() || is_page() ) && ( $headerfeaturedimg == 'yes' || $headertitl
 
 
 
+
+
+
+
+
+
 	// check page meta overwrite
- 	$page_meta_header_type = "";
-    $page_meta_header_display = "";
-	$page_title_display = "";
 	if( is_page() ){
-
-		$page_header_type = get_post_meta( get_the_ID() , "page-meta-header-type", true);
-		$page_header_display = get_post_meta( get_the_ID() , "page-meta-header-display", true);
-		$page_title_display = get_post_meta( get_the_ID() , "page-meta-title-display", true);
-
-		$typearr = array(1 => 'image', 2 => 'overlay', 3 => 'split', 4 => 'none');
-		$displayarr = array( 1 => 'yes', 2 => 'no');
-
 
 		if( $page_header_type != 0 ){
 			$headerdisplay = $typearr[ $page_header_type ];
@@ -87,6 +123,11 @@ if( ( is_single() || is_page() ) && ( $headerfeaturedimg == 'yes' || $headertitl
 		//$headerdisplay = get_theme_mod('imagazine_header_display_type', 'image');
 		//$headertitle = get_theme_mod('imagazine_header_pagetitle', 'no');
 	}
+
+
+
+
+
 
 
 
@@ -170,7 +211,11 @@ if( $headerdisplay != 'none' ){
 		echo '<div class="maincolumnbox">';
 
 		// display title
-		if( ( $headertitle != 'no' && $page_title_display == 0 ) || $page_title_display != 1 ){
+		//if( ( $headertitle != 'no' && $page_title_display == 0 ) || $page_title_display != 1 ){
+		if( is_page() && ( $page_title_display == 1 ) ){
+			$headertitle = 'no';
+		}
+		if( $headertitle != 'no' ){
 
 		echo '<h1>'.$headmaintitle.'</h1>';
 
@@ -201,4 +246,6 @@ if( $headerdisplay != 'none' ){
 
 	} // header used
 	} // image available
+
+} // end theme header
 ?>

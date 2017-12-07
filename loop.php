@@ -19,32 +19,44 @@ $sidebar2respon = get_theme_mod('imagazine_content_sidebars_sidebar2responsive',
 
 
 /* post/page/list global settings */
-$list_topwidgets_display = get_theme_mod('imagazine_global_listdisplay_contenttop', 'hide');
-$list_authortime_display = get_theme_mod('imagazine_global_listdisplay_authortime', 'both');
-$list_timeformat_display = get_theme_mod('imagazine_global_listdisplay_timeformat', 'date');
-$list_bottomwidgets_display = get_theme_mod('imagazine_global_listdisplay_contentbottom', 'hide');
-$list_sidebar1_display = get_theme_mod('imagazine_global_listdisplay_sidebar1_pos','none');
-$list_sidebar2_display = get_theme_mod('imagazine_global_listdisplay_sidebar2_pos','none');
+$list_topwidgets_display = get_theme_mod('imagazine_content_listdisplay_contenttop', 'hide');
+$list_authortime_display = get_theme_mod('imagazine_content_listdisplay_authortime', 'both');
+$list_timeformat_display = get_theme_mod('imagazine_content_listdisplay_timeformat', 'date');
+$list_bottomwidgets_display = get_theme_mod('imagazine_content_listdisplay_contentbottom', 'hide');
+$list_sidebar1_display = get_theme_mod('imagazine_content_listdisplay_sidebar1_pos','none');
+$list_sidebar2_display = get_theme_mod('imagazine_content_listdisplay_sidebar2_pos','none');
 
-$post_topwidgets_display = get_theme_mod('imagazine_global_postdisplay_contenttop', 'hide');
-$post_authortime_display = get_theme_mod('imagazine_global_postdisplay_authortime', 'both');
-$post_timeformat_display = get_theme_mod('imagazine_global_postdisplay_timeformat', 'date');
-$post_featuredimage_display = get_theme_mod('imagazine_global_postdisplay_imageposition', 'top');
-$post_bottomwidgets_display = get_theme_mod('imagazine_global_postdisplay_contentbottom', 'hide');
-$post_sidebar1_display = get_theme_mod('imagazine_global_postdisplay_sidebar1_pos','none');
-$post_sidebar2_display = get_theme_mod('imagazine_global_postdisplay_sidebar2_pos','none');
 
-$page_topwidgets_display = get_theme_mod('imagazine_global_pagedisplay_contenttop', 'hide');
-$page_authortime_display = get_theme_mod('imagazine_global_pagedisplay_authortime', 'both');
-$page_timeformat_display = get_theme_mod('imagazine_global_pagedisplay_timeformat', 'date');
-$page_featuredimage_display = get_theme_mod('imagazine_global_pagedisplay_imageposition', 'top');
-$page_bottomwidgets_display = get_theme_mod('imagazine_global_pagedisplay_contentbottom', 'hide');
+
+
+$post_topwidgets_display = get_theme_mod('imagazine_content_postdisplay_contenttop', 'hide');
+$post_authortime_display = get_theme_mod('imagazine_content_postdisplay_authortime', 'both');
+$post_timeformat_display = get_theme_mod('imagazine_content_postdisplay_timeformat', 'date');
+$post_featuredimage_display = get_theme_mod('imagazine_content_postdisplay_imageposition', 'top');
+$post_bottomwidgets_display = get_theme_mod('imagazine_content_postdisplay_contentbottom', 'hide');
+$post_sidebar1_display = get_theme_mod('imagazine_content_postdisplay_sidebar1_pos','none');
+$post_sidebar2_display = get_theme_mod('imagazine_content_postdisplay_sidebar2_pos','none');
+
+$page_topwidgets_display = get_theme_mod('imagazine_content_pagedisplay_contenttop', 'hide');
+$page_authortime_display = get_theme_mod('imagazine_content_pagedisplay_authortime', 'both');
+$page_timeformat_display = get_theme_mod('imagazine_content_pagedisplay_timeformat', 'date');
+$page_featuredimage_display = get_theme_mod('imagazine_content_pagedisplay_imageposition', 'top');
+$page_bottomwidgets_display = get_theme_mod('imagazine_content_pagedisplay_contentbottom', 'hide');
+
+
+$subcontentshortcode = get_theme_mod('imagazine_content_subcontent_shortcode', '');
+
+
 
 
 $post_categories_display = 'hide';
 $post_tags_display = 'hide';
 
 
+
+$list_page_nav = 'hide'; // hide/ top /bottom
+$post_prevnext_nav = 'hide';
+$page_prevnext_nav = 'hide';
 
 
 // overwrite page meta sidebar settings
@@ -131,8 +143,8 @@ $page_topwidgets_display = $dsparr[$page_contenttop_display];
 }
 
 if( !( is_page() && $page_topwidgets_display == 'hide' )
-   && !( is_single() && get_theme_mod('imagazine_global_postdisplay_contenttop', 'hide') == 'hide' )
-  	&& !( is_category() && get_theme_mod('imagazine_global_listdisplay_contenttop', 'hide') == 'hide' ) ){
+   && !( is_single() && $post_topwidgets_display == 'hide' )
+  	&& !( is_category() && $list_topwidgets_display == 'hide' ) ){
 
 // maincontent top widgets
 if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('contenttopwidgets') ){
@@ -485,8 +497,8 @@ if( $page_contenttop_display != 0 ){
 }
 
 if( !( is_page() && $page_bottomwidgets_display == 'hide' )
-   && !( is_single() && get_theme_mod('imagazine_global_postdisplay_contentbottom', 'hide') == 'hide' )
-   && !( !is_single() && !is_page() && get_theme_mod('imagazine_global_listdisplay_contentbottom', 'hide') == 'hide' )
+   && !( is_single() && $post_bottomwidgets_display == 'hide' )
+   && !( !is_single() && !is_page() && $list_bottomwidgets_display == 'hide' )
   	 ){
 
 // maincontent bottom widgets
@@ -501,8 +513,30 @@ if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') &
 echo '<div class="clr"></div></div>'; // end maincontent
 
 
+echo '<div class="clr"></div><div id="subcontentcontainer">';
+
+// subcontent shortcode
+if( $subcontentshortcode != ""){
+	echo do_shortcode( $subcontentshortcode ) .'<div class="clr"></div>';
+}
+
+// subcontent widgets
+if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('subcontentwidgets') ){
+	echo '<div class="clr"></div><div id="subcontentwidgets" class="subcontentwidgets">';
+	dynamic_sidebar('subcontentwidgets');
+	echo '<div class="clr"></div></div>';
+}
+
+echo '<div class="clr"></div></div>'; // end subcontent container
+
+
+
 echo '<div class="clr"></div></div>'; // end margin
 
-
 echo '<div class="clr"></div></div>'; // end maincontent container
+
+
+
+
+
 ?>

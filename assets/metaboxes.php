@@ -24,11 +24,11 @@ function imagazine_page_meta_box($object)
 	$option_title_display = array(0=>'Default setting ('.get_theme_mod('imagazine_header_pagetitle', 'maintext').')', 1=>'Not in header, only on maintext', 2=>'Title in header and on maintext', 3=>'In header only');
 
 
-	$option_contenttop_widgets_display = array( 0 =>'Default ('.get_theme_mod('imagazine_global_pagedisplay_contenttop', 'show').')', 1 => 'show', 2 => 'hide');
+	$option_contenttop_widgets_display = array( 0 =>'Default ('.get_theme_mod('imagazine_content_pagedisplay_contenttop', 'show').')', 1 => 'show', 2 => 'hide');
 
 	$option_maincontent_display = array( 0 =>'show', 1 => 'hide');
 
-	$option_contentbottom_widgets_display = array( 0 =>'Default ('.get_theme_mod('imagazine_global_pagedisplay_contentbottom', 'show').')', 1 => 'show', 2 => 'hide');
+	$option_contentbottom_widgets_display = array( 0 =>'Default ('.get_theme_mod('imagazine_content_pagedisplay_contentbottom', 'show').')', 1 => 'show', 2 => 'hide');
 
 
 	$option_sidebar1_display = array(0=>'Default setting ('.get_theme_mod('imagazine_content_sidebars_sidebar1pos', 'right').')', 1=>'right', 2=>'left', 3=>'none' );

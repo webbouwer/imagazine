@@ -7,8 +7,12 @@ jQuery(function ($) {
 			//alert( JSON.stringify( $wp_custom_vars ) );
 
 			var mediumswitch = 580;
-			if( $wp_custom_vars['imagazine_global_screenmode_mediummin'] && $wp_custom_vars['imagazine_global_screenmode_mediummin'] > 560 ){
+			var largeswitch = 1150;
+			if( $wp_custom_vars['imagazine_global_screenmode_mediummin'] && $wp_custom_vars['imagazine_global_screenmode_mediummin'] > 580 ){
 			mediumswitch = $wp_custom_vars['imagazine_global_screenmode_mediummin'];
+			}
+			if( $wp_custom_vars['imagazine_global_screenmode_largemin'] && $wp_custom_vars['imagazine_global_screenmode_largemin'] > 1150 ){
+			largeswitch = $wp_custom_vars['imagazine_global_screenmode_largemin'];
 			}
 			/* Upperbar */
 			var upperbardisplaysmall = $wp_custom_vars['imagazine_upperbar_behavior_displaysmall'];
@@ -42,6 +46,8 @@ jQuery(function ($) {
 			var toplogominw = $wp_custom_vars['imagazine_topbar_logo_minwidth'];
 			var toplogomaxw = $wp_custom_vars['imagazine_topbar_logo_maxwidth'];
 			var topbarminheight = $wp_custom_vars['imagazine_topbar_behavior_minheight'];
+			var topbarmaxheight = $wp_custom_vars['imagazine_topbar_behavior_maxheight'];
+			var topbarscroll = $wp_custom_vars['imagazine_topbar_behavior_scroll'];
 		    var topwidgetspos = $wp_custom_vars['imagazine_topbar_widgets_position'];
 
 
@@ -92,6 +98,10 @@ jQuery(function ($) {
 			var footsidebar2align = $wp_custom_vars['imagazine_footer_sidebars_sidebar2align'];
 			var footsidebar2respon = $wp_custom_vars['imagazine_footer_sidebars_sidebar2responsive'];
 
+
+
+		 	/* */
+			var lbform = $("#toplogobox img").clientWidth / $("#toplogobox img").clientHeight;
 
 
 
@@ -168,6 +178,7 @@ jQuery(function ($) {
 						// get topbarcontainer height
 						var th = $('#topbarcontainer').outerHeight();
 
+
 						// fixed on top after scrolling upperbar height
 
 							// onscroll
@@ -188,6 +199,13 @@ jQuery(function ($) {
 									// set sticky
 									$('#topbarcontainer').addClass('sticky');
 
+									if(topbarscroll == 'mini'){
+									$("#toplogobox img").animate({
+									  width: toplogominw+'px'
+									});
+
+									$("#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a").animate({ height: topbarminheight });
+									}
 								}else if( topbarTop >= windowTop && $('#topbarcontainer').hasClass('sticky') ) {
 
 									// remove sticky
@@ -198,6 +216,17 @@ jQuery(function ($) {
 
 									// remove spacer
 									$('#topspacer').remove();
+
+
+									if(topbarscroll == 'mini'){
+									$("#toplogobox img").animate({
+									  width: toplogomaxw+'px'
+									});
+
+									$("#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a").animate({ height: topbarmaxheight });
+									}
+
+
 
 								}
 
@@ -390,7 +419,7 @@ jQuery(function ($) {
 							// menu available
 							$('#topmenu').show();
 
-
+							//var topnavheight = ( $('#toplogobox').outerHeight() > topbarminheight ? $('#toplogobox').outerHeight() : topbarminheight);
 
 							//  logo positioning inside
 							if( toplogopos == 'middle'){
@@ -398,6 +427,7 @@ jQuery(function ($) {
 								// compute menu middle
 								var total_menu_items = $('#topmenu nav div div > ul > li').length;
 								var middle = Math.ceil(total_menu_items / 2);
+
 								// place logo menu html wrapper in menu list
 								if( $('#topmenu nav div div > ul li.logo').length < 1){
 									$('#topmenu nav div div > ul > li:nth-child(' + middle + ')').after( $( menu_logo_html ) );
@@ -406,8 +436,8 @@ jQuery(function ($) {
 								$('#topmenu nav div div > ul li.logo').append( $('#toplogobox') );
 								// adjust menu height to logo
 								// .. todo: logo min height
-								$('#topmenu nav div div > ul > li > a').css( 'height', $('#toplogobox').outerHeight() );
-
+									$('#topmenu, #topmenu nav div div > ul > li > a').css( 'height', topbarmaxheight  );
+									$('#toplogobox > a').css( 'height', topbarmaxheight  );
 
 							}else{
 
@@ -417,12 +447,12 @@ jQuery(function ($) {
 
 								if( toplogopos != 'above' && toplogopos != 'none'){
 
-									var topnavheight = ( $('#toplogobox').outerHeight() > topbarminheight ? $('#toplogobox').outerHeight() : topbarminheight);
-									$('#topmenu nav div div > ul > li > a').css( 'height', topnavheight+'px' );
+									$('#topmenu, #topmenu nav div div > ul > li > a').css( 'height', topbarmaxheight  );
+									$('#toplogobox > a').css( 'height', topbarmaxheight  );
 
 								}else{
 
-									$('#topmenu nav div div > ul > li > a').css( 'height', 'auto' );
+									$('#topmenu, #topmenu nav div div > ul > li > a, #toplogobox > a').css( 'height', topbarminheight );
 
 								}
 
@@ -445,12 +475,11 @@ jQuery(function ($) {
 
 
 
-
-
 					// logo default
 					$('#topmainbar').prepend( $('#toplogobox') );
 					$('li.logo').remove();
-					$('#topmenu nav div div > ul > li > a').css( 'height', 'auto' );
+					$('#topmenu, #topmenu nav div div > ul > li > a, #topmenu nav div div > ul > li > #toplogobox > a').css( 'height', 'auto' );
+
 
 					// move sidebars before, after, collapsed, hide
 					if( $('#topsidebar-2').length > 0 ){
@@ -517,12 +546,12 @@ jQuery(function ($) {
 
 
 
-				}
+				} // end smaller screens
 
-				} //
+				} // end if upperbar / topbar available
 
 
-			}
+			} // end function
 
 
 
@@ -583,8 +612,10 @@ jQuery(function ($) {
 						windowspace -= $("topbarcontainer").height();
 					}
 
+
 					if( (( windowspace / 100 ) * headerheight) > headerminheight ){
-						$('#headermedia > .outermargin, #headermainbar').height( ( windowspace / 100 ) * headerheight );
+						$('#headermedia, #headermedia > .outermargin, #headermainbar').height( ( windowspace / 100 ) * headerheight );
+						//$('#headermedia .outermargin, #headermedia .maincolumnbox, #headermedia .sidecolumn').height( ( windowspace / 100 ) * headerheight );
 					}
 
 
@@ -805,7 +836,7 @@ jQuery(function ($) {
 			}
 
 
-		$(window).load(function() {
+		//$(window).load(function() {
 			/*
 			 * on resize end function
 			 */
@@ -853,12 +884,23 @@ jQuery(function ($) {
 
 				}
 
+
+				// add mobile class
+				var screensizeclass = 'smallscreen';
+				if( $(window).width() > largeswitch ){
+					screensizeclass = 'largescreen';
+				}else if( $(window).width() > mediumswitch ){
+					screensizeclass = 'mediumscreen';
+				}
+				$('body').removeClass('smallscreen mediumscreen largescreen').addClass(screensizeclass);
+
+
 			}
 
 			// init resize end on document ready
 			customizer_resizeend();
 
-		}); //end onload
+		//}); //end onload
 
 	}); //end on ready
 
