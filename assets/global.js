@@ -1,5 +1,18 @@
 /* global.js */
 jQuery(function ($) {
+
+	/*
+	$('html').hide();
+
+	$(window).load(function() {
+		$('html').fadeIn(200);
+	}); //end onload
+
+	$(window).unload(function () {
+        $('html').fadeOut(100);
+    });
+	*/
+
 	$(document).ready( function(){
 
 			var $wp_custom_vars = JSON.parse(site_data['customizer']);//alert( $wp_custom_vars['imagazine_topbar_behavior_minheight'] );
@@ -182,7 +195,9 @@ jQuery(function ($) {
 						// fixed on top after scrolling upperbar height
 
 							// onscroll
-							$(window).scroll(function(){
+							$(window).scroll(function(e){
+
+								e.preventDefault();
 
 								// get scroll top position
 								var windowTop = $(window).scrollTop() + tsp;
@@ -200,12 +215,15 @@ jQuery(function ($) {
 									$('#topbarcontainer').addClass('sticky');
 
 									if(topbarscroll == 'mini'){
-									$("#toplogobox img").animate({
-									  width: toplogominw+'px'
-									});
 
-									$("#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a").animate({ height: topbarminheight });
+										$("#toplogobox img").animate({
+										  width: toplogominw+'px'
+										});
+
+										$("#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a").animate({ height: topbarminheight });
+
 									}
+
 								}else if( topbarTop >= windowTop && $('#topbarcontainer').hasClass('sticky') ) {
 
 									// remove sticky
@@ -219,11 +237,13 @@ jQuery(function ($) {
 
 
 									if(topbarscroll == 'mini'){
-									$("#toplogobox img").animate({
-									  width: toplogomaxw+'px'
-									});
 
-									$("#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a").animate({ height: topbarmaxheight });
+										$("#toplogobox img").animate({
+										  width: toplogomaxw+'px'
+										});
+
+										$("#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a").animate({ height: topbarmaxheight });
+
 									}
 
 
@@ -835,8 +855,6 @@ jQuery(function ($) {
 
 			}
 
-
-		//$(window).load(function() {
 			/*
 			 * on resize end function
 			 */
@@ -900,9 +918,9 @@ jQuery(function ($) {
 			// init resize end on document ready
 			customizer_resizeend();
 
-		//}); //end onload
 
 	}); //end on ready
+
 
 }); // end jquery
 

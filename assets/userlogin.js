@@ -2,7 +2,7 @@ jQuery(function($) {
 		$(document).ready(function(){
 
 		$('ul.tabcontainer li').hide();
-        $("ul.tabcontainer li").eq(0).slideDown();
+        //$("ul.tabcontainer li").eq(0).slideDown();
 
 		$('ul.tabmenu li,div.resetlogin').on('click', function(){
 

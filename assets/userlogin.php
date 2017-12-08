@@ -1,5 +1,5 @@
 <?php
-/* Postslist Widget */
+/* Login Frontend Widget */
 class imagazine_login_widget extends WP_Widget {
 
 
@@ -76,7 +76,8 @@ class imagazine_login_widget extends WP_Widget {
 		<p><label for="<?php echo $this->get_field_id( 'boxtype' ); ?>">Box type:</label>
 		<select name="<?php echo $this->get_field_name( 'boxtype' ); ?>" id="<?php echo $this->get_field_id( 'boxtype' ); ?>">
 		<option value="0" <?php selected( $boxtype, 0 ); ?>>Default</option>
-		<option value="1" <?php selected( $boxtype, 1 ); ?>>Tiny</option>
+		<option value="1" <?php selected( $boxtype, 1 ); ?>>Compact</option>
+		<option value="2" <?php selected( $boxtype, 2 ); ?>>Extended</option>
 		</select>
 		</p>
 

@@ -2127,7 +2127,9 @@ function imagazine_customize_adaptive(){
 	{
 	margin:0px auto;
 	width:<?php echo get_theme_mod('imagazine_global_screenmode_pagewidth', '100' ).'%'; ?>;
+	<?php if( get_theme_mod('imagazine_global_screenmode_pagemaxwidth', '1480' ) > 0 ){ ?>
 	max-width:<?php echo get_theme_mod('imagazine_global_screenmode_pagemaxwidth', '1480' ).'px'; ?>;
+	<?php } ?>
 	}
 
 
