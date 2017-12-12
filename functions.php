@@ -330,6 +330,7 @@
 	/* Sharing - Adding the Open Graph in the Language Attributes
 	todo:
 	* implement custom values
+	* https://blog.kissmetrics.com/open-graph-meta-tags/
  	* linkedin - https://www.linkedin.com/help/linkedin/answer/46687
 
 	.'<meta property="og:title" content="'.esc_attr( get_bloginfo( 'name', 'display' ) ).'"/>'
@@ -356,22 +357,25 @@
 		//echo '<meta property="fb:admins" content="YOUR USER ID"/>';
 
 		echo '<meta property="og:title" content="' . get_the_title() . '"/>';
-			echo '<meta property="og:type" content="article"/>';
-			echo '<meta property="og:url" content="' . get_permalink() . '"/>';
-			echo '<meta property="og:site_name" content="'.esc_attr( get_bloginfo( 'name', 'display' ) ).'"/>';
-			echo'<meta property="og:description" content="'. get_bloginfo( 'description' ).'"/>';
-		if( !has_post_thumbnail( $post->ID )) { //the post does not have featured image, use a default image
+		echo '<meta property="og:type" content="website"/>';
+		echo '<meta property="og:url" content="' . get_permalink() . '"/>';
+		echo '<meta property="og:site_name" content="'.esc_attr( get_bloginfo( 'name', 'display' ) ).'"/>';
 
+		$default_text = get_theme_mod( 'imagazine_globalshare_defaulttext', '' );
+		if( $default_text == ''){
+			$default_text = get_bloginfo( 'description' );
+		}
+		echo'<meta property="og:description" content="'.$default_text.'"/>';
+
+		if( !has_post_thumbnail( $post->ID )) { //the post does not have featured image, use a default image
 			$default_image = get_theme_mod( 'imagazine_globalshare_defaultimage', get_header_image() );
 			echo '<meta property="og:image" content="' . $default_image . '"/>';
-
-		}
-		else{
+		}else{
 			$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium' );
 			echo '<meta property="og:image" content="' . esc_attr( $thumbnail_src[0] ) . '"/>';
 		}
 		echo "
-	";
+		";
 	}
 	add_action( 'wp_head', 'imagazine_fb_in_head', 5 );
 

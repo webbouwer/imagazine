@@ -307,7 +307,17 @@ function imagazine_theme_customizer( $wp_customize ){
 			'description' => __( 'Upload or select an image to share as default site cover/thumb', 'imagazine' ),
    	) ) );
 
-
+	$wp_customize->add_setting( 'imagazine_globalshare_defaulttext' , array(
+		'default' => '',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+		'priority' => 20,
+    	));
+    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_globalshare_defaulttext', array(
+            	'label'          => __( 'Default Description' , 'imagazine' ),
+            	'section'        => 'imagazine_global_share',
+            	'type'           => 'textarea',
+ 	    		'description'    => __( 'Text to share as default description', 'imagazine' ),
+    )));
 
 
 	/* Global - Sreen modes */
