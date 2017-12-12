@@ -25,6 +25,22 @@ customizer global styles
 - [x] define google fonts
 - [x] define subset google fonts
 
+
+customizer global padding
+- [ ] default horizontal 
+- [ ] default vertical 
+- [ ] default title 
+- [ ] default paragraph 
+- [ ] sidebars widget title
+- [ ] sidebars widget content
+- [ ] main content title
+- [ ] main content text/area
+
+customizer global colors
+..
+
+
+
 customizer global share settings
 - [x] set default image (og image)
 - [x] set default text (og description)
