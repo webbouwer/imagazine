@@ -5,7 +5,7 @@ At the moment only the most basic needed css styling for element positioning wit
 For amore complete list of options see [the theme wiki](https://github.com/oddsized/imagazine/wiki/Imagazine-Theme-Options)
 (More functions allready available, will be updated soon)
 
-### Following is in development
+### Features (& in development)
  
 Customizer and meta options
 page meta box
@@ -15,27 +15,29 @@ page meta box
 - [x] date display type 
 - [x] show/hide page bottom content widget
 
+customizer global share settings
+- [x] set default image (og image)
+- [x] set default text (og description)
+
 customizer content lists default settings
 - [x] show/hide top content widget
 - [x] show/hide date/author
 - [x] date display type 
-- [] default image position
+- [ ] default image position
 - [x] show/hide bottom content widget
 - [x] single post sidebar 1 display
 - [x] single post sidebar 2 display
 
 customizer content post default settings
-[x] (change custom var name) 
 - [x] show/hide top content widget
 - [x] show/hide date/author
 - [x] date display type 
 - [x] default image position
-- [x] date display type ent widget
+- [x] date display type and widget display
 - [x] single post sidebar 1 display
 - [x] single post sidebar 2 display
 
-customizer content page default settings
-[x] (change custom var name) 
+customizer content page default settings 
 - [x] show/hide top content widget
 - [x] show/hide date/author
 - [x] date display type 
@@ -53,6 +55,18 @@ customizer topbar menu
 - [x] submenu horizontal/vertical
 - [ ] submenu type compactbox/fullwidth/fullscreen
 
+customizer header
+- [x] image display type - column overlay, inside column or full image/shortcode
+- [x] show title in header (and hide/show title above content)
+- [x] use featured post/page images in header
+- [x] header area width (full or outermargin background)
+- [x] content area width (full or outermargin content)
+- [x] height percentage
+- [x] min-height in px
+- [x] content alignments
+- [x] sidebars (2x)
+- [ ] sidebar responsive small/large options 
+
 customizer content sidebar menu 
 - [x] menu alignment left/center/right
 
@@ -63,6 +77,7 @@ customizer footer menu
 
 Theme Widgets
 - [x] dashboard widget latest theme github commits 
+- [x] stack my feeds widget - facebook, twitter and rss in 1 loop
 - [x] post listing widget by category or related to current category/tags
 
 Theme Core Extensions
