@@ -327,6 +327,60 @@
 	add_action( 'wp_enqueue_scripts', 'imagazine_theme_scripts' );
 
 
+	/* Sharing - Adding the Open Graph in the Language Attributes
+	todo:
+	* implement custom values
+ 	* linkedin - https://www.linkedin.com/help/linkedin/answer/46687
+
+	.'<meta property="og:title" content="'.esc_attr( get_bloginfo( 'name', 'display' ) ).'"/>'
+	.'<meta property="og:image" content="'.get_theme_mod( 'onepiece_identity_featured_image' ).'"/>'
+	.'<meta property="og:description" content="'.$site_description.'"/>'
+	.'<meta property="og:url" content="'.esc_url( home_url( '/' ) ).'" />'
+
+ 	*/
+
+
+	function imagazine_opengraph_doctype( $output ) {
+	   return $output . ' xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml"';
+	}
+	add_filter('language_attributes', 'imagazine_opengraph_doctype');
+
+	// Theme sharing meta data
+	function imagazine_fb_in_head() {
+		global $post;
+
+		/*if ( !is_singular()) //if it is not a post or a page
+			return;
+		*/
+
+		//echo '<meta property="fb:admins" content="YOUR USER ID"/>';
+
+		echo '<meta property="og:title" content="' . get_the_title() . '"/>';
+			echo '<meta property="og:type" content="article"/>';
+			echo '<meta property="og:url" content="' . get_permalink() . '"/>';
+			echo '<meta property="og:site_name" content="'.esc_attr( get_bloginfo( 'name', 'display' ) ).'"/>';
+			echo'<meta property="og:description" content="'. get_bloginfo( 'description' ).'"/>';
+		if( !has_post_thumbnail( $post->ID )) { //the post does not have featured image, use a default image
+
+			$default_image = get_theme_mod( 'imagazine_globalshare_defaultimage', get_header_image() );
+			echo '<meta property="og:image" content="' . $default_image . '"/>';
+
+		}
+		else{
+			$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium' );
+			echo '<meta property="og:image" content="' . esc_attr( $thumbnail_src[0] ) . '"/>';
+		}
+		echo "
+	";
+	}
+	add_action( 'wp_head', 'imagazine_fb_in_head', 5 );
+
+
+
+
+
+
+
 	/*
 	 * WP CUSTOM VARS LOCATED
 	 * Javascript with customizer variables
@@ -482,8 +536,6 @@
 
 
 	/* Libraries */
-
-
 	// include webicon
 	function imagazine_load_webicons(){
 
@@ -493,8 +545,9 @@
 	add_action( 'wp_print_scripts', 'imagazine_load_webicons' );
 
 
+
 	// include googlefonts
-/*
+	/*
     function google_fonts() {
 		$query_args = array(
 			'family' => get_theme_mod("imagazine_global_styles_mainfont", "Lato|Martel"),
@@ -506,7 +559,7 @@
 
 
     add_action('wp_enqueue_scripts', 'google_fonts');
-*/
+	*/
 
     function load_fonts() {
 		wp_register_style( 'google_fonts', 'https://fonts.googleapis.com/css?family='.get_theme_mod("imagazine_global_styles_mainfont", "Lato|Martel") );
@@ -514,12 +567,6 @@
     }
 
     add_action('wp_print_styles', 'load_fonts');
-
-
-
-
-
-
 
 	/* Customized WP elements */
 	// Enable the use of shortcodes in text widgets.

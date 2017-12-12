@@ -84,6 +84,16 @@ function imagazine_theme_customizer( $wp_customize ){
 		'priority' => 20,
     ));
 
+
+
+	$wp_customize->add_section('imagazine_global_share', array(
+        'title'    => __('Share settings', 'imagazine'),
+        'panel'  => 'imagazine_global',
+		'priority' => 20,
+    ));
+
+
+
 	$wp_customize->add_section('imagazine_global_screenmode', array(
         'title'    => __('Screen modes', 'imagazine'),
         'panel'  => 'imagazine_global',
@@ -258,7 +268,6 @@ function imagazine_theme_customizer( $wp_customize ){
         	'priority' => 30,
    	) ) );
 
-
 	$wp_customize->add_setting( 'imagazine_global_styles_mainfont' , array(
 		'default' => 'Lato|Martel',
 		'sanitize_callback' => 'imagazine_sanitize_default',
@@ -281,6 +290,24 @@ function imagazine_theme_customizer( $wp_customize ){
             	'type'           => 'text',
  	    		'description'    => __( 'Copy the google font syntax ( fontname | fontname | ..) here', 'imagazine' ),
     )));
+
+
+
+
+	/* Global - Share	*/
+
+	$wp_customize->add_setting( 'imagazine_globalshare_defaultimage', array(
+		'sanitize_callback' => 'imagazine_sanitize_default',
+        'priority' => 30,
+	 ));
+	 $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'imagazine_globalshare_defaultimage', array(
+        	'label'    => __( 'Default image', 'imagazine' ),
+        	'section'  => 'imagazine_global_share',
+        	'settings' => 'imagazine_globalshare_defaultimage',
+			'description' => __( 'Upload or select an image to share as default site cover/thumb', 'imagazine' ),
+   	) ) );
+
+
 
 
 	/* Global - Sreen modes */
