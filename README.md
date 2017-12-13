@@ -5,56 +5,150 @@ At the moment only the most basic needed css styling for element positioning wit
 For amore complete list of options see [the theme wiki](https://github.com/oddsized/imagazine/wiki/Imagazine-Theme-Options)
 (More functions allready available, will be updated soon)
 
-### Following is in development
+### Features (& in development)
  
-Customizer and meta options
-page meta box
+Page meta options with customizer defaults
 - [x] show/hide page top content widget
 - [x] show/hide page main content
 - [x] show/hide date/author
 - [x] date display type 
 - [x] show/hide page bottom content widget
 
-customizer content lists default settings
-- [x] show/hide top content widget
-- [x] show/hide date/author
-- [x] date display type 
-- [] default image position
-- [x] show/hide bottom content widget
-- [x] single post sidebar 1 display
-- [x] single post sidebar 2 display
 
-customizer content post default settings
-[x] (change custom var name) 
-- [x] show/hide top content widget
-- [x] show/hide date/author
-- [x] date display type 
-- [x] default image position
-- [x] date display type ent widget
-- [x] single post sidebar 1 display
-- [x] single post sidebar 2 display
+customizer global identity
+- [x] set site title
+- [x] set site tagline
+- [x] set site logo image
+- [x] set site icon
 
-customizer content page default settings
-[x] (change custom var name) 
-- [x] show/hide top content widget
-- [x] show/hide date/author
-- [x] date display type 
-- [x] default image position
-- [x] date display type ent widget
+customizer global styles
+- [x] define google fonts
+- [x] define subset google fonts
+
+
+customizer global padding
+- [ ] default horizontal 
+- [ ] default vertical 
+- [ ] default title 
+- [ ] default paragraph 
+- [ ] sidebars widget title
+- [ ] sidebars widget content
+- [ ] main content title
+- [ ] main content text/area
+
+customizer global colors
+..
+
+
+
+customizer global share settings
+- [x] set default image (og image)
+- [x] set default text (og description)
+
+customizer global frontpage type
+- [x] select page or post loop
+
+customizer global background
+- [x] select page background image settings
+
+customizer global screenmodes
+- [x] small min/max width and breakpoint
+- [x] medium min/max width and breakpoint
+- [x] large min/max width
+- [x] page block width percentage
+- [x] page block max width
+
+customizer upperbar behavior
+- [x] small screen fixed/scroll/hide
+- [x] large screen fixed/scroll/hide
+- [x] max width full/outermargin
 
 customizer upperbar menu 
-- [x] menu alignment left/center/right
+- [x] menu alignment large screen left/center/right
+- [ ] menu display small screen
+- [x] menu text alignment
 - [ ] submenu horizontal/vertical 
 - [ ] submenu horizontal/vertical
 - [ ] submenu types compactbox/fullwidth/fullscreen
+
+customizer upperbar sidebar 
+- [x] position
+- [x] width percentage
+- [x] content alignment
+- [ ] responsive position
+
+customizer topbar behavior
+- [x] small screen fixed/scroll/hide
+- [x] large screen fixed/scroll/hide
+- [x] max width full/outermargin
+- [x] min-height
+- [x] max-height
+- [x] sticky height minimal/unchanged 
+- [x] margin width (full/outermargin)
+
+customizer topbar logo
+- [x] select logo image
+- [x] logo position left/right/above/below/center top(default)menu
+- [x] min width in px
+- [x] max width in px
 
 customizer topbar menu 
 - [x] menu alignment left/center/right
 - [x] submenu horizontal/vertical
 - [ ] submenu type compactbox/fullwidth/fullscreen
 
+customizer topbar widgets
+- [ ] positioning options
+- [x] max columns
+
+customizer topbar sidebars (2x)
+- [x] position
+- [x] width percentage
+- [x] content alignment
+- [ ] responsive position
+
+customizer header
+- [x] image display type - column overlay, inside column or full image/shortcode
+- [x] show title in header (and hide/show title above content)
+- [x] use featured post/page images in header
+- [x] header area width (full or outermargin background)
+- [x] content area width (full or outermargin content)
+- [x] height percentage
+- [x] min-height in px
+- [x] content alignments
+- [x] sidebars (2x)
+- [ ] sidebar responsive small/large options 
+
+customizer content lists default settings
+- [x] show/hide top content widget
+- [x] show/hide date/author
+- [x] date display type 
+- [ ] default image position
+- [x] show/hide bottom content widget
+- [x] single post sidebar 1 display
+- [x] single post sidebar 2 display
+
+customizer content post default settings
+- [x] show/hide top content widget
+- [x] show/hide date/author
+- [x] date display type 
+- [x] default image position
+- [x] date display type and widget display
+- [x] single post sidebar 1 display
+- [x] single post sidebar 2 display
+
+customizer content page default settings 
+- [x] show/hide top content widget
+- [x] show/hide date/author
+- [x] date display type 
+- [x] default image position
+- [x] date display type ent widget
+
 customizer content sidebar menu 
 - [x] menu alignment left/center/right
+
+customizer content subcontent
+- [x] add shortcode
 
 customizer footer menu 
 - [x] menu alignment left/center/right
@@ -63,6 +157,7 @@ customizer footer menu
 
 Theme Widgets
 - [x] dashboard widget latest theme github commits 
+- [x] stack my feeds widget - facebook, twitter and rss in 1 loop
 - [x] post listing widget by category or related to current category/tags
 
 Theme Core Extensions

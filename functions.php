@@ -327,6 +327,64 @@
 	add_action( 'wp_enqueue_scripts', 'imagazine_theme_scripts' );
 
 
+	/* Sharing - Adding the Open Graph in the Language Attributes
+	todo:
+	* implement custom values
+	* https://blog.kissmetrics.com/open-graph-meta-tags/
+ 	* linkedin - https://www.linkedin.com/help/linkedin/answer/46687
+
+	.'<meta property="og:title" content="'.esc_attr( get_bloginfo( 'name', 'display' ) ).'"/>'
+	.'<meta property="og:image" content="'.get_theme_mod( 'onepiece_identity_featured_image' ).'"/>'
+	.'<meta property="og:description" content="'.$site_description.'"/>'
+	.'<meta property="og:url" content="'.esc_url( home_url( '/' ) ).'" />'
+
+ 	*/
+
+
+	function imagazine_opengraph_doctype( $output ) {
+	   return $output . ' xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml"';
+	}
+	add_filter('language_attributes', 'imagazine_opengraph_doctype');
+
+	// Theme sharing meta data
+	function imagazine_fb_in_head() {
+		global $post;
+
+		/*if ( !is_singular()) //if it is not a post or a page
+			return;
+		*/
+
+		//echo '<meta property="fb:admins" content="YOUR USER ID"/>';
+
+		echo '<meta property="og:title" content="' . get_the_title() . '"/>';
+		echo '<meta property="og:type" content="website"/>';
+		echo '<meta property="og:url" content="' . get_permalink() . '"/>';
+		echo '<meta property="og:site_name" content="'.esc_attr( get_bloginfo( 'name', 'display' ) ).'"/>';
+
+		$default_text = get_theme_mod( 'imagazine_globalshare_defaulttext', '' );
+		if( $default_text == ''){
+			$default_text = get_bloginfo( 'description' );
+		}
+		echo'<meta property="og:description" content="'.$default_text.'"/>';
+
+		if( !has_post_thumbnail( $post->ID )) { //the post does not have featured image, use a default image
+			$default_image = get_theme_mod( 'imagazine_globalshare_defaultimage', get_header_image() );
+			echo '<meta property="og:image" content="' . $default_image . '"/>';
+		}else{
+			$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium' );
+			echo '<meta property="og:image" content="' . esc_attr( $thumbnail_src[0] ) . '"/>';
+		}
+		echo "
+		";
+	}
+	add_action( 'wp_head', 'imagazine_fb_in_head', 5 );
+
+
+
+
+
+
+
 	/*
 	 * WP CUSTOM VARS LOCATED
 	 * Javascript with customizer variables
@@ -482,8 +540,6 @@
 
 
 	/* Libraries */
-
-
 	// include webicon
 	function imagazine_load_webicons(){
 
@@ -493,8 +549,9 @@
 	add_action( 'wp_print_scripts', 'imagazine_load_webicons' );
 
 
+
 	// include googlefonts
-/*
+	/*
     function google_fonts() {
 		$query_args = array(
 			'family' => get_theme_mod("imagazine_global_styles_mainfont", "Lato|Martel"),
@@ -506,7 +563,7 @@
 
 
     add_action('wp_enqueue_scripts', 'google_fonts');
-*/
+	*/
 
     function load_fonts() {
 		wp_register_style( 'google_fonts', 'https://fonts.googleapis.com/css?family='.get_theme_mod("imagazine_global_styles_mainfont", "Lato|Martel") );
@@ -514,12 +571,6 @@
     }
 
     add_action('wp_print_styles', 'load_fonts');
-
-
-
-
-
-
 
 	/* Customized WP elements */
 	// Enable the use of shortcodes in text widgets.
@@ -610,7 +661,7 @@ function disable_emojicons_tinymce( $plugins ) {
  * control (remove) gravatar
  */
 function bp_remove_gravatar ($image, $params, $item_id, $avatar_dir, $css_id, $html_width, $html_height, $avatar_folder_url, $avatar_folder_dir) {
-	$default = get_stylesheet_directory_uri() .'/images/avatar.png';
+	$default = home_url().'/wp-includes/images/smilies/icon_cool.gif'; // get_stylesheet_directory_uri() .'/images/avatar.png';
 	if( $image && strpos( $image, "gravatar.com" ) ){
 		return '<img src="' . $default . '" alt="avatar" class="avatar" ' . $html_width . $html_height . ' />';
 	} else {
@@ -619,12 +670,12 @@ function bp_remove_gravatar ($image, $params, $item_id, $avatar_dir, $css_id, $h
 }
 add_filter('bp_core_fetch_avatar', 'bp_remove_gravatar', 1, 9 );
 function remove_gravatar ($avatar, $id_or_email, $size, $default, $alt) {
-	$default = get_stylesheet_directory_uri() .'/images/avatar.png';
+	$default = home_url().'/wp-includes/images/smilies/icon_cool.gif'; // get_stylesheet_directory_uri() .'/images/avatar.png';
 	return "<img alt='{$alt}' src='{$default}' class='avatar avatar-{$size} photo avatar-default' height='{$size}' width='{$size}' />";
 }
 add_filter('get_avatar', 'remove_gravatar', 1, 5);
 function bp_remove_signup_gravatar ($image) {
-	$default = get_stylesheet_directory_uri() .'/images/avatar.png';
+	$default = home_url().'/wp-includes/images/smilies/icon_cool.gif'; //get_stylesheet_directory_uri() .'/images/avatar.png';
 	if( $image && strpos( $image, "gravatar.com" ) ){
 		return '<img src="' . $default . '" alt="avatar" class="avatar" width="60" height="60" />';
 	} else {
