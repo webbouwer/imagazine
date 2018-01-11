@@ -871,6 +871,18 @@ jQuery(function ($) {
 
 			function customizer_resizeend(){
 
+
+				// add mobile class
+				var screensizeclass = 'smallscreen';
+				if( $(window).width() > largeswitch ){
+					screensizeclass = 'largescreen';
+				}else if( $(window).width() > mediumswitch ){
+					screensizeclass = 'mediumscreen';
+				}
+				$('body').removeClass('smallscreen mediumscreen largescreen').addClass(screensizeclass);
+
+
+
 				if(new Date() - rctime < cdelta){
 					setTimeout(customizer_resizeend, cdelta);
 				}else{
@@ -902,15 +914,6 @@ jQuery(function ($) {
 
 				}
 
-
-				// add mobile class
-				var screensizeclass = 'smallscreen';
-				if( $(window).width() > largeswitch ){
-					screensizeclass = 'largescreen';
-				}else if( $(window).width() > mediumswitch ){
-					screensizeclass = 'mediumscreen';
-				}
-				$('body').removeClass('smallscreen mediumscreen largescreen').addClass(screensizeclass);
 
 
 			}
