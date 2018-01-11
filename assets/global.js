@@ -197,7 +197,13 @@ jQuery(function ($) {
 							// onscroll
 							$(window).scroll(function(e){
 
-								e.preventDefault();
+								//e.preventDefault();
+								if( $('#toplogobox img,#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a').is(':animated') ) {
+									e.preventDefault();
+									e.stopPropagation();
+									return false;
+								}
+
 
 								// get scroll top position
 								var windowTop = $(window).scrollTop() + tsp;
@@ -220,8 +226,10 @@ jQuery(function ($) {
 										  width: toplogominw+'px'
 										});
 
-										$("#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a").animate({ height: topbarminheight });
-
+										// only if medium/large screen set menu height
+										if($(window).width() >= mediumswitch){
+											$("#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a").animate({ height: topbarminheight });
+										}
 									}
 
 								}else if( topbarTop >= windowTop && $('#topbarcontainer').hasClass('sticky') ) {
@@ -241,9 +249,9 @@ jQuery(function ($) {
 										$("#toplogobox img").animate({
 										  width: toplogomaxw+'px'
 										});
-
-										$("#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a").animate({ height: topbarmaxheight });
-
+										if($(window).width() >= mediumswitch){
+											$("#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a").animate({ height: topbarmaxheight });
+										}
 									}
 
 
