@@ -1,6 +1,136 @@
 /* global.js */
 jQuery(function ($) {
 
+
+
+	var mainGlobal = function(){};
+
+
+
+		mainGlobal.prototype = {
+
+		 /* firstClassVariable: 'This is a basic example',
+		  secondClassVariable: 'JS objects rule!',
+			*/
+
+		  	wp_custom_vars: JSON.parse(site_data['customizer']), //alert( $wp_custom_vars['imagazine_topbar_behavior_minheight'] );
+
+			//alert( JSON.stringify( $wp_custom_vars ) );
+
+
+
+			mediumswitch: 580,
+			largeswitch: 1150,
+
+			/* Upperbar */
+			upperbardisplaysmall: JSON.parse(site_data['customizer'])['imagazine_upperbar_behavior_displaysmall'],
+			upperbardisplaylarge: JSON.parse(site_data['customizer'])['imagazine_upperbar_behavior_displaylarge'],
+
+			upperbarwidth: JSON.parse(site_data['customizer'])['imagazine_upperbar_behavior_width'],
+
+			uppermenusmallpos: JSON.parse(site_data['customizer'])['imagazine_upperbar_menu_smallscreen'],
+			uppermenulargepos: JSON.parse(site_data['customizer'])['imagazine_upperbar_menu_largescreen'],
+			uppermenutextalign: JSON.parse(site_data['customizer'])['imagazine_upperbar_menu_textalign'],
+
+			uppersidebarsmallpos: JSON.parse(site_data['customizer'])['imagazine_upperbar_sidebar_smallscreen'],
+
+			uppersidebarpos: JSON.parse(site_data['customizer'])['imagazine_upperbar_sidebar_pos'],
+			uppersidebarwidth: JSON.parse(site_data['customizer'])['imagazine_upperbar_sidebar_width'],
+			uppersidebaralign: JSON.parse(site_data['customizer'])['imagazine_upperbar_sidebar_align'],
+			uppersidebarrespon: JSON.parse(site_data['customizer'])['imagazine_upperbar_sidebar_responsive'],
+
+			/* Topbar */
+			menusmall: JSON.parse(site_data['customizer'])['imagazine_topbar_menu_smallscreen'],
+			menularge: JSON.parse(site_data['customizer'])['imagazine_topbar_menu_largescreen'],
+
+
+			menu_button_html: '<div id="topmainmenubutton">MENU</div>',
+			menu_logo_html: '<li class="menu-item logo"></li>',
+
+			topbarlargebehavior: JSON.parse(site_data['customizer'])['imagazine_topbar_behavior_largeposition'], // relative / fixed / scroll / none
+			topbarsmallbehavior: JSON.parse(site_data['customizer'])['imagazine_topbar_behavior_smallposition'], // relative / fixed / scroll / none
+			topbarwidth:  JSON.parse(site_data['customizer'])['imagazine_topbar_behavior_width'],
+			toplogopos: JSON.parse(site_data['customizer'])['imagazine_topbar_logo_position'],
+			toplogominw: JSON.parse(site_data['customizer'])['imagazine_topbar_logo_minwidth'],
+			toplogomaxw: JSON.parse(site_data['customizer'])['imagazine_topbar_logo_maxwidth'],
+			topbarminheight: JSON.parse(site_data['customizer'])['imagazine_topbar_behavior_minheight'],
+			topbarmaxheight: JSON.parse(site_data['customizer'])['imagazine_topbar_behavior_maxheight'],
+			topbarscroll: JSON.parse(site_data['customizer'])['imagazine_topbar_behavior_scroll'],
+		    topwidgetspos: JSON.parse(site_data['customizer'])['imagazine_topbar_widgets_position'],
+
+
+			topsidebar1pos: JSON.parse(site_data['customizer'])['imagazine_topbar_sidebars_sidebar1pos'],
+			topsidebar1width: JSON.parse(site_data['customizer'])['imagazine_topbar_sidebars_sidebar1width'],
+			topsidebar1align: JSON.parse(site_data['customizer'])['imagazine_topbar_sidebars_sidebar1align'],
+			topsidebar1respon: JSON.parse(site_data['customizer'])['imagazine_topbar_sidebars_sidebar1responsive'],
+
+			topsidebar2pos: JSON.parse(site_data['customizer'])['imagazine_topbar_sidebars_sidebar2pos'],
+			topsidebar2width: JSON.parse(site_data['customizer'])['imagazine_topbar_sidebars_sidebar2width'],
+			topsidebar2align: JSON.parse(site_data['customizer'])['imagazine_topbar_sidebars_sidebar2align'],
+			topsidebar2respon: JSON.parse(site_data['customizer'])['imagazine_topbar_sidebars_sidebar2responsive'],
+
+		    headerdsptype: JSON.parse(site_data['customizer'])['imagazine_header_display_type'],
+			headerheight: JSON.parse(site_data['customizer'])['imagazine_header_height'],
+			headerminheight: JSON.parse(site_data['customizer'])['imagazine_header_height'],
+
+			headersidebar1pos: JSON.parse(site_data['customizer'])['imagazine_header_sidebar1pos'],
+			headersidebar1width: JSON.parse(site_data['customizer'])['imagazine_header_sidebar1width'],
+			headersidebar1align: JSON.parse(site_data['customizer'])['imagazine_header_sidebar1align'],
+			headersidebar1respon: JSON.parse(site_data['customizer'])['imagazine_header_sidebar1responsive'],
+
+			headersidebar2pos: JSON.parse(site_data['customizer'])['imagazine_header_sidebar2pos'],
+			headersidebar2width: JSON.parse(site_data['customizer'])['imagazine_header_sidebar2width'],
+			headersidebar2align: JSON.parse(site_data['customizer'])['imagazine_header_sidebar2align'],
+			headersidebar2respon: JSON.parse(site_data['customizer'])['imagazine_header_sidebar2responsive'],
+
+
+			/* main content */
+			sidebar1pos: JSON.parse(site_data['customizer'])['imagazine_content_sidebars_sidebar1pos'],
+			sidebar1width: JSON.parse(site_data['customizer'])['imagazine_content_sidebars_sidebar1width'],
+			sidebar1align: JSON.parse(site_data['customizer'])['imagazine_content_sidebars_sidebar1align'],
+			sidebar1respon: JSON.parse(site_data['customizer'])['imagazine_content_sidebars_sidebar1responsive'],
+
+			sidebar2pos: JSON.parse(site_data['customizer'])['imagazine_content_sidebars_sidebar2pos'],
+			sidebar2width: JSON.parse(site_data['customizer'])['imagazine_content_sidebars_sidebar2width'],
+			sidebar2align: JSON.parse(site_data['customizer'])['imagazine_content_sidebars_sidebar2align'],
+			sidebar2respon: JSON.parse(site_data['customizer'])['imagazine_content_sidebars_sidebar2responsive'],
+
+			/* footercontent */
+			footsidebar1pos: JSON.parse(site_data['customizer'])['imagazine_footer_sidebars_sidebar1pos'],
+			footsidebar1width: JSON.parse(site_data['customizer'])['imagazine_footer_sidebars_sidebar1width'],
+			footsidebar1align: JSON.parse(site_data['customizer'])['imagazine_footer_sidebars_sidebar1align'],
+			footsidebar1respon: JSON.parse(site_data['customizer'])['imagazine_footer_sidebars_sidebar1responsive'],
+
+			footsidebar2pos: JSON.parse(site_data['customizer'])['imagazine_footer_sidebars_sidebar2pos'],
+			footsidebar2width: JSON.parse(site_data['customizer'])['imagazine_footer_sidebars_sidebar2width'],
+			footsidebar2align: JSON.parse(site_data['customizer'])['imagazine_footer_sidebars_sidebar2align'],
+			footsidebar2respon: JSON.parse(site_data['customizer'])['imagazine_footer_sidebars_sidebar2responsive'],
+
+
+
+		 	/* */
+			lbform: $("#toplogobox img").clientWidth / $("#toplogobox img").clientHeight,
+
+
+
+
+
+
+		  setVariables: function(){
+			// adjust defaults
+			if( this.wp_custom_vars['imagazine_global_screenmode_mediummin'] && this.wp_custom_vars['imagazine_global_screenmode_mediummin'] > 580 ){
+				this.mediumswitch = this.wp_custom_vars['imagazine_global_screenmode_mediummin'];
+			}
+
+			if( this.wp_custom_vars['imagazine_global_screenmode_largemin'] && this.wp_custom_vars['imagazine_global_screenmode_largemin'] > 1150 ){
+				this.largeswitch = this.wp_custom_vars['imagazine_global_screenmode_largemin'];
+			}
+
+		  }
+
+		}
+
+
 	/*
 	$('html').hide();
 
@@ -15,9 +145,23 @@ jQuery(function ($) {
 
 	$(document).ready( function(){
 
+
+			// init global class
+			var globalVars = new mainGlobal();
+			globalVars.setVariables();
+
+
+
+
+
+
+
+
 			var $wp_custom_vars = JSON.parse(site_data['customizer']);//alert( $wp_custom_vars['imagazine_topbar_behavior_minheight'] );
 
 			//alert( JSON.stringify( $wp_custom_vars ) );
+
+
 
 			var mediumswitch = 580;
 			var largeswitch = 1150;
@@ -871,12 +1015,25 @@ jQuery(function ($) {
 
 			function customizer_resizeend(){
 
+
+				// add mobile class
+				var screensizeclass = 'smallscreen';
+				if( $(window).width() > largeswitch ){
+					screensizeclass = 'largescreen';
+				}else if( $(window).width() > mediumswitch ){
+					screensizeclass = 'mediumscreen';
+				}
+				$('body').removeClass('smallscreen mediumscreen largescreen').addClass(screensizeclass);
+
+
 				if(new Date() - rctime < cdelta){
 					setTimeout(customizer_resizeend, cdelta);
 				}else{
 					ctimeout = false;
 					//alert('Done resizing');
 
+					var globalVars = new mainGlobal();
+					globalVars.setVariables();
 
 					// set upperbar
 					set_upperbar_elements();
@@ -903,14 +1060,6 @@ jQuery(function ($) {
 				}
 
 
-				// add mobile class
-				var screensizeclass = 'smallscreen';
-				if( $(window).width() > largeswitch ){
-					screensizeclass = 'largescreen';
-				}else if( $(window).width() > mediumswitch ){
-					screensizeclass = 'mediumscreen';
-				}
-				$('body').removeClass('smallscreen mediumscreen largescreen').addClass(screensizeclass);
 
 
 			}
