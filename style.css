@@ -111,6 +111,7 @@ display:block;
 #topbarcontainer.sticky
 {
 	position: fixed;
+	left:0px;
 	z-index:298;
 }
 

@@ -2162,6 +2162,7 @@ function imagazine_customize_adaptive(){
 	 */
 	.pagemargin
 	{
+	position:relative;
 	margin:0px auto;
 	width:<?php echo get_theme_mod('imagazine_global_screenmode_pagewidth', '100' ).'%'; ?>;
 	<?php if( get_theme_mod('imagazine_global_screenmode_pagemaxwidth', '1480' ) > 0 ){ ?>
@@ -2175,6 +2176,7 @@ function imagazine_customize_adaptive(){
 	 */
 	.outermargin
 	{
+	position:relative;
 	margin:0px auto;
 	width:<?php echo get_theme_mod('imagazine_global_screenmode_smallwidth', 100).'%'; ?>;
 	max-width:<?php echo get_theme_mod('imagazine_global_screenmode_smallmargin', 320).'px'; ?> !important;

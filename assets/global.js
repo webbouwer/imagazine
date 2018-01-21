@@ -215,7 +215,7 @@ jQuery(function ($) {
 									$('#topbarcontainer').css('top', tsp);
 
 									// insert relative spacer div
-									$('<div id="topspacer" style="height:'+th+'px;"></div>').insertAfter( $('#topbarcontainer') );
+									$('<div id="topspacer" style="height:'+th+'px;"></div>').insertBefore( $('#topbarcontainer') );
 
 									// set sticky
 									$('#topbarcontainer').addClass('sticky');
