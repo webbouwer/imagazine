@@ -112,11 +112,11 @@ if( ( is_single() || is_page() ) && ( $headerfeaturedimg == 'yes' || $headertitl
 	// check page meta overwrite
 	if( is_page() ){
 
-		if( $page_header_type != 0 ){
+		if( isset( $page_header_type ) && $page_header_type != 0 ){
 			$headerdisplay = $typearr[ $page_header_type ];
 		}
 
-		if( $page_header_display != 0 ){
+		if( isset( $page_header_display ) && $page_header_display != 0 ){
 			$headerfeaturedimg = $displayarr[ $page_header_display ];
 		}
 
@@ -212,7 +212,7 @@ if( $headerdisplay != 'none' ){
 
 		// display title
 		//if( ( $headertitle != 'no' && $page_title_display == 0 ) || $page_title_display != 1 ){
-		if( is_page() && ( $page_title_display == 1 ) ){
+		if( is_page() && isset($page_title_display) && ( $page_title_display == 1 ) ){
 			$headertitle = 'no';
 		}
 		if( $headertitle != 'no' ){
