@@ -149,6 +149,13 @@ display:inline-block;
 display:block;
 }
 
+#contenttopwidgets
+{
+max-width:100%;
+height:auto;
+overflow:hidden;
+}
+
 /* Widgets */
 .widget-contentbox img
 {

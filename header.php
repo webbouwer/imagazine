@@ -36,12 +36,9 @@ $headerready = 0;
 
 // header shortcode
 
-if( $headershortcode != '' ){
+if(  $headershortcode != '' && ( $headerdisplay == 'image' || ( is_home() && $headerdisplay == 'short' ) ) ){
 
-	//if( shortcode_exists( $headershortcode ) ) {
-
-
-    	// The short code does  exists > header area for plugin
+	   // The short code area (slider?)
 		if($headerbgwidth == 'full'){
 			echo '<div id="headercodebox" class="fullwidth"'.$headerbgstyle.'>';
 		}else{
@@ -54,7 +51,6 @@ if( $headershortcode != '' ){
 
 
 		$headerready = 1;
-	//}
 }
 
 
@@ -210,16 +206,24 @@ if( $headerdisplay != 'none' ){
 
 		echo '<div class="maincolumnbox">';
 
-		// display title
-		//if( ( $headertitle != 'no' && $page_title_display == 0 ) || $page_title_display != 1 ){
-		if( is_page() && isset($page_title_display) && ( $page_title_display == 1 ) ){
-			$headertitle = 'no';
-		}
-		if( $headertitle != 'no' ){
+        if( $headershortcode != '' && $headerdisplay == 'split'){
 
-		echo '<h1>'.$headmaintitle.'</h1>';
+		      echo do_shortcode( $headershortcode );
 
-		}
+        }else{
+
+            // display title
+            //if( ( $headertitle != 'no' && $page_title_display == 0 ) || $page_title_display != 1 ){
+            if( is_page() && isset($page_title_display) && ( $page_title_display == 1 ) ){
+                $headertitle = 'no';
+            }
+            if( $headertitle != 'no' ){
+
+            echo '<h1>'.$headmaintitle.'</h1>';
+
+            }
+
+        }
 
 		// display widgets-header
 		if( ( $headerdisplay != 'image' && $headerdisplay != 'title' ) && function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('widgets-header') ){
@@ -227,6 +231,8 @@ if( $headerdisplay != 'none' ){
 			dynamic_sidebar('widgets-header');
 
 		}
+
+
 
 		echo '<div class="clr"></div></div>';
 

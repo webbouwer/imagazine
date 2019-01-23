@@ -140,8 +140,10 @@ if( is_home() ){
 }else{ /* basic loop */
     echo '<div id="maincontent">';
 }
+
 $page_contenttop_display = get_post_meta( get_the_ID() , "page-meta-contenttop-display", true);
 $dsparr = array( 1 => 'show', 2 => 'hide');
+
 if( $page_contenttop_display != 0 ){
 $page_topwidgets_display = $dsparr[$page_contenttop_display];
 }
@@ -347,11 +349,14 @@ the_category(', ');
 if($post_tags_display != 'hide'){
 the_tags('Tags: ',' ');
 }
-
-// prev / next posts
-previous_post_link('%link', __('vorige', 'imagazine' ).': %title', TRUE);
-next_post_link('%link', __('volgende', 'imagazine' ).': %title', TRUE);
 */
+// prev / next posts
+//previous_post_link('%link', __('vorige', 'imagazine' ).': %title', TRUE);
+//next_post_link('%link', __('volgende', 'imagazine' ).': %title', TRUE);
+
+previous_post_link('%link', __('previous', 'imagazine' ), TRUE);
+next_post_link('%link', __('next', 'imagazine' ), TRUE);
+
 // post comments
 if ( comments_open() || get_comments_number() ) {
 comments_template(); // WP THEME STANDARD: comments_template( $file, $separate_comments );

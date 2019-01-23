@@ -1067,6 +1067,7 @@ function imagazine_theme_customizer( $wp_customize ){
  	    		'description'    => __( 'Header default display type.', 'imagazine' ),
             	'choices'        => array(
                 	'image'   => __( 'Image or slider shortcode', 'imagazine' ),
+                	'short'   => __( 'Frontpage shortcode, default image', 'imagazine' ),
             		'overlay'   => __( 'Image with overlay widget column(s)', 'imagazine' ),
             		'split'   => __( 'Image in maincolumn besides optional column(s)', 'imagazine' ),
                 	'none'   => __( 'No header', 'imagazine' ),
