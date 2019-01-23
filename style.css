@@ -20,10 +20,18 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
 
 /* global init set */
+
 *
 {
 padding:0;
 margin:0;
+}
+
+html{
+overflow: auto;
+width:100%;
+}
+body{
 }
 .clr
 {
@@ -149,12 +157,31 @@ max-width:100%;
 height:auto;
 }
 
+/* Breadcrumb styles */
+#breadcrumbs{
+    list-style:none;
+    margin:5px 0;
+    overflow:hidden;
+}
+
+#breadcrumbs li{
+    display:inline-block;
+    vertical-align:middle;
+    margin-right:5px;
+}
+
+#breadcrumbs .separator{
+}
+
+
+
 /* maincontent */
 #maincontent .post,
 #maincontent .page
 {
 position:relative;
 }
+
 
 
 .post a.singlepost-top-coverimage,
@@ -192,8 +219,29 @@ background-position: center;
 }
 
 
+/* post blog lists etc. */
+#maincontent.blog-columns
+{
+display: flex;
+flex-wrap: wrap;
+height: 100%;
+}
+#maincontent.blog-columns .post
+{
+flex: 1 1 26%;
+padding:2%;
+}
 
-/* page menu */
+/* pagination */
+.pagination
+{
+display:block;
+text-align:center;
+width:100%;
+}
+
+
+/* page admin menu */
 #maincontent .optionmenu /* edit | voice button */
 {
 position:absolute;

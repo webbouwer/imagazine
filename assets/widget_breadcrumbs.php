@@ -207,7 +207,9 @@ function custom_breadcrumbs( $opt ) {
             if( is_home() ){
 
                 // Just display current page if not parents
-                echo '<li class="item-current item-' . $post->ID . '"><strong class="bread-current bread-' . $post->ID . '"> ' . get_the_title( get_option( 'page_for_posts', true) ) . '</strong></li>';
+                //echo '<li class="item-current item-' . $post->ID . '"><strong class="bread-current bread-' . $post->ID . '"> ' . get_the_title( get_option( 'page_for_posts', true) ) . '</strong></li>';
+                echo '<li class="item-current item-' . $post->ID . '"><strong class="bread-current bread-' . $post->ID . '"> ' . get_bloginfo('name') . '</strong></li>';
+
 
             }else{
 
@@ -224,9 +226,7 @@ function custom_breadcrumbs( $opt ) {
                     echo '<li class="item-current item-' . $post->ID . '"><strong class="bread-current bread-' . $post->ID . '" title="' . get_the_title() . '">' . get_the_title() . '</strong></li>';
 
                 } else {
-
-                    echo '<li class="item-current item-' . $post->ID . '"><strong class="bread-current bread-' . $post->ID . '" title="' . get_the_title() . '">' . get_the_title() . '</strong></li>';
-
+                        echo '<li class="item-current item-' . $post->ID . '"><strong class="bread-current bread-' . $post->ID . '" title="' . get_the_title() . '">' . get_the_title() . '</strong></li>';
                 }
 
             }
