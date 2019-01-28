@@ -36,7 +36,7 @@ $headerready = 0;
 
 // header shortcode
 
-if(  $headershortcode != '' && ( $headerdisplay == 'image' || ( is_home() && $headerdisplay == 'short' ) ) ){
+if(  $headershortcode != '' && ( $headerdisplay == 'image' || ( is_front_page() && $headerdisplay == 'short' ) ) ){
 
 	   // The short code area (slider?)
 		if($headerbgwidth == 'full'){

@@ -51,9 +51,6 @@ $page_bottomwidgets_display = get_theme_mod('imagazine_content_pagedisplay_conte
 
 $subcontentshortcode = get_theme_mod('imagazine_content_subcontent_shortcode', '');
 
-
-
-
 $post_categories_display = 'hide';
 $post_tags_display = 'hide';
 
@@ -354,19 +351,12 @@ the_tags('Tags: ',' ');
 //previous_post_link('%link', __('vorige', 'imagazine' ).': %title', TRUE);
 //next_post_link('%link', __('volgende', 'imagazine' ).': %title', TRUE);
 
-previous_post_link('%link', __('previous', 'imagazine' ), TRUE);
-next_post_link('%link', __('next', 'imagazine' ), TRUE);
-
 // post comments
 if ( comments_open() || get_comments_number() ) {
 comments_template(); // WP THEME STANDARD: comments_template( $file, $separate_comments );
 }
 
 echo '<div class="clr"></div></div>'; // end page(post) container
-
-
-
-
 
 
 
