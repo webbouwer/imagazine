@@ -19,6 +19,11 @@ $sidebar2respon = get_theme_mod('imagazine_content_sidebars_sidebar2responsive',
 
 
 /* post/page/list global settings */
+
+$front_topwidgets_display = get_theme_mod('imagazine_content_frontpagedisplay_contenttop', 'hide');
+$front_blogpage_display = get_theme_mod('imagazine_content_frontpagedisplay_blogpage', 'basic'); // columns | grid
+
+
 $list_topwidgets_display = get_theme_mod('imagazine_content_listdisplay_contenttop', 'hide');
 $list_authortime_display = get_theme_mod('imagazine_content_listdisplay_authortime', 'both');
 $list_timeformat_display = get_theme_mod('imagazine_content_listdisplay_timeformat', 'date');
@@ -45,9 +50,6 @@ $page_bottomwidgets_display = get_theme_mod('imagazine_content_pagedisplay_conte
 
 
 $subcontentshortcode = get_theme_mod('imagazine_content_subcontent_shortcode', '');
-
-
-
 
 $post_categories_display = 'hide';
 $post_tags_display = 'hide';
@@ -130,21 +132,23 @@ echo '<div id="maincontentcontainer">';
 
 
 
-
-
-/* basic loop */
-
-echo '<div id="maincontent">';
+if( is_home() ){
+    echo '<div id="maincontent" class="blog-'.$front_blogpage_display.'">';
+}else{ /* basic loop */
+    echo '<div id="maincontent">';
+}
 
 $page_contenttop_display = get_post_meta( get_the_ID() , "page-meta-contenttop-display", true);
 $dsparr = array( 1 => 'show', 2 => 'hide');
+
 if( $page_contenttop_display != 0 ){
 $page_topwidgets_display = $dsparr[$page_contenttop_display];
 }
 
 if( !( is_page() && $page_topwidgets_display == 'hide' )
    && !( is_single() && $post_topwidgets_display == 'hide' )
-  	&& !( is_category() && $list_topwidgets_display == 'hide' ) ){
+  	&& !( is_category() && $list_topwidgets_display == 'hide' )
+     && !( is_home() && $front_topwidgets_display == 'hide' )){
 
 // maincontent top widgets
 if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('contenttopwidgets') ){
@@ -342,21 +346,17 @@ the_category(', ');
 if($post_tags_display != 'hide'){
 the_tags('Tags: ',' ');
 }
-
-// prev / next posts
-previous_post_link('%link', __('vorige', 'imagazine' ).': %title', TRUE);
-next_post_link('%link', __('volgende', 'imagazine' ).': %title', TRUE);
 */
+// prev / next posts
+//previous_post_link('%link', __('vorige', 'imagazine' ).': %title', TRUE);
+//next_post_link('%link', __('volgende', 'imagazine' ).': %title', TRUE);
+
 // post comments
 if ( comments_open() || get_comments_number() ) {
 comments_template(); // WP THEME STANDARD: comments_template( $file, $separate_comments );
 }
 
 echo '<div class="clr"></div></div>'; // end page(post) container
-
-
-
-
 
 
 
@@ -479,13 +479,15 @@ if ( !is_single() ) {
 
 global $wp_query;
 $big = 999999999; // need an unlikely integer
+
+echo '<div class="pagination bottom">';
 echo paginate_links( array(
 'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
 'format' => '?paged=%#%',
 'current' => max( 1, get_query_var('paged') ),
 'total' => $wp_query->max_num_pages
 ));
-
+echo '<div class="clr"></div></div>';
 }
 
 

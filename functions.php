@@ -7,12 +7,14 @@
 	require get_template_directory() . '/assets/userlogin.php'; // frontend login functions
 	require get_template_directory() . '/assets/widgets.php'; // widget functions
 	require get_template_directory() . '/assets/widget_postlist.php'; // widget functions
+	require get_template_directory() . '/assets/widget_breadcrumbs.php'; // widget functions
 	require get_template_directory() . '/assets/widget_stackmyfeeds.php'; // widget functions
 
 
 	// Register and load the widgets
 	function imagazine_load_widgets() {
 		register_widget( 'imagazine_login_widget' );
+		register_widget( 'imagazine_breadcrumbs_widget' );
 		register_widget( 'imagazine_postlist_widget' );
 		register_widget( 'imagazine_stackmyfeeds_widget' );
 	}

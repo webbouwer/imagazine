@@ -15,8 +15,8 @@ function imagazine_dashboard_widget_content() {
 	//$gitprofile = json_decode( $gitprofile_data );
 	//echo '<a href="'.$gitprofile->html_url.'" target="_blank"><img src="'.$gitprofile->avatar_url.'" style="display:inline-block;vertical-align:text-top;" border="0" width="24" height="auto" />'.$gitprofile->login.' @ github</a>';
 
-	//https://api.github.com/repos/Oddsized/imagazine/events
-	$gitdata = wp_remote_get('https://api.github.com/repos/Oddsized/imagazine/events');
+	//https://api.github.com/repos/webbouwer/imagazine/events
+	$gitdata = wp_remote_get('https://api.github.com/repos/webbouwer/imagazine/events');
 	$gitevent_data = wp_remote_retrieve_body( $gitdata );
 	$events = json_decode( $gitevent_data );
 

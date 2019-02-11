@@ -21,6 +21,9 @@ jQuery(function ($) {
 
 			var mediumswitch = 580;
 			var largeswitch = 1150;
+            var maxpagewidth = $wp_custom_vars['imagazine_global_screenmode_pagemaxwidth'];
+            var pagewidth = $wp_custom_vars['imagazine_global_screenmode_pagewidth'];
+
 			if( $wp_custom_vars['imagazine_global_screenmode_mediummin'] && $wp_custom_vars['imagazine_global_screenmode_mediummin'] > 580 ){
 			mediumswitch = $wp_custom_vars['imagazine_global_screenmode_mediummin'];
 			}
@@ -197,22 +200,29 @@ jQuery(function ($) {
 							// onscroll
 							$(window).scroll(function(e){
 
-								e.preventDefault();
+								//e.preventDefault();
+								if( $('#toplogobox img,#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a').is(':animated') ) {
+									e.preventDefault();
+									e.stopPropagation();
+									return false;
+								}
+
 
 								// get scroll top position
 								var windowTop = $(window).scrollTop() + tsp;
 
 								// check topbar position
-								if ( topbarTop < windowTop && !$('#topbarcontainer').hasClass('sticky') ){
+								if ( topbarTop < ( windowTop -5 ) && !$('#topbarcontainer').hasClass('sticky') ){
 
 									// set absolute pos on nst
 									$('#topbarcontainer').css('top', tsp);
 
 									// insert relative spacer div
-									$('<div id="topspacer" style="height:'+th+'px;"></div>').insertAfter( $('#topbarcontainer') );
+									$('<div id="topspacer" style="height:'+th+'px;"></div>').insertBefore( $('#topbarcontainer') );
 
 									// set sticky
 									$('#topbarcontainer').addClass('sticky');
+
 
 									if(topbarscroll == 'mini'){
 
@@ -220,9 +230,12 @@ jQuery(function ($) {
 										  width: toplogominw+'px'
 										});
 
-										$("#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a").animate({ height: topbarminheight });
-
+										// only if medium/large screen set menu height
+										if($(window).width() >= mediumswitch){
+											$("#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a").animate({ height: topbarminheight });
+										}
 									}
+
 
 								}else if( topbarTop >= windowTop && $('#topbarcontainer').hasClass('sticky') ) {
 
@@ -241,9 +254,9 @@ jQuery(function ($) {
 										$("#toplogobox img").animate({
 										  width: toplogomaxw+'px'
 										});
-
-										$("#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a").animate({ height: topbarmaxheight });
-
+										if($(window).width() >= mediumswitch){
+											$("#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a").animate({ height: topbarmaxheight });
+										}
 									}
 
 
@@ -421,10 +434,6 @@ jQuery(function ($) {
 						'width': mainwidth+'%',
 						'float': mainfloat
 					});
-
-
-
-
 
 
 				// default hide menu & topmainmenubutton
@@ -871,6 +880,18 @@ jQuery(function ($) {
 
 			function customizer_resizeend(){
 
+
+				// add mobile class
+				var screensizeclass = 'smallscreen';
+				if( $(window).width() > largeswitch ){
+					screensizeclass = 'largescreen';
+				}else if( $(window).width() > mediumswitch ){
+					screensizeclass = 'mediumscreen';
+				}
+				$('body').removeClass('smallscreen mediumscreen largescreen').addClass(screensizeclass);
+
+
+
 				if(new Date() - rctime < cdelta){
 					setTimeout(customizer_resizeend, cdelta);
 				}else{
@@ -902,15 +923,6 @@ jQuery(function ($) {
 
 				}
 
-
-				// add mobile class
-				var screensizeclass = 'smallscreen';
-				if( $(window).width() > largeswitch ){
-					screensizeclass = 'largescreen';
-				}else if( $(window).width() > mediumswitch ){
-					screensizeclass = 'mediumscreen';
-				}
-				$('body').removeClass('smallscreen mediumscreen largescreen').addClass(screensizeclass);
 
 
 			}

@@ -2,6 +2,55 @@
 // custom meta boxes
 // https://www.sitepoint.com/adding-custom-meta-boxes-to-wordpress/
 
+/* grid page metabox */
+function add_theme_grid_meta()
+{
+    global $post;
+    if(!empty($post))
+    {
+        $pageTemplate = get_post_meta($post->ID, '_wp_page_template', true);
+        if($pageTemplate == 'grid.php')
+        {
+           add_meta_box(
+                 'gridpage_meta', // $id
+                 'Grid settings', // $title
+                 'display_theme_grid_settings', // $callback
+                 'page', // $page
+                 'normal', // $context
+                 'high'); // $priority
+        }
+    }
+}
+add_action('add_meta_boxes', 'add_theme_grid_meta');
+
+function display_theme_grid_settings( $post ){
+    $values = get_post_custom( $post->ID );
+    $selected = isset( $values['theme_grid_category_selectbox'] ) ? esc_attr( $values['theme_grid_category_selectbox'][0] ) : '';
+    $catarr = get_categories_select(); // customizer function
+
+    ?>
+    <p><label for="theme_grid_category_selectbox">Select a category</label>
+    <select name="theme_grid_category_selectbox" id="theme_grid_category_selectbox">
+    <?php foreach($catarr as $slg => $nm){
+    echo '<option value="'.$slg.'" '.selected( $selected, $slg ).'>'.$nm.'</option>';
+    }
+    ?>
+    <option value="uncategorized" <?php selected( $selected, 'uncategorized' ); ?>><?php echo __('Uncategorized', 'imagazine'); ?></option>
+    </select>
+    </p>
+    <?php
+}
+function save_theme_grid_settings( $post_id )
+{
+    if( isset( $_POST['theme_grid_category_selectbox'] ) )
+        update_post_meta( $post_id, 'theme_grid_category_selectbox', esc_attr( $_POST['theme_grid_category_selectbox'] ) );
+
+
+}
+add_action( 'save_post', 'save_theme_grid_settings' );
+
+
+/* page global metabox */
 function imagazine_page_meta_box($object)
 {
     wp_nonce_field(basename(__FILE__), "meta-box-nonce");

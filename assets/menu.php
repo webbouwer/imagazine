@@ -45,6 +45,7 @@ Author URI: http://makeyoulivebetter.org.ua/
  */
 
 
+if( !class_exists('Menu_Image_Plugin') && !class_exists('Menu_Image_Walker_Nav_Menu_Edit') ){
 
 class Menu_Image_Plugin {
 	/**
@@ -692,6 +693,8 @@ class Menu_Image_Plugin {
 $menu_image = new Menu_Image_Plugin();
 require_once(ABSPATH . 'wp-admin/includes/nav-menu.php');
 
+
+
 class Menu_Image_Walker_Nav_Menu_Edit extends Walker_Nav_Menu_Edit {
 	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 		global $_wp_nav_menu_max_depth;
@@ -883,6 +886,7 @@ class Menu_Image_Walker_Nav_Menu_Edit extends Walker_Nav_Menu_Edit {
 	}
 }
 
+}
 
 /**
  * End Modified Menu_Image for use in theme

@@ -178,6 +178,11 @@ function imagazine_theme_customizer( $wp_customize ){
     ));
 
 	// content types settings
+	$wp_customize->add_section('imagazine_content_frontpagedisplay', array(
+        'title'    => __('Frontpage', 'imagazine'),
+        'panel'  => 'imagazine_content',
+		'priority' => 70,
+    ));
 	$wp_customize->add_section('imagazine_content_listdisplay', array(
         'title'    => __('Post lists', 'imagazine'),
         'panel'  => 'imagazine_content',
@@ -1062,6 +1067,7 @@ function imagazine_theme_customizer( $wp_customize ){
  	    		'description'    => __( 'Header default display type.', 'imagazine' ),
             	'choices'        => array(
                 	'image'   => __( 'Image or slider shortcode', 'imagazine' ),
+                	'short'   => __( 'Frontpage shortcode, default image', 'imagazine' ),
             		'overlay'   => __( 'Image with overlay widget column(s)', 'imagazine' ),
             		'split'   => __( 'Image in maincolumn besides optional column(s)', 'imagazine' ),
                 	'none'   => __( 'No header', 'imagazine' ),
@@ -1349,6 +1355,44 @@ function imagazine_theme_customizer( $wp_customize ){
 
 
 		/* main content widget settings */
+
+    // frontpage
+        $wp_customize->add_setting( 'imagazine_content_frontpagedisplay_contenttop' , array(
+		'default' => 'hide',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_frontpagedisplay_contenttop', array(
+            	'label'          => __( 'Show top widgets', 'imagazine' ),
+            	'section'        => 'imagazine_content_frontpagedisplay',
+            	'settings'       => 'imagazine_content_frontpagedisplay_contenttop',
+            	'type'           => 'select',
+ 	    	'description'    => __( 'Frontpage content top widgets by default', 'imagazine' ),
+            	'choices'        => array(
+                	'hide'   => __( 'No display on frontpage', 'imagazine' ),
+                	'show'   => __( 'Show top widgets on frontpage', 'imagazine' ),
+            	)
+    	)));
+
+        $wp_customize->add_setting( 'imagazine_content_frontpagedisplay_blogpage' , array(
+		'default' => 'basic',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_frontpagedisplay_blogpage', array(
+            	'label'          => __( 'Blog page type', 'imagazine' ),
+            	'section'        => 'imagazine_content_frontpagedisplay',
+            	'settings'       => 'imagazine_content_frontpagedisplay_blogpage',
+            	'type'           => 'select',
+ 	    	'description'    => __( 'Frontpage blogpage type', 'imagazine' ),
+            	'choices'        => array(
+                	'basic'   => __( 'List posts below each other', 'imagazine' ),
+                	'columns'   => __( 'Display posts in columns', 'imagazine' ),
+                	//'grid'   => __( 'Display posts in a responsive grid', 'imagazine' ),
+            	)
+    	)));
+
+        // post lists
 		$wp_customize->add_setting( 'imagazine_content_listdisplay_contenttop' , array(
 		'default' => 'hide',
 		'sanitize_callback' => 'imagazine_sanitize_default',
@@ -2087,10 +2131,10 @@ function imagazine_theme_customizer( $wp_customize ){
 
 	/* Extra css (experiment preset css)
 		// Custom CSS setting
+
 	   class imagazine_Custom_CSS_Control extends WP_Customize_Control {
 
 		  public $type = 'custom_css';
-
 		  public function render_content() {
 		  ?>
 			 <label>
@@ -2101,7 +2145,6 @@ function imagazine_theme_customizer( $wp_customize ){
 		  }
 
 	   }
-
 	   $wp_customize->add_section('imagazine_custom_css_setting', array(
 		  'priority' => 190,
 		  'title' => __('Theme CSS', 'imagazine'),
@@ -2162,6 +2205,7 @@ function imagazine_customize_adaptive(){
 	 */
 	.pagemargin
 	{
+	position:relative;
 	margin:0px auto;
 	width:<?php echo get_theme_mod('imagazine_global_screenmode_pagewidth', '100' ).'%'; ?>;
 	<?php if( get_theme_mod('imagazine_global_screenmode_pagemaxwidth', '1480' ) > 0 ){ ?>
@@ -2169,12 +2213,12 @@ function imagazine_customize_adaptive(){
 	<?php } ?>
 	}
 
-
 	/*
 	 * SMALL SCREEN DEFAULTS
 	 */
 	.outermargin
 	{
+	position:relative;
 	margin:0px auto;
 	width:<?php echo get_theme_mod('imagazine_global_screenmode_smallwidth', 100).'%'; ?>;
 	max-width:<?php echo get_theme_mod('imagazine_global_screenmode_smallmargin', 320).'px'; ?> !important;
