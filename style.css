@@ -15,6 +15,8 @@ GitHub Branch: development
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
+
+now testing aptana
 */
 
 
@@ -25,6 +27,15 @@ Use it to make something cool, have fun, and share what you've learned with othe
 {
 padding:0;
 margin:0;
+}
+
+.pos-right
+{
+float:right;
+}
+.pos-left
+{
+float:left;
 }
 
 html{
@@ -46,8 +57,12 @@ font-size: 0;
 position: relative;
 }
 
-
-/*
+#upperbarcontainer .outermargin,
+#topbarcontainer .outermargin
+{
+padding:0px;
+}
+    /*
  * upperbar and topbar
  */
 #uppermenu,
@@ -69,13 +84,25 @@ display: inline-block;
 {
 display: inline-block;
 }
+
 #topmenu nav div div ul > li > a,
-#topmenu nav div div ul > li > div > a,
-#toplogobox > a
+#topmenu nav div div ul > li > div > a
 {
 display:table-cell;
 vertical-align:middle;
 }
+
+
+#toplogobox > a
+{
+display:table-cell;
+/*vertical-align:bottom;
+font-size:0;
+}
+#toplogobox > a > img
+{
+}
+
 nav div div ul.sub-menu
 {
 display:none;
@@ -91,11 +118,28 @@ position:absolute;
 display:block;
 z-index:399;
 }
-#sidemenu nav div div ul li:hover ul.sub-menu
+
+/*
+ * Truncate topmemu overflow
+ */
+#topmainbar
 {
-position:relative;
-display:block;
 }
+#topmenu ul.menu {
+white-space:nowrap;
+overflow:hidden;
+}
+
+#topmainbar ul.overflow
+{
+display: none;
+}
+
+
+
+
+
+
 /*
  * upperbar and topbar
  */
@@ -132,6 +176,17 @@ display:block;
 }
 
 
+
+/*
+ * Side menu
+ */
+#sidemenu nav div div ul li:hover ul.sub-menu
+{
+position:relative;
+display:block;
+}
+
+
 /* Default topbar sidebar menu styling */
 #topbarcontainer .sidecolumn ul.menu li
 {
@@ -149,6 +204,13 @@ display:inline-block;
 display:block;
 }
 
+
+
+
+
+
+
+/* Widgets */
 #contenttopwidgets
 {
 display:block;
@@ -156,7 +218,6 @@ width:100%;
 height:auto;
 }
 
-/* Widgets */
 .widget-contentbox img
 {
 width:100%;
@@ -165,7 +226,8 @@ height:auto;
 }
 
 /* Breadcrumb styles */
-#breadcrumbs{
+#breadcrumbs,
+#userpanel {
     list-style:none;
     margin:5px 0;
     overflow:hidden;
@@ -226,6 +288,10 @@ background-position: center;
 }
 
 
+
+
+
+
 /* post blog lists etc. */
 #maincontent.blog-columns
 {
@@ -236,7 +302,7 @@ height: 100%;
 #maincontent.blog-columns .post
 {
 flex: 1 1 26%;
-padding:2%;
+/*padding:2%;*/
 }
 
 /* pagination */
@@ -246,6 +312,20 @@ display:block;
 text-align:center;
 width:100%;
 }
+
+
+
+
+
+
+/* Login widget base */
+#userpanel ul li.menu-item a {
+padding:5px 0;
+display: block;
+}
+
+
+
 
 
 /* page admin menu */
@@ -262,12 +342,6 @@ z-index:80;
 {
 display:inline-block;
 padding:3px;
-
-
-
-
-
-
 /* | edit (admin) | voice button (responsive text to speech plugin) */
 }
 #maincontent .optionmenu button.responsivevoice-button
@@ -300,6 +374,3 @@ float:left;
 width:32px;
 height:32px;
 }
-
-
-

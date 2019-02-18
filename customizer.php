@@ -178,8 +178,8 @@ function imagazine_theme_customizer( $wp_customize ){
     ));
 
 	// content types settings
-	$wp_customize->add_section('imagazine_content_frontpagedisplay', array(
-        'title'    => __('Frontpage', 'imagazine'),
+	$wp_customize->add_section('imagazine_content_blogpagedisplay', array(
+        'title'    => __('Blog page', 'imagazine'),
         'panel'  => 'imagazine_content',
 		'priority' => 70,
     ));
@@ -729,6 +729,20 @@ function imagazine_theme_customizer( $wp_customize ){
                 'none'   => __( 'No effect', 'imagazine' ),
                 'mini'   => __( 'Minimal height', 'imagazine' ),
             )
+    )));
+
+
+	$wp_customize->add_setting( 'imagazine_topbar_behavior_anispeed' , array(
+		'default' => 200,
+		'sanitize_callback' => 'imagazine_sanitize_default',
+		'priority' => 20,
+    ));
+    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_topbar_behavior_anispeed', array(
+            'label'          => __( 'Topbar animation speed', 'imagazine' ),
+            'section'        => 'imagazine_topbar_behavior',
+            'settings'       => 'imagazine_topbar_behavior_anispeed',
+            'type'           => 'number',
+ 	    	'description'    => __( 'Select speed for scaling animation (ms)', 'imagazine' ),
     )));
 
 	$wp_customize->add_setting( 'imagazine_topbar_behavior_width' , array(
@@ -1357,37 +1371,59 @@ function imagazine_theme_customizer( $wp_customize ){
 		/* main content widget settings */
 
     // frontpage
-        $wp_customize->add_setting( 'imagazine_content_frontpagedisplay_contenttop' , array(
+        $wp_customize->add_setting( 'imagazine_content_blogpagedisplay_contenttop' , array(
 		'default' => 'hide',
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
 
-		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_frontpagedisplay_contenttop', array(
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_blogpagedisplay_contenttop', array(
             	'label'          => __( 'Show top widgets', 'imagazine' ),
-            	'section'        => 'imagazine_content_frontpagedisplay',
-            	'settings'       => 'imagazine_content_frontpagedisplay_contenttop',
+            	'section'        => 'imagazine_content_blogpagedisplay',
+            	'settings'       => 'imagazine_content_blogpagedisplay_contenttop',
             	'type'           => 'select',
- 	    	'description'    => __( 'Frontpage content top widgets by default', 'imagazine' ),
+ 	    	'description'    => __( 'Blog page content top widgets by default', 'imagazine' ),
             	'choices'        => array(
-                	'hide'   => __( 'No display on frontpage', 'imagazine' ),
-                	'show'   => __( 'Show top widgets on frontpage', 'imagazine' ),
+                	'hide'   => __( 'No display on blog page', 'imagazine' ),
+                	'show'   => __( 'Show top widgets on blog page', 'imagazine' ),
             	)
     	)));
 
-        $wp_customize->add_setting( 'imagazine_content_frontpagedisplay_blogpage' , array(
+
+    // CONTENT - LIST - EXCLUDE CATEGORIES  Add multi select
+		// source used: http://themefoundation.com/customizer-multiple-category-control/
+		// .. http://jayj.dk/multiple-select-lists-theme-customizer/
+		$wp_customize->add_setting( 'imagazine_blogpage_exclude_categories'  , array(
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+		$wp_customize->add_control(
+			new imagazine_multiselect_exclude_categories(
+				$wp_customize,
+				'imagazine_blogpage_exclude_categories',
+				array(
+					'label' => __( 'Exclude Categories', 'imagazine' ),
+ 	    			'description'    => __( 'Select post categories to be excluded from the main loop (post overview)', 'imagazine' ),
+					'section' => 'imagazine_content_blogpagedisplay',
+					'settings' => 'imagazine_blogpage_exclude_categories'
+				)
+			)
+		);
+
+
+        $wp_customize->add_setting( 'imagazine_content_blogpagedisplay_listtype' , array(
 		'default' => 'basic',
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
 
-		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_frontpagedisplay_blogpage', array(
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_blogpagedisplay_listtype', array(
             	'label'          => __( 'Blog page type', 'imagazine' ),
-            	'section'        => 'imagazine_content_frontpagedisplay',
-            	'settings'       => 'imagazine_content_frontpagedisplay_blogpage',
+            	'section'        => 'imagazine_content_blogpagedisplay',
+            	'settings'       => 'imagazine_content_blogpagedisplay_listtype',
             	'type'           => 'select',
- 	    	'description'    => __( 'Frontpage blogpage type', 'imagazine' ),
+ 	    	'description'    => __( 'Blogpage list type', 'imagazine' ),
             	'choices'        => array(
                 	'basic'   => __( 'List posts below each other', 'imagazine' ),
-                	'columns'   => __( 'Display posts in columns', 'imagazine' ),
+                	'columns'   => __( 'Display posts in grid', 'imagazine' ),
                 	//'grid'   => __( 'Display posts in a responsive grid', 'imagazine' ),
             	)
     	)));
@@ -2131,7 +2167,6 @@ function imagazine_theme_customizer( $wp_customize ){
 
 	/* Extra css (experiment preset css)
 		// Custom CSS setting
-
 	   class imagazine_Custom_CSS_Control extends WP_Customize_Control {
 
 		  public $type = 'custom_css';
@@ -2428,13 +2463,18 @@ function imagazine_customize_adaptive(){
 add_action( 'wp_head' , 'imagazine_customize_adaptive' );
 
 
-
-
-
 // default sanitize function
 function imagazine_sanitize_default($obj){
     //.. global sanitizer
     return $obj;
 }
+
+/** Extensions for customizer options
+ * - multiselect categories
+ */
+function imagazine_load_customize_controls() {
+    require_once( get_template_directory() . '/assets/customizer_extend.php' );
+}
+add_action( 'customize_register', 'imagazine_load_customize_controls', 0 );
 
 ?>

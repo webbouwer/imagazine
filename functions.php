@@ -57,6 +57,18 @@
 	}
 	add_action( 'init', 'imagazine_setup_register_menus' );
 
+
+    /*
+     * Exclude specific categories from the loop
+     */
+    add_action( 'pre_get_posts', 'exclude_specific_cats' );
+    function exclude_specific_cats( $wp_query ) {
+        if( !is_admin() && is_main_query() && is_home() ){
+            $exclude_cats = '-'.str_replace(",",",-", get_theme_mod('imagazine_blogpage_exclude_categories') );
+            $wp_query->set( 'cat', $exclude_cats ); // ! '-1' not allowed = buggy in WP Multisitesq
+        }
+    }
+
 	/**
 	 * Keep category select list in hiÎarchy
 	 * source http://wordpress.stackexchange.com/questions/61922/add-post-screen-keep-category-structure
@@ -69,6 +81,7 @@
 
 	}
 	add_filter( 'wp_terms_checklist_args', 'imagazine_wp_terms_checklist_args', 1, 2 );
+
 
 	/* Widgets */
 	function imagazine_setup_widgets_init() {
@@ -288,20 +301,20 @@
 	/*
 	 * Widget empty title content wrapper fix
 	*/
-	function check_sidebar_params( $params ) {
-		global $wp_registered_widgets;
+    // widget empty title content wrapper fix
+    function imagazine_check_sidebar_title( $params ) {
+        global $wp_registered_widgets;
+        $settings_getter = $wp_registered_widgets[ $params[0]['widget_id'] ]['callback'][0];
+        $settings = $settings_getter->get_settings();
+        $settings = $settings[ $params[1]['number'] ];
+        if ( $params[0][ 'after_widget' ] == '<div class="clr"></div></div></div>' && isset( $settings[ 'title' ] ) && ( empty( $settings[ 'title' ] ) || $settings[ 'title' ] == '' ) ) {
 
-		$settings_getter = $wp_registered_widgets[ $params[0]['widget_id'] ]['callback'][0];
-		$settings = $settings_getter->get_settings();
-		$settings = $settings[ $params[1]['number'] ];
-
-		if ( $params[0][ 'after_widget' ] == '<div class="clr"></div></div></div>' && isset( $settings[ 'title' ] ) &&  empty( $settings[ 'title' ] ) ){
-			$params[0][ 'before_widget' ] .= '<div class="widget-contentbox">';
-		}
-
-		return $params;
-	}
-	add_filter( 'dynamic_sidebar_params', 'check_sidebar_params' );
+            $params[0][ 'before_widget' ] .= '<div class="widget-contentbox">';
+        }
+        return $params;
+    }
+    // Add widget param check for empty html correction
+    add_filter( 'dynamic_sidebar_params', 'imagazine_check_sidebar_title' );
 
 
 	/*
@@ -314,6 +327,9 @@
 	add_action( 'admin_init', 'imagazine_editor_styles' );
 
 
+
+
+
 	/* JQuery init */
 	function imagazine_frontend_jquery() {
 		wp_enqueue_script('jquery');
@@ -323,6 +339,7 @@
 	/* Eenqueue scripts and styles */
 	function imagazine_theme_scripts() {
 		wp_enqueue_style( 'basic-stylesheet', get_stylesheet_uri() );
+		wp_enqueue_style( 'menu-stylesheet', get_template_directory_uri() .'/assets/menu.css' );
 		//wp_enqueue_script( 'theme-responsive', get_template_directory_uri()
 		// . '/assets/responsive.js', array(), '1.0.0', true );
 	}
@@ -399,25 +416,28 @@
 		// Register the script(s)
 		wp_register_script( 'custom_global_js', get_template_directory_uri().'/assets/global.js', 99, '1.0', false);
 		wp_register_script( 'custom_login_js', get_template_directory_uri().'/assets/userlogin.js', 99, '1.0', false);
-		//wp_register_script( 'custom_topbar_js', get_template_directory_uri().'/assets/customizer_topbar.js', 99, '1.0', false);
 
 		// Get the global data list.
 		global $wp_global_data;
 
+		// extend the global veriables with specific data.
+		// $wp_global_data[] = array( 'color1' => get_theme_mod('color1'), 'color2' => '#000099' );
+
 		// Localize the global data list for the script
 		wp_localize_script( 'custom_global_js', 'site_data', $wp_global_data );
-		//wp_localize_script( 'custom_topbar_js', 'site_data', $wp_global_data );
-
-
-
-		// localize the script with specific data.
-		//$color_array = array( 'color1' => get_theme_mod('color1'), 'color2' => '#000099' );
-		//wp_localize_script( 'custom_global_js', 'object_name', $color_array );
 
 		// The script can be enqueued now or later.
 		wp_enqueue_script( 'custom_global_js');
 		wp_enqueue_script( 'custom_login_js');
-		//wp_enqueue_script( 'custom_topbar_js');
+
+        /* extend customizer UI */
+        global $wp_customize;
+        if ( isset( $wp_customize ) ) {
+            // do stuff
+        }
+
+
+
 	}
 
 	add_action('wp_enqueue_scripts', 'imagazine_global_js');
@@ -533,11 +553,6 @@
 	 */
 	$wp_global_data = array(); // special var $wp_global_data
 	$wp_global_data['customizer'] = json_encode(get_theme_mods());
-
-
-
-
-
 
 
 

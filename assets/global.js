@@ -1,23 +1,13 @@
 /* global.js */
 jQuery(function ($) {
 
-	/*
-	$('html').hide();
-
-	$(window).load(function() {
-		$('html').fadeIn(200);
-	}); //end onload
-
-	$(window).unload(function () {
-        $('html').fadeOut(100);
-    });
-	*/
 
 	$(document).ready( function(){
 
 			var $wp_custom_vars = JSON.parse(site_data['customizer']);//alert( $wp_custom_vars['imagazine_topbar_behavior_minheight'] );
 
 			//alert( JSON.stringify( $wp_custom_vars ) );
+            var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
 			var mediumswitch = 580;
 			var largeswitch = 1150;
@@ -53,10 +43,15 @@ jQuery(function ($) {
 
 
 			var menu_button_html = '<div id="topmainmenubutton">MENU</div>';
+            var menu_button_more = '<li class="menubutton"><a href="">more</a></li>';
+
+            var menu_overflow_box = '<ul class="overflow"></ul>';
 			var menu_logo_html = '<li class="menu-item logo"></li>';
 
 			var topbarlargebehavior = $wp_custom_vars['imagazine_topbar_behavior_largeposition']; // relative / fixed / scroll / none
 			var topbarsmallbehavior = $wp_custom_vars['imagazine_topbar_behavior_smallposition']; // relative / fixed / scroll / none
+            var topbaranimationspeed = parseInt($wp_custom_vars['imagazine_topbar_behavior_anispeed']);
+
 			var topbarwidth =  $wp_custom_vars['imagazine_topbar_behavior_width'];
 			var toplogopos = $wp_custom_vars['imagazine_topbar_logo_position'];
 			var toplogominw = $wp_custom_vars['imagazine_topbar_logo_minwidth'];
@@ -116,12 +111,165 @@ jQuery(function ($) {
 
 
 
-		 	/* */
+		 	/* logo shape instance */
 			var lbform = $("#toplogobox img").clientWidth / $("#toplogobox img").clientHeight;
 
 
+            // default hide menu & topmainmenubutton
+            //$('#topmenu').hide();
 
-			function set_top_behavior(){
+            function check_overflow_x( element, margin = 0){
+
+                if( element.parent().find('ul.overflow').length < 1 ){
+                    element.parent().append( menu_overflow_box );
+                }
+                if( element.parent().find('li.menubutton').length < 1 ){
+                    //element.append( menu_button_more );
+                }
+
+                var tw = margin;
+                var ow = element.width();
+                $.each( element.children(), function(ind, obj){
+                    tw += $(this).width();
+                });
+                if ( ow < tw ) { //console.log( ow +' vs '+ tw + ');
+                    return true;
+                }
+                return false;
+
+            }
+
+            function set_topmenu_behavior(){
+
+                $('ul.overflow').hide();
+
+                if( $(window).width() >= mediumswitch ){
+
+
+                    var el = $('#topmenu ul.menu');
+
+                    // medium/large
+                    if( menularge != 'none' && menularge != 'collapsed'){
+
+                        var m = $('#toplogobox').width();
+
+
+                        if( $(window).width() >= largeswitch ){
+                            $('#topmainbar ul.overflow').children().appendTo($('#topmenu ul.menu'));
+                        }
+
+                        if( check_overflow_x( el, m ) ){
+
+
+                            el.children().not('.menubutton').last().prependTo($('#topmainbar ul.overflow'));
+                            //$('#topmainbar ul.menu .menubutton').css({ 'display': 'table-cell', 'height': $('#topmainbar').height() });
+                            $('#topmainbar ul.menu .menubutton').show();
+
+
+
+                        }else{
+                            var m = $('#toplogobox').width() + $('#topmainbar ul.overflow').children().first().width();
+                            if( !check_overflow_x( el, m ) ){
+                                $('#topmainbar ul.overflow').children().first().appendTo($('#topmenu ul.menu'));
+                                $('#topmainbar ul.menu .menubutton').appendTo( $('#topmainbar ul.menu') );
+                                if( $('#topmainbar ul.overflow').children().length < 1 ) {
+                                    $('#topmainbar ul.menu .menubutton').hide();
+                                }
+                            }
+
+                        }
+
+						// menu available
+						el.show();
+
+                    }else{
+                        if( menularge == 'collapsed'){
+                            el.children().not('.menubutton').prependTo($('#topmainbar ul.overflow'));
+                            $('#topmainbar ul.menu .menubutton').show();
+                        }else{
+                            //el.hide();
+                        }
+                    }
+
+                }else{
+
+                    // small- if( menusmall != 'none' && menusmall != 'collapsed'){
+                       $('#topmenu ul.menu').children().not('.menubutton').prependTo($('#topmainbar ul.overflow'));
+					   $('#topmainbar ul.menu .menubutton').show();
+
+                }
+
+
+            }
+
+
+                /*
+
+                    var el = $('#topmenu ul.menu');
+                    var m = 0;//$('#toplogobox').width();
+                    if( check_overflow_x( el, m ) ){
+                $('#topmenu ul.menu').children().not('.more').prependTo($('#topmainbar ul.overflow'));
+                    }else{
+                $('#topmainbar ul.overflow').children().prependTo($('#topmenu ul.menu'));
+                    }
+                    */
+
+                /*
+                if( menusmall != 'none' && menusmall != 'collapsed'){
+
+						// menu available
+						$('#topmenu').show();
+
+					}else{
+
+						// do not show menu, place menu button
+						if( menusmall == 'collapsed' ){
+							$('#topmainbar').append( menu_button_html );
+						}
+
+
+
+                if( $(window).width() >= mediumswitch &&  menularge != 'collapsed' ){
+
+                    if( menularge != 'none' ){
+                        $('#topmenu ul.menu').show();
+                    }
+
+                    // larger screens
+                    var el = $('#topmenu ul.menu');
+                    var m = 0;//$('#toplogobox').width();
+                    if( check_overflow_x( el, m ) ){
+                        el.children().not('.more').last().prependTo($('#topmainbar ul.overflow'));
+                        $('#topmainbar ul.menu .more .menubutton').css({ 'display': 'table-cell', 'height': $('#topmainbar').height() });
+                        $('#topmainbar ul.menu .more').show();
+                        set_topmenu_behavior();
+                    }else{
+                        var m = $('#toplogobox').width() + $('#topmainbar ul.overflow').children().first().width();
+                        if( !check_overflow_x( el, m ) ){
+                            $('#topmainbar ul.overflow').children().first().appendTo($('#topmenu ul.menu'));
+                            $('#topmainbar ul.menu .more').appendTo($('#topmenu ul.menu'));
+                        }
+
+                    }
+
+                }else{
+                    // small screens
+                    if( menusmall == 'open' || menusmall == 'collapsed' || ( $(window).width() >= mediumswitch &&  menularge == 'collapsed' ) ){
+                        $('#topmenu ul.menu').children().not('.more').prependTo($('#topmainbar ul.overflow'));
+                    }else{
+                        $('#topmenu ul.menu').hide();
+                    }
+                }
+
+                if( $('#topmainbar ul.overflow').children().length == 0 ){
+                    $('#topmainbar ul.menu .more').hide();
+                }
+                */
+
+
+
+
+        function set_top_behavior(){
 
 				var tsp = 0;
 
@@ -181,8 +329,6 @@ jQuery(function ($) {
 
 
 
-
-
 				if( $('#topbarcontainer').length > 0 ){
 
 					if( ( $(window).width() < mediumswitch && topbarsmallbehavior == 'fixed' ) || ( $(window).width() >= mediumswitch && topbarlargebehavior == 'fixed') ){
@@ -191,9 +337,10 @@ jQuery(function ($) {
 						// get offsets
 						var topbarTop = $('#topbarcontainer').offset().top;
 
+
+
 						// get topbarcontainer height
 						var th = $('#topbarcontainer').outerHeight();
-
 
 						// fixed on top after scrolling upperbar height
 
@@ -208,79 +355,81 @@ jQuery(function ($) {
 								}
 
 
-								// get scroll top position
-								var windowTop = $(window).scrollTop() + tsp;
+                                    // get scroll top position
+                                    var windowTop = $(window).scrollTop() + tsp;
 
-								// check topbar position
-								if ( topbarTop < ( windowTop -5 ) && !$('#topbarcontainer').hasClass('sticky') ){
+                                    // check topbar position
+                                    if ( topbarTop < ( windowTop  ) && !$('#topbarcontainer').hasClass('sticky') ){
 
-									// set absolute pos on nst
-									$('#topbarcontainer').css('top', tsp);
+                                        // set absolute pos on nst
+                                        $('#topbarcontainer').css('top', tsp);
 
-									// insert relative spacer div
-									$('<div id="topspacer" style="height:'+th+'px;"></div>').insertBefore( $('#topbarcontainer') );
+                                        // insert relative spacer div
+                                        $('<div id="topspacer" style="height:'+th+'px;"></div>').insertBefore( $('#topbarcontainer') );
 
-									// set sticky
-									$('#topbarcontainer').addClass('sticky');
-
-
-									if(topbarscroll == 'mini'){
-
-										$("#toplogobox img").animate({
-										  width: toplogominw+'px'
-										});
-
-										// only if medium/large screen set menu height
-										if($(window).width() >= mediumswitch){
-											$("#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a").animate({ height: topbarminheight });
-										}
-									}
+                                        // set sticky
+                                        $('#topbarcontainer').addClass('sticky');
 
 
-								}else if( topbarTop >= windowTop && $('#topbarcontainer').hasClass('sticky') ) {
+                                        if(topbarscroll == 'mini' && !iOS && $(window).width() >= mediumswitch ){
 
-									// remove sticky
-									$('#topbarcontainer').removeClass('sticky');
-
-									// set absolute pos return
-									$('#topbarcontainer').css('top', 0);
-
-									// remove spacer
-									$('#topspacer').remove();
+                                            //clearTimeout($.data(this, 'scrollTimer'));
+                                            //$.data(this, 'scrollTimer', setTimeout(function() {
 
 
-									if(topbarscroll == 'mini'){
+                                            // only if medium/large screen set menu height
+                                            $("#toplogobox img").animate({
+                                              width: toplogominw+'px'
+                                            }, topbaranimationspeed );
+                                            $("#topmenu, #topmenu nav div div > ul > li > a, #topmenu .menubutton, #toplogobox a, #topspacer").animate({ height: topbarminheight }, topbaranimationspeed );
 
-										$("#toplogobox img").animate({
-										  width: toplogomaxw+'px'
-										});
-										if($(window).width() >= mediumswitch){
-											$("#topmenu, #topmenu nav div div > ul > li > a, #toplogobox a").animate({ height: topbarmaxheight });
-										}
-									}
-
+                                            //}, 0)); // endscroll
+                                        }
 
 
-								}
+                                    }else if( topbarTop >= windowTop && $('#topbarcontainer').hasClass('sticky') ) {
 
+                                        // remove spacer
+                                        $('#topspacer').remove();
+
+
+                                        // only if medium/large screen set menu height
+                                        if(topbarscroll == 'mini' && !iOS && $(window).width() >= mediumswitch){
+                                            //clearTimeout($.data(this, 'scrollTimer'));
+                                            //$.data(this, 'scrollTimer', setTimeout(function() {
+                                            $("#toplogobox img").animate({
+                                              width: toplogomaxw+'px'
+                                            }, topbaranimationspeed );
+
+                                            $("#topmenu, #topmenu nav div div > ul > li > a, #topmenu .menubutton, #toplogobox a, #topspacer").animate({ height: topbarmaxheight  }, topbaranimationspeed );
+
+                                            //}, 0)); // endscroll
+                                        }
+
+                                        // remove sticky
+                                        $('#topbarcontainer').removeClass('sticky');
+
+                                        // set absolute pos return
+                                        $('#topbarcontainer').css('top', 0);
+
+                                    }
 							});
-
 
 					}else{
 
-									// remove sticky
-									$('#topbarcontainer').removeClass('sticky');
+                        // remove sticky
+				        $('#topbarcontainer').removeClass('sticky');
 
-									// remove spacer
-									$('#topspacer').remove();
+				        // remove spacer
+				        $('#topspacer').remove();
 
 					}
 
+
 				}
+
+
 			}
-
-
-
 
 
 
@@ -295,14 +444,12 @@ jQuery(function ($) {
 
 					if( upperbardisplaylarge != 'none' ){
 
-
 						// upperbardisplaylarge fixed / relative / none
-
 						$('#upperbarcontainer').show();
 
+
+
 						$('#uppermenubox').parent().prepend( $('#uppersidebar') );
-
-
 
 						// default topmainbar width
 						var uppermenuwidth = 100;
@@ -316,7 +463,9 @@ jQuery(function ($) {
 							'width': uppersidebarwidth+'%'
 							});
 
-
+                            if( uppersidebarrespon == 'before' ){
+                                $('#uppermenubox').parent().prepend( $('#uppersidebar') );
+                            }
 							// define topmainbar width and float position
 							var uppermenufloat = 'left';
 							if( uppersidebarpos === 'left')
@@ -436,11 +585,7 @@ jQuery(function ($) {
 					});
 
 
-				// default hide menu & topmainmenubutton
-					$('#topmenu').hide();
-					$('#topmainmenubutton').remove();
-
-
+				///	$('#topmainmenubutton').remove();
 
 				// menu placement
 					if( menularge != 'none' && menularge != 'collapsed'){
@@ -492,9 +637,10 @@ jQuery(function ($) {
 					}else{
 
 						// do not show menu, place menu button
-						if( menularge == 'collapsed' ){
+						/*if( menularge == 'collapsed' ){
 							$('#topmainbar').append( menu_button_html );
 						}
+                        */
 
 					}
 
@@ -507,7 +653,7 @@ jQuery(function ($) {
 					// logo default
 					$('#topmainbar').prepend( $('#toplogobox') );
 					$('li.logo').remove();
-					$('#topmenu, #topmenu nav div div > ul > li > a, #topmenu nav div div > ul > li > #toplogobox > a').css( 'height', 'auto' );
+					$('#topmenu, #topmenu nav div div > ul > li > a, #topmenu nav div div > ul > li > #toplogobox > a, #overflow li a').css( 'height', 'auto' );
 
 
 					// move sidebars before, after, collapsed, hide
@@ -552,8 +698,9 @@ jQuery(function ($) {
 
 
 
+
 					// default hide menu & topmainmenubutton
-					$('#topmenu').hide();
+					/*$('#topmenu').hide();
 					$('#topmainmenubutton').remove();
 
 					// menu placement
@@ -569,12 +716,10 @@ jQuery(function ($) {
 							$('#topmainbar').append( menu_button_html );
 						}
 
+
+
 					}
-
-
-
-
-
+                    */
 				} // end smaller screens
 
 				} // end if upperbar / topbar available
@@ -871,11 +1016,16 @@ jQuery(function ($) {
 			var ctimeout = false;
 			var cdelta = 200;
 			$(window).resize(function() {
+
+                // timed resize
 				rctime = new Date();
 				if (ctimeout === false) {
 					ctimeout = true;
 					setTimeout(customizer_resizeend, cdelta);
 				}
+                // & set menu etc.
+                //set_topmenu_behavior();
+
 			});
 
 			function customizer_resizeend(){
@@ -905,10 +1055,11 @@ jQuery(function ($) {
 					// check topbar
 					set_topbar_elements();
 
-
-					// fixed topbar etc.
+					// fixed topbar
 					set_top_behavior();
 
+                    // responsive topmenu overflow
+                    set_topmenu_behavior();
 
 					// header
 					set_header_elements();
@@ -927,8 +1078,50 @@ jQuery(function ($) {
 
 			}
 
-			// init resize end on document ready
-			customizer_resizeend();
+
+
+            $('#topbarcontainer').on( 'click', '.menubutton', function( e ){
+                e.preventDefault();
+                $('ul.overflow').fadeToggle();
+            });
+
+
+        // init resize end on document ready
+        var element  = $('#topmenu ul.menu');
+        if( element.parent().find('ul.overflow').length < 1 ){
+                    element.parent().append( menu_overflow_box );
+                }
+                if( element.parent().find('li.menubutton').length < 1 ){
+                    element.append( menu_button_more );
+                }
+
+
+		customizer_resizeend();
+
+
+
+
+
+        $(window).load(function(){
+
+        var element  = $('#topmenu ul.menu');
+
+
+                set_topmenu_behavior();
+          //$('#topmenu ul.menu').children().not('.more').prependTo($('#topmainbar ul.overflow'));
+
+
+            /*setTimeout( function(){
+                $('body').fadeIn(600);
+                set_topmenu_behavior();
+            }, 10);
+            */
+    });
+
+    //$(window).unload(function () {
+    //    $('body').fadeOut(600);
+    //});
+
 
 
 	}); //end on ready

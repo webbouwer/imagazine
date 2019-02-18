@@ -20,8 +20,8 @@ $sidebar2respon = get_theme_mod('imagazine_content_sidebars_sidebar2responsive',
 
 /* post/page/list global settings */
 
-$front_topwidgets_display = get_theme_mod('imagazine_content_frontpagedisplay_contenttop', 'hide');
-$front_blogpage_display = get_theme_mod('imagazine_content_frontpagedisplay_blogpage', 'basic'); // columns | grid
+$blog_topwidgets_display = get_theme_mod('imagazine_content_blogpagedisplay_contenttop', 'hide');
+$blog_postlist_display = get_theme_mod('imagazine_content_blogpagedisplay_listtype', 'basic'); // columns | grid
 
 
 $list_topwidgets_display = get_theme_mod('imagazine_content_listdisplay_contenttop', 'hide');
@@ -133,7 +133,7 @@ echo '<div id="maincontentcontainer">';
 
 
 if( is_home() ){
-    echo '<div id="maincontent" class="blog-'.$front_blogpage_display.'">';
+    echo '<div id="maincontent" class="blog-'.$blog_postlist_display.'">';
 }else{ /* basic loop */
     echo '<div id="maincontent">';
 }
@@ -148,7 +148,7 @@ $page_topwidgets_display = $dsparr[$page_contenttop_display];
 if( !( is_page() && $page_topwidgets_display == 'hide' )
    && !( is_single() && $post_topwidgets_display == 'hide' )
   	&& !( is_category() && $list_topwidgets_display == 'hide' )
-     && !( is_home() && $front_topwidgets_display == 'hide' )){
+     && !( is_home() && $blog_topwidgets_display == 'hide' )){
 
 // maincontent top widgets
 if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('contenttopwidgets') ){
