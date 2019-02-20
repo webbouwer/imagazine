@@ -91,12 +91,10 @@ display: inline-block;
 display:table-cell;
 vertical-align:middle;
 }
-
-
 #toplogobox > a
 {
 display:table-cell;
-vertical-align:bottom;
+vertical-align:middle;
 font-size:0;
 }
 #toplogobox > a > img
