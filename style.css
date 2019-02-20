@@ -96,7 +96,7 @@ vertical-align:middle;
 #toplogobox > a
 {
 display:table-cell;
-/*vertical-align:bottom;
+vertical-align:bottom;
 font-size:0;
 }
 #toplogobox > a > img
