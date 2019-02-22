@@ -130,10 +130,26 @@ overflow:hidden;
 
 #topmainbar ul.overflow
 {
-display: none;
+display: block;
+position:absolute;
+right:-500px;
+top:100%;
+width:100%;
+max-width:320px;
+overflow:hidden;
+-webkit-transition: all linear 0.8s; /* Safari */
+transition: all linear 0.8s;
+z-index:99;
+background-color: aqua;
 }
-
-
+#topmainbar ul.overflow.active
+{
+right:0px;
+}
+#topmainbar ul.overflow li
+{
+display: block;
+}
 
 
 

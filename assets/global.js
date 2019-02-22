@@ -141,8 +141,8 @@ jQuery(function ($) {
 
             function set_topmenu_behavior(){
 
-                $('ul.overflow').hide();
-
+                //$('ul.overflow').hide();
+                $('ul.overflow').removeClass('active');
                 if( $(window).width() >= mediumswitch ){
 
 
@@ -1070,6 +1070,7 @@ jQuery(function ($) {
 
 					// footer
 					set_footer_elements();
+					set_footer_elements();
 
 
 				}
@@ -1080,9 +1081,10 @@ jQuery(function ($) {
 
 
 
-            $('#topbarcontainer').on( 'click', '.menubutton', function( e ){
+            $('#topbarcontainer').on( 'click', '.menubutton a', function( e ){
                 e.preventDefault();
-                $('ul.overflow').fadeToggle();
+                //$('ul.overflow').fadeToggle();
+                $('ul.overflow').toggleClass('active');
             });
 
 

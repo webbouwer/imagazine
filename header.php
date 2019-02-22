@@ -132,21 +132,12 @@ if( ( is_single() || is_page() ) && ( $headerfeaturedimg == 'yes' || $headertitl
 	if( ! empty( $header_image ) ){
 
 
-	$headerbgstyle = ' style="min-height:'.$headerminheight.'px; background-image:url('.esc_url( $header_image ).');"';
 
-	$columnbgstyle = '';
-	if( $headerdisplay == 'split' ){
-		$columnbgstyle = $headerbgstyle;
-		$headerbgstyle = '';
-	}
-
-
-
-
-	// header bg image
-	$headerbgstyle = '';
-
-	$headerbgstyle = ' style="min-height:'.$headerminheight.'px; background-image:url('.esc_url( $header_image ).');"';
+	//$headerbgstyle = ' style="min-height:'.$headerminheight.'px; background-image:url('.esc_url( $header_image ).');"';
+	$headerbgstyle = ' style="min-height:'.$headerminheight.'px;  background:  linear-gradient(
+      rgba(0, 0, 0, 0.65),
+      rgba(0, 0, 0, 0.65)
+    ), url('.esc_url( $header_image ).');"';
 
 	$columnbgstyle = '';
 	if( $headerdisplay == 'split' ){
