@@ -121,8 +121,8 @@ jQuery(function ($) {
             //$('#topmenu').hide();
             function check_overflow_x( element, margin = 0){
 
-                if( element.parent().find('ul.overflow').length < 1 ){
-                    element.parent().append( menu_overflow_box );
+                if( $('#pagecontainer > ul.overflow').length < 1 ){
+                    $('#pagecontainer').append( menu_overflow_box );
                 }
                 if( element.parent().find('li.menubutton').length < 1 ){
                     //element.append( menu_button_more );
@@ -154,24 +154,24 @@ jQuery(function ($) {
                         var m = $('#toplogobox').width();
 
                         if( $(window).width() >= largeswitch ){
-                            $('#topmainbar ul.overflow').children().appendTo($('#topmenu ul.menu'));
+                            $('#pagecontainer > ul.overflow').children().appendTo($('#topmenu ul.menu'));
                         }
 
                         if( check_overflow_x( el, m ) ){
 
 
-                            el.children().not('.menubutton').last().prependTo($('#topmainbar ul.overflow'));
+                            el.children().not('.menubutton').last().prependTo($('#pagecontainer > ul.overflow'));
                             //$('#topmainbar ul.menu .menubutton').css({ 'display': 'table-cell', 'height': $('#topmainbar').height() });
                             $('#topmainbar ul.menu .menubutton').show();
 
 
 
                         }else{
-                            var m = $('#toplogobox').width() + $('#topmainbar ul.overflow').children().first().width();
+                            var m = $('#toplogobox').width() + $('#pagecontainer > ul.overflow').children().first().width();
                             if( !check_overflow_x( el, m ) ){
-                                $('#topmainbar ul.overflow').children().first().appendTo($('#topmenu ul.menu'));
+                                $('#pagecontainer > ul.overflow').children().first().appendTo($('#topmenu ul.menu'));
                                 $('#topmainbar ul.menu .menubutton').appendTo( $('#topmainbar ul.menu') );
-                                if( $('#topmainbar ul.overflow').children().length < 1 ) {
+                                if( $('#pagecontainer > ul.overflow').children().length < 1 ) {
                                     $('#topmainbar ul.menu .menubutton').hide();
                                 }
                             }
@@ -183,7 +183,7 @@ jQuery(function ($) {
 
                     }else{
                         if( menularge == 'collapsed'){
-                            el.children().not('.menubutton').prependTo($('#topmainbar ul.overflow'));
+                            el.children().not('.menubutton').prependTo($('#pagecontainer > ul.overflow'));
                             $('#topmainbar ul.menu .menubutton').show();
                         }else{
                             //el.hide();
@@ -193,11 +193,12 @@ jQuery(function ($) {
                 }else{
 
                     // small- if( menusmall != 'none' && menusmall != 'collapsed'){
-                       $('#topmenu ul.menu').children().not('.menubutton').prependTo($('#topmainbar ul.overflow'));
+                       $('#topmenu ul.menu').children().not('.menubutton').prependTo($('#pagecontainer > ul.overflow'));
 					   $('#topmainbar ul.menu .menubutton').show();
 
                 }
 
+                set_topbar_elements();
 
             }
 
@@ -271,11 +272,9 @@ jQuery(function ($) {
 
 						// get offsets
 						var topbarTop = $('#topbarcontainer').offset().top;
-
-
-
 						// get topbarcontainer height
 						var th = $('#topbarcontainer').outerHeight();
+
 
 						// fixed on top after scrolling upperbar height
 
@@ -345,12 +344,15 @@ jQuery(function ($) {
                                         // remove sticky
                                         $('#topbarcontainer').removeClass('sticky');
 
-                                        if( ( $(window).width() < mediumswitch && ( topbarsmallbehavior == 'fixed') ) ||
-                                           ( $(window).width() >= mediumswitch && ( topbarlargebehavior == 'fixed') ) ){
+                                        if( //( $(window).width() < mediumswitch && ( topbarsmallbehavior == 'fixed') ) ||
+                                           ( $(window).width() >= mediumswitch && ( topbarlargebehavior == 'fixed') ) || $('#upperbarcontainer').length < 1 ){
                                             // set absolute pos return
                                             $('#topbarcontainer').css('top', 0);
-                                        }else if( ( $(window).width() < mediumswitch && ( topbarsmallbehavior == 'overflow') ) ||
-                                           ( $(window).width() >= mediumswitch && ( topbarlargebehavior == 'overflow') ) ){
+                                        }else if( (  //( $(window).width() < mediumswitch && ( topbarsmallbehavior == 'overflow') ) ||
+                                           ( $(window).width() >= mediumswitch && ( topbarlargebehavior == 'overflow') ) )){
+                                            // set absolute pos return
+                                            $('#topbarcontainer').css('top', $('#upperbarcontainer').outerHeight() );
+                                        }else if( $(window).width() < mediumswitch && topbarsmallbehavior == 'fixed' && $('#upperbarcontainer').length > 0 ){
                                             // set absolute pos return
                                             $('#topbarcontainer').css('top', $('#upperbarcontainer').outerHeight() );
                                         }
@@ -543,7 +545,7 @@ jQuery(function ($) {
 
 								// compute menu middle
 								var total_menu_items = $('#topmenu nav div div > ul > li').length;
-								var middle = Math.ceil(total_menu_items / 2);
+								var middle = Math.ceil( total_menu_items / 2 ) -1;
 
 								// place logo menu html wrapper in menu list
 								if( $('#topmenu nav div div > ul li.logo').length < 1){
@@ -972,7 +974,12 @@ jQuery(function ($) {
 					setTimeout(customizer_resizeend, cdelta);
 				}
                 // & set menu etc.
+                //
                 //set_topmenu_behavior();
+				//set_topbar_elements();
+				//set_top_behavior();
+
+
 
 			});
 
@@ -1037,13 +1044,12 @@ jQuery(function ($) {
 
 
         // init resize end on document ready
-        var element  = $('#topmenu ul.menu');
-        if( element.parent().find('ul.overflow').length < 1 ){
-                    element.parent().append( menu_overflow_box );
-                }
-                if( element.parent().find('li.menubutton').length < 1 ){
-                    element.append( menu_button_more );
-                }
+        if( $('#pagecontainer > ul.overflow').length < 1 ){
+            $('#pagecontainer').append( menu_overflow_box );
+        }
+        if( $('#topmenu ul.menu').parent().find('li.menubutton').length < 1 ){
+            $('#topmenu ul.menu').append( menu_button_more );
+        }
 
 
 		customizer_resizeend();

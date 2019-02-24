@@ -126,7 +126,7 @@ if( $headerready != 1 ){
         $headerbgstyle = ' style="min-height:'.$headerminheight.'px;  background:  linear-gradient(
           '.$rgbc1.',
           '.$rgbc2.'
-        ), url('.esc_url( $header_image ).'); color:'.$txtcolor.';"';
+        ), url('.esc_url( $header_image ).'); color:'.$txtcolor.';background-position:center;"';
 
         $columnbgstyle = '';
         if( $headerdisplay == 'split' ){
