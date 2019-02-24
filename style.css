@@ -117,69 +117,7 @@ display:block;
 z-index:399;
 }
 
-/*
- * Truncate topmemu overflow
- */
-#topmainbar
-{
-}
-#topmenu ul.menu {
-white-space:nowrap;
-overflow:hidden;
-}
 
-#topmainbar ul.overflow
-{
-display: block;
-position:absolute;
-right:-500px;
-top:100%;
-width:100%;
-max-width:320px;
-overflow:hidden;
--webkit-transition: all linear 0.8s; /* Safari */
-transition: all linear 0.8s;
-z-index:99;
-background-color: aqua;
-}
-#topmainbar ul.overflow.active
-{
-right:0px;
-}
-#topmainbar ul.overflow li
-{
-display: block;
-}
-
-
-
-
-/*
- * upperbar and topbar
- */
-#upperbarcontainer{
-	position: relative;
-	width:100%;
-}
-#upperbarcontainer.sticky
-{
-	position: fixed;
-	z-index:299;
-}
-
-/* top fixed */
-#topbarcontainer
-{
-	position: relative;
-	width:100%;
-	z-index:99;
-}
-#topbarcontainer.sticky
-{
-	position: fixed;
-	left:0px;
-	z-index:298;
-}
 
 #topbarcontainer .outermargin
 {

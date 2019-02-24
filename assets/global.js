@@ -115,9 +115,10 @@ jQuery(function ($) {
 			var lbform = $("#toplogobox img").clientWidth / $("#toplogobox img").clientHeight;
 
 
+
+
             // default hide menu & topmainmenubutton
             //$('#topmenu').hide();
-
             function check_overflow_x( element, margin = 0){
 
                 if( element.parent().find('ul.overflow').length < 1 ){
@@ -145,14 +146,12 @@ jQuery(function ($) {
                 $('ul.overflow').removeClass('active');
                 if( $(window).width() >= mediumswitch ){
 
-
                     var el = $('#topmenu ul.menu');
 
                     // medium/large
                     if( menularge != 'none' && menularge != 'collapsed'){
 
                         var m = $('#toplogobox').width();
-
 
                         if( $(window).width() >= largeswitch ){
                             $('#topmainbar ul.overflow').children().appendTo($('#topmenu ul.menu'));
@@ -201,71 +200,6 @@ jQuery(function ($) {
 
 
             }
-
-
-                /*
-
-                    var el = $('#topmenu ul.menu');
-                    var m = 0;//$('#toplogobox').width();
-                    if( check_overflow_x( el, m ) ){
-                $('#topmenu ul.menu').children().not('.more').prependTo($('#topmainbar ul.overflow'));
-                    }else{
-                $('#topmainbar ul.overflow').children().prependTo($('#topmenu ul.menu'));
-                    }
-                    */
-
-                /*
-                if( menusmall != 'none' && menusmall != 'collapsed'){
-
-						// menu available
-						$('#topmenu').show();
-
-					}else{
-
-						// do not show menu, place menu button
-						if( menusmall == 'collapsed' ){
-							$('#topmainbar').append( menu_button_html );
-						}
-
-
-
-                if( $(window).width() >= mediumswitch &&  menularge != 'collapsed' ){
-
-                    if( menularge != 'none' ){
-                        $('#topmenu ul.menu').show();
-                    }
-
-                    // larger screens
-                    var el = $('#topmenu ul.menu');
-                    var m = 0;//$('#toplogobox').width();
-                    if( check_overflow_x( el, m ) ){
-                        el.children().not('.more').last().prependTo($('#topmainbar ul.overflow'));
-                        $('#topmainbar ul.menu .more .menubutton').css({ 'display': 'table-cell', 'height': $('#topmainbar').height() });
-                        $('#topmainbar ul.menu .more').show();
-                        set_topmenu_behavior();
-                    }else{
-                        var m = $('#toplogobox').width() + $('#topmainbar ul.overflow').children().first().width();
-                        if( !check_overflow_x( el, m ) ){
-                            $('#topmainbar ul.overflow').children().first().appendTo($('#topmenu ul.menu'));
-                            $('#topmainbar ul.menu .more').appendTo($('#topmenu ul.menu'));
-                        }
-
-                    }
-
-                }else{
-                    // small screens
-                    if( menusmall == 'open' || menusmall == 'collapsed' || ( $(window).width() >= mediumswitch &&  menularge == 'collapsed' ) ){
-                        $('#topmenu ul.menu').children().not('.more').prependTo($('#topmainbar ul.overflow'));
-                    }else{
-                        $('#topmenu ul.menu').hide();
-                    }
-                }
-
-                if( $('#topmainbar ul.overflow').children().length == 0 ){
-                    $('#topmainbar ul.menu .more').hide();
-                }
-                */
-
 
 
 
@@ -331,7 +265,8 @@ jQuery(function ($) {
 
 				if( $('#topbarcontainer').length > 0 ){
 
-					if( ( $(window).width() < mediumswitch && topbarsmallbehavior == 'fixed' ) || ( $(window).width() >= mediumswitch && topbarlargebehavior == 'fixed') ){
+					if( ( $(window).width() < mediumswitch && ( topbarsmallbehavior == 'fixed' || topbarsmallbehavior == 'overflow' ) )
+                       || ( $(window).width() >= mediumswitch && ( topbarlargebehavior == 'fixed' || topbarlargebehavior == 'overflow') ) ) {
 
 
 						// get offsets
@@ -365,8 +300,9 @@ jQuery(function ($) {
                                         $('#topbarcontainer').css('top', tsp);
 
                                         // insert relative spacer div
-                                        $('<div id="topspacer" style="height:'+th+'px;"></div>').insertBefore( $('#topbarcontainer') );
-
+                                        if( topbarlargebehavior == 'fixed'){
+                                            $('<div id="topspacer" style="height:'+th+'px;"></div>').insertBefore( $('#topbarcontainer') );
+                                        }
                                         // set sticky
                                         $('#topbarcontainer').addClass('sticky');
 
@@ -409,8 +345,15 @@ jQuery(function ($) {
                                         // remove sticky
                                         $('#topbarcontainer').removeClass('sticky');
 
-                                        // set absolute pos return
-                                        $('#topbarcontainer').css('top', 0);
+                                        if( ( $(window).width() < mediumswitch && ( topbarsmallbehavior == 'fixed') ) ||
+                                           ( $(window).width() >= mediumswitch && ( topbarlargebehavior == 'fixed') ) ){
+                                            // set absolute pos return
+                                            $('#topbarcontainer').css('top', 0);
+                                        }else if( ( $(window).width() < mediumswitch && ( topbarsmallbehavior == 'overflow') ) ||
+                                           ( $(window).width() >= mediumswitch && ( topbarlargebehavior == 'overflow') ) ){
+                                            // set absolute pos return
+                                            $('#topbarcontainer').css('top', $('#upperbarcontainer').outerHeight() );
+                                        }
 
                                     }
 							});
@@ -733,6 +676,11 @@ jQuery(function ($) {
 
 			function set_header_elements(){
 
+
+                if( $('#headermedia').length > 0 && ( topbarsmallbehavior == 'overflow' || topbarlargebehavior == 'overflow' ) ){
+                    // set topbar padding
+                    $('#headermedia').css('padding-top', $('#topbarcontainer').outerHeight() );
+                }
 
 
 				if( $(window).width() >= mediumswitch ){ //alert($mediumswitch); alert(topsidebar1width);
