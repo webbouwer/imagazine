@@ -259,6 +259,14 @@ function imagazine_theme_customizer( $wp_customize ){
 		'priority' => 120,
     ));
 
+	$wp_customize->add_section('imagazine_footer_styling', array(
+        'title'    => __('Styling', 'imagazine'),
+        'panel'  => 'imagazine_footer',
+		'priority' => 120,
+    ));
+
+
+
 	$wp_customize->add_section('imagazine_footer_sidebar1', array(
         'title'    => __('Sidebar 1', 'imagazine'),
         'panel'  => 'imagazine_footer',
@@ -2226,6 +2234,66 @@ function imagazine_theme_customizer( $wp_customize ){
 		)));
 
 
+        /* Footer colors */
+
+        $wp_customize->add_setting( 'imagazine_footer_styling_bgcolor' , array(
+            'default' => 0.3,
+            'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'imagazine_footer_styling_bgcolor', array(
+                'label'      => __( 'Background color', 'imagazine' ),
+                'section'    => 'imagazine_footer_styling',
+                'settings'   => 'imagazine_footer_styling_bgcolor',
+        )));
+
+
+        $wp_customize->add_setting( 'imagazine_footer_styling_bgtransparancy' , array(
+		'default' => 0.3,
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_footer_styling_bgtransparancy', array(
+            	'label'          => __( 'Background transparancy', 'imagazine' ),
+            	'section'        => 'imagazine_footer_styling',
+            	'settings'       => 'imagazine_footer_styling_bgtransparancy',
+            	'type'           => 'number',
+ 	    		'description'    => __( 'Set transparancy (0.1 - 1.0)', 'imagazine' ),
+    	)));
+
+        $wp_customize->add_setting( 'imagazine_footer_styling_textcolor' , array(
+		  'default' => '#fefefe',
+		  'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'imagazine_footer_styling_textcolor', array(
+                'label'      => __( 'Text color', 'imagazine' ),
+                'section'    => 'imagazine_footer_styling',
+                'settings'   => 'imagazine_footer_styling_textcolor',
+        )));
+
+       $wp_customize->add_setting( 'imagazine_footer_styling_linkcolor' , array(
+		  'default' => '#ffffff',
+		  'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'imagazine_footer_styling_linkcolor', array(
+                'label'      => __( 'Link color', 'imagazine' ),
+                'section'    => 'imagazine_footer_styling',
+                'settings'   => 'imagazine_footer_styling_linkcolor',
+        )));
+
+        $wp_customize->add_setting( 'imagazine_footer_styling_hovercolor' , array(
+		  'default' => '#cecece',
+		  'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'imagazine_footer_styling_hovercolor', array(
+                'label'      => __( 'Link hover color', 'imagazine' ),
+                'section'    => 'imagazine_footer_styling',
+                'settings'   => 'imagazine_footer_styling_hovercolor',
+        )));
+
+
 
 
 
@@ -2430,10 +2498,9 @@ add_action( 'customize_register', 'imagazine_theme_customizer' );
 
 function imagazine_customize_adaptive(){
 
-	// start output css ?>
+	// start output css
+    ?>
 	<style>
-
-
 	/* Fonts */
 	<?php
     $fontstring = '';
@@ -2441,14 +2508,11 @@ function imagazine_customize_adaptive(){
 
 	if( is_array($fontarray) ){
         $fontname = $fontarray[0];
-
         $fontfiles = scandir( TEMPLATEPATH .'/assets/fonts/'.$fontname.'/' );
-
         if( in_array( $fontname.'.ttf',  $fontfiles )  && in_array( $fontname.'.ttf',  $fontfiles ) ){
           // print_r($fontfiles);
-            $ttf = get_template_directory_uri().'/assets/fonts/'.$fontname.'/'.$fontname.'.ttf'; //$_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/imagazine/assets/fonts/'.$fontname.'/'.$fontname.'.ttf';
-            $eot = get_template_directory_uri().'/assets/fonts/'.$fontname.'/'.$fontname.'.eot'; // $_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/imagazine/assets/fonts/'.$fontname.'/'.$fontname.'.eot';
-
+            $ttf = get_template_directory_uri().'/assets/fonts/'.$fontname.'/'.$fontname.'.ttf';
+            $eot = get_template_directory_uri().'/assets/fonts/'.$fontname.'/'.$fontname.'.eot';
             echo '
                 @font-face {
                 font-family: "'.$fontname.'";
@@ -2459,14 +2523,10 @@ function imagazine_customize_adaptive(){
             $fontstring = 'font-family: "'.$fontname.'", '.get_theme_mod("imagazine_global_styles_subsetfont", "Sans").';';
 
         }else{
-
-
             // use as a google font (todo: check excistance)
            $fontstring = 'font-family: "'.$fontname.'", '.get_theme_mod("imagazine_global_styles_subsetfont", "latin,latin-ext").';';
         }
-
     }
-
     if( $fontstring == '' ){
         $fontstring =  'font-family: "'.get_theme_mod("imagazine_global_styles_mainfont", "Lato" ).'", '.get_theme_mod("imagazine_global_styles_subsetfont", "latin,latin-ext").';';
     }
@@ -2529,8 +2589,6 @@ function imagazine_customize_adaptive(){
         z-index:299;
     }
 
-
-
     /* upperbar colors */
     <?php
         $bgc = get_theme_mod('imagazine_upperbar_styling_bgcolor', '#000000');
@@ -2551,10 +2609,6 @@ function imagazine_customize_adaptive(){
         color:<?php echo get_theme_mod('imagazine_upperbar_styling_hovercolor', '#676767'); ?>;
     }
 
-
-
-
-
     /* top */
     #topbarcontainer
     {
@@ -2567,7 +2621,6 @@ function imagazine_customize_adaptive(){
         width:100%;
         z-index:99;
     }
-
 
     #topbarcontainer.sticky
     {
@@ -2614,7 +2667,6 @@ function imagazine_customize_adaptive(){
         color:<?php echo get_theme_mod('imagazine_topbar_styling_hovercolor', '#676767'); ?>;
     }
 
-
      /*
      * Truncate topmemu overflow
      */
@@ -2644,38 +2696,6 @@ function imagazine_customize_adaptive(){
         overflow-y: auto;
         z-index:999;
     }
-    /*
-
-    #topmainbar ul.overflow
-    {
-    display: block;
-    position:absolute;
-    right:-500px;
-    top:100%;
-    width:100%;
-    max-width:320px;
-    overflow:hidden;
-    -webkit-transition: all linear 0.8s;
-    transition: all linear 0.8s;
-    z-index:99;
-    background-color: aqua;
-    }
-    #topmainbar ul.overflow.active
-    {
-    right:0px;
-    }
-    #topmainbar ul.overflow li,
-    #topmainbar ul.overflow li a
-    {
-    display: block;
-    }
-
-    */
-
-
-
-
-
 
 	#headermedia,
 	#headermainbar
@@ -2695,6 +2715,27 @@ function imagazine_customize_adaptive(){
 	{
         color: <?php echo get_theme_mod('imagazine_header_styling_overlay_hovercolor', '#cecece'); ?>;
 	}
+
+
+    /* footer colors */
+    <?php
+        $topbgc = get_theme_mod('imagazine_footer_styling_bgcolor', '#000000');
+        $topbgt = get_theme_mod('imagazine_footer_styling_bgtransparancy', 0.3);
+        $topbgcolor = imagazine_hextorgb( $topbgc, $topbgt );
+    ?>
+    #footercontainer
+    {
+        background-color: <?php echo $topbgcolor; ?>;
+        color: <?php echo get_theme_mod('imagazine_footer_styling_textcolor', '#fefefe'); ?>;
+    }
+    #footercontainer a
+    {
+        color:<?php echo get_theme_mod('imagazine_footer_styling_linkcolor', '#efefef'); ?>;
+    }
+    #footercontainer a:hover
+    {
+        color:<?php echo get_theme_mod('imagazine_footer_styling_hovercolor', '#676767'); ?>;
+    }
 
 
 
@@ -2744,7 +2785,7 @@ function imagazine_customize_adaptive(){
 
 	#topmainbar
 	{
-	min-height:<?php echo get_theme_mod('imagazine_topbar_behavior_minheight', 60).'px'; ?> !important;
+	min-height:<?php echo get_theme_mod('imagazine_topbar_behavior_minheight', 48).'px'; ?> !important;
 	}
 
 
@@ -2808,8 +2849,6 @@ function imagazine_customize_adaptive(){
 	  transform: translateY(-50%);
 	}
 
-
-
 	/* maincontent */
 	#maincontent, #sidebar, #sidebar-2
 	{
@@ -2817,10 +2856,7 @@ function imagazine_customize_adaptive(){
 	display: block;
 	}
 
-
-
 	/* footer */
-
 	<?php
 	if( get_theme_mod('imagazine_footer_menu_layout', 'hor') == 'hor'){
 	?>
@@ -2834,6 +2870,10 @@ function imagazine_customize_adaptive(){
 
 
 	}
+
+
+
+
 
 
 	/*
