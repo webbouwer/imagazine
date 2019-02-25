@@ -79,7 +79,7 @@ function imagazine_theme_customizer( $wp_customize ){
 	// Global custom sections
 
 	$wp_customize->add_section('imagazine_global_styles', array(
-        'title'    => __('Styles', 'imagazine'),
+        'title'    => __('Styling', 'imagazine'),
         'panel'  => 'imagazine_global',
 		'priority' => 20,
     ));
@@ -289,6 +289,8 @@ function imagazine_theme_customizer( $wp_customize ){
         	'priority' => 30,
    	) ) );
 
+
+    /* Font Styling */
 	$wp_customize->add_setting( 'imagazine_global_styles_mainfont' , array(
 		'default' => 'Lato|Martel',
 		'sanitize_callback' => 'imagazine_sanitize_default',
@@ -2434,26 +2436,46 @@ function imagazine_customize_adaptive(){
 
 	/* Fonts */
 	<?php
+    $fontstring = '';
 	$fontarray = explode('|', get_theme_mod("imagazine_global_styles_mainfont", "Lato|Martel" ) );
-	?>
+
+	if( is_array($fontarray) ){
+        $fontname = $fontarray[0];
+
+        $fontfiles = scandir( TEMPLATEPATH .'/assets/fonts/'.$fontname.'/' );
+
+        if( in_array( $fontname.'.ttf',  $fontfiles )  && in_array( $fontname.'.ttf',  $fontfiles ) ){
+          // print_r($fontfiles);
+            $ttf = get_template_directory_uri().'/assets/fonts/'.$fontname.'/'.$fontname.'.ttf'; //$_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/imagazine/assets/fonts/'.$fontname.'/'.$fontname.'.ttf';
+            $eot = get_template_directory_uri().'/assets/fonts/'.$fontname.'/'.$fontname.'.eot'; // $_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/imagazine/assets/fonts/'.$fontname.'/'.$fontname.'.eot';
+
+            echo '
+                @font-face {
+                font-family: "'.$fontname.'";
+                src: url("'.$eot.'"); /* FOR IEs */
+                src: local("'.$fontname.'"), url("'.$ttf.'") format("truetype"); /* for other web browsers */
+                }
+            ';
+            $fontstring = 'font-family: "'.$fontname.'", '.get_theme_mod("imagazine_global_styles_subsetfont", "Sans").';';
+
+        }else{
+
+
+            // use as a google font (todo: check excistance)
+           $fontstring = 'font-family: "'.$fontname.'", '.get_theme_mod("imagazine_global_styles_subsetfont", "latin,latin-ext").';';
+        }
+
+    }
+
+    if( $fontstring == '' ){
+        $fontstring =  'font-family: "'.get_theme_mod("imagazine_global_styles_mainfont", "Lato" ).'", '.get_theme_mod("imagazine_global_styles_subsetfont", "latin,latin-ext").';';
+    }
+    ?>
 
 	body
 	{
-
-		<?php
-		if( is_array($fontarray) ){
-			$fontname =  $fontarray[0];
-			echo 'font-family: "'.$fontname.'", '.get_theme_mod("imagazine_global_styles_subsetfont", "latin,latin-ext").';';
-
-		}else{
-
-			echo 'font-family: "'.get_theme_mod("imagazine_global_styles_mainfont", "Lato" ).'", '.get_theme_mod("imagazine_global_styles_subsetfont", "latin,latin-ext").';';
-
-		}
-		?>
-
-	}
-
+        <?php echo $fontstring; ?>
+    }
 	/*
 	 * ALL SCREENS
 	 */
