@@ -113,6 +113,8 @@ if( is_page_template( 'grid.php' ) ){
     echo '<div id="maincontent" class="blog-columns">';
 
 
+
+
     $page_contenttop_display = get_post_meta( get_the_ID() , "page-meta-contenttop-display", true);
     $dsparr = array( 1 => 'show', 2 => 'hide');
 
@@ -132,6 +134,8 @@ if( is_page_template( 'grid.php' ) ){
     }
 
 
+
+    echo '<div class="contentwrapper">';
 
 
     $values = get_post_custom( $post->ID );
@@ -226,6 +230,9 @@ if( is_page_template( 'grid.php' ) ){
     endwhile;
     endif;
     wp_reset_query();
+
+
+    echo '<div class="clr"></div></div>'; // end content wrapper
 
 
 

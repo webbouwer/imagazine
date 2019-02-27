@@ -2673,6 +2673,54 @@ function imagazine_customize_adaptive(){
 
 
 
+    /* Grid columns basic */
+
+
+#maincontent.blog-columns .contentwrapper
+{
+display: flex;
+flex-wrap: wrap;
+height: 100%;
+}
+#maincontent.blog-columns .contentwrapper .post
+{
+    flex: 0 0 calc(33.33% - 1em);
+    margin-left:1.5em;
+    margin-bottom:1.5em;
+}
+#maincontent.blog-columns .contentwrapper .post:nth-child(3n+1)
+{
+    margin-left:0px;
+}
+
+@media all and (max-width: 1000px) {
+    #maincontent.blog-columns .contentwrapper .post
+    {
+        flex: 0 0 calc(50% - 0.75em);
+        margin-left:0px;
+        margin-bottom:1.5em;
+
+    }
+    #maincontent.blog-columns .contentwrapper .post:nth-child(2n-2)
+    {
+        margin-left:1.5em;
+    }
+}
+@media all and (max-width: 600px) {
+    #maincontent.blog-columns .contentwrapper .post,
+    #maincontent.blog-columns .contentwrapper .post:nth-child(2n-3)
+    {
+        flex: 0 0 100%;
+        margin-left:0;
+    }
+}
+
+
+
+
+
+
+
 	/*
 	 * ALL SCREENS
 	 */

@@ -150,12 +150,12 @@ if( !( is_page() && $page_topwidgets_display == 'hide' )
   	&& !( is_category() && $list_topwidgets_display == 'hide' )
      && !( is_home() && $blog_topwidgets_display == 'hide' )){
 
-// maincontent top widgets
-if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('contenttopwidgets') ){
-	echo '<div id="contenttopwidgets" class="contenttop">';
-	dynamic_sidebar('contenttopwidgets');
-	echo '<div class="clr"></div></div>';
-}
+    // maincontent top widgets
+    if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('contenttopwidgets') ){
+        echo '<div id="contenttopwidgets" class="contenttop">';
+        dynamic_sidebar('contenttopwidgets');
+        echo '<div class="clr"></div></div>';
+    }
 
 }
 
@@ -163,11 +163,11 @@ if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') &
 
 // search
 if( is_search() ){ // search results
+
 echo '<div class="searchheader">'.__('Resultaten voor ', 'imagazine' ).'<strong>'.wp_specialchars($s).'</strong></div>';
 }
 
-
-
+echo '<div class="contentwrapper">';
 
 // get post(s)
 if ( have_posts() ) :
@@ -247,13 +247,10 @@ echo ' <a href="'.get_the_permalink().'">'.__('Lees meer', 'imagazine' ).'</a>';
 
 echo '</div>';
 
+
+
+
 echo '<div class="clr"></div></div>'; // end page(post) container
-
-
-
-
-
-
 
 
 
@@ -356,7 +353,10 @@ if ( comments_open() || get_comments_number() ) {
 comments_template(); // WP THEME STANDARD: comments_template( $file, $separate_comments );
 }
 
+
+
 echo '<div class="clr"></div></div>'; // end page(post) container
+
 
 
 
@@ -471,6 +471,7 @@ endif;
 
 
 
+echo '<div class="clr"></div></div>'; // end content wrapper
 
 
 
@@ -492,6 +493,8 @@ echo '<div class="clr"></div></div>';
 
 
 
+
+
 $page_contentbottom_display = get_post_meta( get_the_ID() , "page-meta-contentbottom-display", true);
 $dsparr = array( 1 => 'show', 2 => 'hide');
 if( $page_contenttop_display != 0 ){
@@ -503,14 +506,17 @@ if( !( is_page() && $page_bottomwidgets_display == 'hide' )
    && !( !is_single() && !is_page() && $list_bottomwidgets_display == 'hide' )
   	 ){
 
-// maincontent bottom widgets
-if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('contentbottomwidgets') ){
-	echo '<div class="clr"></div><div id="contentbottomwidgets" class="contentbottom">';
-	dynamic_sidebar('contentbottomwidgets');
-	echo '<div class="clr"></div></div>';
-}
+    // maincontent bottom widgets
+    if( function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('contentbottomwidgets') ){
+        echo '<div class="clr"></div><div id="contentbottomwidgets" class="contentbottom">';
+        dynamic_sidebar('contentbottomwidgets');
+        echo '<div class="clr"></div></div>';
+    }
 
 }
+
+
+
 
 echo '<div class="clr"></div></div>'; // end maincontent
 
