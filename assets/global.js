@@ -730,10 +730,10 @@ jQuery(function ($) {
 					// set height
 					var windowspace = $(window).height();
 					if( $("upperbarcontainer").height() > 0 ){
-						windowspace -= $("upperbarcontainer").height();
+						windowspace -= $("upperbarcontainer").outerHeight();
 					}
 					if( $("topbarcontainer").height() > 0 ){
-						windowspace -= $("topbarcontainer").height();
+						windowspace -= $("topbarcontainer").outerHeight();
 					}
 
 
@@ -786,27 +786,6 @@ jQuery(function ($) {
 
 
 				}
-
-				/* global set header height
-				var windowspace = $(window).height();
-				if( $("upperbarcontainer").height() > 0 ){
-				windowspace -= $("upperbarcontainer").height();
-				}
-				if( $("topbarcontainer").height() > 0 ){
-				windowspace -= $("topbarcontainer").height();
-				}
-
-				if( (( windowspace / 100 ) * headerheight) > headerminheight ){
-				$('#headermedia > .outermargin, #headermainbar').height( ( windowspace / 100 ) * headerheight );
-				}
-				*/
-				//$('#headermedia, #headermedia > .outermargin').height( ( $windowspace / 100 ) * headerheight );
-
-
-				//if( headerdsptype == 'split' ){
-				//$('#headermainbar').height( $("#headermedia").height() );
-				//}
-				// #headermedia .maincolumn, #headermedia .sidecolumn
 
 			}
 

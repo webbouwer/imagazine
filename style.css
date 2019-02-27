@@ -152,14 +152,12 @@ z-index:399;
 
 
 
-.smallscreen #topbarcontainer ul.menu
+.smallscreen #topbarcontainer #topmenu .menubutton
 {
-/*
-position: fixed;
-top:10px;
-right:10px;
-z-index: 999;
-*/
+
+position: relative;
+float:right;
+
 }
 
 

@@ -2535,7 +2535,126 @@ function imagazine_customize_adaptive(){
 	body
 	{
         <?php echo $fontstring; ?>
+        /*line-height:1.4em; */
     }
+
+
+
+    /* text */
+
+    /* links & buttons */
+    a
+    {
+        color:#121212;
+    }
+    h1 a, h2 a, h3 a, h4 a
+    {
+        color:#232323;
+        text-decoration:none;
+    }
+
+
+    /* upperbar space */
+    #upperbarcontainer .outermargin
+    {
+        padding-top:16px;
+        padding-bottom:16px
+    }
+
+    /* topmenu */
+
+
+    /* upperbar space */
+    #upperbarcontainer .outermargin
+    {
+        padding-top:16px;
+        padding-bottom:16px
+    }
+    /* outer content space */
+    #maincontentcontainer .outermargin
+    {
+        padding-top:16px;
+        padding-bottom:16px
+    }
+
+    /* innercontent space */
+    .post a.postlist-coverimage
+    {
+        display:block;
+    }
+    .post a.postlist-coverimage img
+    {
+        width:100%;
+        height:auto;
+    }
+    .page .maintitlebar,
+    .post .listitemtitlebar
+    {
+        padding-top:8px;
+        padding-bottom:0px;
+    }
+    .page #maincontent  .innerpadding,
+    #maincontent .post .innerpadding
+    {
+        padding-top:8px;
+        padding-bottom:16px
+    }
+
+    /* widget space */
+    .widget .widget-titlebox
+    {
+        padding-top:8px;
+        padding-bottom:8px;
+    }
+    .widget .widget-contentbox
+    {
+        padding-top:0px;
+        padding-bottom:8px;
+    }
+
+    /* subcontent space */
+    #subcontentcontainer
+    {
+        padding-top:16px;
+        padding-bottom:16px
+    }
+
+    /* footer space */
+    #footercontainer .outermargin
+    {
+        padding-top:16px;
+        padding-bottom:16px
+    }
+
+
+
+
+    /* main content column space */
+    .largescreen .sidecolumn.pos-right #sidemenubox,
+    .largescreen .sidecolumn.pos-right .widget
+    {
+        margin-left:32px;
+    }
+    .largescreen .sidecolumn.pos-left #sidemenubox,
+    .largescreen .sidecolumn.pos-left .widget
+    {
+        margin-right:32px;
+    }
+
+    .mediumscreen .sidecolumn.pos-right #sidemenubox,
+    .mediumscreen .sidecolumn.pos-right .widget
+    {
+        margin-left:16px;
+    }
+    .mediumscreen .sidecolumn.pos-left #sidemenubox,
+    .mediumscreen .sidecolumn.pos-left .widget
+    {
+        margin-right:16px;
+    }
+
+
+
+
 	/*
 	 * ALL SCREENS
 	 */
@@ -2686,8 +2805,9 @@ function imagazine_customize_adaptive(){
         overflow:hidden;
         width:100%;
         height:0px;
-        -webkit-transition: all linear 0.8s;
-        transition: all linear 0.8s;
+
+        -webkit-transition: all linear <?php echo get_theme_mod('imagazine_topbar_behavior_anispeed', 200 ) / 1000; ?>s;
+        transition: all linear <?php echo get_theme_mod('imagazine_topbar_behavior_anispeed', 200 ) / 1000; ?>s;
         background-color: <?php echo $topbgcolor; ?>;
     }
     #pagecontainer ul.overflow.active
