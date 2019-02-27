@@ -261,7 +261,7 @@ margin:3px 3px 4px 10px;
 
 
 
-/* post blog lists etc.  */
+/* post blog lists etc.
 #maincontent.blog-columns
 {
 display: flex;
@@ -301,7 +301,7 @@ height: 100%;
         margin-left:0;
     }
 }
-
+*/
 
 /* pagination */
 .pagination
