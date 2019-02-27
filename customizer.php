@@ -2561,7 +2561,25 @@ function imagazine_customize_adaptive(){
         padding-bottom:16px
     }
 
-    /* topmenu */
+    /* custom topmenu */
+    #menu-sitemenu .menu-image-textwrap img
+    {
+    }
+    #menu-sitemenu a
+    {
+    }
+    #menu-sitemenu a span,
+    .menu-image-title
+    {
+    }
+
+    #topmenu a span,
+    .menu-image-title
+    {
+    }
+    #topmenu a:hover span,
+    #topmenu .current-menu-item span{
+    }
 
 
     /* upperbar space */
