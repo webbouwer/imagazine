@@ -1657,6 +1657,68 @@ function imagazine_theme_customizer( $wp_customize ){
             	)
     	)));
 
+        $wp_customize->add_setting( 'imagazine_content_blogpagedisplay_thumb' , array(
+		'default' => 'top',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_blogpagedisplay_thumb', array(
+            	'label'          => __( 'Display featured image', 'imagazine' ),
+            	'section'        => 'imagazine_content_blogpagedisplay',
+            	'settings'       => 'imagazine_content_blogpagedisplay_thumb',
+            	'type'           => 'select',
+ 	    	'description'    => __( 'Featured image display format', 'imagazine' ),
+            	'choices'        => array(
+                	'top'   => __( 'Above title', 'imagazine' ),
+                	'title'   => __( 'Below title', 'imagazine' ),
+                	'cover'   => __( 'Cover title inside', 'imagazine' ),
+                	'none'   => __( 'Do not show', 'imagazine' ),
+            	)
+    	)));
+
+        $wp_customize->add_setting( 'imagazine_content_blogpagedisplay_excerpt' , array(
+		  'default' => 'show',
+		  'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_blogpagedisplay_excerpt', array(
+            	'label'          => __( 'Display excerpt', 'imagazine' ),
+            	'section'        => 'imagazine_content_blogpagedisplay',
+            	'settings'       => 'imagazine_content_blogpagedisplay_excerpt',
+            	'type'           => 'select',
+ 	    	'description'    => __( 'Display excerpt(intro) text', 'imagazine' ),
+            	'choices'        => array(
+                	'show'   => __( 'Show excerpt text', 'imagazine' ),
+                	'hide'   => __( 'Do not show text', 'imagazine' ),
+            	)
+    	)));
+
+        $wp_customize->add_setting( 'imagazine_content_blogpagedisplay_readmorebutton' , array(
+		  'default' => 'right',
+		  'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_blogpagedisplay_readmorebutton', array(
+            	'label'          => __( 'Display readmore', 'imagazine' ),
+            	'section'        => 'imagazine_content_blogpagedisplay',
+            	'settings'       => 'imagazine_content_blogpagedisplay_readmorebutton',
+            	'type'           => 'select',
+ 	    	'description'    => __( 'Display readmore button', 'imagazine' ),
+            	'choices'        => array(
+                	'left'   => __( 'on the left', 'imagazine' ),
+                	'center'   => __( 'centered', 'imagazine' ),
+                	'right'   => __( 'on the right', 'imagazine' ),
+                	'hide'   => __( 'do not show', 'imagazine' ),
+            	)
+    	)));
+
+
+
+
+
+
+
+
         // post lists
 		$wp_customize->add_setting( 'imagazine_content_listdisplay_contenttop' , array(
 		'default' => 'hide',
@@ -1674,6 +1736,26 @@ function imagazine_theme_customizer( $wp_customize ){
                 	'show'   => __( 'Show top widgets', 'imagazine' ),
             	)
     	)));
+
+    /*
+    	$wp_customize->add_setting( 'imagazine_content_listdisplay_thumb' , array(
+		'default' => 'top',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_listdisplay_thumb', array(
+            	'label'          => __( 'Display featured image', 'imagazine' ),
+            	'section'        => 'imagazine_content_listdisplay',
+            	'settings'       => 'imagazine_content_listdisplay_thumb',
+            	'type'           => 'select',
+ 	    	'description'    => __( 'Featured image display format', 'imagazine' ),
+            	'choices'        => array(
+                	'top'   => __( 'Above title', 'imagazine' ),
+                	'title'   => __( 'Below title', 'imagazine' ),
+                	'cover'   => __( 'Cover title inside', 'imagazine' ),
+                	'none'   => __( 'Do not show', 'imagazine' ),
+            	)
+    	)));*/
 
 		$wp_customize->add_setting( 'imagazine_content_listdisplay_authortime' , array(
 		'default' => 'none',
@@ -1711,6 +1793,45 @@ function imagazine_theme_customizer( $wp_customize ){
                 	'ago'   => __( 'Display as time-ago', 'imagazine' ),
             	)
     	)));
+
+
+    /*
+        $wp_customize->add_setting( 'imagazine_content_listdisplay_excerpt' , array(
+		  'default' => 'show',
+		  'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_listdisplay_excerpt', array(
+            	'label'          => __( 'Display excerpt', 'imagazine' ),
+            	'section'        => 'imagazine_content_listdisplay',
+            	'settings'       => 'imagazine_content_listdisplay_excerpt',
+            	'type'           => 'select',
+ 	    	'description'    => __( 'Display excerpt(intro) text', 'imagazine' ),
+            	'choices'        => array(
+                	'show'   => __( 'Show excerpt text', 'imagazine' ),
+                	'hide'   => __( 'Do not show text', 'imagazine' ),
+            	)
+    	)));
+
+        $wp_customize->add_setting( 'imagazine_content_listdisplay_readmorebutton' , array(
+		  'default' => 'right',
+		  'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_listdisplay_readmorebutton', array(
+            	'label'          => __( 'Display readmore', 'imagazine' ),
+            	'section'        => 'imagazine_content_listdisplay',
+            	'settings'       => 'imagazine_content_listdisplay_readmorebutton',
+            	'type'           => 'select',
+ 	    	'description'    => __( 'Display readmore button', 'imagazine' ),
+            	'choices'        => array(
+                	'left'   => __( 'on the left', 'imagazine' ),
+                	'center'   => __( 'centered', 'imagazine' ),
+                	'right'   => __( 'on the right', 'imagazine' ),
+                	'hide'   => __( 'do not show', 'imagazine' ),
+            	)
+    	)));
+        */
 
 
 		$wp_customize->add_setting( 'imagazine_content_listdisplay_contentbottom' , array(
@@ -1763,8 +1884,6 @@ function imagazine_theme_customizer( $wp_customize ){
             		'right'   => __( 'right', 'imagazine' ),
             	)
     	)));
-
-
 
 
 		$wp_customize->add_setting( 'imagazine_content_postdisplay_contenttop' , array(
@@ -2000,8 +2119,6 @@ function imagazine_theme_customizer( $wp_customize ){
 
 
 		/* Main content - Sidebars */
-
-
 		$wp_customize->add_setting( 'imagazine_content_sidebars_sidebar1pos' , array(
 		'default' => 'none',
 		'sanitize_callback' => 'imagazine_sanitize_default',
@@ -2030,7 +2147,6 @@ function imagazine_theme_customizer( $wp_customize ){
             	'type'           => 'number',
  	    		'description'    => __( 'Select sidebar width (percentage).', 'imagazine' ),
     	)));
-
 
 		$wp_customize->add_setting( 'imagazine_content_sidebars_sidebar1align' , array(
 		'default' => 'left',
@@ -2173,8 +2289,6 @@ function imagazine_theme_customizer( $wp_customize ){
 					'full'   => __( 'Full screen width', 'imagazine' ),
 				)
 		)));
-
-
 
 		$wp_customize->add_setting( 'imagazine_footer_menu_textalign' , array(
 			'default' => 'center',
@@ -2676,44 +2790,42 @@ function imagazine_customize_adaptive(){
     /* Grid columns basic */
 
 
-#maincontent.blog-columns .contentwrapper
-{
-display: flex;
-flex-wrap: wrap;
-height: 100%;
-}
-#maincontent.blog-columns .contentwrapper .post
-{
-    flex: 0 0 calc(33.33% - 1em);
-    margin-left:1.5em;
-    margin-bottom:1.5em;
-}
-#maincontent.blog-columns .contentwrapper .post:nth-child(3n+1)
-{
-    margin-left:0px;
-}
-
-@media all and (max-width: 1000px) {
-    #maincontent.blog-columns .contentwrapper .post
+    #maincontent.blog-columns .contentwrapper
     {
-        flex: 0 0 calc(50% - 0.75em);
-        margin-left:0px;
-        margin-bottom:1.5em;
-
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
     }
-    #maincontent.blog-columns .contentwrapper .post:nth-child(2n-2)
+     .largescreen #maincontent.blog-columns .contentwrapper .post
     {
+        flex: 0 0 calc(33.33% - 1em);
         margin-left:1.5em;
+        margin-bottom:1.5em;
     }
-}
-@media all and (max-width: 600px) {
-    #maincontent.blog-columns .contentwrapper .post,
-    #maincontent.blog-columns .contentwrapper .post:nth-child(2n-3)
+     .largescreen #maincontent.blog-columns .contentwrapper .post:nth-child(3n+1)
     {
-        flex: 0 0 100%;
-        margin-left:0;
+        margin-left:0px;
     }
-}
+
+    .mediumscreen #maincontent.blog-columns .contentwrapper .post
+        {
+            flex: 0 0 calc(50% - 0.75em);
+            margin-left:0px;
+            margin-bottom:1.5em !important;
+
+        }
+     .mediumscreen #maincontent.blog-columns .contentwrapper .post:nth-child(2n-2)
+        {
+            margin-left:1.5em !important;
+        }
+
+    .smallscreen #maincontent.blog-columns .contentwrapper .post,
+    .smallscreen #maincontent.blog-columns .contentwrapper .post:nth-child(2n-3)
+        {
+            flex: 0 0 100%;
+            margin-left:0 !important;
+        }
+
 
 
 
@@ -2734,6 +2846,22 @@ height: 100%;
 	<?php } ?>
 	}
 
+
+    #maincontent .post .innerpadding a.readmore
+    {
+        display:block;
+        padding-top:8px;
+        padding-bottom:8px;
+    }
+    #maincontent .post .innerpadding a.readmore.align-right
+    {
+    float:right;
+    }
+    #maincontent .post .innerpadding a.readmore.align-center
+    {
+    width:auto;
+    margin:0px auto;
+    }
 	/*
 	 * SMALL SCREEN DEFAULTS
 	 */

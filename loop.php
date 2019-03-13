@@ -23,10 +23,18 @@ $sidebar2respon = get_theme_mod('imagazine_content_sidebars_sidebar2responsive',
 $blog_topwidgets_display = get_theme_mod('imagazine_content_blogpagedisplay_contenttop', 'hide');
 $blog_postlist_display = get_theme_mod('imagazine_content_blogpagedisplay_listtype', 'basic'); // columns | grid
 
+$list_thumb_display = get_theme_mod('imagazine_content_blogpagedisplay_thumb', 'top');
+$list_text_display = get_theme_mod('imagazine_content_blogpagedisplay_excerpt', 'show');
+$list_readmore_display = get_theme_mod('imagazine_content_blogpagedisplay_readmorebutton', 'right');
 
 $list_topwidgets_display = get_theme_mod('imagazine_content_listdisplay_contenttop', 'hide');
+
+//$list_thumb_display = get_theme_mod('imagazine_content_listdisplay_thumb', 'top');
 $list_authortime_display = get_theme_mod('imagazine_content_listdisplay_authortime', 'both');
 $list_timeformat_display = get_theme_mod('imagazine_content_listdisplay_timeformat', 'date');
+//$list_text_display = get_theme_mod('imagazine_content_listdisplay_excerpt', 'show');
+//$list_readmore_display = get_theme_mod('imagazine_content_listdisplay_readmorebutton', 'right');
+
 $list_bottomwidgets_display = get_theme_mod('imagazine_content_listdisplay_contentbottom', 'hide');
 $list_sidebar1_display = get_theme_mod('imagazine_content_listdisplay_sidebar1_pos','none');
 $list_sidebar2_display = get_theme_mod('imagazine_content_listdisplay_sidebar2_pos','none');
@@ -182,7 +190,7 @@ if ( !is_single() && !is_page() ) {
 
 <?php
 
-if ( has_post_thumbnail() ) {
+if ( has_post_thumbnail() && $list_thumb_display == "top" ) {
 echo '<a class="postlist-coverimage" href="'.get_the_permalink().'" title="'.get_the_title().'" >';
 the_post_thumbnail('big-thumb');
 echo '</a>';
@@ -232,19 +240,23 @@ if ( is_super_admin() ) {
 edit_post_link( __( 'Bewerk' , 'imagazine' ), '<span class="edit-link">', '</span>' );
 }
 
-
-
 echo '<div class="clr"></div></div>';
 
 
+if ( has_post_thumbnail() && $list_thumb_display == "title" ) {
+echo '<a class="postlist-coverimage" href="'.get_the_permalink().'" title="'.get_the_title().'" >';
+the_post_thumbnail('big-thumb');
+echo '</a>';
+}
 
 echo '<div class="innerpadding">';
 
-
-echo apply_filters('the_excerpt', get_the_excerpt());
-
-echo ' <a href="'.get_the_permalink().'">'.__('Lees meer', 'imagazine' ).'</a>';
-
+if ( $list_text_display == "show" ) {
+    echo apply_filters('the_excerpt', get_the_excerpt());
+}
+if( $list_readmore_display != "hide"){
+    echo ' <a href="'.get_the_permalink().'" class="readmore align-'.$list_readmore_display.'">'.__('Lees meer', 'imagazine' ).'</a>';
+}
 echo '</div>';
 
 

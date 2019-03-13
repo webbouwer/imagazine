@@ -9,6 +9,8 @@ echo '<link rel="canonical" href="'.home_url(add_query_arg(array(),$wp->request)
 	.'<meta name="viewport" content="initial-scale=1.0, width=device-width" />'
 	.'<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">';
 
+// http://ogp.me/ ?
+
 if ( is_singular() ) wp_enqueue_script( "comment-reply" );
 
 wp_head(); // http://codex.wordpress.org/Function_Reference/wp_head

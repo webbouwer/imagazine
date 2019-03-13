@@ -259,7 +259,19 @@ margin:3px 3px 4px 10px;
 }
 
 
-
+#maincontent .post .innerpadding a.readmore
+{
+display:block;
+}
+#maincontent .post .innerpadding a.readmore.align-right
+{
+float:right;
+}
+#maincontent .post .innerpadding a.readmore.align-center
+{
+width:auto;
+margin:0px auto;
+}
 
 /* post blog lists etc.
 #maincontent.blog-columns

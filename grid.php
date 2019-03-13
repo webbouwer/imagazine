@@ -38,6 +38,10 @@ get_template_part('header');
  * CONTENT
  */
 
+$list_authortime_display = get_theme_mod('imagazine_content_listdisplay_authortime', 'both');
+$list_timeformat_display = get_theme_mod('imagazine_content_listdisplay_timeformat', 'date');
+
+
 
 if( is_page_template( 'grid.php' ) ){
 
@@ -57,14 +61,6 @@ if( is_page_template( 'grid.php' ) ){
 
     $page_sidebar1_display = get_post_meta( get_the_ID() , "page-meta-sidebar1-display", true);
 	$page_sidebar2_display = get_post_meta( get_the_ID() , "page-meta-sidebar2-display", true);
-
-
-
-
-
-
-
-
 
 	$posarr = array(1 => 'right', 2 => 'left', 3 => 'none');
 	if( $page_sidebar1_display != 0 ){

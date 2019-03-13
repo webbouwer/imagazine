@@ -131,7 +131,7 @@ jQuery(function ($) {
                 var tw = margin;
                 var ow = element.width();
                 $.each( element.children(), function(ind, obj){
-                    tw += $(this).width();
+                    tw += $(this).outerWidth();
                 });
                 if ( ow < tw ) { //console.log( ow +' vs '+ tw + ');
                     return true;
@@ -144,16 +144,16 @@ jQuery(function ($) {
 
                 //$('ul.overflow').hide();
                 $('ul.overflow').removeClass('active');
-                if( $(window).width() >= mediumswitch ){
+                if( $(window).outerWidth() >= mediumswitch ){
 
                     var el = $('#topmenu ul.menu');
 
                     // medium/large
                     if( menularge != 'none' && menularge != 'collapsed'){
 
-                        var m = $('#toplogobox').width();
+                        var m = $('#toplogobox').outerWidth();
 
-                        if( $(window).width() >= largeswitch ){
+                        if( $(window).outerWidth() >= largeswitch ){
                             $('#pagecontainer > ul.overflow').children().appendTo($('#topmenu ul.menu'));
                         }
 
@@ -167,7 +167,7 @@ jQuery(function ($) {
 
 
                         }else{
-                            var m = $('#toplogobox').width() + $('#pagecontainer > ul.overflow').children().first().width();
+                            var m = $('#toplogobox').outerWidth() + $('#pagecontainer > ul.overflow').children().first().outerWidth();
                             if( !check_overflow_x( el, m ) ){
                                 $('#pagecontainer > ul.overflow').children().first().appendTo($('#topmenu ul.menu'));
                                 $('#topmainbar ul.menu .menubutton').appendTo( $('#topmainbar ul.menu') );
@@ -954,7 +954,7 @@ jQuery(function ($) {
 				}
                 // & set menu etc.
                 //
-                //set_topmenu_behavior();
+                set_topmenu_behavior();
 				//set_topbar_elements();
 				//set_top_behavior();
 
