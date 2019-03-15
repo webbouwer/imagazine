@@ -2654,6 +2654,7 @@ function imagazine_customize_adaptive(){
 
 
 
+
     /* text */
 
     /* links & buttons */
@@ -2964,25 +2965,30 @@ function imagazine_customize_adaptive(){
         $topbgcolor = imagazine_hextorgb( $topbgc, $topbgt );
     ?>
     #topbarcontainer,
-    #pagecontainer > .overflow
+    #pagecontainer #menucloak
+    /*#pagecontainer .overflow */
     {
         background-color: <?php echo $topbgcolor; ?>;
         color: <?php echo get_theme_mod('imagazine_topbar_styling_textcolor', '#fefefe'); ?>;
     }
     #topbarcontainer a,
-    #pagecontainer > .overflow a
+    #pagecontainer .overflow a
     {
         color:<?php echo get_theme_mod('imagazine_topbar_styling_linkcolor', '#efefef'); ?>;
     }
     #topbarcontainer a:hover,
-    #pagecontainer > .overflow a:hover
+    #pagecontainer .overflow a:hover
     {
         color:<?php echo get_theme_mod('imagazine_topbar_styling_hovercolor', '#676767'); ?>;
     }
 
+
+
      /*
-     * Truncate topmemu overflow
+     * topmemu overflow/truncate
      */
+
+
     #topmainbar
     {
     }
@@ -2991,25 +2997,51 @@ function imagazine_customize_adaptive(){
     overflow:hidden;
     }
 
-    #pagecontainer ul.overflow
+    #menucloak
+    {
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+        /* set height 0 to hide nonactive*/
+      height:0;
+    }
+
+    #pagecontainer #menucloak.active
     {
         position:fixed;
         top:0px;
-        display: block;
-        overflow:hidden;
         width:100%;
-        height:0px;
-
+        height:100%;
         -webkit-transition: all linear <?php echo get_theme_mod('imagazine_topbar_behavior_anispeed', 200 ) / 1000; ?>s;
         transition: all linear <?php echo get_theme_mod('imagazine_topbar_behavior_anispeed', 200 ) / 1000; ?>s;
         background-color: <?php echo $topbgcolor; ?>;
-    }
-    #pagecontainer ul.overflow.active
-    {
-        height:100%;
         overflow-y: auto;
+        z-index:998;
+
+        text-align: center;
+
+    }
+    #pagecontainer #menucloak.active ul.overflow
+    {
         z-index:999;
     }
+    #pagecontainer #menucloak.active ul.overflow li
+    {
+        max-width:60%;
+        margin:0px auto;
+    }
+
+
 
 	#headermedia,
 	#headermainbar

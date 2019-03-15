@@ -93,11 +93,6 @@ if( is_page() ){
 }
 
 
-
-
-
-
-
 // use upperbar?
 	if ( ( $upperbardisplaysmall != 'none' || $upperbardisplaylarge != 'none' ) && ( has_nav_menu( 'uppermenu' ) || (  function_exists('dynamic_sidebar') && function_exists('is_sidebar_active') && is_sidebar_active('uppersidebar') ) ) ){
 

@@ -121,8 +121,9 @@ jQuery(function ($) {
             //$('#topmenu').hide();
             function check_overflow_x( element, margin = 0){
 
-                if( $('#pagecontainer > ul.overflow').length < 1 ){
-                    $('#pagecontainer').append( menu_overflow_box );
+                if( $('#pagecontainer ul.overflow').length < 1 ){
+                    $('#pagecontainer').append('<div id="menucloak"></div>');
+                    $('#pagecontainer #menucloak').append( menu_overflow_box );
                 }
                 if( element.parent().find('li.menubutton').length < 1 ){
                     //element.append( menu_button_more );
@@ -154,24 +155,24 @@ jQuery(function ($) {
                         var m = $('#toplogobox').outerWidth();
 
                         if( $(window).outerWidth() >= largeswitch ){
-                            $('#pagecontainer > ul.overflow').children().appendTo($('#topmenu ul.menu'));
+                            $('#pagecontainer ul.overflow').children().appendTo($('#topmenu ul.menu'));
                         }
 
                         if( check_overflow_x( el, m ) ){
 
 
-                            el.children().not('.menubutton').last().prependTo($('#pagecontainer > ul.overflow'));
+                            el.children().not('.menubutton').last().prependTo($('#pagecontainer ul.overflow'));
                             //$('#topmainbar ul.menu .menubutton').css({ 'display': 'table-cell', 'height': $('#topmainbar').height() });
                             $('#topmainbar ul.menu .menubutton').show();
 
 
 
                         }else{
-                            var m = $('#toplogobox').outerWidth() + $('#pagecontainer > ul.overflow').children().first().outerWidth();
+                            var m = $('#toplogobox').outerWidth() + $('#pagecontainer ul.overflow').children().first().outerWidth();
                             if( !check_overflow_x( el, m ) ){
-                                $('#pagecontainer > ul.overflow').children().first().appendTo($('#topmenu ul.menu'));
+                                $('#pagecontainer ul.overflow').children().first().appendTo($('#topmenu ul.menu'));
                                 $('#topmainbar ul.menu .menubutton').appendTo( $('#topmainbar ul.menu') );
-                                if( $('#pagecontainer > ul.overflow').children().length < 1 ) {
+                                if( $('#pagecontainer ul.overflow').children().length < 1 ) {
                                     $('#topmainbar ul.menu .menubutton').hide();
                                 }
                             }
@@ -183,7 +184,7 @@ jQuery(function ($) {
 
                     }else{
                         if( menularge == 'collapsed'){
-                            el.children().not('.menubutton').prependTo($('#pagecontainer > ul.overflow'));
+                            el.children().not('.menubutton').prependTo($('#pagecontainer ul.overflow'));
                             $('#topmainbar ul.menu .menubutton').show();
                         }else{
                             //el.hide();
@@ -193,7 +194,7 @@ jQuery(function ($) {
                 }else{
 
                     // small- if( menusmall != 'none' && menusmall != 'collapsed'){
-                       $('#topmenu ul.menu').children().not('.menubutton').prependTo($('#pagecontainer > ul.overflow'));
+                       $('#topmenu ul.menu').children().not('.menubutton').prependTo($('#pagecontainer ul.overflow'));
 					   $('#topmainbar ul.menu .menubutton').show();
 
                 }
@@ -1018,13 +1019,26 @@ jQuery(function ($) {
             $('#topbarcontainer').on( 'click', '.menubutton a', function( e ){
                 e.preventDefault();
                 //$('ul.overflow').fadeToggle();
-                $('ul.overflow').toggleClass('active');
+                //$('ul.overflow').toggleClass('active');
+                $('#menucloak').toggleClass('active');
+                $('body').toggleClass('menu_active');
             });
 
+            $('#pagecontainer').on( 'click', '#menucloak.active', function( e ){
+                if (e.target !== this) return;
+                e.preventDefault();
+                //$('ul.overflow').fadeToggle();
+                //$('ul.overflow').toggleClass('active');
+                $('#menucloak').toggleClass('active');
+                $('body').toggleClass('menu_active');
+            });
 
         // init resize end on document ready
-        if( $('#pagecontainer > ul.overflow').length < 1 ){
-            $('#pagecontainer').append( menu_overflow_box );
+        if( $('#pagecontainer ul.overflow').length < 1 ){
+
+            $('#pagecontainer').append('<div id="menucloak"></div>');
+            $('#pagecontainer #menucloak').append( menu_overflow_box );
+
         }
         if( $('#topmenu ul.menu').parent().find('li.menubutton').length < 1 ){
             $('#topmenu ul.menu').append( menu_button_more );
