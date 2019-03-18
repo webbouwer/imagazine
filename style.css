@@ -45,11 +45,7 @@ height:100%;
 body{
 width:100%;
 }
-body.menu_active
-{
-background-color: aqua;
-overflow:hidden;
-}
+
 
 .clr
 {

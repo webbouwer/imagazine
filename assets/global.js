@@ -122,8 +122,8 @@ jQuery(function ($) {
             function check_overflow_x( element, margin = 0){
 
                 if( $('#pagecontainer ul.overflow').length < 1 ){
-                    $('#pagecontainer').append('<div id="menucloak"></div>');
-                    $('#pagecontainer #menucloak').append( menu_overflow_box );
+                    $('#pagecontainer').append('<div id="topmenulayer"></div>');
+                    $('#pagecontainer #topmenulayer').append( menu_overflow_box );
                 }
                 if( element.parent().find('li.menubutton').length < 1 ){
                     //element.append( menu_button_more );
@@ -145,6 +145,7 @@ jQuery(function ($) {
 
                 //$('ul.overflow').hide();
                 $('ul.overflow').removeClass('active');
+
                 if( $(window).outerWidth() >= mediumswitch ){
 
                     var el = $('#topmenu ul.menu');
@@ -160,12 +161,9 @@ jQuery(function ($) {
 
                         if( check_overflow_x( el, m ) ){
 
-
                             el.children().not('.menubutton').last().prependTo($('#pagecontainer ul.overflow'));
                             //$('#topmainbar ul.menu .menubutton').css({ 'display': 'table-cell', 'height': $('#topmainbar').height() });
                             $('#topmainbar ul.menu .menubutton').show();
-
-
 
                         }else{
                             var m = $('#toplogobox').outerWidth() + $('#pagecontainer ul.overflow').children().first().outerWidth();
@@ -191,6 +189,7 @@ jQuery(function ($) {
                         }
                     }
 
+
                 }else{
 
                     // small- if( menusmall != 'none' && menusmall != 'collapsed'){
@@ -199,7 +198,13 @@ jQuery(function ($) {
 
                 }
 
+
+                $('#topmenulayer').removeClass('active');
+                $('body').removeClass('menu_layer_active');
+
+
                 set_topbar_elements();
+
 
             }
 
@@ -880,72 +885,63 @@ jQuery(function ($) {
 
 		function set_footer_elements(){
 
-				// default topmainbar width
-				var footercontentwidth = 100;
+            // default topmainbar width
+            var footercontentwidth = 100;
 
-				// for medium/large screen
-				if( $(window).width() >= mediumswitch ){ //alert($mediumswitch); alert(sidebar1width);
+            // for medium/large screen
+            if( $(window).width() >= mediumswitch ){ //alert($mediumswitch); alert(sidebar1width);
 
-					// set top sidebars
-					if( $('#footersidebar-1').length > 0 ){
-
-						// split total width for topmainbar and sidebar 1
-						footercontentwidth = footercontentwidth - footsidebar1width;
-						$('#footersidebar-1').css({
-						'width': footsidebar1width+'%'
-						});
-					}
-					if( $('#footersidebar-2').length > 0 ){
-						// split total width for topmainbar and sidebar 2
-						footercontentwidth = footercontentwidth - footsidebar2width;
-						$('#footersidebar-2').css({
-						'width': footsidebar2width+'%'
-						});
-					}
-
-					// define topmainbar width and float position
-					var footercontentfloat = 'left';
-					if( footsidebar1pos === 'left' && footsidebar2pos === 'left')
-					{
-						footercontentfloat = 'right';
-					}
-
-					$('#footermainbar.maincolumn').css({
-						'width': footercontentwidth+'%',
-						'float': footercontentfloat
-					});
-
-
-				}else{ // smaller screens..
-
-					// move sidebars before, after, collapsed, hide
-					if( $('#footersidebar-2').length > 0 && footsidebar2respon === 'after' ){
-						$('#footersidebar-2').insertAfter( $('#footermainbar') );
-					}
-
-					if( $('#footersidebar-1').length > 0 && sidebar1respon === 'after' ){
-						$('#footersidebar-1').insertAfter( $('#footermainbar') );
-					}
-					// revert maincolumn/sidebars full width
-					// .. todo set small width
-					$('#footermainbar, #footersidebar-1, #footersidebar-2').css({
-						'width': '100%',
-					});
-
+				// set top sidebars
+				if( $('#footersidebar-1').length > 0 ){
+                    // split total width for topmainbar and sidebar 1
+				    footercontentwidth = footercontentwidth - footsidebar1width;
+				    $('#footersidebar-1').css({
+				    'width': footsidebar1width+'%'
+				});
+            }
+            if( $('#footersidebar-2').length > 0 ){
+                // split total width for topmainbar and sidebar 2
+				footercontentwidth = footercontentwidth - footsidebar2width;
+				$('#footersidebar-2').css({
+				    'width': footsidebar2width+'%'
+				});
+            }
+            // define topmainbar width and float position
+                var footercontentfloat = 'left';
+				if( footsidebar1pos === 'left' && footsidebar2pos === 'left'){
+				    footercontentfloat = 'right';
 				}
+                $('#footermainbar.maincolumn').css({
+				    'width': footercontentwidth+'%',
+					'float': footercontentfloat
+				});
 
-					//window.console&&console.log(footercontentwidth);
+            }else{ // smaller screens..
+                // move sidebars before, after, collapsed, hide
+				if( $('#footersidebar-2').length > 0 && footsidebar2respon === 'after' ){
+				    $('#footersidebar-2').insertAfter( $('#footermainbar') );
+				}
+                if( $('#footersidebar-1').length > 0 && sidebar1respon === 'after' ){
+				    $('#footersidebar-1').insertAfter( $('#footermainbar') );
+				}
+				// revert maincolumn/sidebars full width
+				// .. todo set small width
+				$('#footermainbar, #footersidebar-1, #footersidebar-2').css({
+				    'width': '100%',
+				});
+            }
+            //window.console&&console.log(footercontentwidth);
+        }
 
 
-			}
+        /*
+        * on resize end function
+        */
 
-			/*
-			 * on resize end function
-			 */
-			var rctime;
-			var ctimeout = false;
-			var cdelta = 200;
-			$(window).resize(function() {
+        var rctime;
+        var ctimeout = false;
+        var cdelta = 200;
+        $(window).resize(function() {
 
                 // timed resize
 				rctime = new Date();
@@ -954,17 +950,13 @@ jQuery(function ($) {
 					setTimeout(customizer_resizeend, cdelta);
 				}
                 // & set menu etc.
-                //
                 set_topmenu_behavior();
 				//set_topbar_elements();
 				//set_top_behavior();
 
+        });
 
-
-			});
-
-			function customizer_resizeend(){
-
+        function customizer_resizeend(){
 
 				// add mobile class
 				var screensizeclass = 'smallscreen';
@@ -973,16 +965,14 @@ jQuery(function ($) {
 				}else if( $(window).width() > mediumswitch ){
 					screensizeclass = 'mediumscreen';
 				}
+
 				$('body').removeClass('smallscreen mediumscreen largescreen').addClass(screensizeclass);
-
-
 
 				if(new Date() - rctime < cdelta){
 					setTimeout(customizer_resizeend, cdelta);
 				}else{
-					ctimeout = false;
-					//alert('Done resizing');
 
+					ctimeout = false; //alert('Done resizing');
 
 					// set upperbar
 					set_upperbar_elements();
@@ -1002,50 +992,45 @@ jQuery(function ($) {
 					// work maincontent
 					set_maincontent_elements();
 
-
 					// footer
 					set_footer_elements();
 					set_footer_elements();
 
-
 				}
-
-
-
 			}
 
 
 
+            var toggle_topmenulayer = function(){
+                $('#topmenulayer').toggleClass('active');
+                $('body').toggleClass('menu_layer_active');
+            }
+
             $('#topbarcontainer').on( 'click', '.menubutton a', function( e ){
                 e.preventDefault();
-                //$('ul.overflow').fadeToggle();
-                //$('ul.overflow').toggleClass('active');
-                $('#menucloak').toggleClass('active');
-                $('body').toggleClass('menu_active');
+                toggle_topmenulayer();
             });
 
-            $('#pagecontainer').on( 'click', '#menucloak.active', function( e ){
+            $('#pagecontainer').on( 'click', '#topmenulayer.active', function( e ){
                 if (e.target !== this) return;
                 e.preventDefault();
-                //$('ul.overflow').fadeToggle();
-                //$('ul.overflow').toggleClass('active');
-                $('#menucloak').toggleClass('active');
-                $('body').toggleClass('menu_active');
+                toggle_topmenulayer();
             });
 
-        // init resize end on document ready
-        if( $('#pagecontainer ul.overflow').length < 1 ){
-
-            $('#pagecontainer').append('<div id="menucloak"></div>');
-            $('#pagecontainer #menucloak').append( menu_overflow_box );
-
-        }
-        if( $('#topmenu ul.menu').parent().find('li.menubutton').length < 1 ){
-            $('#topmenu ul.menu').append( menu_button_more );
-        }
 
 
-		customizer_resizeend();
+            // init resize end on document ready
+            if( $('#pagecontainer ul.overflow').length < 1 ){
+                $('#pagecontainer').append('<div id="topmenulayer"></div>');
+                $('#pagecontainer #topmenulayer').append( menu_overflow_box );
+
+            }
+            if( $('#topmenu ul.menu').parent().find('li.menubutton').length < 1 ){
+                $('#topmenu ul.menu').append( menu_button_more );
+            }
+
+
+            customizer_resizeend();
 
 
 

@@ -2963,30 +2963,46 @@ function imagazine_customize_adaptive(){
         $topbgc = get_theme_mod('imagazine_topbar_styling_bgcolor', '#000000');
         $topbgt = get_theme_mod('imagazine_topbar_styling_bgtransparancy', 0.3);
         $topbgcolor = imagazine_hextorgb( $topbgc, $topbgt );
+
+        $topmenubgc = get_theme_mod('imagazine_topbar_styling_bgcolor', '#000000');
+        $topmenubgt = get_theme_mod('imagazine_topbar_styling_bgtransparancy', 0.3);
+        $topmenubgcolor = imagazine_hextorgb( $topmenubgc, $topmenubgt );
     ?>
-    #topbarcontainer,
-    #pagecontainer #menucloak
-    /*#pagecontainer .overflow */
+    #topbarcontainer
     {
         background-color: <?php echo $topbgcolor; ?>;
         color: <?php echo get_theme_mod('imagazine_topbar_styling_textcolor', '#fefefe'); ?>;
     }
-    #topbarcontainer a,
-    #pagecontainer .overflow a
+    #topbarcontainer a
     {
         color:<?php echo get_theme_mod('imagazine_topbar_styling_linkcolor', '#efefef'); ?>;
     }
-    #topbarcontainer a:hover,
-    #pagecontainer .overflow a:hover
+    #topbarcontainer a:hover
     {
         color:<?php echo get_theme_mod('imagazine_topbar_styling_hovercolor', '#676767'); ?>;
     }
 
 
 
+
      /*
-     * topmemu overflow/truncate
+     * topmemu / body.menu_layer_active #topmenulayer
      */
+
+    #topmenulayer
+    {
+        background-color: <?php echo $topbgcolor; ?>;
+        color: <?php echo get_theme_mod('imagazine_topbar_styling_textcolor', '#fefefe'); ?>;
+    }
+    #topmenulayer .overflow a
+    {
+        color:<?php echo get_theme_mod('imagazine_topbar_styling_linkcolor', '#efefef'); ?>;
+    }
+    #topmenulayer .overflow a:hover
+    {
+        color:<?php echo get_theme_mod('imagazine_topbar_styling_hovercolor', '#676767'); ?>;
+    }
+
 
 
     #topmainbar
@@ -2997,7 +3013,12 @@ function imagazine_customize_adaptive(){
     overflow:hidden;
     }
 
-    #menucloak
+    body.menu_layer_active
+    {
+    background-color: aqua;
+    overflow:hidden;
+    }
+    #topmenulayer
     {
       /* Center slide text vertically */
       display: -webkit-box;
@@ -3013,10 +3034,10 @@ function imagazine_customize_adaptive(){
       -webkit-align-items: center;
       align-items: center;
         /* set height 0 to hide nonactive*/
-      height:0;
+      height:0px;
+      overflow-y: hidden;
     }
-
-    #pagecontainer #menucloak.active
+    body.menu_layer_active #topmenulayer
     {
         position:fixed;
         top:0px;
@@ -3024,22 +3045,29 @@ function imagazine_customize_adaptive(){
         height:100%;
         -webkit-transition: all linear <?php echo get_theme_mod('imagazine_topbar_behavior_anispeed', 200 ) / 1000; ?>s;
         transition: all linear <?php echo get_theme_mod('imagazine_topbar_behavior_anispeed', 200 ) / 1000; ?>s;
-        background-color: <?php echo $topbgcolor; ?>;
+        background-color: <?php echo $topmenubgcolor; ?>;
         overflow-y: auto;
         z-index:998;
 
         text-align: center;
 
     }
-    #pagecontainer #menucloak.active ul.overflow
+    body.menu_layer_active #topmenulayer ul.overflow
     {
         z-index:999;
     }
-    #pagecontainer #menucloak.active ul.overflow li
+    body.menu_layer_active #topmenulayer ul.overflow li
     {
         max-width:60%;
         margin:0px auto;
     }
+
+
+
+
+
+
+
 
 
 
