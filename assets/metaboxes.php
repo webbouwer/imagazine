@@ -24,30 +24,172 @@ function add_theme_grid_meta()
 add_action('add_meta_boxes', 'add_theme_grid_meta');
 
 function display_theme_grid_settings( $post ){
+
     $values = get_post_custom( $post->ID );
     $selected = isset( $values['theme_grid_category_selectbox'] ) ? esc_attr( $values['theme_grid_category_selectbox'][0] ) : '';
     $catarr = get_categories_select(); // customizer function
 
-    ?>
-    <p><label for="theme_grid_category_selectbox">Select a category</label>
-    <select name="theme_grid_category_selectbox" id="theme_grid_category_selectbox">
-    <?php foreach($catarr as $slg => $nm){
-    echo '<option value="'.$slg.'" '.selected( $selected, $slg ).'>'.$nm.'</option>';
+    $grid_ppp = isset( $values['theme_grid_ppp'] ) ? $values['theme_grid_ppp'][0] : 12;
+
+    $grid_authortime = isset( $values['theme_grid_authortime'] ) ? $values['theme_grid_authortime'][0] : 'both';
+    $option_grid_authortime = array( 0 =>'Default ('.get_theme_mod('imagazine_content_listdisplay_authortime', 'both').')', 1 => 'none', 2 => 'both', 3 => 'date', 4 => 'author');
+
+    $grid_timeformat = isset( $values['theme_grid_timeformat'] ) ? $values['theme_grid_timeformat'][0] : 'date';
+    $option_grid_timeformat = array( 0 =>'Default ('.get_theme_mod('imagazine_content_listdisplay_timeformat', 'date').')', 1 => 'date', 2 => 'full', 3 => 'ago');
+
+    $grid_thumb = isset( $values['theme_grid_thumb'] ) ? $values['theme_grid_thumb'][0] : 'top';
+    $option_grid_thumb = array( 0 =>'Default ('.get_theme_mod('imagazine_content_listdisplay_thumb', 'top').')', 1 => 'top', 2 => 'title', 3 => 'cover', 4 => 'none');
+
+    $grid_excerpt = isset( $values['theme_grid_excerpt'] ) ? $values['theme_grid_excerpt'][0] : 'hide';
+    $option_grid_excerpt = array( 0 =>'Default ('.get_theme_mod('imagazine_content_listdisplay_excerpt', 'show').')', 1 => 'show', 2 => 'hide');
+
+
+    $grid_readmorebutton = isset( $values['theme_grid_readmorebutton'] ) ? $values['theme_grid_readmorebutton'][0] : 'hide';
+    $option_grid_readmorebutton = array( 0 =>'Default ('.get_theme_mod('imagazine_content_listdisplay_readmorebutton', 'hide').')', 1 => 'left', 2 => 'center', 3 => 'right', 4 => 'hide');
+
+
+    function create_option_selectbox( $option, $selectlist ){
+            foreach( $selectlist as $key => $value){
+                if($key == get_post_meta($object->ID, "theme_'.$option.'", true))
+                {
+                    echo '<option value="'.$key.'" selected>'.$value.'</option>';
+                }else{
+                    echo '<option value="'.$key.'">'.$value.'</option>';
+                }
+            }
     }
+
     ?>
-    <option value="uncategorized" <?php selected( $selected, 'uncategorized' ); ?>><?php echo __('Uncategorized', 'imagazine'); ?></option>
-    </select>
+    <p>
+        <label for="theme_grid_category_selectbox">Post grid category</label>
+        <select name="theme_grid_category_selectbox" id="theme_grid_category_selectbox">
+        <?php foreach($catarr as $slg => $nm){
+        echo '<option value="'.$slg.'" '.selected( $selected, $slg ).'>'.$nm.'</option>';
+        }
+        ?>
+        <option value="uncategorized" <?php selected( $selected, 'uncategorized' ); ?>><?php echo __('Uncategorized', 'imagazine'); ?></option>
+        </select>
     </p>
+
+    <p>
+            <label for="theme_grid_ppp">Posts per page</label>
+            <input name="theme_grid_ppp" value="<?php echo $grid_ppp; ?>" size="4" />
+    </p>
+
+
+    <p>
+            <label for="theme_grid_authortime">Date/time & Author</label>
+
+        <select id="theme_grid_authortime" name="theme_grid_authortime">
+                <?php
+                    foreach($option_grid_authortime as $key => $value)
+                    {
+                        if($key == get_post_meta($object->ID, "theme_grid_authortime", true))
+                        {
+                            echo '<option value="'.$key.'" selected>'.$value.'</option>';
+                        }else{
+                            echo '<option value="'.$key.'">'.$value.'</option>';
+                        }
+                    }
+                ?>
+            </select>
+    </p>
+
+    <p>
+            <label for="theme_grid_timeformat">Date/time format</label>
+            <select id="theme_grid_timeformat" name="theme_grid_timeformat">
+                <?php
+                    foreach($option_grid_timeformat as $key => $value)
+                    {
+                        if($key == get_post_meta($object->ID, "theme_grid_timeformat", true))
+                        {
+                            echo '<option value="'.$key.'" selected>'.$value.'</option>';
+                        }else{
+                            echo '<option value="'.$key.'">'.$value.'</option>';
+                        }
+                    }
+                ?>
+            </select>
+    </p>
+    <p>
+            <label for="theme_grid_thumb">Featured image display format</label>
+            <select id="theme_grid_thumb" name="theme_grid_thumb">
+                <?php
+                    foreach($option_grid_thumb as $key => $value)
+                    {
+                        if($key == get_post_meta($object->ID, "theme_grid_thumb", true))
+                        {
+                            echo '<option value="'.$key.'" selected>'.$value.'</option>';
+                        }else{
+                            echo '<option value="'.$key.'">'.$value.'</option>';
+                        }
+                    }
+                ?>
+            </select>
+    </p>
+    <p>
+            <label for="theme_grid_excerpt">Display excerpt</label>
+            <select id="theme_grid_excerpt" name="theme_grid_excerpt">
+                <?php
+                    foreach($option_grid_excerpt as $key => $value)
+                    {
+                        if($key == get_post_meta($object->ID, "theme_grid_excerpt", true))
+                        {
+                            echo '<option value="'.$key.'" selected>'.$value.'</option>';
+                        }else{
+                            echo '<option value="'.$key.'">'.$value.'</option>';
+                        }
+                    }
+                ?>
+            </select>
+    </p>
+    <p>
+            <label for="theme_grid_readmorebutton">Display readmore</label>
+            <select id="theme_grid_readmorebutton" name="theme_grid_readmorebutton">
+                <?php
+                    foreach($option_grid_readmorebutton as $key => $value)
+                    {
+                        if($key == get_post_meta($object->ID, "theme_grid_readmorebutton", true))
+                        {
+                            echo '<option value="'.$key.'" selected>'.$value.'</option>';
+                        }else{
+                            echo '<option value="'.$key.'">'.$value.'</option>';
+                        }
+                    }
+                ?>
+            </select>
+    </p>
+
+
+
     <?php
 }
+
+
 function save_theme_grid_settings( $post_id )
 {
     if( isset( $_POST['theme_grid_category_selectbox'] ) )
         update_post_meta( $post_id, 'theme_grid_category_selectbox', esc_attr( $_POST['theme_grid_category_selectbox'] ) );
 
+    if( isset( $_POST['theme_grid_ppp'] ) )
+        update_post_meta( $post_id, 'theme_grid_ppp', esc_attr( $_POST['theme_grid_ppp'] ) );
+    if( isset( $_POST['theme_grid_authortime'] ) )
+        update_post_meta( $post_id, 'theme_grid_authortime', esc_attr( $_POST['theme_grid_authortime'] ) );
+    if( isset( $_POST['theme_grid_timeformat'] ) )
+        update_post_meta( $post_id, 'theme_grid_timeformat', esc_attr( $_POST['theme_grid_timeformat'] ) );
+    if( isset( $_POST['theme_grid_thumb'] ) )
+        update_post_meta( $post_id, 'theme_grid_thumb', esc_attr( $_POST['theme_grid_thumb'] ) );
+    if( isset( $_POST['theme_grid_excerpt'] ) )
+        update_post_meta( $post_id, 'theme_grid_excerpt', esc_attr( $_POST['theme_grid_excerpt'] ) );
+    if( isset( $_POST['theme_grid_readmorebutton'] ) )
+        update_post_meta( $post_id, 'theme_grid_readmorebutton', esc_attr( $_POST['theme_grid_readmorebutton'] ) );
 
 }
 add_action( 'save_post', 'save_theme_grid_settings' );
+
+
+
+
 
 
 /* page global metabox */
@@ -233,9 +375,6 @@ function imagazine_page_meta_box($object)
 
 
 <b>Content display</b><br />
-
-
-
 
 		<label for="page-meta-contenttop-display">Content top widgets display</label>
 		<br />

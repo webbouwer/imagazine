@@ -1657,6 +1657,45 @@ function imagazine_theme_customizer( $wp_customize ){
             	)
     	)));
 
+
+
+    $wp_customize->add_setting( 'imagazine_content_blogpagedisplay_authortime' , array(
+		'default' => 'none',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_blogpagedisplay_authortime', array(
+            	'label'          => __( 'Date/time & Author', 'imagazine' ),
+            	'section'        => 'imagazine_content_blogpagedisplay',
+            	'settings'       => 'imagazine_content_blogpagedisplay_authortime',
+            	'type'           => 'select',
+ 	    	'description'    => __( 'Display date/time & author name in lists', 'imagazine' ),
+            	'choices'        => array(
+                	'none'   => __( 'No display', 'imagazine' ),
+                	'both'   => __( 'Display both', 'imagazine' ),
+                	'date'   => __( 'Display date only', 'imagazine' ),
+                	'author'   => __( 'Display author name only', 'imagazine' ),
+            	)
+    	)));
+
+		$wp_customize->add_setting( 'imagazine_content_blogpagedisplay_timeformat' , array(
+		'default' => 'date',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_blogpagedisplay_timeformat', array(
+            	'label'          => __( 'Date/time format', 'imagazine' ),
+            	'section'        => 'imagazine_content_blogpagedisplay',
+            	'settings'       => 'imagazine_content_blogpagedisplay_timeformat',
+            	'type'           => 'select',
+ 	    	'description'    => __( 'Time display format in lists', 'imagazine' ),
+            	'choices'        => array(
+                	'date'   => __( 'Date only', 'imagazine' ),
+                	'full'   => __( 'Date & Time', 'imagazine' ),
+                	'ago'   => __( 'Display as time-ago', 'imagazine' ),
+            	)
+    	)));
+
         $wp_customize->add_setting( 'imagazine_content_blogpagedisplay_thumb' , array(
 		'default' => 'top',
 		'sanitize_callback' => 'imagazine_sanitize_default',
@@ -1711,6 +1750,56 @@ function imagazine_theme_customizer( $wp_customize ){
                 	'hide'   => __( 'do not show', 'imagazine' ),
             	)
     	)));
+	$wp_customize->add_setting( 'imagazine_content_blogpagedisplay_contentbottom' , array(
+		'default' => 'hide',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_blogpagedisplay_contentbottom', array(
+            	'label'          => __( 'Show bottom widgets', 'imagazine' ),
+            	'section'        => 'imagazine_content_blogpagedisplay',
+            	'settings'       => 'imagazine_content_blogpagedisplay_contentbottom',
+            	'type'           => 'select',
+ 	    	'description'    => __( 'Content bottom widgets by default', 'imagazine' ),
+            	'choices'        => array(
+                	'hide'   => __( 'No display on post lists', 'imagazine' ),
+                	'show'   => __( 'Show bottom widgets', 'imagazine' ),
+            	)
+    	)));
+
+		$wp_customize->add_setting( 'imagazine_content_blogpagedisplay_sidebar1_pos' , array(
+		'default' => 'none',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_blogpagedisplay_sidebar1_pos', array(
+            	'label'          => __( 'Sidebar 1 display', 'imagazine' ),
+            	'section'        => 'imagazine_content_blogpagedisplay',
+            	'settings'       => 'imagazine_content_blogpagedisplay_sidebar1_pos',
+            	'type'           => 'select',
+ 	    		'description'    => __( 'Select sidebar 1 display in list view (default overwrite).', 'imagazine' ),
+            	'choices'        => array(
+                	'none'   => __( 'none', 'imagazine' ),
+                	'left'   => __( 'left', 'imagazine' ),
+            		'right'   => __( 'right', 'imagazine' ),
+            	)
+    	)));
+
+		$wp_customize->add_setting( 'imagazine_content_blogpagedisplay_sidebar2_pos' , array(
+		'default' => 'none',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+    	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_blogpagedisplay_sidebar2_pos', array(
+            	'label'          => __( 'Sidebar 2 display', 'imagazine' ),
+            	'section'        => 'imagazine_content_blogpagedisplay',
+            	'settings'       => 'imagazine_content_blogpagedisplay_sidebar2_pos',
+            	'type'           => 'select',
+ 	    		'description'    => __( 'Select sidebar 2 display in list view (default overwrite).', 'imagazine' ),
+            	'choices'        => array(
+                	'none'   => __( 'none', 'imagazine' ),
+                	'left'   => __( 'left', 'imagazine' ),
+            		'right'   => __( 'right', 'imagazine' ),
+            	)
+    	)));
 
 
 
@@ -1719,7 +1808,7 @@ function imagazine_theme_customizer( $wp_customize ){
 
 
 
-        // post lists
+        /* post (taxonomy) lists */
 		$wp_customize->add_setting( 'imagazine_content_listdisplay_contenttop' , array(
 		'default' => 'hide',
 		'sanitize_callback' => 'imagazine_sanitize_default',
@@ -1737,25 +1826,25 @@ function imagazine_theme_customizer( $wp_customize ){
             	)
     	)));
 
-    /*
-    	$wp_customize->add_setting( 'imagazine_content_listdisplay_thumb' , array(
-		'default' => 'top',
+
+        $wp_customize->add_setting( 'imagazine_content_listdisplay_listtype' , array(
+		'default' => 'basic',
 		'sanitize_callback' => 'imagazine_sanitize_default',
     	));
 
-        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_listdisplay_thumb', array(
-            	'label'          => __( 'Display featured image', 'imagazine' ),
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_listdisplay_listtype', array(
+            	'label'          => __( 'List page type', 'imagazine' ),
             	'section'        => 'imagazine_content_listdisplay',
-            	'settings'       => 'imagazine_content_listdisplay_thumb',
+            	'settings'       => 'imagazine_content_listdisplay_listtype',
             	'type'           => 'select',
- 	    	'description'    => __( 'Featured image display format', 'imagazine' ),
+ 	    	'description'    => __( 'list type display', 'imagazine' ),
             	'choices'        => array(
-                	'top'   => __( 'Above title', 'imagazine' ),
-                	'title'   => __( 'Below title', 'imagazine' ),
-                	'cover'   => __( 'Cover title inside', 'imagazine' ),
-                	'none'   => __( 'Do not show', 'imagazine' ),
+                	'basic'   => __( 'List posts below each other', 'imagazine' ),
+                	'columns'   => __( 'Display posts in grid', 'imagazine' ),
+                	//'grid'   => __( 'Display posts in a responsive grid', 'imagazine' ),
             	)
-    	)));*/
+    	)));
+
 
 		$wp_customize->add_setting( 'imagazine_content_listdisplay_authortime' , array(
 		'default' => 'none',
@@ -1795,7 +1884,25 @@ function imagazine_theme_customizer( $wp_customize ){
     	)));
 
 
-    /*
+        $wp_customize->add_setting( 'imagazine_content_listdisplay_thumb' , array(
+		'default' => 'top',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+    	));
+
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_content_listdisplay_thumb', array(
+            	'label'          => __( 'Display featured image', 'imagazine' ),
+            	'section'        => 'imagazine_content_listdisplay',
+            	'settings'       => 'imagazine_content_listdisplay_thumb',
+            	'type'           => 'select',
+ 	    	'description'    => __( 'Featured image display format', 'imagazine' ),
+            	'choices'        => array(
+                	'top'   => __( 'Above title', 'imagazine' ),
+                	'title'   => __( 'Below title', 'imagazine' ),
+                	'cover'   => __( 'Cover title inside', 'imagazine' ),
+                	'none'   => __( 'Do not show', 'imagazine' ),
+            	)
+    	)));
+
         $wp_customize->add_setting( 'imagazine_content_listdisplay_excerpt' , array(
 		  'default' => 'show',
 		  'sanitize_callback' => 'imagazine_sanitize_default',
@@ -1831,8 +1938,6 @@ function imagazine_theme_customizer( $wp_customize ){
                 	'hide'   => __( 'do not show', 'imagazine' ),
             	)
     	)));
-        */
-
 
 		$wp_customize->add_setting( 'imagazine_content_listdisplay_contentbottom' , array(
 		'default' => 'hide',
@@ -1885,6 +1990,12 @@ function imagazine_theme_customizer( $wp_customize ){
             	)
     	)));
 
+
+
+
+
+
+        /* single posts */
 
 		$wp_customize->add_setting( 'imagazine_content_postdisplay_contenttop' , array(
 		'default' => 'hide',
@@ -2714,12 +2825,33 @@ function imagazine_customize_adaptive(){
     .post a.postlist-coverimage
     {
         display:block;
+        width:100%;
     }
-    .post a.postlist-coverimage img
+    .post a.postlist-coverimage div.coverbox
+    {
+        display:block;
+        width:100%;
+        min-height:200px;
+        background-position:center;
+        background-size: cover;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    /*.post a.postlist-coverimage img
     {
         width:100%;
         height:auto;
-    }
+    }*/
     .page .maintitlebar,
     .post .listitemtitlebar
     {

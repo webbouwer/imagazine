@@ -22,23 +22,34 @@ $sidebar2respon = get_theme_mod('imagazine_content_sidebars_sidebar2responsive',
 
 $blog_topwidgets_display = get_theme_mod('imagazine_content_blogpagedisplay_contenttop', 'hide');
 $blog_postlist_display = get_theme_mod('imagazine_content_blogpagedisplay_listtype', 'basic'); // columns | grid
+$bloglist_authortime_display = get_theme_mod('imagazine_content_blogpagedisplay_authortime', 'both');
+$bloglist_timeformat_display = get_theme_mod('imagazine_content_blogpagedisplay_timeformat', 'date');
+$bloglist_thumb_display = get_theme_mod('imagazine_content_blogpagedisplay_thumb', 'top');
+$bloglist_text_display = get_theme_mod('imagazine_content_blogpagedisplay_excerpt', 'show');
+$bloglist_readmore_display = get_theme_mod('imagazine_content_blogpagedisplay_readmorebutton', 'right');
 
-$list_thumb_display = get_theme_mod('imagazine_content_blogpagedisplay_thumb', 'top');
-$list_text_display = get_theme_mod('imagazine_content_blogpagedisplay_excerpt', 'show');
-$list_readmore_display = get_theme_mod('imagazine_content_blogpagedisplay_readmorebutton', 'right');
+$bloglist_bottomwidgets_display = get_theme_mod('imagazine_content_blogpagedisplay_contentbottom', 'hide');
+$bloglist_sidebar1_display = get_theme_mod('imagazine_content_blogpagedisplay_sidebar1_pos','none');
+$bloglist_sidebar2_display = get_theme_mod('imagazine_content_blogpagedisplay_sidebar2_pos','none');
+
+
 
 $list_topwidgets_display = get_theme_mod('imagazine_content_listdisplay_contenttop', 'hide');
 
-//$list_thumb_display = get_theme_mod('imagazine_content_listdisplay_thumb', 'top');
+
+$list_postlist_display = get_theme_mod('imagazine_content_listdisplay_listtype', 'basic'); // columns | grid
+
+$list_thumb_display = get_theme_mod('imagazine_content_listdisplay_thumb', 'top');
 $list_authortime_display = get_theme_mod('imagazine_content_listdisplay_authortime', 'both');
 $list_timeformat_display = get_theme_mod('imagazine_content_listdisplay_timeformat', 'date');
-//$list_text_display = get_theme_mod('imagazine_content_listdisplay_excerpt', 'show');
-//$list_readmore_display = get_theme_mod('imagazine_content_listdisplay_readmorebutton', 'right');
+$ist_text_display = get_theme_mod('imagazine_content_listdisplay_excerpt', 'show');
+$list_readmore_display = get_theme_mod('imagazine_content_listdisplay_readmorebutton', 'right');
+
+
 
 $list_bottomwidgets_display = get_theme_mod('imagazine_content_listdisplay_contentbottom', 'hide');
 $list_sidebar1_display = get_theme_mod('imagazine_content_listdisplay_sidebar1_pos','none');
 $list_sidebar2_display = get_theme_mod('imagazine_content_listdisplay_sidebar2_pos','none');
-
 
 
 
@@ -97,7 +108,11 @@ echo '<div id="maincontentcontainer">';
 		$sidebar1pos = $post_sidebar1_display;
 		$sidebar2pos = $post_sidebar2_display;
 	}
-	if( !is_single() && !is_page() ){
+    if( is_home() ){
+		$sidebar1pos = $bloglist_sidebar1_display;
+		$sidebar2pos = $bloglist_sidebar2_display;
+	}
+	if( !is_single() && !is_page() && !is_home() ){
 		$sidebar1pos = $list_sidebar1_display;
 		$sidebar2pos = $list_sidebar2_display;
 	}
@@ -138,9 +153,9 @@ echo '<div id="maincontentcontainer">';
 
 
 
-
-
-if( is_home() ){
+if( !is_home() && !is_single() && !is_page() ){
+    echo '<div id="maincontent" class="blog-'.$list_postlist_display.'">';
+}else if( is_home() ){
     echo '<div id="maincontent" class="blog-'.$blog_postlist_display.'">';
 }else{ /* basic loop */
     echo '<div id="maincontent">';
@@ -184,85 +199,196 @@ while( have_posts() ) : the_post();
 
 if ( !is_single() && !is_page() ) {
 
-// post in a list (category/search/archieve etc.)
-?>
-<div id="post-<?php echo get_the_ID(); ?>" <?php post_class(); ?>>
+    if( is_home() ){
+        // post in a list (category/search/archieve etc.)
 
-<?php
+        ?>
+        <div id="post-<?php echo get_the_ID(); ?>" <?php post_class(); ?>>
 
-if ( has_post_thumbnail() && $list_thumb_display == "top" ) {
-echo '<a class="postlist-coverimage" href="'.get_the_permalink().'" title="'.get_the_title().'" >';
-the_post_thumbnail('big-thumb');
-echo '</a>';
-}
-
-
-echo '<div class="listitemtitlebar">';
-
-
-echo '<h2><a href="'.get_the_permalink().'">';
-if( is_search() ){ echo search_title_highlight(); }else{ echo get_the_title(); }
-echo '</a></h2>';
-
-
-echo '<div class="metabox">';
-
-
-if( $list_authortime_display == 'both' || $list_authortime_display == 'date'){
-
-	/* set date display */
-	if( $list_timeformat_display == 'date' ){
-		echo '<span class="post-date date-time">'.get_the_date().'</span> ';
-	}elseif( $list_timeformat_display == 'full' ){
-		echo '<span class="post-date date-time">'.get_the_date().' '.__('om','imagazine').' '.get_the_time().'</span> ';
-	}else{
-		echo '<span class="post-date time-ago">';
-		wp_time_ago(get_the_time( 'U' ));
-		echo '</span>';
-	}
-}
-
-if( $list_authortime_display == 'both' || $list_authortime_display == 'author'){
-/* set author display */
-echo ' <span class="post-author">'.__('door','imagazine').' '.get_the_author().'</span> ';
-}
+        <?php
+        if ( has_post_thumbnail() && ( $bloglist_thumb_display == "top" || $bloglist_thumb_display == "cover" ) ) {
+        /*echo '<a class="postlist-coverimage" href="'.get_the_permalink().'" title="'.get_the_title().'" >';
+        the_post_thumbnail_url('big-thumb'); // the_post_thumbnail('big-thumb');
+        echo '</a>';*/
+            echo '<a class="postlist-coverimage" href="'.get_the_permalink().'" title="'.get_the_title().'" >';
+            //the_post_thumbnail('big-thumb');
+                $featured_img_url = get_the_post_thumbnail_url( get_the_ID(), 'big-thumb'); ;
+            echo '<div class="coverbox" style="background-image:url('.$featured_img_url.');">';
+            if ( $bloglist_thumb_display == "cover" ) {
+                echo '<h2>';
+                if( is_search() ){ echo search_title_highlight(); }else{ echo get_the_title(); }
+                echo '</h2>';
+            }
+            echo '</div>';
+            echo '</a>';
+        }
 
 
+        echo '<div class="listitemtitlebar">';
 
-echo '<div class="clr"></div></div>';
+        if ( $bloglist_thumb_display != "cover" || ( !has_post_thumbnail() && $bloglist_thumb_display == "cover" )  ) {
+        echo '<h2><a href="'.get_the_permalink().'">';
+        if( is_search() ){ echo search_title_highlight(); }else{ echo get_the_title(); }
+        echo '</a></h2>';
+        }
 
-echo '<div class="clr"></div></div>';
-
-
-echo '<div class="optionmenu">';
-
-if ( is_super_admin() ) {
-edit_post_link( __( 'Bewerk' , 'imagazine' ), '<span class="edit-link">', '</span>' );
-}
-
-echo '<div class="clr"></div></div>';
+        echo '<div class="metabox">';
 
 
-if ( has_post_thumbnail() && $list_thumb_display == "title" ) {
-echo '<a class="postlist-coverimage" href="'.get_the_permalink().'" title="'.get_the_title().'" >';
-the_post_thumbnail('big-thumb');
-echo '</a>';
-}
+        if( $bloglist_authortime_display == 'both' || $bloglist_authortime_display == 'date'){
 
-echo '<div class="innerpadding">';
+            /* set date display */
+            if( $bloglist_timeformat_display == 'date' ){
+                echo '<span class="post-date date-time">'.get_the_date().'</span> ';
+            }elseif( $bloglist_timeformat_display == 'full' ){
+                echo '<span class="post-date date-time">'.get_the_date().' '.__('om','imagazine').' '.get_the_time().'</span> ';
+            }else{
+                echo '<span class="post-date time-ago">';
+                wp_time_ago(get_the_time( 'U' ));
+                echo '</span>';
+            }
+        }
 
-if ( $list_text_display == "show" ) {
-    echo apply_filters('the_excerpt', get_the_excerpt());
-}
-if( $list_readmore_display != "hide"){
-    echo ' <a href="'.get_the_permalink().'" class="readmore align-'.$list_readmore_display.'">'.__('Lees meer', 'imagazine' ).'</a>';
-}
-echo '</div>';
+        if( $bloglist_authortime_display == 'both' || $bloglist_authortime_display == 'author'){
+        /* set author display */
+        echo ' <span class="post-author">'.__('door','imagazine').' '.get_the_author().'</span> ';
+        }
 
 
 
+        echo '<div class="clr"></div></div>';
 
-echo '<div class="clr"></div></div>'; // end page(post) container
+        echo '<div class="clr"></div></div>';
+
+
+        echo '<div class="optionmenu">';
+
+        if ( is_super_admin() ) {
+        edit_post_link( __( 'Bewerk' , 'imagazine' ), '<span class="edit-link">', '</span>' );
+        }
+
+        echo '<div class="clr"></div></div>';
+
+
+        if ( has_post_thumbnail() && $bloglist_thumb_display == "title" ) {
+        echo '<a class="postlist-coverimage" href="'.get_the_permalink().'" title="'.get_the_title().'" >';
+            $featured_img_url = get_the_post_thumbnail_url( get_the_ID(), 'big-thumb'); ;
+            echo '<div class="coverbox" style="background-image:url('.$featured_img_url.');"></div>';
+        echo '</a>';
+        }
+
+        echo '<div class="innerpadding">';
+
+        if ( $bloglist_text_display == "show" ) {
+            echo apply_filters('the_excerpt', get_the_excerpt());
+        }
+        if( $bloglist_readmore_display != "hide"){
+            echo ' <a href="'.get_the_permalink().'" class="readmore align-'.$bloglist_readmore_display.'">'.__('Lees meer', 'imagazine' ).'</a>';
+        }
+        echo '</div>';
+
+
+
+
+        echo '<div class="clr"></div></div>'; // end page(post) container
+
+    }else{ // end home / blog
+
+    /* basic post lists */
+
+        ?>
+        <div id="post-<?php echo get_the_ID(); ?>" <?php post_class(); ?>>
+
+        <?php
+        if ( has_post_thumbnail() && ( $list_thumb_display == "top" || $list_thumb_display == "cover" ) ) {
+            /*echo '<a class="postlist-coverimage" href="'.get_the_permalink().'" title="'.get_the_title().'" >';
+            the_post_thumbnail_url('big-thumb'); // the_post_thumbnail('big-thumb');
+            echo '</a>';*/
+            echo '<a class="postlist-coverimage" href="'.get_the_permalink().'" title="'.get_the_title().'" >';
+            //the_post_thumbnail('big-thumb');
+                $featured_img_url = get_the_post_thumbnail_url( get_the_ID(), 'big-thumb'); ;
+            echo '<div class="coverbox" style="background-image:url('.$featured_img_url.');">';
+            if ( $list_thumb_display == "cover" ) {
+                echo '<h2>';
+                if( is_search() ){ echo search_title_highlight(); }else{ echo get_the_title(); }
+                echo '</h2>';
+            }
+            echo '</div>';
+            echo '</a>';
+        }
+
+
+        echo '<div class="listitemtitlebar">';
+
+        if ( $list_thumb_display != "cover" || ( !has_post_thumbnail() && $list_thumb_display == "cover" )  ) {
+        echo '<h2><a href="'.get_the_permalink().'">';
+        if( is_search() ){ echo search_title_highlight(); }else{ echo get_the_title(); }
+        echo '</a></h2>';
+        }
+
+        echo '<div class="metabox">';
+
+
+        if( $list_authortime_display == 'both' || $list_authortime_display == 'date'){
+
+            /* set date display */
+            if( $list_timeformat_display == 'date' ){
+                echo '<span class="post-date date-time">'.get_the_date().'</span> ';
+            }elseif( $list_timeformat_display == 'full' ){
+                echo '<span class="post-date date-time">'.get_the_date().' '.__('om','imagazine').' '.get_the_time().'</span> ';
+            }else{
+                echo '<span class="post-date time-ago">';
+                wp_time_ago(get_the_time( 'U' ));
+                echo '</span>';
+            }
+        }
+
+        if( $list_authortime_display == 'both' || $list_authortime_display == 'author'){
+        /* set author display */
+        echo ' <span class="post-author">'.__('door','imagazine').' '.get_the_author().'</span> ';
+        }
+
+
+
+        echo '<div class="clr"></div></div>';
+
+        echo '<div class="clr"></div></div>';
+
+
+        echo '<div class="optionmenu">';
+
+        if ( is_super_admin() ) {
+        edit_post_link( __( 'Bewerk' , 'imagazine' ), '<span class="edit-link">', '</span>' );
+        }
+
+        echo '<div class="clr"></div></div>';
+
+
+        if ( has_post_thumbnail() && $list_thumb_display == "title" ) {
+        echo '<a class="postlist-coverimage" href="'.get_the_permalink().'" title="'.get_the_title().'" >';
+            $featured_img_url = get_the_post_thumbnail_url( get_the_ID(), 'big-thumb'); ;
+            echo '<div class="coverbox" style="background-image:url('.$featured_img_url.');"></div>';
+        echo '</a>';
+        }
+
+        echo '<div class="innerpadding">';
+
+        if ( $list_text_display == "show" ) {
+            echo apply_filters('the_excerpt', get_the_excerpt());
+        }
+        if( $list_readmore_display != "hide"){
+            echo ' <a href="'.get_the_permalink().'" class="readmore align-'.$list_readmore_display.'">'.__('Lees meer', 'imagazine' ).'</a>';
+        }
+        echo '</div>';
+
+
+
+
+        echo '<div class="clr"></div></div>'; // end page(post) container
+
+
+
+    }
 
 
 
@@ -515,7 +641,8 @@ if( $page_contenttop_display != 0 ){
 
 if( !( is_page() && $page_bottomwidgets_display == 'hide' )
    && !( is_single() && $post_bottomwidgets_display == 'hide' )
-   && !( !is_single() && !is_page() && $list_bottomwidgets_display == 'hide' )
+   && !( is_home() && $bloglist_bottomwidgets_display == 'hide' )
+   && !( !is_single() && !is_page() && !is_home() && $list_bottomwidgets_display == 'hide' )
   	 ){
 
     // maincontent bottom widgets
