@@ -57,6 +57,52 @@
 	}
 	add_action( 'init', 'imagazine_setup_register_menus' );
 
+    // custom OG meta
+    add_action('wp_head', 'fc_opengraph');
+    function fc_opengraph() {
+
+      if( is_single() || is_page() ) {
+
+        $post_id = get_queried_object_id();
+
+        $url = get_permalink($post_id);
+        $title = get_the_title($post_id);
+        $site_name = get_bloginfo('name');
+
+        $description = wp_trim_words( get_post_field('post_content', $post_id), 25 );
+
+        $image = get_the_post_thumbnail_url($post_id);
+        if( !empty( get_post_meta($post_id, 'og_image', true) ) ){
+           $image = get_post_meta($post_id, 'og_image', true);
+        }else if( get_theme_mod( 'imagazine_globalshare_defaultimage', '') != ''){
+            $image = get_theme_mod( 'imagazine_globalshare_defaultimage', get_the_post_thumbnail_url($post_id) );
+        }
+
+        $site_author = get_bloginfo('name');
+        if( get_theme_mod( 'imagazine_globalshare_siteauthor_name', '') != ''){
+            $site_author = get_theme_mod( 'imagazine_globalshare_siteauthor_name' );
+        }
+        $locale = get_locale();
+
+        echo '<meta property="og:locale" content="' . esc_attr($locale) . '" />';
+        echo '<meta property="og:type" content="article" />';
+        echo '<meta property="og:title" content="' . esc_attr($title) . ' | ' . esc_attr($site_name) . '" />';
+        echo '<meta property="og:description" content="' . esc_attr($description) . '" />';
+        echo '<meta property="og:url" content="' . esc_url($url) . '" />';
+        echo '<meta property="og:site_name" content="' . esc_attr($site_name) . '" />';
+
+        if($image) echo '<meta property="og:image" content="' . esc_url($image) . '" />';
+
+        // Twitter Card
+        echo '<meta name="twitter:card" content="summary_large_image" />';
+        echo '<meta name="twitter:site" content="@' . esc_attr($site_name) . '" />';
+        echo '<meta name="twitter:creator" content="@'.$site_author.'" />';
+
+      }
+
+    }
+
+
 
     /*
      * Exclude specific categories from the loop
@@ -70,7 +116,7 @@
     }
 
 	/**
-	 * Keep category select list in hiÎarchy
+	 * Keep category select list in hiearchy
 	 * source http://wordpress.stackexchange.com/questions/61922/add-post-screen-keep-category-structure
 	 */
 	function imagazine_wp_terms_checklist_args( $args, $post_id ) {
@@ -443,7 +489,7 @@
 	add_action('wp_enqueue_scripts', 'imagazine_global_js');
 
 
-
+    /* Using rgba color created from hexa colors with an alpha/transparency value */
     function imagazine_hextorgb($hex, $alpha = false) {
        $hex      = str_replace('#', '', $hex);
        $length   = strlen($hex);
@@ -451,12 +497,12 @@
        $rgb['g'] = hexdec($length == 6 ? substr($hex, 2, 2) : ($length == 3 ? str_repeat(substr($hex, 1, 1), 2) : 0));
        $rgb['b'] = hexdec($length == 6 ? substr($hex, 4, 2) : ($length == 3 ? str_repeat(substr($hex, 2, 1), 2) : 0));
 
-        $rgbcolor = 'rgb('.$rgb['r'].','.$rgb['g'].','.$rgb['b'].')';
+        $rgbcolor = 'rgba('.$rgb['r'].','.$rgb['g'].','.$rgb['b'].')';
        if ( $alpha ) {
           $rgb['a'] = $alpha;
-          $rgbcolor = 'rgb('.$rgb['r'].','.$rgb['g'].','.$rgb['b'].','.$rgb['a'].')';
+          $rgbcolor = 'rgba('.$rgb['r'].','.$rgb['g'].','.$rgb['b'].','.$rgb['a'].')';
        }
-       return $rgbcolor; //return $rgb;//
+       return $rgbcolor;
     }
 
 

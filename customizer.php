@@ -72,7 +72,7 @@ function imagazine_theme_customizer( $wp_customize ){
 	$wp_customize->add_section('background_image', array(
         'title'    => __('Background Image', 'imagazine'),
         'panel'  => 'imagazine_global',
-		'priority' => 50,
+		'priority' => 20,
     ));
 
 
@@ -285,17 +285,66 @@ function imagazine_theme_customizer( $wp_customize ){
 
 	/* Global */
 
-	// Global - Identity logo image
-	$wp_customize->add_setting( 'title_tagline_logoimage', array(
+	// Global - Identity
+
+    $wp_customize->add_setting( 'imagazine_globalshare_siteauthor_name' , array(
+		'default' => '',
 		'sanitize_callback' => 'imagazine_sanitize_default',
-	    ));
-	 $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'title_tagline_logoimage', array(
-        	'label'    => __( 'Logo image', 'imagazine' ),
-        	'section'  => 'title_tagline',
-        	'settings' => 'title_tagline_logoimage',
-			'description' => __( 'Upload or select a logo image to display', 'imagazine' ),
-        	'priority' => 30,
-   	) ) );
+		'priority' => 20,
+    	));
+    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_globalshare_siteauthor_name', array(
+            	'label'          => __( 'Site author name' , 'imagazine' ),
+            	'section'        => 'title_tagline',
+            	'type'           => 'text',
+ 	    		'description'    => __( 'Site author name', 'imagazine' ),
+    )));
+
+
+    $wp_customize->add_setting( 'imagazine_globalshare_copyrighttext' , array(
+		'default' => '© '. date("Y") .'',
+		'sanitize_callback' => 'imagazine_sanitize_default',
+		'priority' => 20,
+    	));
+    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_globalshare_copyrighttext', array(
+            	'label'          => __( 'Copyright text' , 'imagazine' ),
+            	'section'        => 'title_tagline',
+            	'type'           => 'text',
+ 	    		'description'    => __( 'Copyright text line', 'imagazine' ),
+    )));
+
+
+    /* Global color styling
+
+    background-color
+    text color
+
+    text | padding:10px 2px 5px 2px;
+    text | margin:10px 2px 5px 2px;
+	select | text-transform:uppercase;
+	range | font-size:1em;
+	range | letter-spacing:0.04em;
+
+
+    header title
+    text color
+    select | alignment
+    range | font-size:1em;
+	range | letter-spacing:0.04em;
+	select | text-transform:lowercase;
+    text | padding:10px 2px 5px 2px;
+    select | font-type
+
+    h1 ..
+    h2 ..
+    h3 ..
+
+    date and author text ..
+
+    list cover title ..
+    widget titles ..
+
+    etc.
+    */
 
 
     /* Font Styling */
@@ -303,7 +352,7 @@ function imagazine_theme_customizer( $wp_customize ){
 		'default' => 'Lato|Martel',
 		'sanitize_callback' => 'imagazine_sanitize_default',
 		'priority' => 20,
-    	));
+    ));
     $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'imagazine_global_styles_mainfont', array(
             	'label'          => __( 'Font style family (google fonts)' , 'imagazine' ),
             	'section'        => 'imagazine_global_styles',
@@ -349,6 +398,8 @@ function imagazine_theme_customizer( $wp_customize ){
             	'type'           => 'textarea',
  	    		'description'    => __( 'Text to share as default description', 'imagazine' ),
     )));
+
+
 
 
 	/* Global - Sreen modes */
@@ -539,6 +590,10 @@ function imagazine_theme_customizer( $wp_customize ){
     )));
 
 	/* Upperbar - Menu */
+
+    // font size.
+
+
 	$wp_customize->add_setting( 'imagazine_upperbar_menu_smallscreen' , array(
 		'default' => 'none',
 		'sanitize_callback' => 'imagazine_sanitize_default',
@@ -556,6 +611,7 @@ function imagazine_theme_customizer( $wp_customize ){
                 'none'   => __( 'No display', 'imagazine' ),
             )
     )));
+
 	$wp_customize->add_setting( 'imagazine_upperbar_menu_largescreen' , array(
 		'default' => 'center',
 		'sanitize_callback' => 'imagazine_sanitize_default',
@@ -597,6 +653,29 @@ function imagazine_theme_customizer( $wp_customize ){
     )));
 
 
+    /* upperbar
+    menu links
+
+    text | padding:10px 2px 5px 2px;
+	select | text-transform:uppercase;
+	texxt font-size:1em;
+	letter-spacing:0.04em;
+    background-color
+    color
+	text-decoration:none;
+
+    menu links hover::
+
+    background-color
+    color
+	text-decoration:none;
+
+    custom style:
+    textarea
+    */
+
+
+
         $wp_customize->add_setting( 'imagazine_upperbar_styling_bgcolor' , array(
             'default' => 0.3,
             'sanitize_callback' => 'imagazine_sanitize_default',
@@ -617,8 +696,14 @@ function imagazine_theme_customizer( $wp_customize ){
             	'label'          => __( 'Background transparancy', 'imagazine' ),
             	'section'        => 'imagazine_upperbar_styling',
             	'settings'       => 'imagazine_upperbar_styling_bgtransparancy',
-            	'type'           => 'number',
- 	    		'description'    => __( 'Set transparancy (0.1 - 1.0)', 'imagazine' ),
+            	/*'type'           => 'number',*/
+                'type'              => 'range',
+                'input_attrs'       => array(
+                    'min'           => 0,
+                    'max'           => 1.00,
+                    'step'          => 0.01,
+                ),
+ 	    		'description'    => __( 'Set transparancy (0.01 - 1.00)', 'imagazine' ),
     	)));
 
         $wp_customize->add_setting( 'imagazine_upperbar_styling_textcolor' , array(
@@ -903,7 +988,30 @@ function imagazine_theme_customizer( $wp_customize ){
  	    	'description'    => __( 'Select max width (pixels)', 'imagazine' ),
     )));
 
-	/* Topbar - Menu */
+    /* Menu links
+
+    menu links
+    margin | padding:10px 2px 5px 2px;
+    text | padding:10px 2px 5px 2px;
+	select | text-transform:uppercase;
+	range | font-size:1em;
+	range | letter-spacing:0.04em;
+    background-color
+    color
+	text-decoration:none;
+
+    menu links hover::
+
+    background-color
+    color
+	text-decoration:none;
+
+    custom style:
+    textarea
+    */
+
+	/* Topbar - Menu  */
+
 	$wp_customize->add_setting( 'imagazine_topbar_menu_smallscreen' , array(
 		'default' => 'collapsed',
 		'sanitize_callback' => 'imagazine_sanitize_default',
@@ -999,8 +1107,13 @@ function imagazine_theme_customizer( $wp_customize ){
             	'label'          => __( 'Background transparancy', 'imagazine' ),
             	'section'        => 'imagazine_topbar_styling',
             	'settings'       => 'imagazine_topbar_styling_bgtransparancy',
-            	'type'           => 'number',
- 	    		'description'    => __( 'Set transparancy (0.1 - 1.0)', 'imagazine' ),
+            	'type'              => 'range',
+                'input_attrs'       => array(
+                    'min'           => 0,
+                    'max'           => 1.00,
+                    'step'          => 0.01,
+                ),
+ 	    		'description'    => __( 'Set transparancy (0.01 - 1.00)', 'imagazine' ),
     	)));
 
         $wp_customize->add_setting( 'imagazine_topbar_styling_textcolor' , array(
@@ -1393,8 +1506,13 @@ function imagazine_theme_customizer( $wp_customize ){
             	'label'          => __( 'Overlay transparancy (color 1)', 'imagazine' ),
             	'section'        => 'imagazine_header_styling',
             	'settings'       => 'imagazine_header_styling_overlay_transparancy1',
-            	'type'           => 'number',
- 	    		'description'    => __( 'Set transparancy (0.1 - 1.0)', 'imagazine' ),
+            	'type'              => 'range',
+                'input_attrs'       => array(
+                    'min'           => 0,
+                    'max'           => 1.00,
+                    'step'          => 0.01,
+                ),
+ 	    		'description'    => __( 'Set transparancy (0.01 - 1.00)', 'imagazine' ),
     	)));
 
         $wp_customize->add_setting( 'imagazine_header_styling_overlay_color2' , array(
@@ -1417,8 +1535,13 @@ function imagazine_theme_customizer( $wp_customize ){
             	'label'          => __( 'Overlay transparancy (color 2)', 'imagazine' ),
             	'section'        => 'imagazine_header_styling',
             	'settings'       => 'imagazine_header_styling_overlay_transparancy2',
-            	'type'           => 'number',
- 	    		'description'    => __( 'Set transparancy (0.1 - 1.0)', 'imagazine' ),
+            	'type'              => 'range',
+                'input_attrs'       => array(
+                    'min'           => 0,
+                    'max'           => 1.00,
+                    'step'          => 0.01,
+                ),
+ 	    		'description'    => __( 'Set transparancy (0.01 - 1.00)', 'imagazine' ),
     	)));
 
         $wp_customize->add_setting( 'imagazine_header_styling_overlay_textcolor' , array(
@@ -2481,8 +2604,13 @@ function imagazine_theme_customizer( $wp_customize ){
             	'label'          => __( 'Background transparancy', 'imagazine' ),
             	'section'        => 'imagazine_footer_styling',
             	'settings'       => 'imagazine_footer_styling_bgtransparancy',
-            	'type'           => 'number',
- 	    		'description'    => __( 'Set transparancy (0.1 - 1.0)', 'imagazine' ),
+            	'type'              => 'range',
+                'input_attrs'       => array(
+                    'min'           => 0,
+                    'max'           => 1.00,
+                    'step'          => 0.01,
+                ),
+ 	    		'description'    => __( 'Set transparancy (0.01 - 1.00)', 'imagazine' ),
     	)));
 
         $wp_customize->add_setting( 'imagazine_footer_styling_textcolor' , array(

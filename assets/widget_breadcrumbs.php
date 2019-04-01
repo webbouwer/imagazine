@@ -57,6 +57,22 @@ public function form( $instance ) {
     <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
     </p>
 
+
+    <?php
+		$dsp_alignment = 0;
+		if ( isset( $instance[ 'alignment' ] ) ) {
+		$dsp_alignment = $instance[ 'alignment' ];
+		}
+
+		?>
+		<p><label for="<?php echo $this->get_field_id( 'alignment' ); ?>">Text alignment:</label>
+		<select name="<?php echo $this->get_field_name( 'alignment' ); ?>" id="<?php echo $this->get_field_id( 'alignment' ); ?>">
+		<option value="left" <?php selected( $dsp_alignment, 'left' ); ?>>Left</option>
+		<option value="center" <?php selected( $dsp_alignment, 'center' ); ?>>Center</option>
+		<option value="right" <?php selected( $dsp_alignment, 'right' ); ?>>Right</option>
+		</select>
+		</p>
+
     <?php
 		$dsp_homelink = 0;
 		if ( isset( $instance[ 'homelink' ] ) ) {
@@ -88,6 +104,7 @@ public function form( $instance ) {
 public function update( $new_instance, $old_instance ) {
     $instance = array();
     $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+    $instance['alignment'] = ( ! empty( $new_instance['alignment'] ) ) ? strip_tags( $new_instance['alignment'] ) : '';
     $instance['homelink'] = ( ! empty( $new_instance['homelink'] ) ) ? strip_tags( $new_instance['homelink'] ) : '';
     $instance['introtext'] = ( ! empty( $new_instance['introtext'] ) ) ? strip_tags( $new_instance['introtext'] ) : '';
     return $instance;
@@ -116,7 +133,8 @@ function imagazine_custom_breadcrumbs( $opt ) {
     if ( !is_front_page() ) {
 
         // Build the breadcrums
-        echo '<ul id="' . $breadcrums_id . '" class="' . $breadcrums_class . '">';
+        echo '<ul id="' . $breadcrums_id . '" class="' . $breadcrums_class . '" style="text-align:'.$opt['alignment'].'">';
+
 
         // intro text
         if( $opt['introtext'] != '' ){
@@ -128,6 +146,7 @@ function imagazine_custom_breadcrumbs( $opt ) {
         echo '<li class="item-home"><a class="bread-link bread-home" href="' . get_home_url() . '" title="' . $home_title . '">' . $home_title . '</a></li>';
         echo '<li class="separator separator-home"> ' . $separator . ' </li>';
 		}
+
 
         if ( is_archive() && !is_tax() && !is_category() && !is_tag() ) {
 
