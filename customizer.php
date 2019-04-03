@@ -313,38 +313,7 @@ function imagazine_theme_customizer( $wp_customize ){
     )));
 
 
-    /* Global color styling
-
-    background-color
-    text color
-
-    text | padding:10px 2px 5px 2px;
-    text | margin:10px 2px 5px 2px;
-	select | text-transform:uppercase;
-	range | font-size:1em;
-	range | letter-spacing:0.04em;
-
-
-    header title
-    text color
-    select | alignment
-    range | font-size:1em;
-	range | letter-spacing:0.04em;
-	select | text-transform:lowercase;
-    text | padding:10px 2px 5px 2px;
-    select | font-type
-
-    h1 ..
-    h2 ..
-    h3 ..
-
-    date and author text ..
-
-    list cover title ..
-    widget titles ..
-
-    etc.
-    */
+    /* Global color styling    */
 
 
     /* Font Styling */

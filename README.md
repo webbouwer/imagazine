@@ -1,9 +1,18 @@
-# Imagazine
-A multi purpose Wordpress theme (in development, beta release not planned yet)
-At the moment only the most basic needed css styling for element positioning with customizer- and meta-options. A perfect 'blank' setup for custom theme development.
+![](https://github.com/webbouwer/imagazine/blob/development/screenshot.png)
+## Imagazine WP Theme
 
-For amore complete list of options see [the theme wiki](https://github.com/oddsized/imagazine/wiki/Imagazine-Theme-Options)
-(More functions allready available, will be updated soon)
+made by Webbouwer™
+
+####  A multi purpose Wordpress theme 
+
+Webdesign Den Haag © 2019
+
+#### This theme is in development, use at your own risk. Beta release not planned yet
+Latest version is the [developer branch](https://github.com/webbouwer/imagazine/tree/development), will be updated frequently. 
+
+At the moment this is a 'blank' setup for custom theme development. 
+See [project progress and specifics on github](https://github.com/webbouwer/imagazine/projects/1).
+After install use the customizer to adjust your basic setup.
 
 ### Features (& in development)
  
@@ -36,8 +45,8 @@ customizer global padding
 - [ ] main content title
 - [ ] main content text/area
 
-customizer global colors
-..
+customizer global styling
+.. [project progress on github](https://github.com/webbouwer/imagazine/projects/1).
 
 
 
