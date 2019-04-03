@@ -20,7 +20,7 @@ Page meta options with customizer defaults
 - [x] show/hide page top content widget
 - [x] show/hide page main content
 - [x] show/hide date/author
-- [x] date display type 
+- [x] date display type
 - [x] show/hide page bottom content widget
 
 
